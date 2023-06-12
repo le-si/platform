@@ -2,10 +2,18 @@ import { Link } from "react-router-dom";
 
 export function Overview() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <Header />
-      <Sandboxes />
-      <Footer />
+    <div className="min-w-screen flex min-h-screen overflow-auto">
+      <iframe
+        className="grow overflow-visible"
+        src="https://bulky-pineapples-639484.framer.app"
+      />
+      {false && (
+        <>
+          <Header />
+          <Sandboxes />
+          <Footer />
+        </>
+      )}
     </div>
   );
 }
@@ -39,7 +47,7 @@ function SandboxButton({
   description,
   image,
   href,
-  color
+  color,
 }: {
   title: string;
   description: string;
@@ -53,7 +61,7 @@ function SandboxButton({
       <div
         className="aspect-square w-full overflow-hidden rounded-xl"
         style={{
-          backgroundColor: color
+          backgroundColor: color,
         }}
       >
         {image && (
