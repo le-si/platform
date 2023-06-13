@@ -59,7 +59,7 @@ export namespace User {
       queryKey: ["User.use"],
       queryFn: async (): Promise<User> => {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/v1/user/account`,
+          `${import.meta.env.VITE_API_REST_URL}/v1/user/account`,
           { headers: { Authorization: `Bearer ${accessToken}` } }
         );
 

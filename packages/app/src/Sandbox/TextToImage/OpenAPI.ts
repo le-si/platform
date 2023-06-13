@@ -41,7 +41,7 @@ export async function request(
   try {
     response = await fetch(
       `${
-        import.meta.env.VITE_API_URL
+        import.meta.env.VITE_API_REST_URL
       }/v1/generation/${engineId}/text-to-image` satisfies OpenAPI.TextToImageRequestPath,
       {
         method: "POST",
