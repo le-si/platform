@@ -13,7 +13,7 @@ export function Router() {
     {
       path: "/",
       element: (
-        <Page noFooter noScroll>
+        <Page>
           <Overview />
         </Page>
       )

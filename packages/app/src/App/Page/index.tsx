@@ -23,15 +23,22 @@ export function Page({
       }
     >
       <TopBar />
-      {children}
-      {!noFooter && <Footer />}
+
+      {!noFooter ? (
+        <>
+          <div className="min-h-screen">{children}</div>
+          <Footer />
+        </>
+      ) : (
+        children
+      )}
     </div>
   );
 }
 
 function Footer() {
   return (
-    <div className="bg-brand-amber-1 mt-auto flex h-16 w-full items-center justify-between px-5">
+    <div className="mt-auto flex h-16 w-full items-center justify-between border-t border-zinc-100 bg-white px-5">
       <div className="flex gap-6">
         <a href="/tos" className="text-sm font-semibold hover:text-indigo-500">
           Terms of Service
