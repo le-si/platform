@@ -48,7 +48,7 @@ export function Button({
       <span
         className={classes(
           "flex items-center justify-center",
-          loading && "invisible"
+          loading && "opacity-30"
         )}
       >
         {children}

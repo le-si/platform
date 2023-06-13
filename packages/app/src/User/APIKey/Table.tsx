@@ -56,9 +56,7 @@ function AddKeyButton() {
 
   return (
     <Theme.Button
-      // outline
-      // icon={Theme.Icon.Plus}
-      // loading={createAPIKey?.isLoading}
+      loading={createAPIKey?.isLoading}
       className={`flex w-fit items-center gap-2`}
       onClick={() => {
         createAPIKey?.mutate();

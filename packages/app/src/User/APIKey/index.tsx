@@ -29,7 +29,7 @@ export namespace APIKey {
           isSecret: true,
         });
 
-        user.refetch();
+        await user.refetch();
 
         return {
           key: response.key,
@@ -49,7 +49,7 @@ export namespace APIKey {
         async ({ key }: Pick<APIKey, "key">) => {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           await grpc!.dashboard.deleteAPIKey({ id: key });
-          user.refetch();
+          await user.refetch();
         }
       );
 
