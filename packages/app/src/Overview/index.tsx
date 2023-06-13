@@ -180,12 +180,37 @@ function SandboxCard({
   link: string;
   soon?: boolean;
 }) {
+  const content = (
+    <>
+      <div className="rounded-xl bg-white p-3">
+        <img src={soon ? "/svg/soon-sandbox.svg" : svg} />
+      </div>
+      <div className="flex items-center gap-2">
+        <h2
+          className={classes(
+            "text-xl font-extralight duration-100",
+            !soon && "group-hover:text-indigo-500"
+          )}
+        >
+          {title}
+        </h2>
+        {!soon && (
+          <Arrow className="h-6 w-6 -translate-x-2 text-indigo-300 opacity-0 duration-100 group-hover:translate-x-0 group-hover:opacity-100" />
+        )}
+      </div>
+    </>
+  );
+
+  const styles = "flex flex-col gap-2 rounded-xl group";
+
+  if (soon) {
+    return <div className={styles}>{content}</div>;
+  }
+
   return (
-    <div className="flex flex-col gap-2 rounded-3xl bg-white p-4">
-      <img src={soon ? "/svg/soon-sandbox.svg" : svg} />
-      <h2 className="text-xl font-extralight">{title}</h2>
-      <Button arrow link={link} disabled={soon} />
-    </div>
+    <Link to={link} className={styles}>
+      {content}
+    </Link>
   );
 }
 
@@ -261,16 +286,16 @@ function OtherCard({
   linkName?: string;
 }) {
   return (
-    <div className="flex flex-col gap-3">
+    <a href={link} className="group flex flex-col gap-3">
       <h1 className="text-3xl font-extralight">{title}</h1>
       <img src={svg} />
       <a
         href={link}
-        className="flex items-center gap-2 text-sm font-semibold text-indigo-500 duration-100 hover:text-indigo-400"
+        className="flex items-center gap-2 text-sm font-semibold text-indigo-500 duration-100 group-hover:text-indigo-400"
       >
         {linkName || "Learn More"} <Arrow />
       </a>
-    </div>
+    </a>
   );
 }
 
