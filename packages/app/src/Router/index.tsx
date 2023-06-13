@@ -3,10 +3,9 @@ import { Page } from "~/App/Page";
 import { Overview } from "~/Overview";
 
 import { Sandbox } from "~/Sandbox";
-import { User } from "~/User";
-
-import { TextToImage } from "../Sandbox/TextToImage";
 import { List } from "~/Sandbox/List";
+import { TextToImage } from "~/Sandbox/TextToImage";
+import { User } from "~/User";
 
 export function Router() {
   return ReactRouter.useRoutes([
@@ -16,7 +15,7 @@ export function Router() {
         <Page noFooter noScroll>
           <Overview />
         </Page>
-      )
+      ),
     },
     {
       path: "/sandbox",
@@ -24,7 +23,7 @@ export function Router() {
         <Page>
           <List />
         </Page>
-      )
+      ),
     },
     {
       path: "/sandbox/text-to-image",
@@ -35,16 +34,16 @@ export function Router() {
             samples={TextToImage.Samples}
           />
         </Page>
-      )
+      ),
     },
     {
       path: User.Logout.url(),
-      element: <User.Logout />
+      element: <User.Logout />,
     },
     {
       path: User.Login.Callback.url(),
-      element: <User.Login.Callback />
-    }
+      element: <User.Login.Callback />,
+    },
   ]);
 }
 

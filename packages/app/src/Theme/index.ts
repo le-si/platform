@@ -9,5 +9,7 @@ export { Input } from "./Input";
 export { Select } from "./Select";
 export { Modal } from "./Modal";
 export { Background } from "./Background";
+export { Tooltip } from "./Tooltip";
+export { Skeleton } from "./Skeleton";
 
 export * as Theme from ".";

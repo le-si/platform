@@ -1,0 +1,48 @@
+import * as ReactQuery from "@tanstack/react-query";
+
+import { Billing } from "~/Billing";
+import { Organization } from "~/Organization";
+import { SDK, Stability } from "~/SDK";
+
+export type Payments = Billing.Payment[];
+
+export namespace Payments {
+  export const use = (options?: { organization: { id: ID } }) => {
+    const context = SDK.Context.use();
+    const { data: organization } = Organization.use();
+    const organizationID = options?.organization.id ?? organization?.id;
+
+    return ReactQuery.useQuery({
+      enabled: organizationID !== undefined && context !== undefined,
+
+      queryKey: ["Billing.Payments.use", organizationID],
+      queryFn: async (): Promise<Payments> => {
+        await waitForFirstRequest();
+
+        const {
+          response: { charges },
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        } = await context!.dashboard.getCharges(
+          Stability.Proto.Dashboard.GetChargesRequest.create({
+            organizationId: organizationID,
+            rangeFrom: 0n,
+            rangeTo: BigInt(new Date(3000, 1, 1).getTime() / 1000),
+          })
+        );
+
+        return charges
+          .map((charge) => ({
+            id: charge.id,
+            paid: charge.paid,
+            created: new Date(Number(charge.createdAt) * 1000),
+            credits: Number(charge.amountCredits) * 100,
+            stripe: {
+              receipt: charge.receiptLink,
+              payment: charge.paymentLink,
+            },
+          }))
+          .sort((a, b) => b.created.valueOf() - a.created.valueOf());
+      },
+    });
+  };
+}

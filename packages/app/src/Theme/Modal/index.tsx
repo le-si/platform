@@ -1,4 +1,5 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+
 import { X } from "../Icons";
 
 export type Modal = StyleableWithChildren & {
@@ -10,7 +11,7 @@ export type Modal = StyleableWithChildren & {
 export function Backdrop({
   open,
   onClose,
-  className
+  className,
 }: {
   open?: boolean;
   onClose?: () => void;
@@ -83,16 +84,16 @@ const outSideVariants = {
     opacity: 0,
     transition: {
       type: "tween",
-      duration: 0.1
-    }
+      duration: 0.1,
+    },
   },
   open: {
     opacity: 1,
     transition: {
       type: "tween",
-      duration: 0.1
-    }
-  }
+      duration: 0.1,
+    },
+  },
 };
 
 const insideVariants = {
@@ -103,8 +104,8 @@ const insideVariants = {
       type: "spring",
       damping: 30,
       stiffness: 500,
-      restSpeed: 10
-    }
+      restSpeed: 10,
+    },
   },
   open: {
     scale: 1,
@@ -113,7 +114,7 @@ const insideVariants = {
       type: "spring",
       damping: 22,
       stiffness: 500,
-      restSpeed: 0.1
-    }
-  }
+      restSpeed: 0.1,
+    },
+  },
 };

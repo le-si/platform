@@ -3,8 +3,10 @@ import { OpenAPI } from "@stability/sdk";
 import * as ReactQuery from "@tanstack/react-query";
 
 import { AccessToken } from "./AccessToken";
+import { Account } from "./Account";
 import { APIKey, APIKeys } from "./APIKey";
 import { Avatar } from "./Avatar";
+import { Delete } from "./Delete";
 import { IdentityToken } from "./IdentityToken";
 import { Login } from "./Login";
 import { Logout } from "./Logout";
@@ -29,6 +31,8 @@ export declare namespace User {
     Provider,
     Login,
     Logout,
+    Account,
+    Delete,
   };
 }
 
@@ -40,6 +44,8 @@ export namespace User {
   User.Provider = Provider;
   User.Login = Login;
   User.Logout = Logout;
+  User.Account = Account;
+  User.Delete = Delete;
 
   export const use = () => {
     const accessToken = AccessToken.use();

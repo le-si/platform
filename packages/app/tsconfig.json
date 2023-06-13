@@ -3,6 +3,8 @@
   "exclude": ["./src/**/*.stories.tsx", "./src/**/*.test.tsx"],
   "compilerOptions": {
     "baseUrl": "./",
-    "jsx": "react-jsx"
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react"
   }
 }
