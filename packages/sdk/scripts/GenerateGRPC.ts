@@ -1,11 +1,10 @@
 import * as ChildProcess from "child_process";
 import * as FileSystem from "fs";
 import * as Path from "path";
-import path from "path";
 import * as URL from "url";
 
 const __filename = URL.fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = Path.dirname(__filename);
 
 const main = () => {
   OutputDirectory.setup();
