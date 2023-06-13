@@ -1,4 +1,5 @@
 import { keyframes } from "@emotion/react";
+import React from "react";
 import { Billing } from "~/Billing";
 import { Theme } from "~/Theme";
 import { isNumber } from "~/Utilities";
@@ -24,6 +25,7 @@ export function Credits({ autoFocus }: { autoFocus: boolean }) {
 
 function AvailableCredits() {
   const { data: balance } = Billing.Credits.Balance.use();
+
   return (
     <div className="flex flex-row items-end justify-between">
       <span className="text-brand-400 text-3xl font-bold">
@@ -44,12 +46,16 @@ function AvailableCredits() {
   );
 }
 
+const blink = keyframes`
+  50% { --tw-ring-opacity: 0 }
+`;
+
 function BuyCredits({ autoFocus }: { autoFocus: boolean | undefined }) {
   const [amount, setAmount] = useState<number>(10);
-  // const [focused, setFocused] = useState<boolean>(!!autoFocus);
+  const [focused, setFocused] = useState<boolean>(!!autoFocus);
 
-  const onInputAmountChange = (value: string) => {
-    const newInputAmount = Number(value.replace(/,/g, ""));
+  const onInputAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newInputAmount = Number(event.target.value.replace(/[\s$,]/g, ""));
     if (isNumber(newInputAmount)) {
       setAmount(newInputAmount);
     }
@@ -66,53 +72,45 @@ function BuyCredits({ autoFocus }: { autoFocus: boolean | undefined }) {
     <div className="flex flex-col gap-3">
       <h1>Purchase credits</h1>
       <div className="flex flex-col gap-2">
-        <div
-          className={classes(
-            "col-span-2 flex items-center overflow-hidden rounded bg-neutral-50 bg-white/20 text-neutral-900 duration-200 dark:bg-neutral-700 dark:text-white dark:placeholder-neutral-400"
-            // focused &&
-            //   "ring-brand-500 ring-[2px] ring-offset-1 dark:ring-offset-zinc-800"
-          )}
-          css={css`
-            animation-name: ${blink};
-            animation-duration: 0.4s;
-            animation-delay: 0.2s;
-            animation-iteration-count: 2;
-          `}
-        >
-          <Theme.Input
-            autoFocus={autoFocus}
-            value={amount > 0 ? Billing.Credits.formatted(amount) : ""}
-            onChange={onInputAmountChange}
-            // iconLeft={
-            //   <span className="select-none text-neutral-900 dark:text-neutral-400">
-            //     $
-            //   </span>
-            // }
-            // onFocus={() => setFocused(true)}
-            // onBlur={() => {
-            //   setFocused(false);
-            //
-            //   if (isNaN(amount) || amount < 10) {
-            //     setAmount(10);
-            //   } else if (amount > 1000) {
-            //     setAmount(1000);
-            //   }
-            // }}
-            className="h-full items-center rounded-r-none shadow-none"
-            // transparent
-          />
-          <Theme.Button
-            onClick={onBuyCredits}
-            // loading={createPayment?.isLoading}
-            disabled={isNaN(amount) || amount < 10}
-            // color="brand"
-            // icon={(props) => (
-            //   <div className={classes(props.className, "w-0")} />
-            // )}
-            className="gap-0 rounded-l-none rounded-r-sm py-1.5 pr-4 text-sm text-white duration-100"
+        <div className="w-fit">
+          <div
+            className={classes(
+              "flex items-center justify-end overflow-hidden rounded bg-neutral-50 bg-white/20 text-neutral-900 duration-200 dark:bg-neutral-700 dark:text-white dark:placeholder-neutral-400",
+              focused &&
+                "ring-brand-500 ring-[2px] ring-offset-1 dark:ring-offset-zinc-800"
+            )}
+            css={css`
+              animation-name: ${blink};
+              animation-duration: 0.4s;
+              animation-delay: 0.2s;
+              animation-iteration-count: 2;
+            `}
           >
-            Buy
-          </Theme.Button>
+            <input
+              autoFocus={autoFocus}
+              value={amount > 0 ? `$ ${Billing.Credits.formatted(amount)}` : ""}
+              onChange={onInputAmountChange}
+              onFocus={() => setFocused(true)}
+              onBlur={() => {
+                setFocused(false);
+
+                if (isNaN(amount) || amount < 10) {
+                  setAmount(10);
+                } else if (amount > 1000) {
+                  setAmount(1000);
+                }
+              }}
+              className="flex h-8 max-w-[10rem] flex-grow cursor-text items-center gap-2 rounded rounded-r-none border border-zinc-300 px-2 py-1 shadow-none outline-none"
+            />
+            <Theme.Button
+              onClick={onBuyCredits}
+              loading={createPayment?.isLoading}
+              disabled={isNaN(amount) || amount < 10}
+              className="w-fit gap-0 rounded-l-none rounded-r-sm bg-violet-500 py-1.5 pr-4 text-sm text-white duration-100 hover:bg-violet-600"
+            >
+              Buy
+            </Theme.Button>
+          </div>
         </div>
         <div className="ml-auto flex flex-col items-end">
           <Billing.Credits currency={{ usd: amount }} />
@@ -125,7 +123,3 @@ function BuyCredits({ autoFocus }: { autoFocus: boolean | undefined }) {
     </div>
   );
 }
-
-const blink = keyframes`
-  50% { --tw-ring-opacity: 0 }
-`;

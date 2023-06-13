@@ -1,7 +1,8 @@
+import * as Stability from "@stability/sdk";
 import * as ReactQuery from "@tanstack/react-query";
 
 import { Billing } from "~/Billing";
-import { SDK, Stability } from "~/SDK";
+import { GRPC } from "~/GRPC";
 import { User } from "~/User";
 
 export namespace Create {
@@ -10,7 +11,7 @@ export namespace Create {
       undefined
     );
 
-    const context = SDK.Context.use();
+    const grpc = GRPC.use();
     const { data: organization } = User.Organization.use();
     const organizationID = organization?.id;
 
@@ -21,8 +22,8 @@ export namespace Create {
         amount: Billing.Currency;
       }): Promise<Billing.Payment | undefined> => {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const { response: charge } = await context!.dashboard.createCharge(
-          Stability.Proto.Dashboard.CreateChargeRequest.create({
+        const { response: charge } = await grpc!.dashboard.createCharge(
+          GRPC.CreateChargeRequest.create({
             amount: BigInt(usd),
             organizationId: organizationID,
           })
@@ -48,7 +49,7 @@ export namespace Create {
       payment && (window.location.href = payment.stripe.payment);
     }, [payment]);
 
-    return organizationID !== undefined && context !== undefined
+    return organizationID !== undefined && grpc !== undefined
       ? execute
       : undefined;
   };

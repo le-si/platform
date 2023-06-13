@@ -3,11 +3,22 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Inter";
-  src: url("/Inter.ttf") format("truetype");
+    font-family: "Inter";
+    src: url("/Inter.ttf") format("truetype");
 }
 
 html,
-  body {
+body {
     font-family: "Inter", sans-serif;
-  }
+}
+
+@keyframes blink {
+    50% {
+        --tw-ring-opacity: 0
+    }
+}
+
+.animate-blink-twice {
+    animation: blink 0.4s infinite alternate;
+}
+

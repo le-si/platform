@@ -1,7 +1,9 @@
 import { CustomContentProps, SnackbarProvider } from "notistack";
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Theme } from "~/Theme";
+import { User } from "~/User";
 
 export { useSnackbar as use, type CustomContentProps } from "notistack";
 
@@ -16,6 +18,7 @@ export function Provider({ children }: React.PropsWithChildren) {
         error: ErrorSnackbar,
         success: SuccessSnackbar,
         warning: WarningSnackbar,
+        outOfCredits: OutOfCreditsSnackbar,
       }}
     >
       {children}
@@ -120,3 +123,33 @@ const SuccessSnackbar = React.forwardRef<HTMLDivElement, CustomContentProps>(
 const DefaultSnackbar = React.forwardRef<HTMLDivElement, CustomContentProps>(
   (props, ref) => <BaseSnackbar {...props} ref={ref} />
 );
+
+const OutOfCreditsSnackbar = React.forwardRef<
+  HTMLDivElement,
+  Theme.Snackbar.CustomContentProps
+>(({ id, message, persist }, ref) => {
+  const { closeSnackbar } = Theme.Snackbar.use();
+  const navigate = useNavigate();
+
+  if (persist)
+    console.error("Setting persist on OutOfCredits is not supported");
+
+  const onClick = useCallback(() => {
+    closeSnackbar(id);
+    navigate(User.Account.Page.url({ autoFocusCredits: true }));
+  }, [closeSnackbar, id, navigate]);
+
+  return (
+    <div
+      className="mb-4 flex items-center rounded-lg border-2 border-zinc-700 bg-white p-4 text-zinc-500 shadow dark:bg-zinc-900 dark:text-zinc-400"
+      role="alert"
+      ref={ref}
+    >
+      <Theme.AlertCircle className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-orange-600 dark:text-orange-500" />
+      <div className="text-md ml-3 font-semibold">{message}</div>
+      <Theme.Button className="ml-8 w-fit" onClick={onClick}>
+        Buy credits
+      </Theme.Button>
+    </div>
+  );
+});

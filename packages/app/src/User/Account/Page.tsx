@@ -7,33 +7,26 @@ import { Payments } from "./Payments";
 export function Page() {
   const [searchParams] = useSearchParams();
   const autoFocusCredits = searchParams.has(Page.autoFocusSearchParam());
+
   return (
-    <>
-      <div className="h-full justify-between overflow-y-auto bg-zinc-900 px-5 py-6">
-        <div className="mx-auto flex max-w-[70rem] flex-col gap-8">
-          <div className="flex flex-col gap-10">
-            <div>
-              <h1 className="text-3xl">Account</h1>
-              <h2 className="opacity-75">
-                Manage your account and billing information
-              </h2>
-            </div>
-            <div className="flex justify-between">
-              <UserDetails />
-              <User.Account.Support />
-            </div>
-            <div className="flex flex-wrap gap-4">
-              <div className="flex grow flex-col flex-wrap gap-4">
-                <User.Account.Credits autoFocus={autoFocusCredits} />
-                <Payments.Table />
-              </div>
-              <User.APIKeys.Table />
-            </div>
+    <div className="h-full justify-between overflow-y-auto px-5 py-6">
+      <div className="mx-auto flex max-w-[80rem] flex-col gap-8">
+        <div className="flex flex-col gap-10">
+          <div className="flex justify-between">
+            <UserDetails />
+            <User.Account.Support />
           </div>
-          <User.Account.Danger />
+          <div className="flex flex-wrap gap-4">
+            <div className="flex grow flex-col flex-wrap gap-4">
+              <User.Account.Credits autoFocus={autoFocusCredits} />
+              <Payments.Table />
+            </div>
+            <User.APIKeys.Table />
+          </div>
         </div>
+        <User.Account.Danger />
       </div>
-    </>
+    </div>
   );
 }
 

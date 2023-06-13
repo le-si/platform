@@ -1,6 +1,6 @@
 import * as ReactQuery from "@tanstack/react-query";
 
-import { SDK } from "~/SDK";
+import { GRPC } from "~/GRPC";
 import { User } from "~/User";
 import { DateTime } from "~/Utilities";
 
@@ -22,10 +22,10 @@ export namespace APIKey {
   export namespace Create {
     export const use = () => {
       const user = User.use();
-      const context = SDK.Context.use();
+      const grpc = GRPC.use();
       const execute = ReactQuery.useMutation(async () => {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const { response } = await context!.dashboard.createAPIKey({
+        const { response } = await grpc!.dashboard.createAPIKey({
           isSecret: true,
         });
 
@@ -37,23 +37,23 @@ export namespace APIKey {
         };
       });
 
-      return context === undefined ? undefined : execute;
+      return grpc === undefined ? undefined : execute;
     };
   }
 
   export namespace Delete {
     export const use = () => {
       const user = User.use();
-      const context = SDK.Context.use();
+      const grpc = GRPC.use();
       const execute = ReactQuery.useMutation(
         async ({ key }: Pick<APIKey, "key">) => {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          await context!.dashboard.deleteAPIKey({ id: key });
+          await grpc!.dashboard.deleteAPIKey({ id: key });
           user.refetch();
         }
       );
 
-      return context === undefined ? undefined : execute;
+      return grpc === undefined ? undefined : execute;
     };
   }
 }

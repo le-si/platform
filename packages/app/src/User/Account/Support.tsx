@@ -10,12 +10,6 @@ export function Support() {
       >
         Log out
       </Link>
-      <Link
-        to="/support"
-        className="text-brand-600 dark:text-brand-400 text-right font-medium hover:underline"
-      >
-        Contact us
-      </Link>
       <a
         href="https://platform.stability.ai/docs/getting-started/credits-and-billing"
         className="text-brand-600 dark:text-brand-400 text-right font-medium hover:underline"
@@ -24,12 +18,6 @@ export function Support() {
       >
         Billing guide
       </a>
-      <Link
-        to="/prompt-guide"
-        className="text-brand-600 dark:text-brand-400 text-right font-medium hover:underline"
-      >
-        Prompt guide
-      </Link>
     </div>
   );
 }

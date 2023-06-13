@@ -1,3 +1,4 @@
+import { Theme } from "..";
 import { Link } from "../Icons";
 
 export type Button = StyleableWithChildren & {
@@ -6,6 +7,7 @@ export type Button = StyleableWithChildren & {
   onClick?: () => void;
   variant?: "primary" | "secondary";
   link?: string;
+  loading?: boolean;
 };
 
 export function Button({
@@ -15,7 +17,8 @@ export function Button({
   onClick,
   className,
   variant,
-  link
+  link,
+  loading,
 }: Button) {
   return (
     <button
@@ -33,10 +36,23 @@ export function Button({
           ? "hover:bg-brand-orange"
           : "hover:bg-brand-amber-2",
         link && "flex items-center justify-between gap-2 text-left",
+        loading && "pointer-events-none relative opacity-80",
         className
       )}
     >
-      {children}
+      {loading && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Theme.Spinner className="h-4 w-4 text-black" />
+        </div>
+      )}
+      <span
+        className={classes(
+          "flex items-center justify-center",
+          loading && "invisible"
+        )}
+      >
+        {children}
+      </span>
       {link && <Link color={variant === "primary" ? "white" : undefined} />}
     </button>
   );

@@ -1,14 +1,14 @@
 import * as ReactQuery from "@tanstack/react-query";
 
 import { Billing } from "~/Billing";
-import { SDK, Stability } from "~/SDK";
+import { GRPC } from "~/GRPC";
 import { User } from "~/User";
 
 export type Payments = Billing.Payment[];
 
 export namespace Payments {
   export const use = (options?: { organization: { id: ID } }) => {
-    const context = SDK.Context.use();
+    const context = GRPC.use();
     const { data: organization } = User.Organization.use();
     const organizationID = options?.organization.id ?? organization?.id;
 
@@ -23,7 +23,7 @@ export namespace Payments {
           response: { charges },
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         } = await context!.dashboard.getCharges(
-          Stability.Proto.Dashboard.GetChargesRequest.create({
+          GRPC.GetChargesRequest.create({
             organizationId: organizationID,
             rangeFrom: 0n,
             rangeTo: BigInt(new Date(3000, 1, 1).getTime() / 1000),

@@ -59,6 +59,7 @@ function AddKeyButton() {
       // outline
       // icon={Theme.Icon.Plus}
       // loading={createAPIKey?.isLoading}
+      className={`flex w-fit items-center gap-2`}
       onClick={() => {
         createAPIKey?.mutate();
       }}
@@ -100,8 +101,7 @@ function APIKeyRow({
         {canDelete && (
           <>
             <Theme.Button
-              // transparent
-              className="rounded py-1 text-sm text-white transition-all duration-200 hover:text-red-600"
+              className="w-fit rounded text-sm transition-all duration-200 hover:text-red-600"
               onClick={() => setIsConfirmModalOpen(true)}
             >
               <Theme.X />
@@ -133,7 +133,7 @@ function CopyKey({ apiKey }: { apiKey: User.APIKey }) {
       onChange={(open) => !open && setTimeout(() => setIsCopied(false), 200)}
     >
       <Theme.Button
-        // transparent
+        className="w-fit"
         onClick={() => {
           copyToClipboard(apiKey.key);
           setIsCopied(true);
@@ -155,7 +155,7 @@ function ShowHideKey({
   return (
     <Theme.Button
       onClick={() => setIsKeyRevealed(!isKeyRevealed)}
-      // transparent
+      className="w-fit"
     >
       {isKeyRevealed ? <Theme.EyeOff /> : <Theme.Eye />}
     </Theme.Button>

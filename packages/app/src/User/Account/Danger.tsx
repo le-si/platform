@@ -13,7 +13,7 @@ export function Danger() {
         Danger zone
       </h5>
 
-      <div className="flex items-center justify-between rounded border border-red-500 px-4 py-3 pr-6 text-white">
+      <div className="flex items-center justify-between rounded border border-red-500 px-4 py-3 pr-6 text-black">
         <div className="flex flex-col">
           <span className="text-lg">Delete account</span>
           <span className="opacity-muted text-sm">
@@ -22,7 +22,7 @@ export function Danger() {
         </div>
         <Theme.Button
           onClick={() => setShowDeleteConfirm(true)}
-          className="bg-red-600 hover:bg-red-700 active:bg-red-800"
+          className="w-fit bg-red-600 px-4 text-white hover:bg-red-700 active:bg-red-800"
         >
           Delete
         </Theme.Button>

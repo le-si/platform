@@ -46,7 +46,11 @@ export function Router() {
     },
     {
       path: "/account",
-      element: <User.Account.Page />,
+      element: (
+        <Page noFooter noScroll>
+          <User.Account.Page />
+        </Page>
+      ),
     },
   ]);
 }
