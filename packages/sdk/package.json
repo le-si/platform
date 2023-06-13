@@ -10,14 +10,18 @@
     "clean": "rimraf lib && rimraf node_modules",
     "lint": "eslint \"./src/**/*.{ts}\"",
     "lint:fix": "yarn lint --fix",
-    "generate:rest-api-types": "openapi-typescript ./src/OpenAPI/OpenAPI.json --output ./src/OpenAPI/OpenAPI.generated.ts",
-    "build:types": "yarn generate:rest-api-types && tsc --project tsconfig.json && tsc-alias",
+    "generate:grpc-clients": "tsx scripts/GenerateGRPC.ts",
+    "generate:open-api-types": "openapi-typescript ./src/OpenAPI/OpenAPI.json --output ./src/OpenAPI/OpenAPI.generated.ts",
+    "build:types": "yarn generate:grpc-clients && yarn generate:open-api-types && tsc --project tsconfig.json && tsc-alias",
     "build:javascript": "tsx scripts/Build.ts",
-    "build": "yarn build:types && yarn build:javascript",
+    "build": "yarn build:types && yarn build:javascript && tsx scripts/FindAndReplaceVersion.ts",
     "dev": "nodemon --watch src --ext ts,json --exec \"yarn build\" --ignore \"./src/**/*.generated.*\""
   },
+  "dependencies": {
+    "@protobuf-ts/grpcweb-transport": "^2.9.0"
+  },
   "devDependencies": {
-    "@stability/sdk": "workspace:^",
+    "@protobuf-ts/plugin": "^2.9.0",
     "@types/node": "^20.2.5",
     "@typescript-eslint/eslint-plugin": "^5.59.8",
     "@typescript-eslint/parser": "^5.59.8",
@@ -33,6 +37,7 @@
     "openapi-typescript": "latest",
     "prettier": "^2.8.8",
     "rimraf": "^5.0.1",
+    "ts-proto": "^1.148.2",
     "tsc-alias": "^1.8.6",
     "tsx": "^3.12.7",
     "typescript": "5.0.4"
