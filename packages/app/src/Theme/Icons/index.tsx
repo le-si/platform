@@ -215,6 +215,69 @@ export function Code(props: Icon) {
   );
 }
 
+export function Arrow(props: Icon) {
+  return (
+    <svg
+      width="13"
+      height="12"
+      viewBox="0 0 13 12"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={props.className}
+    >
+      <path
+        d="M7.65332 1.88867L11.5133 5.74861L7.65332 9.60856"
+        stroke="currentColor"
+        strokeWidth="1.25"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M0.999869 5.74915H11.5138"
+        stroke="currentColor"
+        strokeWidth="1.25"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function ExternalLink(props: Icon) {
+  return (
+    <svg
+      width="15"
+      height="16"
+      viewBox="0 0 15 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={props.className}
+    >
+      <path
+        d="M11.25 8.625V12.375C11.25 12.7065 11.1183 13.0245 10.8839 13.2589C10.6495 13.4933 10.3315 13.625 10 13.625H3.125C2.79348 13.625 2.47554 13.4933 2.24112 13.2589C2.0067 13.0245 1.875 12.7065 1.875 12.375V5.5C1.875 5.16848 2.0067 4.85054 2.24112 4.61612C2.47554 4.3817 2.79348 4.25 3.125 4.25H6.875"
+        stroke="currentColor"
+        strokeWidth="1.25"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9.375 2.375H13.125V6.125"
+        stroke="currentColor"
+        strokeWidth="1.25"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6.25 9.25L13.125 2.375"
+        stroke="currentColor"
+        strokeWidth="1.25"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function Eye(props: Icon) {
   return (
     <svg
