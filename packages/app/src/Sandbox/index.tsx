@@ -1,17 +1,16 @@
-import { Button } from "~/Theme";
+import { Button, Code as CodeIcon } from "~/Theme";
 import { User } from "~/User";
 
 import { Code, Languages } from "./Code";
+import { useWindowSize } from "react-use";
 
 export function Sandbox({
   SandboxComponent,
-  SandboxButtons,
   samples
 }: {
   SandboxComponent: React.FC<{
     setOptions: (options: any) => void;
   }>;
-  SandboxButtons: React.FC;
   samples: Record<Languages, string>;
 }) {
   const apiKey = User.APIKey.use();
@@ -31,24 +30,29 @@ export function Sandbox({
     }, code);
   }, [codeLanguage, apiKey, options]);
 
+  const size = useWindowSize();
+
   return (
-    <div className="flex h-full max-h-full min-h-0 grow flex-col gap-6 p-6">
+    <div className="flex h-full max-h-full min-h-0 grow flex-col gap-6 p-5 pt-0">
       <div className="flex min-h-0 grow gap-6">
-        {showCode && (
-          <Code
-            content={code}
-            language={codeLanguage}
-            setLanguage={setCodeLanguage}
-            onClose={() => setShowCode(false)}
-          />
-        )}
+        {size.width > 1024 &&
+          (showCode ? (
+            <Code
+              content={code}
+              language={codeLanguage}
+              setLanguage={setCodeLanguage}
+              onClose={() => setShowCode(false)}
+            />
+          ) : (
+            <div
+              className="flex w-24 cursor-pointer flex-col items-center justify-center gap-1 rounded-xl border border-zinc-400 text-center text-xs transition-colors duration-100 hover:bg-zinc-100"
+              onClick={() => setShowCode(true)}
+            >
+              <CodeIcon />
+              View Code
+            </div>
+          ))}
         <SandboxComponent setOptions={setOptions} />
-      </div>
-      <div className="flex min-h-0 shrink-0 gap-6">
-        <Button onClick={() => setShowCode(!showCode)}>
-          {showCode ? "Hide" : "Show"} Code
-        </Button>
-        <SandboxButtons />
       </div>
     </div>
   );

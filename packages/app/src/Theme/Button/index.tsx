@@ -23,7 +23,7 @@ export function Button({
       onClick={link && !onClick ? () => window.open(link, "_blank") : onClick}
       className={classes(
         active && "hover",
-        "h-fit min-w-[20rem] grow-0 rounded-lg p-2.5 text-sm text-white duration-100 focus:outline-1 focus:outline-black/10",
+        "h-fit w-full max-w-[20rem] grow-0 rounded-lg p-2.5 text-sm text-white duration-100 focus:outline-1 focus:outline-black/10",
         variant === "primary"
           ? "bg-brand-orange/90"
           : "bg-brand-amber-1 text-black",

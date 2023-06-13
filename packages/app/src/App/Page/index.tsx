@@ -3,17 +3,63 @@ import { TopBar, height } from "../TopBar";
 export function Page({
   children,
   className,
-  noScroll
+  noScroll,
+  noFooter
 }: StyleableWithChildren & {
   noScroll?: boolean;
+  noFooter?: boolean;
 }) {
   return (
     <div
       className={classes("z-0 w-full", className)}
-      style={noScroll ? { height: `calc(100vh - ${height()})` } : undefined}
+      style={
+        noScroll
+          ? {
+              height: `calc(100vh - (${height()} + ${
+                noFooter ? "0rem" : "4rem"
+              }))`
+            }
+          : undefined
+      }
     >
       <TopBar />
       {children}
+      {!noFooter && <Footer />}
+    </div>
+  );
+}
+
+function Footer() {
+  return (
+    <div className="bg-brand-amber-1 mt-auto flex h-16 w-full items-center justify-between px-5">
+      <div className="flex gap-6">
+        <a href="/tos" className="text-sm font-semibold hover:text-indigo-500">
+          Terms of Service
+        </a>
+        <a
+          href="/privacy"
+          className="text-sm font-semibold hover:text-indigo-500"
+        >
+          Privacy Policy
+        </a>
+        <a href="/faq" className="text-sm font-semibold hover:text-indigo-500">
+          FAQs
+        </a>
+        <a
+          href="https://stability.ai"
+          className="text-sm font-semibold hover:text-indigo-500"
+        >
+          Stability.AI
+        </a>
+      </div>
+      <div className="flex gap-6">
+        <a
+          href="https://discord.gg/5fgDen6CPU"
+          className="text-sm font-semibold hover:text-indigo-500"
+        >
+          Discord
+        </a>
+      </div>
     </div>
   );
 }

@@ -6,13 +6,14 @@ import { Sandbox } from "~/Sandbox";
 import { User } from "~/User";
 
 import { TextToImage } from "../Sandbox/TextToImage";
+import { List } from "~/Sandbox/List";
 
 export function Router() {
   return ReactRouter.useRoutes([
     {
       path: "/",
       element: (
-        <Page>
+        <Page noFooter noScroll>
           <Overview />
         </Page>
       )
@@ -20,28 +21,21 @@ export function Router() {
     {
       path: "/sandbox",
       element: (
-        <Page noScroll>
+        <Page>
+          <List />
+        </Page>
+      )
+    },
+    {
+      path: "/sandbox/text-to-image",
+      element: (
+        <Page noScroll noFooter>
           <Sandbox
-            SandboxButtons={TextToImage.Buttons}
             SandboxComponent={TextToImage}
             samples={TextToImage.Samples}
           />
         </Page>
-      ),
-      children: [
-        {
-          path: "/sandbox/text-to-image",
-          element: (
-            <Page noScroll>
-              <Sandbox
-                SandboxButtons={TextToImage.Buttons}
-                SandboxComponent={TextToImage}
-                samples={TextToImage.Samples}
-              />
-            </Page>
-          )
-        }
-      ]
+      )
     },
     {
       path: User.Logout.url(),

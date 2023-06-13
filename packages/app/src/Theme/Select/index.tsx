@@ -43,7 +43,7 @@ export function Select({
   const selectRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  useClickAway(dropdownRef, () => {
+  useClickAway(dropdownRef, (e) => {
     setOpen(false);
   });
 
@@ -104,7 +104,11 @@ export function Select({
             disabled ? "pointer-events-none opacity-60" : "cursor-pointer",
             className
           )}
-          onClick={() => setOpen(!open)}
+          onClick={() => {
+            if (!disabled && !open) {
+              setOpen((open) => !open);
+            }
+          }}
           ref={selectRef}
         >
           {icon && (
