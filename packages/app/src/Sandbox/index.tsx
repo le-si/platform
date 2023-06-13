@@ -1,19 +1,19 @@
-import { Button, Code as CodeIcon } from "~/Theme";
+import { useWindowSize } from "react-use";
+import { Code as CodeIcon } from "~/Theme";
 import { User } from "~/User";
 
 import { Code, Languages } from "./Code";
-import { useWindowSize } from "react-use";
 
 export function Sandbox({
   SandboxComponent,
-  samples
+  samples,
 }: {
   SandboxComponent: React.FC<{
     setOptions: (options: any) => void;
   }>;
   samples: Record<Languages, string>;
 }) {
-  const apiKey = User.APIKey.use();
+  const apiKey = User.AccessToken.use();
 
   const [showCode, setShowCode] = useState(true);
   const [codeLanguage, setCodeLanguage] = useState<Languages>("typescript");

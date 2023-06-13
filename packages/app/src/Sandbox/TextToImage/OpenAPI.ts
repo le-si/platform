@@ -50,7 +50,7 @@ export async function request(
           Accept: "image/png",
           Authorization: `Bearer ${apiKey}`,
         },
-  
+
         body,
       }
     );

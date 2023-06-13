@@ -1,14 +1,21 @@
 import { Credits } from "./Credits";
-import { type Currency } from "./Currency";
 import { Payment, Payments } from "./Payment";
-import { type Stripe } from "./Stripe";
 
 export declare namespace Billing {
-  export { Credits, Currency, Payment, Payments, Stripe };
+  export { Credits, Payment, Payments };
 }
 
 export namespace Billing {
   Billing.Credits = Credits;
   Billing.Payment = Payment;
   Billing.Payments = Payments;
+
+  export type Currency = { usd: number };
+
+  export namespace Stripe {
+    export type Links = {
+      receipt: string;
+      payment: string;
+    };
+  }
 }

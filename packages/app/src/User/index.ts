@@ -10,6 +10,7 @@ import { Delete } from "./Delete";
 import { IdentityToken } from "./IdentityToken";
 import { Login } from "./Login";
 import { Logout } from "./Logout";
+import { Organization } from "./Organization";
 import { Provider } from "./Provider";
 
 export type User = {
@@ -33,6 +34,7 @@ export declare namespace User {
     Logout,
     Account,
     Delete,
+    Organization,
   };
 }
 
@@ -46,6 +48,7 @@ export namespace User {
   User.Logout = Logout;
   User.Account = Account;
   User.Delete = Delete;
+  User.Organization = Organization;
 
   export const use = () => {
     const accessToken = AccessToken.use();

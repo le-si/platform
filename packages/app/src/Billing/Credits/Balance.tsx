@@ -18,7 +18,7 @@ export namespace Balance {
 
       queryKey: ["Billing.Credits.Balance.use"],
       queryFn: async (): Promise<Balance> => {
-        await waitForFirstRequest();
+        // await waitForFirstRequest();
 
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const balance = await Stability.Sandbox.getBalance(context!);

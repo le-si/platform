@@ -11,5 +11,7 @@ export { Modal } from "./Modal";
 export { Background } from "./Background";
 export { Tooltip } from "./Tooltip";
 export { Skeleton } from "./Skeleton";
+export * as Snackbar from "./Snackbar";
+export { Provider } from "./Provider";
 
 export * as Theme from ".";

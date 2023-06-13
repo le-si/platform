@@ -1,8 +1,8 @@
 import * as ReactQuery from "@tanstack/react-query";
 
 import { Billing } from "~/Billing";
-import { Organization } from "~/Organization";
 import { SDK, Stability } from "~/SDK";
+import { User } from "~/User";
 
 export namespace Create {
   export const use = () => {
@@ -11,7 +11,7 @@ export namespace Create {
     );
 
     const context = SDK.Context.use();
-    const { data: organization } = Organization.use();
+    const { data: organization } = User.Organization.use();
     const organizationID = organization?.id;
 
     const execute = ReactQuery.useMutation(

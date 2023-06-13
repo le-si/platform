@@ -44,6 +44,10 @@ export function Router() {
       path: User.Login.Callback.url(),
       element: <User.Login.Callback />,
     },
+    {
+      path: "/account",
+      element: <User.Account.Page />,
+    },
   ]);
 }
 
