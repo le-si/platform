@@ -12,7 +12,7 @@ export * from "./Generated/project.client";
 export const createWebTransport = ({
   apiKey,
   baseURL = "https://grpc.stability.ai",
-  clientID = "typescript-platform-sdk",
+  clientID = "typescript-sdk-platform",
 }: {
   apiKey: string;
   baseURL?: string;
