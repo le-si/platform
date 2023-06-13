@@ -13,8 +13,12 @@ export function TopBar() {
     >
       <div className="w-1/3">
         <div className="w-fit">
-          <Link to="/">
-            <img src="/logo.png" />
+          <Link to="/" className="flex items-center gap-2">
+            <img src="/logo.png" className="lg:mt-px" />
+            <div className="hidden h-6 w-px bg-black lg:block" />
+            <h1 className="hidden text-sm font-medium lg:block">
+              Developer Platform
+            </h1>
           </Link>
         </div>
       </div>

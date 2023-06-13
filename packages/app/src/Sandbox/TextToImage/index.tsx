@@ -104,110 +104,137 @@ export function TextToImage({ setOptions }: TextToImage) {
   ]);
 
   return (
-    <Background
-      title="Text-to-Image"
-      className="h-full min-h-0 w-full overflow-y-auto"
-    >
-      <div className="flex grow gap-3">
-        <div className="flex w-fit flex-col gap-3">
-          <Textarea
-            autoFocus
-            color="positive"
-            title="Positive Prompt"
-            placeholder="Description of what you want to generate"
-            value={positivePrompt}
-            onChange={setPositivePrompt}
-          />
-          <Textarea
-            color="negative"
-            title="Negative Prompt"
-            placeholder="What you want to avoid generating"
-            value={negativePrompt}
-            onChange={setNegativePrompt}
-          />
-          <Select
-            title="Model"
-            value={engineId}
-            onChange={setEngineId}
-            options={[
-              {
-                label: "Stable Diffusion XL",
-                value: "stable-diffusion-xl-beta-v2-2-2"
-              },
-              {
-                label: "Stable Diffusion 1.5",
-                value: "stable-diffusion-v1-5"
-              },
-              {
-                label: "Stable Diffusion 2.1",
-                value: "stable-diffusion-512-v2-1"
+    <div className="flex h-full w-full flex-col gap-6 md:min-w-[55rem]">
+      <Background
+        title="Text-to-Image"
+        className="h-full min-h-0 w-full"
+        sidebar={
+          <div className="flex h-fit w-full grow flex-col gap-3">
+            <Textarea
+              autoFocus
+              color="positive"
+              title="Positive Prompt"
+              placeholder="Description of what you want to generate"
+              value={positivePrompt}
+              onChange={setPositivePrompt}
+            />
+            <Textarea
+              color="negative"
+              title="Negative Prompt"
+              placeholder="What you want to avoid generating"
+              value={negativePrompt}
+              onChange={setNegativePrompt}
+            />
+            <Select
+              title="Model"
+              value={engineId}
+              onChange={setEngineId}
+              options={[
+                {
+                  label: "Stable Diffusion XL",
+                  value: "stable-diffusion-xl-beta-v2-2-2"
+                },
+                {
+                  label: "Stable Diffusion 1.5",
+                  value: "stable-diffusion-v1-5"
+                },
+                {
+                  label: "Stable Diffusion 2.1",
+                  value: "stable-diffusion-512-v2-1"
+                }
+              ]}
+            />
+            <Select
+              title="Style"
+              value={style}
+              onChange={(value) =>
+                setStyle(
+                  value as OpenAPI.TextToImageRequestBody["style_preset"]
+                )
               }
-            ]}
-          />
-          <Select
-            title="Style"
-            value={style}
-            onChange={(value) =>
-              setStyle(value as OpenAPI.TextToImageRequestBody["style_preset"])
-            }
-            options={[
-              { label: "Enhance", value: "enhance" },
-              { label: "Anime", value: "anime" },
-              { label: "Photographic", value: "photographic" },
-              { label: "Digital Art", value: "digital-art" },
-              { label: "Comic Book", value: "comic-book" },
-              { label: "Fantasy Art", value: "fantasy-art" },
-              { label: "Line Art", value: "line-art" },
-              { label: "Analog Film", value: "analog-film" },
-              { label: "Neon Punk", value: "neon-punk" },
-              { label: "Isometric", value: "isometric" },
-              { label: "Low Poly", value: "low-poly" },
-              { label: "Origami", value: "origami" },
-              { label: "Modeling Compound", value: "modeling-compound" },
-              { label: "Cinematic", value: "cinematic" },
-              { label: "3D Model", value: "3d-model" },
-              { label: "Pixel Art", value: "pixel-art" },
-              { label: "Tile Texture", value: "tile-texture" }
-            ]}
-          />
-          <Input
-            number
-            title="CFG Scale"
-            value={cfgScale}
-            onNumberChange={setCfgScale}
-          />
-          <Input title="Steps" number value={steps} onNumberChange={setSteps} />
+              options={[
+                { label: "Enhance", value: "enhance" },
+                { label: "Anime", value: "anime" },
+                { label: "Photographic", value: "photographic" },
+                { label: "Digital Art", value: "digital-art" },
+                { label: "Comic Book", value: "comic-book" },
+                { label: "Fantasy Art", value: "fantasy-art" },
+                { label: "Line Art", value: "line-art" },
+                { label: "Analog Film", value: "analog-film" },
+                { label: "Neon Punk", value: "neon-punk" },
+                { label: "Isometric", value: "isometric" },
+                { label: "Low Poly", value: "low-poly" },
+                { label: "Origami", value: "origami" },
+                { label: "Modeling Compound", value: "modeling-compound" },
+                { label: "Cinematic", value: "cinematic" },
+                { label: "3D Model", value: "3d-model" },
+                { label: "Pixel Art", value: "pixel-art" },
+                { label: "Tile Texture", value: "tile-texture" }
+              ]}
+            />
+            <Input
+              number
+              title="CFG Scale"
+              value={cfgScale}
+              onNumberChange={setCfgScale}
+            />
+            <Input
+              title="Steps"
+              number
+              value={steps}
+              onNumberChange={setSteps}
+            />
+          </div>
+        }
+        sidebarBottom={
           <Button
             variant="primary"
+            className="h-16 rounded-none"
             disabled={generating || !positivePrompt || !apiKey}
             onClick={generate}
           >
             Generate
           </Button>
+        }
+      >
+        <div className=" flex h-full grow gap-3 overflow-y-auto overflow-x-hidden">
+          <div className="flex grow items-center justify-center">
+            {apiKey ? (
+              imageURL ? (
+                <ImageContainer
+                  src={imageURL}
+                  title="Output Image"
+                  onClear={() => setImageURL(undefined)}
+                />
+              ) : (
+                <div className="flex w-full shrink-0 flex-col items-center justify-center">
+                  <pre
+                    className={classes(
+                      error
+                        ? "rounded border border-red-300 p-3 font-mono text-red-500"
+                        : "text-brand-orange select-none font-sans"
+                    )}
+                  >
+                    {generating
+                      ? "Generating..."
+                      : error
+                      ? error
+                      : "No image generated"}
+                  </pre>
+                </div>
+              )
+            ) : (
+              <div className="flex w-full shrink-0 flex-col items-center justify-center">
+                <User.Login.Button />
+              </div>
+            )}
+          </div>
         </div>
-        <div className="flex grow items-center justify-center">
-          {imageURL ? (
-            <img src={imageURL} className="rounded object-cover shadow" />
-          ) : (
-            <div className="flex w-full shrink-0 flex-col items-center justify-center">
-              <pre
-                className={classes(
-                  error
-                    ? "rounded border border-red-300 p-3 font-mono text-red-500"
-                    : "text-brand-orange select-none font-sans"
-                )}
-              >
-                {generating
-                  ? "Generating..."
-                  : error
-                  ? error
-                  : "No image generated"}
-              </pre>
-            </div>
-          )}
-        </div>
+      </Background>
+      <div className="flex min-h-0 shrink-0 flex-wrap gap-6">
+        <Buttons />
       </div>
-    </Background>
+    </div>
   );
 }
 
