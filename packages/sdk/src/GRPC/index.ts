@@ -1,7 +1,5 @@
 import { GrpcWebFetchTransport } from "@protobuf-ts/grpcweb-transport";
 
-import PackageJSON from "../../package.json";
-
 export * from "./Generated/dashboard";
 export * from "./Generated/dashboard.client";
 export * from "./Generated/engines";
@@ -27,6 +25,6 @@ export const createWebTransport = ({
 
       "stability-channel-id": "typescript-sdk",
       "stability-client-id": clientID,
-      "stability-client-version": PackageJSON.version,
+      "stability-client-version": "$$VERSION$$",
     },
   });

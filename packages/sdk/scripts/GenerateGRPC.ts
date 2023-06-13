@@ -10,6 +10,7 @@ const main = () => {
   OutputDirectory.setup();
   InputDirectory.setup();
   GenerationCommand.execute();
+  PrependCode.execute();
 };
 
 namespace GenerationCommand {
@@ -106,6 +107,28 @@ namespace OutputDirectory {
     remove();
     FileSystem.mkdirSync(path());
   };
+}
+
+namespace PrependCode {
+  const code = `/* eslint-disable */
+// @ts-nocheck
+`;
+
+  const prependTo = (filePath: string) => {
+    const oldContents = FileSystem.readFileSync(filePath, "utf8");
+    const newContents = `${code}${oldContents}`;
+    FileSystem.writeFileSync(filePath, newContents);
+  };
+
+  const iterateFilesInDirectory = (directoryPath: string) =>
+    FileSystem.readdirSync(directoryPath).forEach((file) => {
+      const filePath = Path.join(directoryPath, file);
+      FileSystem.lstatSync(filePath).isDirectory()
+        ? iterateFilesInDirectory(filePath)
+        : prependTo(filePath);
+    });
+
+  export const execute = () => iterateFilesInDirectory(OutputDirectory.path());
 }
 
 main();
