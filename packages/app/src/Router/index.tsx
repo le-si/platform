@@ -47,7 +47,7 @@ export function Router() {
     {
       path: "/account",
       element: (
-        <Page noFooter noScroll>
+        <Page>
           <User.Account.Page />
         </Page>
       ),

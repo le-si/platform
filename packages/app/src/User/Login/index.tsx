@@ -2,6 +2,7 @@ import * as Auth0 from "@auth0/auth0-react";
 
 import { Callback } from "./Callback";
 import { User } from "..";
+import { Link } from "react-router-dom";
 
 export declare namespace Login {
   export { Callback };
@@ -34,7 +35,11 @@ export namespace Login {
         </a>
       );
     } else {
-      return <User.Avatar />;
+      return (
+        <Link to="/account">
+          <User.Avatar />
+        </Link>
+      );
     }
   }
 }
