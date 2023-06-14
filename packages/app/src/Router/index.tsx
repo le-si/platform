@@ -15,7 +15,7 @@ export function Router() {
         <Page>
           <Overview />
         </Page>
-      ),
+      )
     },
     {
       path: "/sandbox",
@@ -23,7 +23,7 @@ export function Router() {
         <Page>
           <List />
         </Page>
-      ),
+      )
     },
     {
       path: "/sandbox/text-to-image",
@@ -34,15 +34,15 @@ export function Router() {
             samples={TextToImage.Samples}
           />
         </Page>
-      ),
+      )
     },
     {
       path: User.Logout.url(),
-      element: <User.Logout />,
+      element: <User.Logout />
     },
     {
       path: User.Login.Callback.url(),
-      element: <User.Login.Callback />,
+      element: <User.Login.Callback />
     },
     {
       path: "/account",
@@ -51,7 +51,22 @@ export function Router() {
           <User.Account.Page />
         </Page>
       ),
-    },
+      children: [
+        {
+          path: "*",
+          index: true,
+          element: <User.Account.Overview />
+        },
+        {
+          path: "billing",
+          element: <User.Account.Credits autoFocus />
+        },
+        {
+          path: "keys",
+          element: <User.APIKeys.Table />
+        }
+      ]
+    }
   ]);
 }
 

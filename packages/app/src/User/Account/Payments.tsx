@@ -1,9 +1,7 @@
 import React from "react";
 import { Billing } from "~/Billing";
-import { Theme } from "~/Theme";
+import { Background, Theme } from "~/Theme";
 import { DateTime } from "~/Utilities";
-
-import { Panel } from "./Panel";
 
 export namespace Payments {
   export function Table() {
@@ -20,13 +18,9 @@ export namespace Payments {
       ));
 
     return (
-      <Panel className="h-fit overflow-x-auto">
+      <Background className="h-full w-full" title="Payments">
         <table className="w-full text-left text-sm text-neutral-500 dark:text-neutral-400">
-          <caption className="mb-4 text-left text-lg font-semibold text-neutral-900 dark:text-white">
-            Payments
-          </caption>
-
-          <thead className="border-b border-black/10 text-xs uppercase text-neutral-700 dark:border-white/5 dark:text-neutral-400">
+          <thead className="text-xs uppercase text-neutral-700 dark:text-neutral-400">
             <tr>
               <th scope="col" className=" py-2">
                 Date
@@ -47,14 +41,14 @@ export namespace Payments {
             )}
           </tbody>
         </table>
-      </Panel>
+      </Background>
     );
   }
 }
 
 function PaymentRow({
   payment,
-  isLastRow,
+  isLastRow
 }: {
   payment: Billing.Payment;
   isLastRow: boolean;
@@ -99,7 +93,7 @@ function NoDataRow() {
 }
 
 function Row({
-  children,
+  children
 }: React.PropsWithChildren<{
   isLastRow?: boolean;
 }>) {
@@ -109,7 +103,7 @@ function Row({
 function Cell({
   children,
   className,
-  colSpan,
+  colSpan
 }: StyleableWithChildren & {
   colSpan?: number;
 }) {

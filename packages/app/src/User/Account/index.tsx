@@ -1,17 +1,15 @@
 import { Credits } from "./Credits";
 import { Danger } from "./Danger";
+import { Overview } from "./Overview";
 import { Page } from "./Page";
-import { Panel } from "./Panel";
-import { Support } from "./Support";
 
 export declare namespace Account {
-  export { Page, Credits, Support, Danger, Panel };
+  export { Page, Credits, Danger, Overview };
 }
 
 export namespace Account {
   Account.Page = Page;
   Account.Credits = Credits;
-  Account.Support = Support;
   Account.Danger = Danger;
-  Account.Panel = Panel;
+  Account.Overview = Overview;
 }

@@ -36,7 +36,7 @@ export namespace Login {
       );
     } else {
       return (
-        <Link to="/account">
+        <Link to="/account/overview">
           <User.Avatar />
         </Link>
       );

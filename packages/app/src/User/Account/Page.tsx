@@ -1,78 +1,72 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { Theme } from "~/Theme";
-import { User } from "~/User";
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useSearchParams
+} from "react-router-dom";
 
-import { Payments } from "./Payments";
-
-export function Page() {
-  const [searchParams] = useSearchParams();
-  const autoFocusCredits = searchParams.has(Page.autoFocusSearchParam());
-
+function NavButton({
+  children,
+  url,
+  active
+}: React.PropsWithChildren<{
+  url: string;
+  active?: boolean;
+}>) {
   return (
-    <div className="h-full justify-between overflow-y-auto px-5 py-6">
-      <div className="mx-auto flex max-w-[80rem] flex-col gap-8">
-        <div className="flex flex-col gap-10">
-          <div className="flex justify-between">
-            <UserDetails />
-            <User.Account.Support />
-          </div>
-          <div className="flex flex-wrap gap-4">
-            <div className="flex grow flex-col flex-wrap gap-4">
-              <User.Account.Credits autoFocus={autoFocusCredits} />
-              <Payments.Table />
-            </div>
-            <User.APIKeys.Table />
-          </div>
-        </div>
-        <User.Account.Danger />
-      </div>
-    </div>
+    <Link
+      to={url}
+      className={classes(
+        "border-b border-zinc-300 p-3 last:border-b-0",
+        active ? "bg-indigo-500 text-white" : "duration-100 hover:bg-indigo-200"
+      )}
+    >
+      {children}
+    </Link>
   );
 }
 
-Page.autoFocusSearchParam = () => "credits" as const;
-Page.url = (params?: { autoFocusCredits?: boolean }) =>
-  params?.autoFocusCredits
-    ? "/account?" + Page.autoFocusSearchParam()
-    : "/account";
-
-function UserDetails() {
-  const { user, isLoading } = User.use();
+export function Page() {
+  const location = useLocation();
   const navigate = useNavigate();
 
+  // redirect to /account/overview if no subpage is selected
   useEffect(() => {
-    if (!user && !isLoading) {
-      navigate("/");
+    if (location.pathname === "/account") {
+      navigate("/account/overview");
     }
-  }, [user, navigate, isLoading]);
-
-  // const { data: organization } = Organization.use();
+  }, [location.pathname]);
 
   return (
-    <div className="flex items-center gap-4">
-      <User.Avatar className="h-[100px] w-[100px]" />
-      <div className="flex flex-col justify-between gap-1 text-left">
-        {user?.name ? (
-          <h5 className="text-2xl font-medium text-zinc-900 dark:text-white">
-            {user.name}
-          </h5>
-        ) : (
-          <Theme.Skeleton className="h-4 w-32" />
-        )}
-        {user?.email ? (
-          <span className="text-md text-zinc-500 dark:text-zinc-400">
-            {user.email}
-          </span>
-        ) : (
-          <Theme.Skeleton className="mt-2 h-4 w-20" />
-        )}
-        {/* {organization ? (
-          <span className="mt-1 w-fit rounded bg-blue-100 px-2.5 py-0.5 text-sm font-medium text-blue-800 dark:bg-blue-200 dark:text-blue-800">
-            {organization.name}
-          </span>
-        ) : (
-          <Theme.Skeleton className="mt-2 h-5 w-20" />
-        )} */}
+    <div className="mt-6 flex w-full gap-5 px-5">
+      <div className="flex w-full max-w-[20rem] flex-col gap-5">
+        <div className="bg-brand-amber-1 flex w-full flex-col overflow-hidden rounded-xl">
+          <NavButton
+            url="/account/overview"
+            active={location.pathname === "/account/overview"}
+          >
+            Account
+          </NavButton>
+          <NavButton
+            url="/account/billing"
+            active={location.pathname === "/account/billing"}
+          >
+            Billing
+          </NavButton>
+          <NavButton
+            url="/account/keys"
+            active={location.pathname === "/account/keys"}
+          >
+            API Keys
+          </NavButton>
+        </div>
+        <div className="bg-brand-amber-1 flex w-full flex-col overflow-hidden rounded-xl">
+          <NavButton url="/logout">Log out</NavButton>
+        </div>
+      </div>
+      <div className="mx-auto flex w-full max-w-[80rem] justify-center">
+        <Outlet />
       </div>
     </div>
   );

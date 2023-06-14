@@ -1,5 +1,5 @@
 import { useCopyToClipboard } from "react-use";
-import { Theme } from "~/Theme";
+import { Background, Theme } from "~/Theme";
 import { User } from "~/User";
 
 import { DeleteModal } from "./DeleteModal";
@@ -16,38 +16,39 @@ export function Table() {
   ));
 
   return (
-    <User.Account.Panel className="h-fit w-1/2 grow self-start overflow-x-auto truncate">
-      <div className="w-full text-left text-sm text-neutral-500 dark:text-neutral-400">
-        <div className="mb-5 flex items-center justify-between text-lg text-neutral-900 dark:text-white">
-          <span className="text-lg font-semibold">API keys</span>
-          <AddKeyButton />
+    <div className="flex h-full w-full flex-col items-end gap-5">
+      <AddKeyButton />
+      <Background
+        className="h-fit w-full grow self-start overflow-x-auto truncate"
+        title="API Keys"
+      >
+        <div className="w-full text-left text-sm text-neutral-500 dark:text-neutral-400">
+          <div className="grid grid-cols-5 border-b border-white/5 py-3 text-xs uppercase text-neutral-700 dark:text-neutral-400">
+            <h1 className="col-span-3 truncate">Key</h1>
+            <h1 className="col-span-2 truncate">Date created</h1>
+          </div>
+          {isLoading ? (
+            <LoadingRows count={2} />
+          ) : rows?.length === 0 ? (
+            <NoDataRow />
+          ) : (
+            rows
+          )}
         </div>
-
-        <div className="grid grid-cols-5 border-b border-white/5 py-3 text-xs uppercase text-neutral-700 dark:text-neutral-400">
-          <h1 className="col-span-3 truncate">Key</h1>
-          <h1 className="col-span-2 truncate">Date created</h1>
+        <hr className="mb-4 h-px border-0 bg-neutral-200 dark:bg-white/5" />
+        <div className="mt-4 text-sm text-neutral-500 dark:text-neutral-400">
+          Documentation can be found at{" "}
+          <a
+            href="https://platform.stability.ai/"
+            target="_blank"
+            className="text-neutral-700 underline dark:text-neutral-400"
+            rel="noreferrer"
+          >
+            platform.stability.ai
+          </a>
         </div>
-        {isLoading ? (
-          <LoadingRows count={2} />
-        ) : rows?.length === 0 ? (
-          <NoDataRow />
-        ) : (
-          rows
-        )}
-      </div>
-      <hr className="mb-4 h-px border-0 bg-neutral-200 dark:bg-white/5" />
-      <div className="mt-4 text-sm text-neutral-500 dark:text-neutral-400">
-        Documentation can be found at{" "}
-        <a
-          href="https://platform.stability.ai/"
-          target="_blank"
-          className="text-neutral-700 underline dark:text-neutral-400"
-          rel="noreferrer"
-        >
-          platform.stability.ai
-        </a>
-      </div>
-    </User.Account.Panel>
+      </Background>
+    </div>
   );
 }
 
@@ -70,7 +71,7 @@ function AddKeyButton() {
 
 function APIKeyRow({
   apiKey,
-  canDelete,
+  canDelete
 }: {
   apiKey: User.APIKey;
   canDelete?: boolean;
@@ -80,7 +81,7 @@ function APIKeyRow({
   const [isKeyRevealed, setIsKeyRevealed] = useState(false);
 
   return (
-    <div className="grid w-full grid-cols-5 items-center border-b border-white/5 py-3 last-of-type:border-none">
+    <div className="grid w-full grid-cols-5 items-center border-b border-white/5 last-of-type:border-none">
       <div className="col-span-3 text-left font-mono">
         <div className="truncate">
           {(isKeyRevealed ? apiKey.key : User.APIKey.obscure(apiKey)).replace(
@@ -99,7 +100,7 @@ function APIKeyRow({
         {canDelete && (
           <>
             <Theme.Button
-              className="w-fit rounded text-sm transition-all duration-200 hover:text-red-600"
+              className="w-fit rounded transition-all duration-200 hover:text-red-600"
               onClick={() => setIsConfirmModalOpen(true)}
             >
               <Theme.X />
@@ -145,7 +146,7 @@ function CopyKey({ apiKey }: { apiKey: User.APIKey }) {
 
 function ShowHideKey({
   isKeyRevealed,
-  setIsKeyRevealed,
+  setIsKeyRevealed
 }: {
   isKeyRevealed: boolean;
   setIsKeyRevealed: (isKeyRevealed: boolean) => void;
@@ -197,7 +198,7 @@ function NoDataRow() {
 function Row({
   children,
   isLastRow,
-  className,
+  className
 }: StyleableWithChildren & {
   isLastRow?: boolean;
 }) {
@@ -217,7 +218,7 @@ function Row({
 function Cell({
   children,
   className,
-  colSpan,
+  colSpan
 }: StyleableWithChildren & {
   colSpan?: number;
 }) {
