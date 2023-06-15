@@ -70,17 +70,22 @@ export function Modal({
               )}
             >
               {title && (
-                <div className="flex items-center justify-between p-4 pb-2 text-lg">
+                <div className="flex items-center justify-between p-4 pb-2 text-lg text-black">
                   {title}
                   <button
-                    className="text-black duration-100 hover:text-black/90"
+                    className="text-black duration-100 hover:text-black/50"
                     onClick={onClose}
                   >
                     <X />
                   </button>
                 </div>
               )}
-              <div className={classes("p-4", containerClassName)}>
+              <div
+                className={classes(
+                  "p-4 text-sm text-neutral-500",
+                  containerClassName
+                )}
+              >
                 {children}
               </div>
               {bottom && <div className="bg-black/5">{bottom}</div>}
