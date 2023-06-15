@@ -97,7 +97,7 @@ export function Upscaling({ setOptions }: Upscaling) {
                   value: "esrgan-v1-x2plus"
                 },
                 {
-                  label: "Stable Diffusion x4 Latent Upscale",
+                  label: "Stable Diffusion x4 Latent Upscaler",
                   value: "stable-diffusion-x4-latent-upscaler"
                 }
               ]}
