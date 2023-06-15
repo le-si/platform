@@ -1,9 +1,9 @@
-name: Deploy to Staging
+name: Next Deploy
 
 on:
   push:
-    branches-ignore:
-      - "main"
+    branches:
+      - "next"
 
 jobs:
   build-and-deploy:
@@ -32,3 +32,9 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_PLATFORM_CI_API_KEY }}
           command: pages publish ./packages/app/dist --project-name=platform-stability --branch=${{ steps.extract_vars.outputs.branch }} --commit-hash=${{ steps.extract_vars.outputs.hash }}
+      - name: Publish
+        uses: cloudflare/wrangler-action@2.0.0
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          accountId: ${{ secrets.CLOUDFLARE_PLATFORM_CI_API_KEY }}
+          command: pages publish ./packages/app/dist --project-name=platform-next --branch next
