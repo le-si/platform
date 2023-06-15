@@ -3,10 +3,9 @@ import { Page } from "~/App/Page";
 import { Overview } from "~/Overview";
 
 import { Sandbox } from "~/Sandbox";
-import { User } from "~/User";
-
-import { TextToImage } from "../Sandbox/TextToImage";
 import { List } from "~/Sandbox/List";
+import { TextToImage } from "~/Sandbox/TextToImage";
+import { User } from "~/User";
 
 export function Router() {
   return ReactRouter.useRoutes([
@@ -44,6 +43,29 @@ export function Router() {
     {
       path: User.Login.Callback.url(),
       element: <User.Login.Callback />
+    },
+    {
+      path: "/account",
+      element: (
+        <Page>
+          <User.Account.Page />
+        </Page>
+      ),
+      children: [
+        {
+          path: "*",
+          index: true,
+          element: <User.Account.Overview />
+        },
+        {
+          path: "billing",
+          element: <User.Account.Credits autoFocus />
+        },
+        {
+          path: "keys",
+          element: <User.APIKeys.Table />
+        }
+      ]
     }
   ]);
 }
