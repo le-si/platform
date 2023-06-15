@@ -101,7 +101,7 @@ function BuyCredits({ autoFocus }: { autoFocus: boolean | undefined }) {
               onClick={onBuyCredits}
               loading={createPayment?.isLoading}
               disabled={isNaN(amount) || amount < 10}
-              className="w-fit gap-0 rounded-l-none rounded-r-sm bg-violet-500 py-1.5 text-sm text-white duration-100 hover:bg-violet-600"
+              className="w-fit gap-0 rounded-l-none rounded-r-sm bg-indigo-500 py-1.5 text-sm text-white duration-100 hover:bg-indigo-600"
             >
               Buy
             </Theme.Button>

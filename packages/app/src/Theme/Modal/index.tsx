@@ -6,12 +6,14 @@ export type Modal = StyleableWithChildren & {
   open?: boolean;
   onClose?: () => void;
   title?: string;
+  containerClassName?: string;
+  bottom?: React.ReactNode;
 };
 
 export function Backdrop({
   open,
   onClose,
-  className,
+  className
 }: {
   open?: boolean;
   onClose?: () => void;
@@ -37,7 +39,15 @@ export function Backdrop({
   );
 }
 
-export function Modal({ open, onClose, className, children, title }: Modal) {
+export function Modal({
+  open,
+  onClose,
+  className,
+  children,
+  title,
+  containerClassName,
+  bottom
+}: Modal) {
   return (
     <AnimatePresence>
       {open && (
@@ -60,7 +70,7 @@ export function Modal({ open, onClose, className, children, title }: Modal) {
               )}
             >
               {title && (
-                <div className="flex items-center justify-between border-b border-zinc-300 bg-white px-6 py-4 text-lg">
+                <div className="flex items-center justify-between p-4 pb-2 text-lg">
                   {title}
                   <button
                     className="text-black duration-100 hover:text-black/90"
@@ -70,7 +80,10 @@ export function Modal({ open, onClose, className, children, title }: Modal) {
                   </button>
                 </div>
               )}
-              <div className="p-6">{children}</div>
+              <div className={classes("p-4", containerClassName)}>
+                {children}
+              </div>
+              {bottom && <div className="bg-black/5">{bottom}</div>}
             </div>
           </motion.div>
         </>
@@ -84,16 +97,16 @@ const outSideVariants = {
     opacity: 0,
     transition: {
       type: "tween",
-      duration: 0.1,
-    },
+      duration: 0.1
+    }
   },
   open: {
     opacity: 1,
     transition: {
       type: "tween",
-      duration: 0.1,
-    },
-  },
+      duration: 0.1
+    }
+  }
 };
 
 const insideVariants = {
@@ -104,8 +117,8 @@ const insideVariants = {
       type: "spring",
       damping: 30,
       stiffness: 500,
-      restSpeed: 10,
-    },
+      restSpeed: 10
+    }
   },
   open: {
     scale: 1,
@@ -114,7 +127,7 @@ const insideVariants = {
       type: "spring",
       damping: 22,
       stiffness: 500,
-      restSpeed: 0.1,
-    },
-  },
+      restSpeed: 0.1
+    }
+  }
 };
