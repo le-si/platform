@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import "../GlobalVariables";
+import "../../GlobalVariables";
 
 import { Select } from "../Select";
 import { GridBlocks } from "../Icons";

@@ -36,7 +36,10 @@ export namespace Login {
       );
     } else {
       return (
-        <Link to="/account/overview">
+        <Link
+          to="/account/overview"
+          className="rounded-full ring-1 ring-transparent duration-100 hover:ring hover:ring-indigo-500"
+        >
           <User.Avatar />
         </Link>
       );

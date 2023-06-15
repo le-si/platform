@@ -3,6 +3,7 @@ import { Page } from "~/App/Page";
 import { Overview } from "~/Overview";
 
 import { Sandbox } from "~/Sandbox";
+import { ImageToImage } from "~/Sandbox/ImageToImage";
 import { List } from "~/Sandbox/List";
 import { TextToImage } from "~/Sandbox/TextToImage";
 import { User } from "~/User";
@@ -32,6 +33,17 @@ export function Router() {
           <Sandbox
             SandboxComponent={TextToImage}
             samples={TextToImage.Samples}
+          />
+        </Page>
+      )
+    },
+    {
+      path: "/sandbox/image-to-image",
+      element: (
+        <Page noScroll noFooter>
+          <Sandbox
+            SandboxComponent={ImageToImage}
+            samples={ImageToImage.Samples}
           />
         </Page>
       )

@@ -1,5 +1,6 @@
 export type Icon = Styleable & {
   color?: string;
+  onClick?: () => void;
 };
 
 export function Link(props: Icon) {
@@ -11,6 +12,7 @@ export function Link(props: Icon) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={props.className}
+      {...props}
     >
       <g>
         <path
@@ -48,6 +50,7 @@ export function Union(props: Icon) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={props.className}
+      {...props}
     >
       <path
         fillRule="evenodd"
@@ -68,6 +71,7 @@ export function Engine(props: Icon) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={props.className}
+      {...props}
     >
       <path
         d="M19.2032 3.91699V3.91909L23.7734 9.98745V9.9928C26.3196 10.1107 28.3477 12.2123 28.3477 14.7876V16.0576H31.9995V18.4858H28.3477V19.7566C28.3477 22.3319 26.3196 24.4335 23.7734 24.5514V24.5565L19.2032 30.6249V30.6269L12.8003 30.6269L8.22852 24.5565V24.5511C5.68238 24.4333 3.6543 22.3317 3.6543 19.7564V18.4858H0V16.0576H3.6543V14.7873C3.6543 12.212 5.68238 10.1104 8.22852 9.99252V9.98743L12.8003 3.91699H19.2032Z"
@@ -86,6 +90,7 @@ export function GridBlocks(props: Icon) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={props.className}
+      {...props}
     >
       <rect width="2.57143" height="2.57143" fill="#3F3F46" />
       <rect
@@ -161,6 +166,7 @@ export function X(props: Icon) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={props.className}
+      {...props}
     >
       <path
         d="M13 3L3 13"
@@ -191,6 +197,7 @@ export function Copy(props: Icon) {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={props.className}
+      {...props}
     >
       <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
       <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
@@ -224,6 +231,7 @@ export function Arrow(props: Icon) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={props.className}
+      {...props}
     >
       <path
         d="M7.65332 1.88867L11.5133 5.74861L7.65332 9.60856"
@@ -252,6 +260,7 @@ export function ExternalLink(props: Icon) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={props.className}
+      {...props}
     >
       <path
         d="M11.25 8.625V12.375C11.25 12.7065 11.1183 13.0245 10.8839 13.2589C10.6495 13.4933 10.3315 13.625 10 13.625H3.125C2.79348 13.625 2.47554 13.4933 2.24112 13.2589C2.0067 13.0245 1.875 12.7065 1.875 12.375V5.5C1.875 5.16848 2.0067 4.85054 2.24112 4.61612C2.47554 4.3817 2.79348 4.25 3.125 4.25H6.875"
@@ -291,6 +300,7 @@ export function Eye(props: Icon) {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={props.className}
+      {...props}
     >
       <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
       <circle cx="12" cy="12" r="3" />
@@ -311,6 +321,7 @@ export function EyeOff(props: Icon) {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={props.className}
+      {...props}
     >
       <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
       <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
@@ -333,6 +344,7 @@ export function Plus(props: Icon) {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={props.className}
+      {...props}
     >
       <line x1="12" x2="12" y1="5" y2="19" />
       <line x1="5" x2="19" y1="12" y2="12" />
@@ -353,6 +365,7 @@ export function AlertTriangle(props: Icon) {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={props.className}
+      {...props}
     >
       <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
       <path d="M12 9v4" />
@@ -374,6 +387,7 @@ export function AlertCircle(props: Icon) {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={props.className}
+      {...props}
     >
       <circle cx="12" cy="12" r="10" />
       <line x1="12" x2="12" y1="8" y2="12" />
@@ -395,6 +409,7 @@ export function Info(props: Icon) {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={props.className}
+      {...props}
     >
       <circle cx="12" cy="12" r="10" />
       <path d="M12 16v-4" />
@@ -416,6 +431,7 @@ export function Check(props: Icon) {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={props.className}
+      {...props}
     >
       <polyline points="20 6 9 17 4 12" />
     </svg>
@@ -446,6 +462,72 @@ export function Spinner({ className }: Styleable) {
         fill="currentColor"
         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
       ></path>
+    </svg>
+  );
+}
+
+export function Upload(props: Icon) {
+  return (
+    <svg
+      width="25"
+      height="25"
+      viewBox="0 0 25 25"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={props.className}
+      {...props}
+    >
+      <path
+        d="M20 14.25V16.75C20 17.2804 19.7893 17.7891 19.4142 18.1642C19.0391 18.5393 18.5304 18.75 18 18.75H7C6.46957 18.75 5.96086 18.5393 5.58579 18.1642C5.21071 17.7891 5 17.2804 5 16.75V14.25"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M17.5 9.25L12.5 4.25L7.5 9.25"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12.502 4.25L12.502 14.75"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function Image(props: Icon) {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={props.className}
+      {...props}
+    >
+      <path
+        d="M12.6667 2H3.33333C2.59695 2 2 2.59695 2 3.33333V12.6667C2 13.403 2.59695 14 3.33333 14H12.6667C13.403 14 14 13.403 14 12.6667V3.33333C14 2.59695 13.403 2 12.6667 2Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5.99935 7.33366C6.73573 7.33366 7.33268 6.73671 7.33268 6.00033C7.33268 5.26395 6.73573 4.66699 5.99935 4.66699C5.26297 4.66699 4.66602 5.26395 4.66602 6.00033C4.66602 6.73671 5.26297 7.33366 5.99935 7.33366Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M14 9.99947L11.9427 7.94214C11.6926 7.69218 11.3536 7.55176 11 7.55176C10.6464 7.55176 10.3074 7.69218 10.0573 7.94214L4 13.9995"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }

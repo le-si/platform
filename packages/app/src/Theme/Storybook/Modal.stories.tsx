@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import "../GlobalVariables";
+import "../../GlobalVariables";
 
 import { Modal } from "../Modal";
 import { Input } from "../Input";

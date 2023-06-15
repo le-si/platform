@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import "../GlobalVariables";
+import "../../GlobalVariables";
 
 import { ImageContainer } from "../ImageContainer";
 import { Background } from "../Background";

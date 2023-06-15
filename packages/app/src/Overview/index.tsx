@@ -237,16 +237,6 @@ function Sandboxes() {
             link="/sandbox/image-to-image"
           />
           <SandboxCard
-            title="Masking"
-            svg="/svg/masking-sandbox.svg"
-            link="/sandbox/masking"
-          />
-          <SandboxCard
-            title="Animation"
-            svg="/svg/animation-sandbox.svg"
-            link="/sandbox/animation"
-          />
-          <SandboxCard
             title="Upscaling"
             svg="/svg/upscaling-sandbox.svg"
             link="/sandbox/upscaling"
@@ -255,6 +245,18 @@ function Sandboxes() {
             title="Multi-prompting"
             svg="/svg/multi-prompting-sandbox.svg"
             link="/sandbox/multi-prompting"
+          />
+          <SandboxCard
+            title="Masking"
+            svg="/svg/masking-sandbox.svg"
+            link="/sandbox/masking"
+            soon
+          />
+          <SandboxCard
+            title="Animation"
+            svg="/svg/animation-sandbox.svg"
+            link="/sandbox/animation"
+            soon
           />
           <SandboxCard
             title="Face enhancing"
