@@ -136,7 +136,7 @@ const OutOfCreditsSnackbar = React.forwardRef<
 
   const onClick = useCallback(() => {
     closeSnackbar(id);
-    navigate(User.Account.Page.url({ autoFocusCredits: true }));
+    navigate(User.Account.Page.url());
   }, [closeSnackbar, id, navigate]);
 
   return (

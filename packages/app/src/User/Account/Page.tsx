@@ -1,15 +1,9 @@
-import {
-  Link,
-  Outlet,
-  useLocation,
-  useNavigate,
-  useSearchParams
-} from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 
 function NavButton({
   children,
   url,
-  active
+  active,
 }: React.PropsWithChildren<{
   url: string;
   active?: boolean;
@@ -70,4 +64,8 @@ export function Page() {
       </div>
     </div>
   );
+}
+
+export namespace Page {
+  export const url = () => "/account" as const;
 }
