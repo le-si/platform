@@ -60,7 +60,7 @@ export function DropZone({
         }}
         onDrop={!image ? onDropFiles : undefined}
       >
-        {children ? (
+        {image ? (
           <div
             className="relative flex flex-col gap-2 p-3"
             onClickCapture={(e) => e.preventDefault()}

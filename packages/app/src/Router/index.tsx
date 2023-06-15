@@ -6,6 +6,7 @@ import { Sandbox } from "~/Sandbox";
 import { ImageToImage } from "~/Sandbox/ImageToImage";
 import { List } from "~/Sandbox/List";
 import { TextToImage } from "~/Sandbox/TextToImage";
+import { Upscaling } from "~/Sandbox/Upscaling";
 import { User } from "~/User";
 
 export function Router() {
@@ -45,6 +46,14 @@ export function Router() {
             SandboxComponent={ImageToImage}
             samples={ImageToImage.Samples}
           />
+        </Page>
+      )
+    },
+    {
+      path: "/sandbox/upscaling",
+      element: (
+        <Page noScroll noFooter>
+          <Sandbox SandboxComponent={Upscaling} samples={Upscaling.Samples} />
         </Page>
       )
     },

@@ -102,7 +102,9 @@ export function ImageToImage({ setOptions }: ImageToImage) {
     cfgScale,
     steps,
     seed,
-    setOptions
+    setOptions,
+    initStrength,
+    init
   ]);
 
   return (
@@ -216,7 +218,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
           <Button
             variant="primary"
             className="h-16 rounded-none"
-            disabled={generating || !positivePrompt || !apiKey}
+            disabled={generating || !positivePrompt || !apiKey || !init}
             onClick={generate}
           >
             Generate
