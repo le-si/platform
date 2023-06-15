@@ -32,6 +32,7 @@ export async function request(
     "text_prompts[0][weight]": prompts[0]?.weight,
     "text_prompts[1][text]": prompts[1]?.text,
     "text_prompts[1][weight]": prompts[1]?.weight,
+    image_strength: initStrength,
     style_preset: style,
     samples: 1,
     cfg_scale: cfgScale,

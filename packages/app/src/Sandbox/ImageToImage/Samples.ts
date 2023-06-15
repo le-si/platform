@@ -9,11 +9,13 @@ import fs from 'node:fs';
 const formData = new FormData();
 formData.append('init_image', fs.readFileSync('../init_image.png'));
 formData.append('init_image_mode', 'IMAGE_STRENGTH');
-formData.append('image_strength', 0.35);
-formData.append('text_prompts[0][text]', 'Galactic dog wearing a cape');
-formData.append('cfg_scale', 7);
-formData.append('samples', 1);
-formData.append('steps', 30);
+formData.append('image_strength', {imageStrength});
+formData.append('text_prompts[0][text]', "{positivePrompt}");
+formData.append('text_prompts[0][weight]', 1);
+formData.append('text_prompts[1][text]', "{negativePrompt}");
+formData.append('text_prompts[1][weight]', -1);
+formData.append('cfg_scale', {cfgScale});
+formData.append('steps', {steps});
 
 const response = await fetch(
   "https://api.stability.ai/v1/generation/{engineId}/image-to-image",
@@ -61,11 +63,13 @@ import fs from 'node:fs';
 const formData = new FormData();
 formData.append('init_image', fs.readFileSync('../init_image.png'));
 formData.append('init_image_mode', 'IMAGE_STRENGTH');
-formData.append('image_strength', 0.35);
-formData.append('text_prompts[0][text]', 'Galactic dog wearing a cape');
-formData.append('cfg_scale', 7);
-formData.append('samples', 1);
-formData.append('steps', 30);
+formData.append('image_strength', {imageStrength});
+formData.append('text_prompts[0][text]', "{positivePrompt}");
+formData.append('text_prompts[0][weight]', 1);
+formData.append('text_prompts[1][text]', "{negativePrompt}");
+formData.append('text_prompts[1][weight]', -1);
+formData.append('cfg_scale', {cfgScale});
+formData.append('steps', {steps});
 
 const response = await fetch(
   "https://api.stability.ai/v1/generation/{engineId}/image-to-image",
@@ -111,16 +115,10 @@ response = requests.post(
     data={
         "image_strength": {imageStrength},
         "init_image_mode": "IMAGE_STRENGTH",
-        "text_prompts": [
-          {
-            "text": "{positivePrompt}",
-            "weight": 1,
-          },
-          {
-            "text": "{negativePrompt}",
-            "weight": -1,
-          }
-        ],
+        "text_prompts[0][text]": "{positivePrompt}",
+        "text_prompts[0][weight]": 1,
+        "text_prompts[1][text]": "{negativePrompt}",
+        "text_prompts[1][weight]": -1,
         "style_preset": "{style}",
         "height": {height},
         "width": {width},

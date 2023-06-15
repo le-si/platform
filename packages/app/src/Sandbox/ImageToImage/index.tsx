@@ -91,7 +91,8 @@ export function ImageToImage({ setOptions }: ImageToImage) {
       style,
       cfgScale,
       steps,
-      seed
+      seed,
+      imageStrength: initStrength
     });
   }, [
     engineId,
