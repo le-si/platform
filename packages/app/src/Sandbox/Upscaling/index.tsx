@@ -160,13 +160,13 @@ export function Buttons() {
   return (
     <>
       <Button
-        link="https://stabilityai.readme.io/reference/imagetoimage"
+        link="https://stabilityai.readme.io/reference/upscaleimage"
         variant="secondary"
       >
         View Documentation
       </Button>
       <Button
-        link="https://github.com/Stability-AI/platform/blob/main/packages/app/src/Sandbox/ImageToImage/index.tsx"
+        link="https://github.com/Stability-AI/platform/blob/main/packages/app/src/Sandbox/Upscale/index.tsx"
         variant="secondary"
       >
         View on GitHub
