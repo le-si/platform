@@ -42,15 +42,18 @@ export function TopBar() {
         >
           Sandbox
         </Link>
-        <a href="/docs" className="text-sm font-semibold hover:text-indigo-500">
+        <h1
+          // href="/docs"
+          className="text-sm font-semibold opacity-50"
+        >
           Documentation
-        </a>
-        <a
-          href="/docs/recipes"
-          className="text-sm font-semibold hover:text-indigo-500"
+        </h1>
+        <h1
+          // href="/docs/recipes"
+          className="text-sm font-semibold opacity-50"
         >
           Guides
-        </a>
+        </h1>
       </div>
       <div className="flex w-1/3 items-center justify-end gap-3">
         <User.Login.Button />

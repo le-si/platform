@@ -246,7 +246,7 @@ function Sandboxes() {
             svg="/svg/multi-prompting-sandbox.svg"
             link="/sandbox/multi-prompting"
           />
-          <SandboxCard
+          {/* <SandboxCard
             title="Masking"
             svg="/svg/masking-sandbox.svg"
             link="/sandbox/masking"
@@ -269,8 +269,14 @@ function Sandboxes() {
             svg="/svg/fine-tuning-sandbox.svg"
             link="/sandbox/fine-tuning"
             soon
-          />
+          /> */}
         </div>
+        <Link
+          to="/sandbox"
+          className="mt-16 flex items-center gap-2 font-semibold text-indigo-500 duration-100 hover:text-indigo-400"
+        >
+          View All Sandboxes <Arrow />
+        </Link>
       </div>
     </div>
   );

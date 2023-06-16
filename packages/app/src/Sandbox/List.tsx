@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export function List() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col gap-48">
       <Header />
       <Sandboxes />
     </div>
@@ -11,23 +11,66 @@ export function List() {
 
 function Header() {
   return (
-    <div className="mx-auto my-24 flex flex-col justify-center gap-8 px-3 md:px-0">
-      <h1 className="max-w-[40rem] text-center text-5xl font-light">
-        Try out emerging AI models and technologies
+    <div className="mt-24 flex w-full flex-col items-center gap-4">
+      <img src="/svg/sai-header.svg" />
+      <h1 className="mt-2 text-center text-5xl font-extralight">
+        Sandbox experience
       </h1>
-      <p className="text-center font-light">Brought to you by Stability.AI</p>
+      <h2 className="text-lg font-light">Brought to you by Stability AI</h2>
     </div>
   );
 }
 
 function Sandboxes() {
   return (
-    <div className="grid grid-cols-1 gap-4 px-4 md:grid-cols-2 md:px-32 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="mb-24 grid grid-cols-1 gap-4 px-4 md:grid-cols-2 md:px-32 lg:grid-cols-3 xl:grid-cols-4">
       <SandboxButton
         title="Text to Image"
         description="Generate images from text"
         href="/sandbox/text-to-image"
-        color="#b84317"
+        image="/svg/sandboxes/text-to-image.svg"
+      />
+      <SandboxButton
+        title="Image to Image"
+        description="Generate images from images"
+        href="/sandbox/image-to-image"
+        image="/svg/sandboxes/image-to-image.svg"
+      />
+      <SandboxButton
+        title="Upscaling"
+        description="Increase image resolution"
+        href="/sandbox/upscaling"
+        image="/svg/sandboxes/upscaling.svg"
+      />
+      <SandboxButton
+        title="Inpainting"
+        description="Edit images with AI"
+        href="/sandbox/masking"
+        image="/svg/sandboxes/masking.svg"
+      />
+      <SandboxButton
+        title="Deepfloyd IF"
+        description="Generate images from text"
+        href="/sandbox/deepfloyd-if"
+        image="/svg/sandboxes/deepfloyd.svg"
+      />
+      <SandboxButton
+        title="Chat UI"
+        description="Communicate with language models"
+        href="/sandbox/chat"
+        image="/svg/sandboxes/chatui.svg"
+      />
+      <SandboxButton
+        title="Outpainting"
+        description="Expand images with AI"
+        href="/sandbox/outpainting"
+        image="/svg/sandboxes/outpainting.svg"
+      />
+      <SandboxButton
+        title="Fine-tuning"
+        description="Train image models with your data"
+        href="/sandbox/fine-tuning"
+        image="/svg/sandboxes/fine-tuning.svg"
       />
     </div>
   );
@@ -37,29 +80,29 @@ function SandboxButton({
   title,
   description,
   image,
-  href,
-  color
+  href
 }: {
   title: string;
   description: string;
   image?: string;
   href: string;
-  color: string;
 }) {
   return (
-    <Link className="flex flex-col gap-2" to={href}>
+    <Link
+      className="bg-brand-amber-1 hover:bg-brand-amber-2 group flex flex-col gap-3 rounded-2xl p-5 duration-100"
+      to={href}
+    >
       <h1 className="text-2xl">{title}</h1>
-      <div
-        className="aspect-square w-full overflow-hidden rounded-xl"
-        style={{
-          backgroundColor: color
-        }}
-      >
+      <p>{description}</p>
+      <div className="w-full overflow-hidden rounded-xl">
         {image && (
-          <img src={image} alt={title} className="h-full w-full object-cover" />
+          <img
+            src={image}
+            alt={title}
+            className="w-full grayscale duration-100 group-hover:grayscale-0"
+          />
         )}
       </div>
-      <p>{description}</p>
     </Link>
   );
 }
