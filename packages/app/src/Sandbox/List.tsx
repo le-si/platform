@@ -28,49 +28,49 @@ function Sandboxes() {
         title="Text to Image"
         description="Generate images from text"
         href="/sandbox/text-to-image"
-        image="/svg/sandboxes/text-to-image.svg"
+        image="/svg/sandboxes/text-to-image.webp"
       />
       <SandboxButton
         title="Image to Image"
         description="Generate images from images"
         href="/sandbox/image-to-image"
-        image="/svg/sandboxes/image-to-image.svg"
+        image="/svg/sandboxes/image-to-image.webp"
       />
       <SandboxButton
         title="Upscaling"
         description="Increase image resolution"
         href="/sandbox/upscaling"
-        image="/svg/sandboxes/upscaling.svg"
+        image="/svg/sandboxes/upscaling.webp"
       />
       <SandboxButton
         title="Inpainting"
         description="Edit images with AI"
         href="/sandbox/masking"
-        image="/svg/sandboxes/masking.svg"
+        image="/svg/sandboxes/masking.webp"
       />
       <SandboxButton
         title="Deepfloyd IF"
         description="Generate images from text"
         href="/sandbox/deepfloyd-if"
-        image="/svg/sandboxes/deepfloyd.svg"
+        image="/svg/sandboxes/deepfloyd.webp"
       />
       <SandboxButton
         title="Chat UI"
         description="Communicate with language models"
         href="/sandbox/chat"
-        image="/svg/sandboxes/chatui.svg"
+        image="/svg/sandboxes/chatui.webp"
       />
       <SandboxButton
         title="Outpainting"
         description="Expand images with AI"
         href="/sandbox/outpainting"
-        image="/svg/sandboxes/outpainting.svg"
+        image="/svg/sandboxes/outpainting.webp"
       />
       <SandboxButton
         title="Fine-tuning"
         description="Train image models with your data"
         href="/sandbox/fine-tuning"
-        image="/svg/sandboxes/fine-tuning.svg"
+        image="/svg/sandboxes/fine-tuning.webp"
       />
     </div>
   );

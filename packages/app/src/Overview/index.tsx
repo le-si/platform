@@ -72,13 +72,13 @@ function GetStarted() {
     <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
       <div className="flex flex-col gap-4">
         <h2 className="text-2xl font-light">Get Started</h2>
-        <img src="/svg/getstarted-cta.svg" className="select-none" />
+        <img src="/svg/getstarted-cta.webp" className="select-none" />
         <p>An intro on how to get the best out of the Stability.ai platform.</p>
         <Button>Learn More</Button>
       </div>
       <div className="flex flex-col gap-4">
         <h2 className="text-2xl font-light">DreamStudio</h2>
-        <img src="/svg/dreamstudio-cta.svg" className="select-none" />
+        <img src="/svg/dreamstudio-cta.webp" className="select-none" />
         <p>
           Find out about Stability AI image generation and open source UI
           StableStudio.
@@ -128,7 +128,7 @@ function Documentation() {
       <h1 className="text-5xl font-extralight">Documentation</h1>
       <div className="mt-36 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <DocumentCard
-          svg="/svg/image-doc.svg"
+          svg="/svg/image-doc.webp"
           title="Image"
           links={[
             { title: "Introduction", url: "/docs/text-to-image" },
@@ -138,7 +138,7 @@ function Documentation() {
         />
         <DocumentCard
           title="Language"
-          svg="/svg/language-doc.svg"
+          svg="/svg/language-doc.webp"
           links={[
             { title: "Models", url: "/docs/text-to-text" },
             {
@@ -150,7 +150,7 @@ function Documentation() {
         />
         <DocumentCard
           title="Animation"
-          svg="/svg/animation-doc.svg"
+          svg="/svg/animation-doc.webp"
           links={[
             { title: "Introduction", url: "/docs/text-to-video" },
             { title: "gRPC API", url: "/docs/text-to-video" }
@@ -158,7 +158,7 @@ function Documentation() {
         />
         <DocumentCard
           title="Integrations"
-          svg="/svg/integration-doc.svg"
+          svg="/svg/integration-doc.webp"
           links={[
             { title: "Photoshop", url: "/docs/text-to-image" },
             { title: "Blender", url: "/docs/text-to-image" }
@@ -183,7 +183,7 @@ function SandboxCard({
   const content = (
     <>
       <div className="rounded-xl bg-white p-3">
-        <img src={soon ? "/svg/soon-sandbox.svg" : svg} />
+        <img src={soon ? "/svg/soon-sandbox.webp" : svg} />
       </div>
       <div className="flex items-center gap-2">
         <h2
@@ -228,45 +228,45 @@ function Sandboxes() {
         <div className="mt-24 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <SandboxCard
             title="Text-to-Image"
-            svg="/svg/text-image-sandbox.svg"
+            svg="/svg/text-image-sandbox.webp"
             link="/sandbox/text-to-image"
           />
           <SandboxCard
             title="Image-to-Image"
-            svg="/svg/image-image-sandbox.svg"
+            svg="/svg/image-image-sandbox.webp"
             link="/sandbox/image-to-image"
           />
           <SandboxCard
             title="Upscaling"
-            svg="/svg/upscaling-sandbox.svg"
+            svg="/svg/upscaling-sandbox.webp"
             link="/sandbox/upscaling"
           />
           <SandboxCard
             title="Multi-prompting"
-            svg="/svg/multi-prompting-sandbox.svg"
+            svg="/svg/multi-prompting-sandbox.webp"
             link="/sandbox/multi-prompting"
           />
           {/* <SandboxCard
             title="Masking"
-            svg="/svg/masking-sandbox.svg"
+            svg="/svg/masking-sandbox.webp"
             link="/sandbox/masking"
             soon
           />
           <SandboxCard
             title="Animation"
-            svg="/svg/animation-sandbox.svg"
+            svg="/svg/animation-sandbox.webp"
             link="/sandbox/animation"
             soon
           />
           <SandboxCard
             title="Face enhancing"
-            svg="/svg/face-enhancing-sandbox.svg"
+            svg="/svg/face-enhancing-sandbox.webp"
             link="/sandbox/face-enhancing"
             soon
           />
           <SandboxCard
             title="Fine-tuning"
-            svg="/svg/fine-tuning-sandbox.svg"
+            svg="/svg/fine-tuning-sandbox.webp"
             link="/sandbox/fine-tuning"
             soon
           /> */}
@@ -312,23 +312,23 @@ function Others() {
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       <OtherCard
         title="Pricing"
-        svg="/svg/pricing.svg"
+        svg="/svg/pricing.webp"
         link="https://stability.ai/pricing"
       />
       <OtherCard
         title="Support"
-        svg="/svg/support.svg"
+        svg="/svg/support.webp"
         link="https://stability.ai/support"
       />
       <OtherCard
         title="Status"
-        svg="/svg/status.svg"
+        svg="/svg/status.webp"
         link="https://status.stability.ai"
         linkName="View API Status"
       />
       <OtherCard
         title="Release Notes"
-        svg="/svg/release-notes.svg"
+        svg="/svg/release-notes.webp"
         link="https://stability.ai/blog"
       />
     </div>
