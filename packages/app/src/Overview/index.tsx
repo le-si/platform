@@ -57,9 +57,9 @@ function Header() {
   return (
     <div className="mt-24 flex w-full flex-col items-center gap-2">
       <img src="/svg/sai-header.svg" />
-      <h2 className="mt-4 text-lg font-light">Welcome to</h2>
+      <h2 className="mt-4 text-lg font-light">Stability AI platform</h2>
       <h1 className="text-center text-5xl font-extralight">
-        Stability.ai's Developer Platform
+        Explore the possibilities of generative AI
       </h1>
     </div>
   );
@@ -78,7 +78,8 @@ function GetStarted() {
         <h2 className="text-2xl font-light">DreamStudio</h2>
         <img src="/svg/dreamstudio-cta.webp" className="select-none" />
         <p>
-          Learn about DreamStudio and StableStudio, Stability.ai's image generation applications.
+          Learn about DreamStudio and StableStudio, Stability AI's image
+          generation applications.
         </p>
         <Button>Learn More</Button>
       </div>
@@ -336,7 +337,7 @@ function Testimonials() {
     <div className="flex flex-col gap-12 text-center">
       <h1 className="text-4xl font-extralight leading-[2.75rem]">
         Join industry-leaders making the most of
-        <br /> generative AI with Stability.ai
+        <br /> generative AI with Stability AI
       </h1>
       <img src="/svg/logos.svg" />
     </div>
