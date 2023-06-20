@@ -14,7 +14,7 @@ function Header() {
     <div className="mt-24 flex w-full flex-col items-center gap-4">
       <img src="/svg/sai-header.svg" />
       <h1 className="mt-2 text-center text-5xl font-extralight">
-        Sandbox experience
+        Sandbox Experiences
       </h1>
       <h2 className="text-lg font-light">Brought to you by Stability AI</h2>
     </div>
@@ -43,31 +43,36 @@ function Sandboxes() {
         image="/svg/sandboxes/upscaling.webp"
       />
       <SandboxButton
+        comingSoon
         title="Inpainting"
         description="Edit images with AI"
         href="/sandbox/masking"
         image="/svg/sandboxes/masking.webp"
       />
       <SandboxButton
+        comingSoon
         title="Deepfloyd IF"
         description="Generate images from text"
         href="/sandbox/deepfloyd-if"
         image="/svg/sandboxes/deepfloyd.webp"
       />
       <SandboxButton
+        comingSoon
         title="Chat UI"
         description="Communicate with language models"
         href="/sandbox/chat"
         image="/svg/sandboxes/chatui.webp"
       />
       <SandboxButton
+        comingSoon
         title="Outpainting"
         description="Expand images with AI"
         href="/sandbox/outpainting"
         image="/svg/sandboxes/outpainting.webp"
       />
       <SandboxButton
-        title="Fine-tuning"
+        comingSoon
+        title="Fine-Tuning"
         description="Train image models with your data"
         href="/sandbox/fine-tuning"
         image="/svg/sandboxes/fine-tuning.webp"
@@ -77,11 +82,13 @@ function Sandboxes() {
 }
 
 function SandboxButton({
+  comingSoon,
   title,
   description,
   image,
-  href
+  href,
 }: {
+  comingSoon?: boolean;
   title: string;
   description: string;
   image?: string;
@@ -89,17 +96,26 @@ function SandboxButton({
 }) {
   return (
     <Link
-      className="bg-brand-amber-1 hover:bg-brand-amber-2 group flex flex-col gap-3 rounded-2xl p-5 duration-100"
       to={href}
+      className={classes(
+        "bg-brand-amber-1 group flex flex-col gap-3 rounded-2xl p-5 duration-100",
+        comingSoon ? "cursor-default opacity-50" : "hover:bg-brand-amber-2"
+      )}
+      {...(comingSoon && {
+        onClick: (event) => event.preventDefault(),
+      })}
     >
-      <h1 className="text-2xl">{title}</h1>
+      <h1 className="flex justify-between text-2xl">{title}</h1>
       <p>{description}</p>
       <div className="w-full overflow-hidden rounded-xl">
         {image && (
           <img
             src={image}
             alt={title}
-            className="w-full grayscale duration-100 group-hover:grayscale-0"
+            className={classes(
+              "w-full grayscale duration-100",
+              !comingSoon && "group-hover:grayscale-0"
+            )}
           />
         )}
       </div>

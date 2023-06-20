@@ -12,9 +12,9 @@ const meta = {
   argTypes: {
     title: {
       description: "Title of the background",
-      type: "string"
-    }
-  }
+      type: "string",
+    },
+  },
 } satisfies Meta<typeof Background>;
 
 export default meta;
@@ -24,10 +24,10 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Default: Story = {
   args: {
-    title: "Text-to-Image"
-  }
+    title: "Text to Image",
+  },
 };
 
 export const NoTitle: Story = {
-  args: {}
+  args: {},
 };

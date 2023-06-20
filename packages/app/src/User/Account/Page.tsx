@@ -56,7 +56,7 @@ export function Page() {
           </NavButton>
         </div>
         <div className="bg-brand-amber-1 flex w-full flex-col overflow-hidden rounded-xl">
-          <NavButton url="/logout">Log out</NavButton>
+          <NavButton url="/logout">Logout</NavButton>
         </div>
       </div>
       <div className="mx-auto flex w-full max-w-[80rem] justify-center">

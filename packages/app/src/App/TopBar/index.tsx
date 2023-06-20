@@ -21,7 +21,7 @@ export function TopBar() {
         !atTopScroll && "border-zinc-100"
       )}
       style={{
-        height: height()
+        height: height(),
       }}
     >
       <div className="w-1/3">
@@ -44,13 +44,13 @@ export function TopBar() {
         </Link>
         <h1
           // href="/docs"
-          className="text-sm font-semibold opacity-50"
+          className="cursor-not-allowed text-sm font-semibold opacity-50"
         >
           Documentation
         </h1>
         <h1
           // href="/docs/recipes"
-          className="text-sm font-semibold opacity-50"
+          className="cursor-not-allowed text-sm font-semibold opacity-50"
         >
           Guides
         </h1>

@@ -25,7 +25,7 @@ function Button({
   link,
   arrow,
   onClick,
-  disabled
+  disabled,
 }: StyleableWithChildren & {
   onClick?: () => void;
   link?: string;
@@ -78,7 +78,8 @@ function GetStarted() {
         <h2 className="text-2xl font-light">DreamStudio</h2>
         <img src="/svg/dreamstudio-cta.webp" className="select-none" />
         <p>
-          Learn about DreamStudio and StableStudio, Stability.ai's image generation applications.
+          Learn about DreamStudio and StableStudio, Stability.ai's image
+          generation applications.
         </p>
         <Button>Learn More</Button>
       </div>
@@ -89,7 +90,7 @@ function GetStarted() {
 function DocumentCard({
   title,
   svg,
-  links
+  links,
 }: {
   title: string;
   svg: string;
@@ -130,7 +131,7 @@ function Documentation() {
           links={[
             { title: "Introduction", url: "/docs/text-to-image" },
             { title: "REST API", url: "/docs/text-to-image" },
-            { title: "gRPC API", url: "/docs/text-to-image" }
+            { title: "gRPC API", url: "/docs/text-to-image" },
           ]}
         />
         <DocumentCard
@@ -141,8 +142,8 @@ function Documentation() {
             {
               title: "Chat UI",
               url: "https://research.stability.ai/chat",
-              newWindow: true
-            }
+              newWindow: true,
+            },
           ]}
         />
         <DocumentCard
@@ -150,7 +151,7 @@ function Documentation() {
           svg="/svg/animation-doc.webp"
           links={[
             { title: "Introduction", url: "/docs/text-to-video" },
-            { title: "gRPC API", url: "/docs/text-to-video" }
+            { title: "gRPC API", url: "/docs/text-to-video" },
           ]}
         />
         <DocumentCard
@@ -158,7 +159,7 @@ function Documentation() {
           svg="/svg/integration-doc.webp"
           links={[
             { title: "Photoshop", url: "/docs/text-to-image" },
-            { title: "Blender", url: "/docs/text-to-image" }
+            { title: "Blender", url: "/docs/text-to-image" },
           ]}
         />
       </div>
@@ -170,7 +171,7 @@ function SandboxCard({
   title,
   svg,
   link,
-  soon
+  soon,
 }: {
   title: string;
   svg: string;
@@ -223,12 +224,12 @@ function Sandboxes() {
 
         <div className="mt-24 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <SandboxCard
-            title="Text-to-Image"
+            title="Text to Image"
             svg="/svg/text-image-sandbox.webp"
             link="/sandbox/text-to-image"
           />
           <SandboxCard
-            title="Image-to-Image"
+            title="Image to Image"
             svg="/svg/image-image-sandbox.webp"
             link="/sandbox/image-to-image"
           />
@@ -238,7 +239,7 @@ function Sandboxes() {
             link="/sandbox/upscaling"
           />
           <SandboxCard
-            title="Multi-prompting"
+            title="Multi-Prompting"
             svg="/svg/multi-prompting-sandbox.webp"
             link="/sandbox/multi-prompting"
           />
@@ -261,7 +262,7 @@ function Sandboxes() {
             soon
           />
           <SandboxCard
-            title="Fine-tuning"
+            title="Fine-Tuning"
             svg="/svg/fine-tuning-sandbox.webp"
             link="/sandbox/fine-tuning"
             soon
@@ -282,7 +283,7 @@ function OtherCard({
   title,
   svg,
   link,
-  linkName
+  linkName,
 }: {
   title: string;
   svg: string;
