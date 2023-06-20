@@ -57,11 +57,9 @@ function Header() {
   return (
     <div className="mt-24 flex w-full flex-col items-center gap-2">
       <img src="/svg/sai-header.svg" />
-      <h2 className="mt-4 text-lg font-light">Stability AI platform</h2>
+      <h2 className="mt-4 text-lg font-light">Welcome to</h2>
       <h1 className="text-center text-5xl font-extralight">
-        Explore our generative AI
-        <br />
-        API documentation
+        Stability.ai's Developer Platform
       </h1>
     </div>
   );
@@ -73,15 +71,14 @@ function GetStarted() {
       <div className="flex flex-col gap-4">
         <h2 className="text-2xl font-light">Get Started</h2>
         <img src="/svg/getstarted-cta.webp" className="select-none" />
-        <p>An intro on how to get the best out of the Stability.ai platform.</p>
+        <p>Learn how to get started with generative AI via our APIs.</p>
         <Button>Learn More</Button>
       </div>
       <div className="flex flex-col gap-4">
         <h2 className="text-2xl font-light">DreamStudio</h2>
         <img src="/svg/dreamstudio-cta.webp" className="select-none" />
         <p>
-          Find out about Stability AI image generation and open source UI
-          StableStudio.
+          Learn about DreamStudio and StableStudio, Stability.ai's image generation applications.
         </p>
         <Button>Learn More</Button>
       </div>
@@ -219,10 +216,9 @@ function Sandboxes() {
     <div className="bg-brand-amber-1 py-48">
       <div className="mx-auto flex flex-col items-center gap-5 px-5 2xl:max-w-[93rem] 2xl:px-0">
         <img src="/svg/api-header.svg" />
-        <h1 className="text-5xl font-extralight">The API for generative AI</h1>
+        <h1 className="text-5xl font-extralight">Developer Sandboxes</h1>
         <p className="text-center">
-          Generate images with SDXL, edit them and more with the
-          <br /> best APIs and SDKs.
+          Experiment with our APIs and get useable code for your own projects.
         </p>
 
         <div className="mt-24 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -340,7 +336,7 @@ function Testimonials() {
     <div className="flex flex-col gap-12 text-center">
       <h1 className="text-4xl font-extralight leading-[2.75rem]">
         Join industry-leaders making the most of
-        <br /> generative AI with Stability AI
+        <br /> generative AI with Stability.ai
       </h1>
       <img src="/svg/logos.svg" />
     </div>
