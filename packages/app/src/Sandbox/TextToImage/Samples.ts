@@ -1,56 +1,20 @@
-export const typescript = `
-import { OpenAPI } from "@stability/sdk";
+export const typescript = `import { OpenAPI } from "@stability/sdk";
 
-const options = {
-  method: "POST",
-  headers: {
+export const textToImage = async () => {
+  const path: OpenAPI.TextToImageRequestPath =
+    "https://api.stability.ai/v1/generation/{engineID}/text-to-image";
+
+  const headers: OpenAPI.TextToImageRequestHeaders = {
     Accept: "image/png",
-    Authorization: "Bearer {apiKey}"
-  } satisfies OpenAPI.TextToImageRequestHeaders,
-  body: JSON.stringify({
-    height: {height},
-    width: {width},
-    cfg_scale: {cfgScale},
-    seed: {seed},
-    steps: {steps},
-    style_preset: "{style}",
-    text_prompts: [
-      {
-        text: "{positivePrompt}",
-        weight: 1,
-      },
-      {
-        text: "{negativePrompt}",
-        weight: -1,
-      }
-    ]
-  } satisfies OpenAPI.TextToImageRequestBody)
-};
-
-fetch(
-  "https://api.stability.ai/v1/generation/{engineId}/text-to-image" satisfies OpenAPI.TextToImageRequestPath,
-  options
-)
-  .then(response => response.blob())
-  .then(response => URL.createObjectURL(response))
-  .then(url => console.log(url))
-  .catch(err => console.error(err));
-`;
-
-export const javascript = `
-const options = {
-  method: "POST",
-  headers: {
-    Accept: "image/png",
-    "content-type": "application/json",
     Authorization: "Bearer {apiKey}"
   },
-  body: JSON.stringify({
-    height: {height},
+
+  const body: OpenAPI.TextToImageRequestBody = {
     width: {width},
-    cfg_scale: {cfgScale},
+    height: {height},
     seed: {seed},
     steps: {steps},
+    cfg_scale: {cfgScale},
     style_preset: "{style}",
     text_prompts: [
       {
@@ -62,20 +26,69 @@ const options = {
         weight: -1,
       }
     ]
-  })
-};
+  };
 
-fetch("https://api.stability.ai/v1/generation/{engineId}/text-to-image", options)
-  .then(response => response.blob())
-  .then(response => URL.createObjectURL(response))
-  .then(url => console.log(url))
-  .catch(err => console.error(err));
+  return fetch(
+    path,
+    {
+      headers,
+      method: "POST",
+      body: JSON.stringify(body),
+    }
+  );
+};
 `;
 
-export const python = `
-import requests
+export const javascript = `export const textToImage = async () => {
+  const path =
+    "https://api.stability.ai/v1/generation/{engineID}/text-to-image";
+
+  const headers = {
+    Accept: "image/png",
+    Authorization: "Bearer {apiKey}"
+  },
+
+  const body = {
+    width: {width},
+    height: {height},
+    seed: {seed},
+    steps: {steps},
+    cfg_scale: {cfgScale},
+    style_preset: "{style}",
+    text_prompts: [
+      {
+        text: "{positivePrompt}",
+        weight: 1,
+      },
+      {
+        text: "{negativePrompt}",
+        weight: -1,
+      }
+    ]
+  };
+
+  return fetch(
+    path,
+    {
+      headers,
+      method: "POST",
+      body: JSON.stringify(body),
+    }
+  );
+};
+`;
+
+export const python = `import requests
+
+url = "https://api.stability.ai/v1/generation/{engineId}/text-to-image"
 
 body = {
+  "width": {width},
+  "height": {height},
+  "seed": {seed},
+  "steps": {steps},
+  "cfg_scale": {cfgScale},
+  "style_preset": "{style}",
   "text_prompts": [
     {
       "text": "{positivePrompt}",
@@ -86,27 +99,22 @@ body = {
       "weight": -1,
     }
   ],
-  "style_preset": "{style}",
-  "height": {height},
-  "width": {width},
-  "cfg_scale": {cfgScale},
-  "seed": {seed},
-  "steps": {steps},
+}
+
+headers = {
+  "Accept": "image/png",
+  "Content-Type": "application/json",
+  "Authorization": "Bearer {apiKey}",
 }
 
 response = requests.post(
-  "https://api.stability.ai/v1/generation/{engineId}/text-to-image",
-  headers={
-    "Content-Type": "application/json",
-    "Accept": "image/png",
-    "Authorization": "Bearer {apiKey}",
-  },
+  url,
+  headers=headers,
   json=body,
 )
 
 image = response.content
 
-# save image to file
-with open("image.png", "wb") as f:
-  f.write(image)
+with open("image.png", "wb") as file:
+  file.write(image)
 `;
