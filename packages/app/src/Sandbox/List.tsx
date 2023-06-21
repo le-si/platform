@@ -43,18 +43,17 @@ function Sandboxes() {
         image="/svg/sandboxes/upscaling.webp"
       />
       <SandboxButton
+        title="Multi-Prompting"
+        description="Generate images from multiple prompts"
+        href="/sandbox/multi-prompting"
+        image="/svg/sandboxes/multi-prompting.webp"
+      />
+      <SandboxButton
         comingSoon
         title="Inpainting"
         description="Edit images with AI"
         href="/sandbox/masking"
         image="/svg/sandboxes/masking.webp"
-      />
-      <SandboxButton
-        comingSoon
-        title="Deepfloyd IF"
-        description="Generate images from text"
-        href="/sandbox/deepfloyd-if"
-        image="/svg/sandboxes/deepfloyd.webp"
       />
       <SandboxButton
         comingSoon
@@ -86,7 +85,7 @@ function SandboxButton({
   title,
   description,
   image,
-  href,
+  href
 }: {
   comingSoon?: boolean;
   title: string;
@@ -102,7 +101,7 @@ function SandboxButton({
         comingSoon ? "cursor-default opacity-50" : "hover:bg-brand-amber-2"
       )}
       {...(comingSoon && {
-        onClick: (event) => event.preventDefault(),
+        onClick: (event) => event.preventDefault()
       })}
     >
       <h1 className="flex justify-between text-2xl">{title}</h1>

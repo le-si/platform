@@ -13,5 +13,6 @@ export { Tooltip } from "./Tooltip";
 export { Skeleton } from "./Skeleton";
 export * as Snackbar from "./Snackbar";
 export { Provider } from "./Provider";
+export { Range } from "./Range";
 
 export * as Theme from ".";
