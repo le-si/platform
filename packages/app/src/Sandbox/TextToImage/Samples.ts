@@ -7,7 +7,7 @@ export const textToImage = async () => {
   const headers: OpenAPI.TextToImageRequestHeaders = {
     Accept: "image/png",
     Authorization: "Bearer {apiKey}"
-  },
+  };
 
   const body: OpenAPI.TextToImageRequestBody = {
     width: {width},
@@ -46,7 +46,7 @@ export const javascript = `export const textToImage = async () => {
   const headers = {
     Accept: "image/png",
     Authorization: "Bearer {apiKey}"
-  },
+  };
 
   const body = {
     width: {width},
