@@ -76,7 +76,7 @@ function VirtualRowRenderer({
   return (
     <div className="h-full w-full">
       <AutoSizer>
-        {({ height, width }) => (
+        {({ height, width }: any) => (
           <FixedSizeList
             style={{ padding: "0.75em" }}
             height={height}

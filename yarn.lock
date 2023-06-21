@@ -2747,6 +2747,7 @@ __metadata:
     "@types/react": ^18.2.7
     "@types/react-dom": ^18.2.4
     "@types/react-syntax-highlighter": ^15.5.7
+    "@types/react-window": ^1.8.5
     "@typescript-eslint/eslint-plugin": ^5.59.8
     "@typescript-eslint/parser": ^5.59.8
     "@vitejs/plugin-react": ^4.0.0
@@ -4394,6 +4395,15 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: 1918d01baaa9bf485093fb04167d0dc87131be708bd68d32d3f614c0e7dba05de765fc62df139fa1972836b13e27983a2d89552eda5b5a38691a4ec300949648
+  languageName: node
+  linkType: hard
+
+"@types/react-window@npm:^1.8.5":
+  version: 1.8.5
+  resolution: "@types/react-window@npm:1.8.5"
+  dependencies:
+    "@types/react": "*"
+  checksum: 5f519e1402300d11b6e6595223feb6499f3227e38da166cbc565773cd7f71862abcf855b7835d391b5119fcfacdfba79d73a965b45f60a293fc1ff25986319ed
   languageName: node
   linkType: hard
 
