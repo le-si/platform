@@ -24,7 +24,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
 
   const [imageURL, setImageURL] = useState<string | undefined>(undefined);
   const [generating, setGenerating] = useState<boolean>(false);
-  const [engineId, setEngineId] = useState<string>(
+  const [engineID, setEngineID] = useState<string>(
     "stable-diffusion-xl-beta-v2-2-2"
   );
   const [error, setError] = useState<string | undefined>(undefined);
@@ -54,7 +54,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
 
     const [url, error] = await request(
       apiKey,
-      engineId,
+      engineID,
       init?.file,
       positivePrompt,
       negativePrompt,
@@ -74,18 +74,20 @@ export function ImageToImage({ setOptions }: ImageToImage) {
     }
   }, [
     apiKey,
-    engineId,
+    engineID,
     style,
     positivePrompt,
     negativePrompt,
     cfgScale,
     steps,
     seed,
+    init?.file,
+    initStrength,
   ]);
 
   useEffect(() => {
     setOptions({
-      engineId,
+      engineID,
       positivePrompt,
       negativePrompt,
       style,
@@ -95,7 +97,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
       imageStrength: initStrength,
     });
   }, [
-    engineId,
+    engineID,
     style,
     positivePrompt,
     negativePrompt,
@@ -155,8 +157,8 @@ export function ImageToImage({ setOptions }: ImageToImage) {
             </DropZone>
             <Select
               title="Model"
-              value={engineId}
-              onChange={setEngineId}
+              value={engineID}
+              onChange={setEngineID}
               options={[
                 {
                   label: "Stable Diffusion XL",

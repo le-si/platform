@@ -2,7 +2,7 @@ import { OpenAPI } from "@stability/sdk";
 
 export async function request(
   apiKey: string,
-  engineId: string,
+  engineID: string,
   prompts: OpenAPI.TextToImageRequestBody["text_prompts"],
   style?: OpenAPI.TextToImageRequestBody["style_preset"],
   cfgScale?: OpenAPI.TextToImageRequestBody["cfg_scale"],
@@ -21,7 +21,7 @@ export async function request(
     response = await fetch(
       `${
         import.meta.env.VITE_API_REST_URL
-      }/v1/generation/${engineId}/text-to-image` satisfies OpenAPI.TextToImageRequestPath,
+      }/v1/generation/${engineID}/text-to-image` satisfies OpenAPI.TextToImageRequestPath,
       {
         method: "POST",
         headers: {

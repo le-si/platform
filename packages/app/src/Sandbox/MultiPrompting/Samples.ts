@@ -28,7 +28,7 @@ const options = {
 };
 
 fetch(
-  "https://api.stability.ai/v1/generation/{engineId}/text-to-image" satisfies OpenAPI.TextToImageRequestPath,
+  "https://api.stability.ai/v1/generation/{engineID}/text-to-image" satisfies OpenAPI.TextToImageRequestPath,
   options
 )
   .then(response => response.blob())
@@ -65,7 +65,7 @@ const options = {
   })
 };
 
-fetch("https://api.stability.ai/v1/generation/{engineId}/text-to-image", options)
+fetch("https://api.stability.ai/v1/generation/{engineID}/text-to-image", options)
   .then(response => response.blob())
   .then(response => URL.createObjectURL(response))
   .then(url => console.log(url))
@@ -95,7 +95,7 @@ body = {
 }
 
 response = requests.post(
-  "https://api.stability.ai/v1/generation/{engineId}/text-to-image",
+  "https://api.stability.ai/v1/generation/{engineID}/text-to-image",
   headers={
     "Content-Type": "application/json",
     "Accept": "image/png",

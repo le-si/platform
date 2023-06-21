@@ -2,7 +2,7 @@ import { OpenAPI } from "@stability/sdk";
 
 export async function request(
   apiKey: string,
-  engineId: string,
+  engineID: string,
   initImage: Blob,
   positivePrompt: string,
   negativePrompt?: string,
@@ -40,10 +40,10 @@ export async function request(
     steps,
   };
 
-  const formData = new FormData()
+  const formData = new FormData();
   for (const [key, value] of Object.entries(body)) {
     if (!value) continue;
-    formData.append(key, value?.toString() ?? "")
+    formData.append(key, value?.toString() ?? "");
   }
 
   formData.append("init_image", initImage);
@@ -53,7 +53,7 @@ export async function request(
     response = await fetch(
       `${
         import.meta.env.VITE_API_REST_URL
-      }/v1/generation/${engineId}/image-to-image` satisfies OpenAPI.ImageToImageRequestPath,
+      }/v1/generation/${engineID}/image-to-image` satisfies OpenAPI.ImageToImageRequestPath,
       {
         method: "POST",
         headers: {

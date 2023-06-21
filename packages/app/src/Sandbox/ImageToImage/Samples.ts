@@ -18,7 +18,7 @@ formData.append('cfg_scale', {cfgScale});
 formData.append('steps', {steps});
 
 const response = await fetch(
-  "https://api.stability.ai/v1/generation/{engineId}/image-to-image",
+  "https://api.stability.ai/v1/generation/{engineID}/image-to-image",
   {
     method: 'POST',
     headers: {
@@ -72,7 +72,7 @@ formData.append('cfg_scale', {cfgScale});
 formData.append('steps', {steps});
 
 const response = await fetch(
-  "https://api.stability.ai/v1/generation/{engineId}/image-to-image",
+  "https://api.stability.ai/v1/generation/{engineID}/image-to-image",
   {
     method: 'POST',
     headers: {
@@ -104,7 +104,7 @@ import os
 import requests
 
 response = requests.post(
-    "https://api.stability.ai/v1/generation/{engineId}/image-to-image",
+    "https://api.stability.ai/v1/generation/{engineID}/image-to-image",
     headers={
         "Accept": "application/json",
         "Authorization": f"Bearer {apiKey}"

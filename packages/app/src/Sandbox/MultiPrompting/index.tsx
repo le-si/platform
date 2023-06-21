@@ -20,7 +20,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
 
   const [imageURL, setImageURL] = useState<string | undefined>(undefined);
   const [generating, setGenerating] = useState<boolean>(false);
-  const [engineId, setEngineId] = useState<string>(
+  const [engineID, setEngineID] = useState<string>(
     "stable-diffusion-xl-beta-v2-2-2"
   );
   const [error, setError] = useState<string | undefined>(undefined);
@@ -46,7 +46,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
 
     const [url, error] = await request(
       apiKey,
-      engineId,
+      engineID,
       prompts,
       style,
       cfgScale,
@@ -60,17 +60,17 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
     } else {
       setImageURL(url);
     }
-  }, [apiKey, engineId, style, prompts, cfgScale, steps]);
+  }, [apiKey, engineID, style, prompts, cfgScale, steps]);
 
   useEffect(() => {
     setOptions({
-      engineId,
+      engineID,
       prompts,
       style,
       cfgScale,
       steps,
     });
-  }, [engineId, style, prompts, cfgScale, steps, setOptions]);
+  }, [engineID, style, prompts, cfgScale, steps, setOptions]);
 
   return (
     <div className="flex h-full w-full flex-col gap-6 md:min-w-[55rem]">
@@ -81,8 +81,8 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
           <div className="flex h-fit w-full grow flex-col gap-3">
             <Theme.Select
               title="Model"
-              value={engineId}
-              onChange={setEngineId}
+              value={engineID}
+              onChange={setEngineID}
               options={[
                 {
                   label: "Stable Diffusion XL",

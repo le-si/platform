@@ -15,7 +15,7 @@ export function Upscaling({ setOptions }: Upscaling) {
 
   const [imageURL, setImageURL] = useState<string | undefined>(undefined);
   const [generating, setGenerating] = useState<boolean>(false);
-  const [engineId, setEngineId] = useState<string>("esrgan-v1-x2plus");
+  const [engineID, setEngineID] = useState<string>("esrgan-v1-x2plus");
   const [error, setError] = useState<string | undefined>(undefined);
 
   const [init, setInit] = useState<
@@ -28,8 +28,8 @@ export function Upscaling({ setOptions }: Upscaling) {
   const [height, setHeight] = useState<number>(0);
 
   const scale = useMemo(
-    () => (engineId === "esrgan-v1-x2plus" ? 2 : 4),
-    [engineId]
+    () => (engineID === "esrgan-v1-x2plus" ? 2 : 4),
+    [engineID]
   );
 
   const generate = useCallback(async () => {
@@ -40,7 +40,7 @@ export function Upscaling({ setOptions }: Upscaling) {
 
     const [url, error] = await request(
       apiKey,
-      engineId,
+      engineID,
       init?.file,
       height * scale
     );
@@ -52,14 +52,14 @@ export function Upscaling({ setOptions }: Upscaling) {
     } else {
       setImageURL(url);
     }
-  }, [apiKey, engineId, init, height, scale]);
+  }, [apiKey, engineID, init, height, scale]);
 
   useEffect(() => {
     setOptions({
-      engineId,
-      height: height * scale
+      engineID,
+      height: height * scale,
     });
-  }, [engineId, setOptions, height, scale]);
+  }, [engineID, setOptions, height, scale]);
 
   return (
     <div className="flex h-full w-full flex-col gap-6 md:min-w-[55rem]">
@@ -82,24 +82,24 @@ export function Upscaling({ setOptions }: Upscaling) {
 
                 setInit({
                   file: blob,
-                  url: URL.createObjectURL(blob)
+                  url: URL.createObjectURL(blob),
                 });
               }}
               onClear={() => setInit(undefined)}
             />
             <Select
               title="Model"
-              value={engineId}
-              onChange={setEngineId}
+              value={engineID}
+              onChange={setEngineID}
               options={[
                 {
                   label: "Real-ESRGAN x2",
-                  value: "esrgan-v1-x2plus"
+                  value: "esrgan-v1-x2plus",
                 },
                 {
                   label: "Stable Diffusion x4 Latent Upscaler",
-                  value: "stable-diffusion-x4-latent-upscaler"
-                }
+                  value: "stable-diffusion-x4-latent-upscaler",
+                },
               ]}
             />
           </div>

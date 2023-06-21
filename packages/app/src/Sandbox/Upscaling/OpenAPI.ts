@@ -2,11 +2,10 @@ import { OpenAPI } from "@stability/sdk";
 
 export async function request(
   apiKey: string,
-  engineId: string,
+  engineID: string,
   initImage: Blob,
-  height: number,
+  height: number
 ): Promise<[string | undefined, Error | undefined]> {
-
   const formData = new FormData();
   formData.append("height", height.toString());
   formData.append("image", initImage);
@@ -16,7 +15,7 @@ export async function request(
     response = await fetch(
       `${
         import.meta.env.VITE_API_REST_URL
-      }/v1/generation/${engineId}/image-to-image/upscale` satisfies OpenAPI.UpscaleRequestPath,
+      }/v1/generation/${engineID}/image-to-image/upscale` satisfies OpenAPI.UpscaleRequestPath,
       {
         method: "POST",
         headers: {

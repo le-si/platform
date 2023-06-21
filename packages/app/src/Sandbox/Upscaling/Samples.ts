@@ -11,7 +11,7 @@ formData.append('image', fs.readFileSync('../init_image.png'));
 formData.append('height', {height});
 
 const response = await fetch(
-  "https://api.stability.ai/v1/generation/{engineId}/image-to-image/upscale",
+  "https://api.stability.ai/v1/generation/{engineID}/image-to-image/upscale",
   {
     method: 'POST',
     headers: {
@@ -58,7 +58,7 @@ formData.append('image', fs.readFileSync('../init_image.png'));
 formData.append('height', {height});
 
 const response = await fetch(
-  "https://api.stability.ai/v1/generation/{engineId}/image-to-image/upscale",
+  "https://api.stability.ai/v1/generation/{engineID}/image-to-image/upscale",
   {
     method: 'POST',
     headers: {
@@ -90,7 +90,7 @@ import os
 import requests
 
 response = requests.post(
-    "https://api.stability.ai/v1/generation/{engineId}/image-to-image/upscale",
+    "https://api.stability.ai/v1/generation/{engineID}/image-to-image/upscale",
     headers={
         "Accept": "application/json",
         "Authorization": f"Bearer {apiKey}"

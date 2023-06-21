@@ -80,7 +80,7 @@ export const javascript = `export const textToImage = async () => {
 
 export const python = `import requests
 
-url = "https://api.stability.ai/v1/generation/{engineId}/text-to-image"
+url = "https://api.stability.ai/v1/generation/{engineID}/text-to-image"
 
 body = {
   "width": {width},
