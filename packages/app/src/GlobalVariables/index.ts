@@ -1,6 +1,7 @@
 /* eslint-disable */
 
-import { css as cssImport, cx } from "@emotion/css";
+import { css as cssImport } from "@emotion/react";
+import { cx } from "@emotion/css";
 import ReactImport from "react";
 import { twMerge } from "tailwind-merge";
 

@@ -2,8 +2,9 @@
   "extends": "../../tsconfig.json",
   "exclude": ["./src/**/*.stories.tsx", "./src/**/*.test.tsx"],
   "compilerOptions": {
-    "baseUrl": "./",
     "noEmit": true,
+    "baseUrl": "./",
+
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react"
   }

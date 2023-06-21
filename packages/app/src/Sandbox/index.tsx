@@ -2,7 +2,7 @@ import { useWindowSize } from "react-use";
 import { Code as CodeIcon } from "~/Theme";
 import { User } from "~/User";
 
-import { Code, Languages } from "./Code";
+import { Code } from "./Code";
 
 export function Sandbox({
   SandboxComponent,
@@ -11,15 +11,21 @@ export function Sandbox({
   SandboxComponent: React.FC<{
     setOptions: (options: any) => void;
   }>;
-  samples: Record<Languages, string>;
+  samples: Record<Code.Language, string>;
 }) {
   const apiKey = User.AccessToken.use();
 
   const [showCode, setShowCode] = useState(true);
-  const [codeLanguage, setCodeLanguage] = useState<Languages>("typescript");
+  const [codeLanguage, setCodeLanguage] = useState<Code.Language>("typescript");
   const [options, setOptions] = useState<any>({});
 
   const code = useMemo(() => {
+    const hasActiveOption = Object.entries(options).find(
+      ([_, value]) => value !== undefined
+    );
+
+    if (!hasActiveOption) return undefined;
+
     const code = samples[codeLanguage]
       .trim()
       .replace("{apiKey}", "YOUR API KEY");
@@ -28,7 +34,7 @@ export function Sandbox({
     return Object.entries(options).reduce((acc, [key, value]) => {
       return acc.replace(`{${key}}`, `${value}`);
     }, code);
-  }, [codeLanguage, apiKey, options]);
+  }, [samples, codeLanguage, options]);
 
   const size = useWindowSize();
 
@@ -36,9 +42,9 @@ export function Sandbox({
     <div className="flex h-full max-h-full min-h-0 grow flex-col gap-6 p-5 pt-0">
       <div className="flex min-h-0 grow gap-6">
         {size.width > 1024 &&
-          (showCode ? (
+          (showCode && code ? (
             <Code
-              content={code}
+              code={code}
               language={codeLanguage}
               setLanguage={setCodeLanguage}
               onClose={() => setShowCode(false)}

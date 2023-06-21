@@ -2735,6 +2735,7 @@ __metadata:
     "@storybook/testing-library": 0.0.14-next.2
     "@tailwindcss/typography": ^0.5.9
     "@tanstack/react-query": ^4.29.12
+    "@types/diff-match-patch": ^1.0.32
     "@types/react": ^18.2.7
     "@types/react-dom": ^18.2.4
     "@types/react-syntax-highlighter": ^15.5.7
@@ -2745,6 +2746,7 @@ __metadata:
     autoprefixer: ^10.4.14
     buffer: ^6.0.3
     daisyui: ^2.52.0
+    diff-match-patch: ^1.0.5
     eslint: 8.41.0
     eslint-config-prettier: ^8.8.0
     eslint-plugin-import: ^2.27.5
@@ -2759,6 +2761,7 @@ __metadata:
     prettier: ^2.8.8
     prettier-plugin-tailwindcss: ^0.3.0
     react: ^18.2.0
+    react-change-highlight: ^1.3.1
     react-dom: ^18.2.0
     react-router-dom: ^6.11.2
     react-syntax-highlighter: ^15.5.0
@@ -4049,6 +4052,13 @@ __metadata:
   version: 1.3.3
   resolution: "@types/detect-port@npm:1.3.3"
   checksum: 0dadb520286a5cfd2832d12189dc795cc3589dfd9166d1b033453fb94b0212c4067a847045833e85b0f7c73135c944cb4ccb49c8e683491845c2e8a3da5d5c1c
+  languageName: node
+  linkType: hard
+
+"@types/diff-match-patch@npm:^1.0.32":
+  version: 1.0.32
+  resolution: "@types/diff-match-patch@npm:1.0.32"
+  checksum: 8431ab2bf2f0e96ece30beddeae3bc8024429bd6071f1ab695c3f64112b2551446fc4a746a44a7a7d14e47ffce622333286c1c78869cfb510c775a9e8c47a1b1
   languageName: node
   linkType: hard
 
@@ -6349,6 +6359,13 @@ __metadata:
   version: 1.2.2
   resolution: "didyoumean@npm:1.2.2"
   checksum: d5d98719d58b3c2fa59663c4c42ba9716f1fd01245c31d5fce31915bd3aa26e6aac149788e007358f778ebbd68a2256eb5973e8ca6f221df221ba060115acf2e
+  languageName: node
+  linkType: hard
+
+"diff-match-patch@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "diff-match-patch@npm:1.0.5"
+  checksum: 841522d01b09cccbc4e4402cf61514a81b906349a7d97b67222390f2d35cf5df277cb23959eeed212d5e46afb5629cebab41b87918672c5a05c11c73688630e3
   languageName: node
   linkType: hard
 
@@ -11163,6 +11180,16 @@ __metadata:
   bin:
     rc: ./cli.js
   checksum: 2e26e052f8be2abd64e6d1dabfbd7be03f80ec18ccbc49562d31f617d0015fbdbcf0f9eed30346ea6ab789e0fdfe4337f033f8016efdbee0df5354751842080e
+  languageName: node
+  linkType: hard
+
+"react-change-highlight@npm:^1.3.1":
+  version: 1.3.1
+  resolution: "react-change-highlight@npm:1.3.1"
+  peerDependencies:
+    react: ">=16.8"
+    react-dom: ">=16.8"
+  checksum: 5e3ba82e0a4251aeb0af24138ab9e5b9d182cf73332c17ee0ba96c871d4dbf5628e1539635dc9fd8cd58ce5f4022bba85c34db274b165d5dd7741fb501df5dfd
   languageName: node
   linkType: hard
 
