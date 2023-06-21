@@ -5,12 +5,11 @@ import { Theme } from "~/Theme";
 export function Overview() {
   return (
     <div className="flex flex-col gap-48">
-      <div className="mx-auto flex flex-col gap-64 px-5 2xl:max-w-[93rem] 2xl:px-0">
+      <div className="mx-auto flex flex-col gap-32 px-5 2xl:max-w-[93rem] 2xl:px-0">
         <Header />
-        <GetStarted />
-        <Documentation />
+        <Sandboxes />
       </div>
-      <Sandboxes />
+      <Documentation />
       <div className="mx-auto flex flex-col gap-64 px-5 2xl:max-w-[93rem] 2xl:px-0">
         <Others />
         <Testimonials />
@@ -26,7 +25,7 @@ function Button({
   link,
   arrow,
   onClick,
-  disabled,
+  disabled
 }: StyleableWithChildren & {
   onClick?: () => void;
   link?: string;
@@ -91,7 +90,7 @@ function GetStarted() {
 function DocumentCard({
   title,
   svg,
-  links,
+  links
 }: {
   title: string;
   svg: string;
@@ -127,47 +126,49 @@ function DocumentCard({
 
 function Documentation() {
   return (
-    <div className="flex flex-col items-center gap-5">
-      <img src="/svg/documentation-header.svg" />
-      <h1 className="text-5xl font-extralight">Documentation</h1>
-      <div className="mt-36 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        <DocumentCard
-          svg="/svg/image-doc.webp"
-          title="Image"
-          links={[
-            { title: "Introduction", url: "/docs/text-to-image" },
-            { title: "REST API", url: "/docs/text-to-image" },
-            { title: "gRPC API", url: "/docs/text-to-image" },
-          ]}
-        />
-        <DocumentCard
-          title="Language"
-          svg="/svg/language-doc.webp"
-          links={[
-            { title: "Models", url: "/docs/text-to-text" },
-            {
-              title: "Chat UI",
-              url: "https://research.stability.ai/chat",
-              newWindow: true,
-            },
-          ]}
-        />
-        <DocumentCard
-          title="Animation"
-          svg="/svg/animation-doc.webp"
-          links={[
-            { title: "Introduction", url: "/docs/text-to-video" },
-            { title: "gRPC API", url: "/docs/text-to-video" },
-          ]}
-        />
-        <DocumentCard
-          title="Integrations"
-          svg="/svg/integration-doc.webp"
-          links={[
-            { title: "Photoshop", url: "/docs/text-to-image" },
-            { title: "Blender", url: "/docs/text-to-image" },
-          ]}
-        />
+    <div className="bg-brand-amber-1 py-32">
+      <div className="flex flex-col items-center gap-5">
+        <img src="/svg/documentation-header.svg" />
+        <h1 className="text-5xl font-extralight">Documentation</h1>
+        <div className="mt-28 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <DocumentCard
+            svg="/svg/image-doc.webp"
+            title="Image"
+            links={[
+              { title: "Introduction", url: "/docs/text-to-image" },
+              { title: "REST API", url: "/docs/text-to-image" },
+              { title: "gRPC API", url: "/docs/text-to-image" }
+            ]}
+          />
+          <DocumentCard
+            title="Language"
+            svg="/svg/language-doc.webp"
+            links={[
+              { title: "Models", url: "/docs/text-to-text" },
+              {
+                title: "Chat UI",
+                url: "https://research.stability.ai/chat",
+                newWindow: true
+              }
+            ]}
+          />
+          <DocumentCard
+            title="Animation"
+            svg="/svg/animation-doc.webp"
+            links={[
+              { title: "Introduction", url: "/docs/text-to-video" },
+              { title: "gRPC API", url: "/docs/text-to-video" }
+            ]}
+          />
+          <DocumentCard
+            title="Integrations"
+            svg="/svg/integration-doc.webp"
+            links={[
+              { title: "Photoshop", url: "/docs/text-to-image" },
+              { title: "Blender", url: "/docs/text-to-image" }
+            ]}
+          />
+        </div>
       </div>
     </div>
   );
@@ -177,7 +178,7 @@ function SandboxCard({
   title,
   svg,
   link,
-  soon,
+  soon
 }: {
   title: string;
   svg: string;
@@ -186,7 +187,7 @@ function SandboxCard({
 }) {
   const content = (
     <>
-      <div className="rounded-xl bg-white p-3">
+      <div className="rounded-xl bg-white">
         <img src={soon ? "/svg/soon-sandbox.webp" : svg} />
       </div>
       <div className="flex items-center gap-2">
@@ -220,36 +221,29 @@ function SandboxCard({
 
 function Sandboxes() {
   return (
-    <div className="bg-brand-amber-1 py-48">
-      <div className="mx-auto flex flex-col items-center gap-5 px-5 2xl:max-w-[93rem] 2xl:px-0">
-        <img src="/svg/api-header.svg" />
-        <h1 className="text-5xl font-extralight">Developer Sandboxes</h1>
-        <p className="text-center">
-          Experiment with our APIs and get useable code for your own projects.
-        </p>
-
-        <div className="mt-24 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          <SandboxCard
-            title="Text to Image"
-            svg="/svg/text-image-sandbox.webp"
-            link="/sandbox/text-to-image"
-          />
-          <SandboxCard
-            title="Image to Image"
-            svg="/svg/image-image-sandbox.webp"
-            link="/sandbox/image-to-image"
-          />
-          <SandboxCard
-            title="Upscaling"
-            svg="/svg/upscaling-sandbox.webp"
-            link="/sandbox/upscaling"
-          />
-          <SandboxCard
-            title="Multi-Prompting"
-            svg="/svg/multi-prompting-sandbox.webp"
-            link="/sandbox/multi-prompting"
-          />
-          {/* <SandboxCard
+    <div className="mx-auto flex flex-col items-center gap-5 px-5 2xl:max-w-[93rem] 2xl:px-0">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <SandboxCard
+          title="Text to Image"
+          svg="/svg/text-image-sandbox.webp"
+          link="/sandbox/text-to-image"
+        />
+        <SandboxCard
+          title="Image to Image"
+          svg="/svg/image-image-sandbox.webp"
+          link="/sandbox/image-to-image"
+        />
+        <SandboxCard
+          title="Upscaling"
+          svg="/svg/upscaling-sandbox.webp"
+          link="/sandbox/upscaling"
+        />
+        <SandboxCard
+          title="Multi-Prompting"
+          svg="/svg/multi-prompting-sandbox.webp"
+          link="/sandbox/multi-prompting"
+        />
+        {/* <SandboxCard
             title="Masking"
             svg="/svg/masking-sandbox.webp"
             link="/sandbox/masking"
@@ -273,14 +267,13 @@ function Sandboxes() {
             link="/sandbox/fine-tuning"
             soon
           /> */}
-        </div>
-        <Link
-          to="/sandbox"
-          className="mt-16 flex items-center gap-2 font-semibold text-indigo-500 duration-100 hover:text-indigo-400"
-        >
-          View All Sandboxes <Theme.Icon.Arrow />
-        </Link>
       </div>
+      <Link
+        to="/sandbox"
+        className="mt-16 flex items-center gap-2 font-semibold text-indigo-500 duration-100 hover:text-indigo-400"
+      >
+        View All Sandboxes <Theme.Icon.Arrow />
+      </Link>
     </div>
   );
 }
@@ -289,7 +282,7 @@ function OtherCard({
   title,
   svg,
   link,
-  linkName,
+  linkName
 }: {
   title: string;
   svg: string;

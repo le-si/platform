@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export function List() {
   return (
-    <div className="mx-auto flex min-h-screen flex-col gap-48 px-5 2xl:max-w-[93rem] 2xl:px-0">
+    <div className="mx-auto flex min-h-screen flex-col gap-32 px-5 2xl:max-w-[93rem] 2xl:px-0">
       <Header />
       <Sandboxes />
     </div>
@@ -23,7 +23,7 @@ function Header() {
 
 function Sandboxes() {
   return (
-    <div className="mb-24 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="mb-24 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       <SandboxButton
         title="Text to Image"
         description="Generate images from text"
