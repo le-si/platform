@@ -5,6 +5,7 @@ import { Overview } from "~/Overview";
 import { Sandbox } from "~/Sandbox";
 import { ImageToImage } from "~/Sandbox/ImageToImage";
 import { List } from "~/Sandbox/List";
+import { MultiPrompting } from "~/Sandbox/MultiPrompting";
 import { TextToImage } from "~/Sandbox/TextToImage";
 import { Upscaling } from "~/Sandbox/Upscaling";
 import { User } from "~/User";
@@ -54,6 +55,17 @@ export function Router() {
       element: (
         <Page noScroll noFooter>
           <Sandbox SandboxComponent={Upscaling} samples={Upscaling.Samples} />
+        </Page>
+      )
+    },
+    {
+      path: "/sandbox/multi-prompting",
+      element: (
+        <Page noScroll noFooter>
+          <Sandbox
+            SandboxComponent={MultiPrompting}
+            samples={MultiPrompting.Samples}
+          />
         </Page>
       )
     },

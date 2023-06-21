@@ -4,7 +4,7 @@ export type Textarea = Styleable & {
   autoFocus?: boolean;
   onChange?: (value: string) => void;
   placeholder?: string;
-  title?: string;
+  title?: string | React.ReactNode;
   color?: "positive" | "negative" | "neutral";
 };
 
@@ -32,7 +32,11 @@ export function Textarea({
               )}
             />
           )}
-          {title && <p className="text-sm">{title}</p>}
+          {typeof title === "string" ? (
+            <p className="text-sm">{title}</p>
+          ) : (
+            title
+          )}
         </div>
       )}
       <textarea

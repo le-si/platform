@@ -104,7 +104,7 @@ export function Input({
               if (number) {
                 // strip out all non-numeric characters
                 const numericValue = inputRef.current?.value.replace(
-                  /[^0-9.]/g,
+                  /[^0-9.-]|(?<=\..*)\.|(?<=-.*)-/g,
                   ""
                 );
 
