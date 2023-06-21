@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Arrow, ExternalLink } from "~/Theme";
+
+import { Theme } from "~/Theme";
 
 export function Overview() {
   return (
@@ -41,14 +42,14 @@ function Button({
   if (link) {
     return (
       <Link to={link} className={styles}>
-        {children} {arrow && <Arrow />}
+        {children} {arrow && <Theme.Icon.Arrow />}
       </Link>
     );
   }
 
   return (
     <button onClick={onClick} className={styles}>
-      {children} {arrow && <Arrow />}
+      {children} {arrow && <Theme.Icon.Arrow />}
     </button>
   );
 }
@@ -111,7 +112,12 @@ function DocumentCard({
             href={link.url}
             className="flex items-center gap-2 text-sm font-semibold text-indigo-500 duration-100 hover:text-indigo-400"
           >
-            {link.title} {link.newWindow ? <ExternalLink /> : <Arrow />}
+            {link.title}&nbsp;
+            {link.newWindow ? (
+              <Theme.Icon.ExternalLink />
+            ) : (
+              <Theme.Icon.Arrow />
+            )}
           </a>
         ))}
       </div>
@@ -193,7 +199,7 @@ function SandboxCard({
           {title}
         </h2>
         {!soon && (
-          <Arrow className="h-6 w-6 -translate-x-2 text-indigo-300 opacity-0 duration-100 group-hover:translate-x-0 group-hover:opacity-100" />
+          <Theme.Icon.Arrow className="h-6 w-6 -translate-x-2 text-indigo-300 opacity-0 duration-100 group-hover:translate-x-0 group-hover:opacity-100" />
         )}
       </div>
     </>
@@ -272,7 +278,7 @@ function Sandboxes() {
           to="/sandbox"
           className="mt-16 flex items-center gap-2 font-semibold text-indigo-500 duration-100 hover:text-indigo-400"
         >
-          View All Sandboxes <Arrow />
+          View All Sandboxes <Theme.Icon.Arrow />
         </Link>
       </div>
     </div>
@@ -298,7 +304,7 @@ function OtherCard({
         href={link}
         className="flex items-center gap-2 text-sm font-semibold text-indigo-500 duration-100 group-hover:text-indigo-400"
       >
-        {linkName || "Learn More"} <Arrow />
+        {linkName ?? "Learn More"} <Theme.Icon.Arrow />
       </a>
     </a>
   );

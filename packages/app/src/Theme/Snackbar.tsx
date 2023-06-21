@@ -78,7 +78,7 @@ const ErrorSnackbar = React.forwardRef<HTMLDivElement, CustomContentProps>(
       {...props}
       ref={ref}
       Icon={
-        <Theme.AlertTriangle className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-red-600 dark:text-red-500" />
+        <Theme.Icon.AlertTriangle className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-red-600 dark:text-red-500" />
       }
     />
   )
@@ -90,7 +90,7 @@ const WarningSnackbar = React.forwardRef<HTMLDivElement, CustomContentProps>(
       {...props}
       ref={ref}
       Icon={
-        <Theme.AlertCircle className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-orange-600 dark:text-orange-500" />
+        <Theme.Icon.AlertCircle className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-orange-600 dark:text-orange-500" />
       }
     />
   )
@@ -102,7 +102,7 @@ const InfoSnackbar = React.forwardRef<HTMLDivElement, CustomContentProps>(
       {...props}
       ref={ref}
       Icon={
-        <Theme.Info className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-blue-600 dark:text-blue-500" />
+        <Theme.Icon.Info className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-blue-600 dark:text-blue-500" />
       }
     />
   )
@@ -114,7 +114,7 @@ const SuccessSnackbar = React.forwardRef<HTMLDivElement, CustomContentProps>(
       {...props}
       ref={ref}
       Icon={
-        <Theme.Check className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-emerald-600 dark:text-emerald-500" />
+        <Theme.Icon.Check className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-emerald-600 dark:text-emerald-500" />
       }
     />
   )
@@ -145,7 +145,7 @@ const OutOfCreditsSnackbar = React.forwardRef<
       role="alert"
       ref={ref}
     >
-      <Theme.AlertCircle className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-orange-600 dark:text-orange-500" />
+      <Theme.Icon.AlertCircle className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-orange-600 dark:text-orange-500" />
       <div className="text-md ml-3 font-semibold">{message}</div>
       <Theme.Button className="ml-8 w-fit" onClick={onClick}>
         Buy credits

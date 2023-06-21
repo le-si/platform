@@ -1,7 +1,7 @@
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
-import { Copy, X } from "~/Theme";
+import { Theme } from "~/Theme";
 
 export type Code = string;
 
@@ -44,13 +44,13 @@ export function Code({
           onClick={() => navigator.clipboard.writeText(code)}
           className="ml-auto rounded border border-transparent p-1 text-xs text-white duration-100 hover:bg-white hover:text-black"
         >
-          <Copy className="h-4 w-4" />
+          <Theme.Icon.Copy className="h-4 w-4" />
         </button>
         <button
           onClick={onClose}
           className="aspect-square rounded border border-transparent p-1 px-1.5 text-xs text-white duration-100 hover:bg-white hover:text-black"
         >
-          <X className="h-3 w-3" />
+          <Theme.Icon.X className="h-3 w-3" />
         </button>
       </div>
       <SyntaxHighlighter

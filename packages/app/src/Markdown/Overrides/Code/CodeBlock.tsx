@@ -1,13 +1,12 @@
 import { CodeProps } from "react-markdown/lib/ast-to-react";
 import * as SyntaxHighlighter from "react-syntax-highlighter";
-
 import bash from "react-syntax-highlighter/dist/esm/languages/hljs/bash";
 import python from "react-syntax-highlighter/dist/esm/languages/hljs/python";
 import typescript from "react-syntax-highlighter/dist/esm/languages/hljs/typescript";
 import { tomorrowNightBright as darkCodeTheme } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import AutoSizer from "react-virtualized-auto-sizer";
-
 import { FixedSizeList, ListChildComponentProps } from "react-window";
+
 import { Markdown } from "~/Markdown";
 
 import { CodeBlockButtons } from "./CodeBlockButtons";

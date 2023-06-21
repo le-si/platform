@@ -1,4 +1,4 @@
-import { X } from "../Icons";
+import { Theme } from "~/Theme";
 
 export type ImageContainer = StyleableWithChildren & {
   title?: string;
@@ -11,7 +11,7 @@ export function ImageContainer({
   src,
   children,
   className,
-  onClear
+  onClear,
 }: ImageContainer) {
   return (
     <div
@@ -38,7 +38,7 @@ export function ImageContainer({
               className="flex items-center gap-1 text-xs text-zinc-400 duration-100 hover:text-black"
             >
               Clear Image
-              <X className="h-3 w-3 rounded-full border border-zinc-400 p-px" />
+              <Theme.Icon.X className="h-3 w-3 rounded-full border border-zinc-400 p-px" />
             </button>
           )}
         </div>

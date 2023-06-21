@@ -1,0 +1,76 @@
+import { Theme } from "~/Theme";
+
+export function GridBlocks(props: Theme.Icon) {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 12 12"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <rect width="2.57143" height="2.57143" fill="#3F3F46" />
+      <rect
+        opacity="0.6"
+        x="9.42773"
+        width="2.57143"
+        height="2.57143"
+        fill="#3F3F46"
+      />
+      <rect
+        opacity="0.8"
+        x="4.71484"
+        width="2.57143"
+        height="2.57143"
+        fill="#3F3F46"
+      />
+      <rect
+        opacity="0.8"
+        y="4.71387"
+        width="2.57143"
+        height="2.57143"
+        fill="#3F3F46"
+      />
+      <rect
+        opacity="0.4"
+        x="9.42773"
+        y="4.71387"
+        width="2.57143"
+        height="2.57143"
+        fill="#3F3F46"
+      />
+      <rect
+        opacity="0.6"
+        x="4.71484"
+        y="4.71484"
+        width="2.57143"
+        height="2.57143"
+        fill="#3F3F46"
+      />
+      <rect
+        opacity="0.6"
+        y="9.42871"
+        width="2.57143"
+        height="2.57143"
+        fill="#3F3F46"
+      />
+      <rect
+        opacity="0.2"
+        x="9.42773"
+        y="9.42871"
+        width="2.57143"
+        height="2.57143"
+        fill="#3F3F46"
+      />
+      <rect
+        opacity="0.4"
+        x="4.71484"
+        y="9.42871"
+        width="2.57143"
+        height="2.57143"
+        fill="#3F3F46"
+      />
+    </svg>
+  );
+}

@@ -1,4 +1,4 @@
-import { Image, Upload, X } from "../Icons";
+import { Theme } from "~/Theme";
 
 export type DropZone = StyleableWithChildren & {
   onDrop: (file: File) => void;
@@ -13,7 +13,7 @@ export function DropZone({
   children,
   title,
   imageStyle,
-  onClear
+  onClear,
 }: DropZone) {
   const [image, setImage] = useState<string | undefined>();
 
@@ -46,7 +46,7 @@ export function DropZone({
   return (
     <div className="flex flex-col gap-2">
       <h1 className="flex items-center gap-2 text-sm">
-        <Image /> {title}
+        <Theme.Icon.Image /> {title}
       </h1>
       <div
         className={classes(
@@ -66,7 +66,7 @@ export function DropZone({
             onClickCapture={(e) => e.preventDefault()}
           >
             {image && (
-              <X
+              <Theme.Icon.X
                 className="absolute right-5 top-5 z-50 h-7 w-7 cursor-pointer rounded-full bg-white/60 p-1.5 backdrop-blur-sm duration-100 hover:bg-white/80"
                 onClick={() => {
                   setImage(undefined);
@@ -88,7 +88,7 @@ export function DropZone({
           </div>
         ) : (
           <>
-            <Upload className="bg-brand-orange h-8 w-8 rounded-full p-1 text-white" />
+            <Theme.Icon.Upload className="bg-brand-orange h-8 w-8 rounded-full p-1 text-white" />
             <p className="text-sm opacity-50">Upload an image</p>
           </>
         )}

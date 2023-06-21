@@ -1,16 +1,6 @@
 import { OpenAPI } from "@stability/sdk";
 
-import {
-  Background,
-  Button,
-  ImageContainer,
-  Input,
-  Select,
-  Textarea,
-  X,
-  Range
-} from "~/Theme";
-
+import { Theme } from "~/Theme";
 import { User } from "~/User";
 
 import { request } from "./OpenAPI";
@@ -38,9 +28,10 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
   const [prompts, setPrompts] = useState<Prompt[]>([
     {
       text: "A painting of a cat",
-      weight: 1
-    }
+      weight: 1,
+    },
   ]);
+
   const [style, setStyle] =
     useState<OpenAPI.TextToImageRequestBody["style_preset"]>("enhance");
 
@@ -77,37 +68,37 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
       prompts,
       style,
       cfgScale,
-      steps
+      steps,
     });
   }, [engineId, style, prompts, cfgScale, steps, setOptions]);
 
   return (
     <div className="flex h-full w-full flex-col gap-6 md:min-w-[55rem]">
-      <Background
+      <Theme.Background
         title="Multi-Prompting"
         className="h-full min-h-0 w-full"
         sidebar={
           <div className="flex h-fit w-full grow flex-col gap-3">
-            <Select
+            <Theme.Select
               title="Model"
               value={engineId}
               onChange={setEngineId}
               options={[
                 {
                   label: "Stable Diffusion XL",
-                  value: "stable-diffusion-xl-beta-v2-2-2"
+                  value: "stable-diffusion-xl-beta-v2-2-2",
                 },
                 {
                   label: "Stable Diffusion 1.5",
-                  value: "stable-diffusion-v1-5"
+                  value: "stable-diffusion-v1-5",
                 },
                 {
                   label: "Stable Diffusion 2.1",
-                  value: "stable-diffusion-512-v2-1"
-                }
+                  value: "stable-diffusion-512-v2-1",
+                },
               ]}
             />
-            <Select
+            <Theme.Select
               title="Style"
               value={style}
               onChange={(value) =>
@@ -132,16 +123,16 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
                 { label: "Cinematic", value: "cinematic" },
                 { label: "3D Model", value: "3d-model" },
                 { label: "Pixel Art", value: "pixel-art" },
-                { label: "Tile Texture", value: "tile-texture" }
+                { label: "Tile Texture", value: "tile-texture" },
               ]}
             />
-            <Input
+            <Theme.Input
               number
               title="CFG Scale"
               value={cfgScale}
               onNumberChange={setCfgScale}
             />
-            <Input
+            <Theme.Input
               title="Steps"
               number
               value={steps}
@@ -150,15 +141,18 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
             <p className="select-none text-xs opacity-75">Prompts</p>
             <div className="-mt-2 flex flex-col gap-3">
               {prompts.map((prompt, index) => (
-                <div className="flex flex-col gap-2 rounded border border-zinc-300 p-3">
-                  <Textarea
+                <div
+                  key={index}
+                  className="flex flex-col gap-2 rounded border border-zinc-300 p-3"
+                >
+                  <Theme.Textarea
                     key={index}
                     autoFocus
                     color={prompt.weight > 0 ? "positive" : "negative"}
                     title={
                       <div className="flex w-full items-center justify-between">
                         <p className="text-sm">Prompt {index + 1}</p>
-                        <X
+                        <Theme.Icon.X
                           className="h-4 w-4 cursor-pointer text-neutral-500 duration-100 hover:text-neutral-900"
                           onClick={() =>
                             setPrompts((prompts) =>
@@ -178,7 +172,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
                       )
                     }
                   />
-                  <Range
+                  <Theme.Range
                     max={1}
                     min={-1}
                     step={0.01}
@@ -196,7 +190,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
               ))}
             </div>
             {prompts.length < 10 && (
-              <Button
+              <Theme.Button
                 variant="secondary"
                 className="border border-dashed border-zinc-300"
                 onClick={() =>
@@ -204,32 +198,32 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
                     ...prompts,
                     {
                       text: "",
-                      weight: 1
-                    }
+                      weight: 1,
+                    },
                   ])
                 }
               >
                 Add Prompt
-              </Button>
+              </Theme.Button>
             )}
           </div>
         }
         sidebarBottom={
-          <Button
+          <Theme.Button
             variant="primary"
             className="h-16 rounded-none"
             disabled={generating || !prompts.length || !apiKey}
             onClick={generate}
           >
             Generate
-          </Button>
+          </Theme.Button>
         }
       >
         <div className=" flex h-full grow gap-3 overflow-y-auto overflow-x-hidden">
           <div className="flex grow items-center justify-center">
             {apiKey ? (
               imageURL ? (
-                <ImageContainer
+                <Theme.ImageContainer
                   src={imageURL}
                   title="Output Image"
                   onClear={() => setImageURL(undefined)}
@@ -258,7 +252,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
             )}
           </div>
         </div>
-      </Background>
+      </Theme.Background>
       <div className="flex min-h-0 shrink-0 flex-wrap gap-6">
         <Buttons />
       </div>
@@ -269,18 +263,18 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
 export function Buttons() {
   return (
     <>
-      <Button
+      <Theme.Button
         link="https://stabilityai.readme.io/reference/texttoimage"
         variant="secondary"
       >
         View Documentation
-      </Button>
-      <Button
+      </Theme.Button>
+      <Theme.Button
         link="https://github.com/Stability-AI/platform/blob/main/packages/app/src/Sandbox/MultiPrompting/index.tsx"
         variant="secondary"
       >
         View on GitHub
-      </Button>
+      </Theme.Button>
     </>
   );
 }

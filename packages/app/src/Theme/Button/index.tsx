@@ -1,5 +1,4 @@
-import { Theme } from "..";
-import { Link } from "../Icons";
+import { Theme } from "~/Theme";
 
 export type Button = StyleableWithChildren & {
   active?: boolean;
@@ -42,7 +41,7 @@ export function Button({
     >
       {loading && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <Theme.Spinner className="h-4 w-4 text-black" />
+          <Theme.Icon.Spinner className="h-4 w-4 text-black" />
         </div>
       )}
       <span
@@ -53,7 +52,9 @@ export function Button({
       >
         {children}
       </span>
-      {link && <Link color={variant === "primary" ? "white" : undefined} />}
+      {link && (
+        <Theme.Icon.Link color={variant === "primary" ? "white" : undefined} />
+      )}
     </button>
   );
 }

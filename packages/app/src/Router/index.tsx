@@ -12,10 +12,10 @@ import { Upscaling } from "~/Sandbox/Upscaling";
 import { User } from "~/User";
 
 export function Router() {
+  const path = ReactRouter.useLocation().pathname;
+
   // reset scroll on route change
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [ReactRouter.useLocation().pathname]);
+  useEffect(() => window.scrollTo(0, 0), [path]);
 
   return ReactRouter.useRoutes([
     {
@@ -24,7 +24,7 @@ export function Router() {
         <Page>
           <Overview />
         </Page>
-      )
+      ),
     },
     {
       path: "/sandbox",
@@ -32,7 +32,7 @@ export function Router() {
         <Page>
           <List />
         </Page>
-      )
+      ),
     },
     {
       path: "/sandbox/text-to-image",
@@ -43,7 +43,7 @@ export function Router() {
             samples={TextToImage.Samples}
           />
         </Page>
-      )
+      ),
     },
     {
       path: "/sandbox/image-to-image",
@@ -54,7 +54,7 @@ export function Router() {
             samples={ImageToImage.Samples}
           />
         </Page>
-      )
+      ),
     },
     {
       path: "/sandbox/upscaling",
@@ -62,7 +62,7 @@ export function Router() {
         <Page noScroll noFooter>
           <Sandbox SandboxComponent={Upscaling} samples={Upscaling.Samples} />
         </Page>
-      )
+      ),
     },
     {
       path: "/sandbox/multi-prompting",
@@ -73,23 +73,23 @@ export function Router() {
             samples={MultiPrompting.Samples}
           />
         </Page>
-      )
+      ),
     },
     {
       path: User.Logout.url(),
-      element: <User.Logout />
+      element: <User.Logout />,
     },
     {
       path: User.Login.Callback.url(),
-      element: <User.Login.Callback />
+      element: <User.Login.Callback />,
     },
     {
       path: "/legal/terms-of-service",
-      element: <Markdown>{Markdown.Pages.API_TOS}</Markdown>
+      element: <Markdown>{Markdown.Pages.API_TOS}</Markdown>,
     },
     {
       path: "/faq",
-      element: <Markdown>{Markdown.Pages.FAQ}</Markdown>
+      element: <Markdown>{Markdown.Pages.FAQ}</Markdown>,
     },
     {
       path: "/account",
@@ -102,18 +102,18 @@ export function Router() {
         {
           path: "*",
           index: true,
-          element: <User.Account.Overview />
+          element: <User.Account.Overview />,
         },
         {
           path: "billing",
-          element: <User.Account.Credits autoFocus />
+          element: <User.Account.Credits autoFocus />,
         },
         {
           path: "keys",
-          element: <User.APIKeys.Table />
-        }
-      ]
-    }
+          element: <User.APIKeys.Table />,
+        },
+      ],
+    },
   ]);
 }
 

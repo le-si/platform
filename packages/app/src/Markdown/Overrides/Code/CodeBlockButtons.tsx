@@ -1,4 +1,5 @@
 import { useCopyToClipboard } from "react-use";
+
 import { Theme } from "~/Theme";
 
 export function CodeBlockButtons({ code }: { code: string }) {
@@ -28,7 +29,7 @@ function CopyCodeToClipboardButton({ code }: { code: string }) {
       content={isCopied ? "Copied!" : "Copy snippet"}
     >
       <Theme.Button
-        icon={Theme.Icon.Copy}
+        // icon={Theme.Icon.Copy}
         onClick={() => {
           copyToClipboard(code);
           setTimeout(() => setIsCopied(false), 200);

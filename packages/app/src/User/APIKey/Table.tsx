@@ -63,7 +63,7 @@ function AddKeyButton() {
         createAPIKey?.mutate();
       }}
     >
-      <Theme.Plus className="mr-2" />
+      <Theme.Icon.Plus className="mr-2" />
       Create API Key
     </Theme.Button>
   );
@@ -71,7 +71,7 @@ function AddKeyButton() {
 
 function APIKeyRow({
   apiKey,
-  canDelete
+  canDelete,
 }: {
   apiKey: User.APIKey;
   canDelete?: boolean;
@@ -103,7 +103,7 @@ function APIKeyRow({
               className="w-fit rounded transition-all duration-200 hover:text-red-600"
               onClick={() => setIsConfirmModalOpen(true)}
             >
-              <Theme.X />
+              <Theme.Icon.X />
             </Theme.Button>
             <DeleteModal
               open={isConfirmModalOpen}
@@ -138,7 +138,7 @@ function CopyKey({ apiKey }: { apiKey: User.APIKey }) {
           setIsCopied(true);
         }}
       >
-        <Theme.Copy />
+        <Theme.Icon.Copy />
       </Theme.Button>
     </Theme.Tooltip>
   );
@@ -146,7 +146,7 @@ function CopyKey({ apiKey }: { apiKey: User.APIKey }) {
 
 function ShowHideKey({
   isKeyRevealed,
-  setIsKeyRevealed
+  setIsKeyRevealed,
 }: {
   isKeyRevealed: boolean;
   setIsKeyRevealed: (isKeyRevealed: boolean) => void;
@@ -156,7 +156,7 @@ function ShowHideKey({
       onClick={() => setIsKeyRevealed(!isKeyRevealed)}
       className="w-fit"
     >
-      {isKeyRevealed ? <Theme.EyeOff /> : <Theme.Eye />}
+      {isKeyRevealed ? <Theme.Icon.EyeOff /> : <Theme.Icon.Eye />}
     </Theme.Button>
   );
 }
@@ -198,7 +198,7 @@ function NoDataRow() {
 function Row({
   children,
   isLastRow,
-  className
+  className,
 }: StyleableWithChildren & {
   isLastRow?: boolean;
 }) {
@@ -218,7 +218,7 @@ function Row({
 function Cell({
   children,
   className,
-  colSpan
+  colSpan,
 }: StyleableWithChildren & {
   colSpan?: number;
 }) {

@@ -1,4 +1,4 @@
-import { Union } from "../Icons";
+import { Theme } from "~/Theme";
 
 export type PickButton = Styleable & {
   icon?: React.ReactNode;
@@ -14,7 +14,7 @@ export function PickButton({
   value,
   disabled,
   onClick,
-  className
+  className,
 }: PickButton) {
   return (
     <div
@@ -30,7 +30,7 @@ export function PickButton({
         {label && <p className="text-xs">{label}:</p>}
         <p className="text-sm">{value}</p>
       </div>
-      <Union />
+      <Theme.Icon.Union />
     </div>
   );
 }

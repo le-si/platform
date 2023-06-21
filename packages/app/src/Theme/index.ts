@@ -3,7 +3,7 @@ import "./index.css";
 export { Button } from "./Button";
 export { Textarea } from "./Textarea";
 export { ImageContainer } from "./ImageContainer";
-export * from "./Icons";
+export { Icon } from "./Icon";
 export { PickButton } from "./PickButton";
 export { Input } from "./Input";
 export { Select } from "./Select";
