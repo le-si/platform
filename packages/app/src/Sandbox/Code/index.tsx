@@ -16,7 +16,7 @@ export function Code({
   setLanguage: (language: Code.Language) => void;
   onClose: () => void;
 }) {
-  const highlighting = Code.useHighlighting(code);
+  const highlighting = Code.useHighlighting(code, language);
   return (
     <div
       ref={highlighting.ref}
@@ -75,7 +75,7 @@ export function Code({
 export namespace Code {
   export type Language = "python" | "javascript" | "typescript";
 
-  export const useHighlighting = (content: string) => {
+  export const useHighlighting = (code: Code, language: Language) => {
     const fadeInSpeed = 100;
     const fadeOutSpeed = 750;
     const fadeOutDelay = 1000;
@@ -84,6 +84,21 @@ export namespace Code {
     const spans = useRef<HTMLSpanElement[]>([]);
     const previousContents = useRef<string[]>([]);
     const timeouts = useRef<NodeJS.Timeout[]>([]);
+
+    useEffect(
+      () => () => {
+        timeouts.current.forEach(clearTimeout);
+      },
+      []
+    );
+
+    useEffect(() => {
+      spans.current = [];
+      previousContents.current = [];
+
+      timeouts.current.forEach(clearTimeout);
+      timeouts.current = [];
+    }, [language]);
 
     useEffect(() => {
       if (!ref.current) return;
@@ -108,7 +123,7 @@ export namespace Code {
       });
 
       previousContents.current = currentContents;
-    }, [content]);
+    }, [code]);
 
     return {
       ref,
