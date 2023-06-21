@@ -95,6 +95,7 @@ export namespace Code {
       const currentContents = spans.current.map(
         (span) => span.textContent ?? ""
       );
+
       currentContents.forEach((content, index) => {
         const previousContent = previousContents.current[index] ?? "";
         if (content === previousContent || previousContent === "") return;
