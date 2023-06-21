@@ -1,5 +1,6 @@
 import * as ReactRouter from "react-router-dom";
 import { Page } from "~/App/Page";
+import { Markdown } from "~/Markdown";
 import { Overview } from "~/Overview";
 
 import { Sandbox } from "~/Sandbox";
@@ -11,6 +12,11 @@ import { Upscaling } from "~/Sandbox/Upscaling";
 import { User } from "~/User";
 
 export function Router() {
+  // reset scroll on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [ReactRouter.useLocation().pathname]);
+
   return ReactRouter.useRoutes([
     {
       path: "/",
@@ -76,6 +82,14 @@ export function Router() {
     {
       path: User.Login.Callback.url(),
       element: <User.Login.Callback />
+    },
+    {
+      path: "/legal/terms-of-service",
+      element: <Markdown>{Markdown.Pages.API_TOS}</Markdown>
+    },
+    {
+      path: "/faq",
+      element: <Markdown>{Markdown.Pages.FAQ}</Markdown>
     },
     {
       path: "/account",

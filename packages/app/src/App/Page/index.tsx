@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { TopBar, height } from "../TopBar";
 
 export function Page({
@@ -40,18 +41,21 @@ function Footer() {
   return (
     <div className="mt-auto flex h-16 w-full items-center justify-between border-t border-zinc-100 bg-white px-5">
       <div className="flex gap-6">
-        <a href="/tos" className="text-sm font-semibold hover:text-indigo-500">
+        <Link
+          to="/legal/terms-of-service"
+          className="text-sm font-semibold hover:text-indigo-500"
+        >
           Terms of Service
-        </a>
-        <a
-          href="/privacy"
+        </Link>
+        <Link
+          to="/legal/privacy-policy"
           className="text-sm font-semibold hover:text-indigo-500"
         >
           Privacy Policy
-        </a>
-        <a href="/faq" className="text-sm font-semibold hover:text-indigo-500">
+        </Link>
+        <Link to="/faq" className="text-sm font-semibold hover:text-indigo-500">
           FAQs
-        </a>
+        </Link>
         <a
           href="https://stability.ai"
           className="text-sm font-semibold hover:text-indigo-500"
