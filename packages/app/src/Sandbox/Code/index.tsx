@@ -52,7 +52,7 @@ export function Code({
         </button>
       </div>
 
-      <div className="overflow-auto">
+      <div className="h-full overflow-auto">
         <Markdown className="sandbox m-0 h-full rounded-t-none p-0 text-[0.95rem] leading-3">
           {Code.toMarkdownCodeBlock(code, language)}
         </Markdown>

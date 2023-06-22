@@ -85,9 +85,7 @@ export function Router() {
     },
     {
       path: "/legal/terms-of-service",
-      element: (
-        <Markdown.Page>{Markdown.Pages.CreditsAndBilling}</Markdown.Page>
-      ),
+      element: <Markdown.Page>{Markdown.Pages.API_TOS}</Markdown.Page>,
     },
     {
       path: "/faq",
