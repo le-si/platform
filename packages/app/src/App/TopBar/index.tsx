@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { User } from "~/User";
 
-export const height = () => "4rem";
+export const topBarHeight = () => "4rem";
 
 export function TopBar() {
   const [atTopScroll, setAtTopScroll] = useState(true);
@@ -21,7 +21,7 @@ export function TopBar() {
         !atTopScroll && "border-zinc-100"
       )}
       style={{
-        height: height(),
+        height: topBarHeight(),
       }}
     >
       <div className="w-1/3">

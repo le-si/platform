@@ -1,6 +1,8 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import { ReactMarkdownProps } from "react-markdown/lib/complex-types";
-import { AutoLinkPlugin } from "~/Markdown/AutoLinkPlugin";
+import { useNavigate } from "react-router-dom";
+
+import { Scroll } from "../Scroll";
 
 type Props = React.DetailedHTMLProps<
   React.AnchorHTMLAttributes<HTMLAnchorElement>,
@@ -8,26 +10,45 @@ type Props = React.DetailedHTMLProps<
 > &
   ReactMarkdownProps;
 
+/**
+ * Renders an anchor tag that supports:
+ *  - Links to headings within the same document
+ *  - Internal links to other pages within the app
+ *  - External links
+ */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function Anchor({ href, children, node, ...props }: Props) {
-  if (props.className === AutoLinkPlugin.className) {
-    console.log("Anchor", { href, children, node, props });
-    return (
-      <a href={href} {...props}>
-        {children}
-      </a>
-    );
-  }
+export function Anchor({ href, children, node: _node, ...props }: Props) {
+  const navigate = useNavigate();
+
+  const onClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
+    if (isLinkToHeading(href)) {
+      event.preventDefault();
+      navigate({ hash: href });
+      Scroll.toElementByID(href.slice(1));
+    } else if (isInternalLink(href)) {
+      event.preventDefault();
+      navigate(href);
+    }
+  };
 
   return (
-    //component links to external site
     <a
       href={href}
+      className="link-hover link-primary link"
       target="_blank"
-      rel="noreferrer"
-      className="text-brand-300 hover:text-brand-400 hover:underline"
+      rel="noopener noreferrer"
+      onClick={onClick}
+      {...props}
     >
       {children}
     </a>
   );
+}
+
+function isLinkToHeading(href: string | undefined): href is string {
+  return !!href && href.startsWith("#");
+}
+
+function isInternalLink(href: string | undefined): href is string {
+  return !!href && href.startsWith("/");
 }

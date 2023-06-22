@@ -1,4 +1,9 @@
 import React from "react";
+import {
+  TableDataCellProps,
+  TableHeaderCellProps,
+  TableRowProps,
+} from "react-markdown/lib/ast-to-react";
 import { ReactMarkdownProps } from "react-markdown/lib/complex-types";
 
 import { Markdown } from "~/Markdown";
@@ -18,29 +23,29 @@ export function Table({
 }
 
 export namespace Table {
-  export const THead = function THead({ children }: ReactMarkdownProps) {
+  export function THead({ children }: ReactMarkdownProps) {
     return <thead className="p-3">{children}</thead>;
-  };
+  }
 
-  export const TBody = function TBody({ children }: ReactMarkdownProps) {
+  export function TBody({ children }: ReactMarkdownProps) {
     return <tbody className="p-3">{children}</tbody>;
-  };
+  }
 
-  export const Th = function Th({ children }: ReactMarkdownProps) {
+  export function Th({ children }: TableHeaderCellProps) {
     return (
       <th className="whitespace-nowrap text-center font-bold">{children}</th>
     );
-  };
+  }
 
-  export const Td = function Td({ children }: ReactMarkdownProps) {
+  export function Td({ children }: TableDataCellProps) {
     return <td className="text-center">{children}</td>;
-  };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  export const Tr = function Tr({ children, isHeader }: any) {
+  }
+
+  export function Tr({ children, isHeader }: TableRowProps) {
     return isHeader ? (
       <tr>{children}</tr>
     ) : (
       <tr className="[&:last-child td]:border-none">{children}</tr>
     );
-  };
+  }
 }

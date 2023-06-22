@@ -1,6 +1,4 @@
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
-
+import { Markdown } from "~/Markdown";
 import { Theme } from "~/Theme";
 
 export type Code = string;
@@ -17,14 +15,14 @@ export function Code({
   onClose: () => void;
 }) {
   const highlighting = Code.useHighlighting(code, language);
+
   return (
     <div
       ref={highlighting.ref}
       css={highlighting.css}
-      style={a11yDark}
-      className="flex w-full max-w-[50rem] shrink flex-col overflow-hidden overflow-x-auto rounded-xl bg-[#2b2b2b]"
+      className="flex w-full max-w-[50rem] shrink flex-col overflow-hidden overflow-x-auto rounded-xl"
     >
-      <div className="flex w-full gap-1 border-b border-[#424242] p-2">
+      <div className="flex w-full gap-1 border-b border-[#424242] bg-[#2b2b2b] p-2">
         <LanguageButton
           language="Typescript"
           onClick={() => setLanguage("typescript")}
@@ -53,27 +51,21 @@ export function Code({
           <Theme.Icon.X className="h-3 w-3" />
         </button>
       </div>
-      <SyntaxHighlighter
-        showLineNumbers
-        className="code"
-        language={language}
-        style={a11yDark}
-        lineNumberStyle={{ color: "#666666" }}
-        customStyle={{
-          width: "100%",
-          height: "100%",
-          fontSize: "0.85rem",
-          textAlign: "left",
-        }}
-      >
-        {code}
-      </SyntaxHighlighter>
+
+      <div className="overflow-auto">
+        <Markdown className="sandbox m-0 h-full rounded-t-none p-0 text-[0.95rem] leading-3">
+          {Code.toMarkdownCodeBlock(code, language)}
+        </Markdown>
+      </div>
     </div>
   );
 }
 
 export namespace Code {
   export type Language = "python" | "javascript" | "typescript";
+
+  export const toMarkdownCodeBlock = (code: Code, language: Language) =>
+    "```" + language + "\n" + code + "\n```";
 
   export const useHighlighting = (code: Code, language: Language) => {
     const fadeInSpeed = 100;

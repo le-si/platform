@@ -12,7 +12,7 @@ declare global {
   type CSSValue = string;
 
   type Styleable = { className?: string };
-  type StyleableWithChildren = Styleable & React.PropsWithChildren;
+  type StyleableWithChildren<T = {}> = Styleable & React.PropsWithChildren<T>;
 
   var React: typeof ReactImport;
   var useState: typeof ReactImport.useState;
