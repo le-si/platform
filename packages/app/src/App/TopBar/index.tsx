@@ -27,7 +27,14 @@ export function TopBar() {
       <div className="w-1/3">
         <div className="w-fit">
           <Link to="/" className="flex items-center gap-2">
-            <img src="/logo.png" className="lg:mt-px" />
+            <img
+              src="/full-logo-black.svg"
+              className="hidden w-[90px] sm:block"
+            />
+            <img
+              src="/small-logo-black.svg"
+              className="block h-8 w-8 sm:hidden"
+            />
             <div className="hidden h-6 w-px bg-black lg:block" />
             <h1 className="hidden text-sm font-medium lg:block">
               Developer Platform
@@ -48,12 +55,6 @@ export function TopBar() {
         >
           Documentation
         </Link>
-        <h1
-          // href="/docs/recipes"
-          className="cursor-not-allowed text-sm font-semibold opacity-50"
-        >
-          Guides
-        </h1>
       </div>
       <div className="flex w-1/3 items-center justify-end gap-3">
         <User.Login.Button />
