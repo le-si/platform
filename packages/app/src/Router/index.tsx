@@ -2,6 +2,7 @@ import * as ReactRouter from "react-router-dom";
 import { Page } from "~/App/Page";
 import { Markdown } from "~/Markdown";
 import { Overview } from "~/Overview";
+import { REST } from "~/REST";
 
 import { Sandbox } from "~/Sandbox";
 import { ImageToImage } from "~/Sandbox/ImageToImage";
@@ -101,6 +102,10 @@ export function Router() {
     {
       path: "/faq",
       element: <Markdown.Page>{Markdown.Pages.FAQ}</Markdown.Page>
+    },
+    {
+      path: REST.Page.url(),
+      element: <REST.Page />,
     },
     {
       path: "/account",

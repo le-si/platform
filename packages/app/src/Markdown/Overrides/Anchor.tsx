@@ -2,7 +2,7 @@ import React, { MouseEventHandler } from "react";
 import { ReactMarkdownProps } from "react-markdown/lib/complex-types";
 import { useNavigate } from "react-router-dom";
 
-import { Scroll } from "../Scroll";
+import { Scroll } from "~/Scroll";
 
 type Props = React.DetailedHTMLProps<
   React.AnchorHTMLAttributes<HTMLAnchorElement>,

@@ -17,6 +17,7 @@ declare global {
     readonly VITE_AUTH0_CLIENT_ID: string;
     readonly VITE_API_GRPC_URL: string;
     readonly VITE_API_REST_URL: string;
+    readonly VITE_REST_API_SPEC_URL: string;
   }
 
   // Augment import.meta.env so it references the ImportMetaEnv above
@@ -42,6 +43,7 @@ export namespace Environment {
     VITE_AUTH0_CLIENT_ID: import.meta.env.VITE_AUTH0_CLIENT_ID,
     VITE_API_GRPC_URL: import.meta.env.VITE_API_GRPC_URL,
     VITE_API_REST_URL: import.meta.env.VITE_API_REST_URL,
+    VITE_REST_API_SPEC_URL: import.meta.env.VITE_REST_API_SPEC_URL,
   } as const;
 
   export function validate() {

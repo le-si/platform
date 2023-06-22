@@ -17,8 +17,6 @@ import * as Overrides from "./Overrides";
 import { Page } from "./Page";
 import * as Pages from "./Pages";
 
-import { Scroll } from "./Scroll";
-
 export function Markdown({
   className,
   children,

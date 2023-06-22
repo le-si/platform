@@ -1,6 +1,6 @@
 import { App } from "~/App";
 import { Markdown } from "~/Markdown";
-import { Scroll } from "~/Markdown/Scroll";
+import { Scroll } from "~/Scroll";
 
 export function Page({ children }: { children: string }) {
   Scroll.useListenForURLChanges();
