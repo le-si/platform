@@ -1,15 +1,6 @@
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { topBarHeight } from "~/App/TopBar";
-import { Markdown } from "~/Markdown";
-import { Theme } from "~/Theme";
 import { Documentation } from ".";
-
-type Subroute = {
-  /** Used to label the SideBar link & GlobalSearch results */
-  name: string;
-  url: string;
-  subroutes?: Subroute[];
-};
 
 function DocButton({
   name,
