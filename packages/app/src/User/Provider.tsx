@@ -11,7 +11,21 @@ export function Provider({ children }: React.PropsWithChildren) {
     [navigate]
   );
 
-  return <>{children}</>;
+  return (
+    <Auth0.Auth0Provider
+      useRefreshTokens
+      cacheLocation="localstorage"
+      onRedirectCallback={onRedirect}
+      domain={import.meta.env.VITE_AUTH0_DOMAIN}
+      clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
+      authorizationParams={{
+        audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+        redirect_uri: `${window.location.origin}${User.Login.Callback.url()}`,
+      }}
+    >
+      <ErrorInterceptor>{children}</ErrorInterceptor>
+    </Auth0.Auth0Provider>
+  );
 }
 
 function ErrorInterceptor({ children }: React.PropsWithChildren) {
