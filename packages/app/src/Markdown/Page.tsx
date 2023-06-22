@@ -1,9 +1,15 @@
+import { App } from "~/App";
 import { Markdown } from "~/Markdown";
+import { Scroll } from "~/Markdown/Scroll";
 
-export function Page({ children }: React.PropsWithChildren<unknown>) {
+export function Page({ children }: { children: string }) {
+  Scroll.useListenForURLChanges();
+
   return (
-    <div className="mx-auto max-w-[70rem] overflow-y-scroll">
-      <Markdown>{children}</Markdown>
-    </div>
+    <App.Page>
+      <div className="mx-auto max-w-[70rem]">
+        <Markdown>{children}</Markdown>
+      </div>
+    </App.Page>
   );
 }

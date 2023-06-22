@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
-import { TopBar, height } from "../TopBar";
 
+import { TopBar, topBarHeight } from "../TopBar";
+
+// TODO: Move this to Theme so we can reference it as Theme.Page
 export function Page({
   children,
   className,
   noScroll,
-  noFooter
+  noFooter,
 }: StyleableWithChildren & {
   noScroll?: boolean;
   noFooter?: boolean;
@@ -16,9 +18,9 @@ export function Page({
       style={
         noScroll
           ? {
-              height: `calc(100vh - (${height()} + ${
+              height: `calc(100vh - (${topBarHeight()} + ${
                 noFooter ? "0rem" : "4rem"
-              }))`
+              }))`,
             }
           : undefined
       }

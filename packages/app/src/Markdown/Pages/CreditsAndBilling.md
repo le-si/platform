@@ -38,3 +38,47 @@ Here are various step counts and pixel dimensions along with their credit usage.
 | 150   | 3.0       | 7.2       | 11.4       | 13.8      | 19.8       | 28.2        |
 
 _Note:_ Cost increases faster with higher step counts and larger pixel dimensions.
+
+```typescript
+import { OpenAPI } from "@stability/sdk";
+
+export const textToImage = async () => {
+  const path: OpenAPI.TextToImageRequestPath =
+    "https://api.stability.ai/v1/generation/stable-diffusion-xl-beta-v2-2-2/text-to-image";
+
+  const headers: OpenAPI.TextToImageRequestHeaders = {
+    Accept: "image/png",
+    Authorization: "Bearer YOUR API KEY"
+  };
+
+  console.log('Hello, world!');
+
+  const body: OpenAPI.TextToImageRequestBody = {
+    width: 512,
+    height: 512,
+    seed: 0,
+    steps: 50,
+    cfg_scale: 7,
+    style_preset: "enhance",
+    text_prompts: [
+      {
+        text: "",
+        weight: 1,
+      },
+      {
+        text: "",
+        weight: -1,
+      }
+    ]
+  };
+
+  return fetch(
+    path,
+    {
+      headers,
+      method: "POST",
+      body: JSON.stringify(body),
+    }
+  );
+};
+```

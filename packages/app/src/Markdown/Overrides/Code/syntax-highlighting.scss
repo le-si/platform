@@ -1,0 +1,79 @@
+@use "sass:meta";
+
+$light-mode-css: "highlight.js/styles/a11y-dark.css";
+$light-bg-code-block: hsl(0, 0%, 17%);
+$light-bg-code-inline: rgba(175, 184, 193, 0.2);
+
+$dark-mode-css: "highlight.js/styles/github-dark.css";
+$dark-bg-code-block: hsl(0, 0%, 7%);
+$dark-bg-code-inline: hsl(0, 0%, 7%);
+
+
+// Light mode syntax highlighting
+html:not(.dark) {
+  @include meta.load-css($light-mode-css);
+
+  .prose {
+    // Code block background color
+    --tw-prose-pre-bg: #{$light-bg-code-block};
+
+    // Inline code changes
+    code {
+      background-color: $light-bg-code-inline;
+    }
+  }
+}
+
+// Dark mode syntax highlighting
+html.dark {
+  @include meta.load-css($dark-mode-css);
+
+  .prose {
+    // Code block background color
+    --tw-prose-pre-bg: #{$dark-bg-code-block};
+
+    // Inline code changes
+    code {
+      background-color: $dark-bg-code-inline;
+      color: var(--tw-prose-invert-pre-code);
+    }
+  }
+}
+
+// Non-sandbox code blocks
+.prose:not(.sandbox) {
+  .code-block-header {
+    @apply flex items-center justify-between bg-gray-600 px-4 py-1 text-xs text-white;
+  }
+
+  pre {
+    @apply p-0;
+    @apply rounded-none;
+    @apply rounded shadow-sm;
+
+    div.hljs {
+      background-color: transparent;
+      @apply p-4;
+      @apply overflow-x-auto;
+      @apply w-full;
+    }
+
+    code {
+      @apply mx-2 bg-transparent shadow-none;
+      color: initial;
+    }
+  }
+}
+
+// Sandbox code blocks
+.prose.sandbox {
+  .code-block-header {
+    @apply hidden;
+  }
+
+  pre {
+    @apply rounded-t-none;
+    @apply h-full;
+  }
+}
+

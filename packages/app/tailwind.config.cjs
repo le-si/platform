@@ -14,8 +14,14 @@ module.exports = {
       addVariant("hover", ["&:hover", "&.hover"]);
       addVariant("active", ["&:active", "&.active"]);
     }),
+    require("daisyui")
   ],
-
+  daisyui: {
+    logs: false,
+    themes: [
+      "light",
+    ],
+  },
   theme: {
     extend: {
       opacity: {
