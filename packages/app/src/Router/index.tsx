@@ -10,6 +10,8 @@ import { MultiPrompting } from "~/Sandbox/MultiPrompting";
 import { TextToImage } from "~/Sandbox/TextToImage";
 import { Upscaling } from "~/Sandbox/Upscaling";
 import { User } from "~/User";
+import { Page as DocumentationPage } from "~/Documentation/Page";
+import { Documentation } from "~/Documentation";
 
 export function Router() {
   const path = ReactRouter.useLocation().pathname;
@@ -24,7 +26,7 @@ export function Router() {
         <Page>
           <Overview />
         </Page>
-      ),
+      )
     },
     {
       path: "/sandbox",
@@ -32,7 +34,16 @@ export function Router() {
         <Page>
           <List />
         </Page>
+      )
+    },
+    {
+      path: "/docs",
+      element: (
+        <Page>
+          <DocumentationPage />
+        </Page>
       ),
+      children: Documentation.useRoutes()
     },
     {
       path: "/sandbox/text-to-image",
@@ -43,7 +54,7 @@ export function Router() {
             samples={TextToImage.Samples}
           />
         </Page>
-      ),
+      )
     },
     {
       path: "/sandbox/image-to-image",
@@ -54,7 +65,7 @@ export function Router() {
             samples={ImageToImage.Samples}
           />
         </Page>
-      ),
+      )
     },
     {
       path: "/sandbox/upscaling",
@@ -62,7 +73,7 @@ export function Router() {
         <Page noScroll noFooter>
           <Sandbox SandboxComponent={Upscaling} samples={Upscaling.Samples} />
         </Page>
-      ),
+      )
     },
     {
       path: "/sandbox/multi-prompting",
@@ -73,23 +84,23 @@ export function Router() {
             samples={MultiPrompting.Samples}
           />
         </Page>
-      ),
+      )
     },
     {
       path: User.Logout.url(),
-      element: <User.Logout />,
+      element: <User.Logout />
     },
     {
       path: User.Login.Callback.url(),
-      element: <User.Login.Callback />,
+      element: <User.Login.Callback />
     },
     {
       path: "/legal/terms-of-service",
-      element: <Markdown.Page>{Markdown.Pages.API_TOS}</Markdown.Page>,
+      element: <Markdown.Page>{Markdown.Pages.API_TOS}</Markdown.Page>
     },
     {
       path: "/faq",
-      element: <Markdown.Page>{Markdown.Pages.FAQ}</Markdown.Page>,
+      element: <Markdown.Page>{Markdown.Pages.FAQ}</Markdown.Page>
     },
     {
       path: "/account",
@@ -102,18 +113,18 @@ export function Router() {
         {
           path: "*",
           index: true,
-          element: <User.Account.Overview />,
+          element: <User.Account.Overview />
         },
         {
           path: "billing",
-          element: <User.Account.Credits autoFocus />,
+          element: <User.Account.Credits autoFocus />
         },
         {
           path: "keys",
-          element: <User.APIKeys.Table />,
-        },
-      ],
-    },
+          element: <User.APIKeys.Table />
+        }
+      ]
+    }
   ]);
 }
 

@@ -1,25 +1,5 @@
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-
-function NavButton({
-  children,
-  url,
-  active,
-}: React.PropsWithChildren<{
-  url: string;
-  active?: boolean;
-}>) {
-  return (
-    <Link
-      to={url}
-      className={classes(
-        "border-b border-zinc-300 p-3 last:border-b-0",
-        active ? "bg-indigo-500 text-white" : "duration-100 hover:bg-indigo-200"
-      )}
-    >
-      {children}
-    </Link>
-  );
-}
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Theme } from "~/Theme";
 
 export function Page() {
   const location = useLocation();
@@ -36,27 +16,27 @@ export function Page() {
     <div className="mt-6 flex w-full gap-5 px-5">
       <div className="flex w-full max-w-[20rem] flex-col gap-5">
         <div className="bg-brand-amber-1 flex w-full flex-col overflow-hidden rounded-xl">
-          <NavButton
+          <Theme.NavButton
             url="/account/overview"
             active={location.pathname === "/account/overview"}
           >
             Account
-          </NavButton>
-          <NavButton
+          </Theme.NavButton>
+          <Theme.NavButton
             url="/account/billing"
             active={location.pathname === "/account/billing"}
           >
             Billing
-          </NavButton>
-          <NavButton
+          </Theme.NavButton>
+          <Theme.NavButton
             url="/account/keys"
             active={location.pathname === "/account/keys"}
           >
             API Keys
-          </NavButton>
+          </Theme.NavButton>
         </div>
         <div className="bg-brand-amber-1 flex w-full flex-col overflow-hidden rounded-xl">
-          <NavButton url="/logout">Logout</NavButton>
+          <Theme.NavButton url="/logout">Logout</Theme.NavButton>
         </div>
       </div>
       <div className="mx-auto flex w-full max-w-[80rem] justify-center">

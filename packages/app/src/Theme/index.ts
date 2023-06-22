@@ -16,5 +16,6 @@ export { Provider } from "./Provider";
 export { Range } from "./Range";
 export { IconButton } from "./IconButton";
 export { CopyToClipboard } from "./CopyToClipboard";
+export { NavButton } from "./NavButton";
 
 export * as Theme from ".";

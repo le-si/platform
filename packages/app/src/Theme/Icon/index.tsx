@@ -17,6 +17,8 @@ import { Spinner } from "./Spinner";
 import { Union } from "./Union";
 import { Upload } from "./Upload";
 import { X } from "./X";
+import { Python } from "./Python";
+import { TypeScript } from "./TypeScript";
 
 export type Icon = Styleable & {
   color?: CSSValue;
@@ -44,6 +46,8 @@ export declare namespace Icon {
     Union,
     Upload,
     X,
+    Python,
+    TypeScript
   };
 }
 
@@ -67,4 +71,6 @@ export namespace Icon {
   Icon.Union = Union;
   Icon.Upload = Upload;
   Icon.X = X;
+  Icon.Python = Python;
+  Icon.TypeScript = TypeScript;
 }
