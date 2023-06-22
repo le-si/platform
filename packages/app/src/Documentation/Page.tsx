@@ -70,7 +70,7 @@ export function Page() {
       </div>
       <div className="w-[20rem] shrink-0" />
       <div className="mx-auto flex w-full max-w-[80rem] justify-center overflow-hidden">
-        <div className="flex flex-col gap-6">
+        <div className="flex w-full flex-col gap-6">
           <Outlet />
           {/* <div className="flex w-full justify-between gap-7"></div> */}
           {/* TODO: next/previous buttons */}

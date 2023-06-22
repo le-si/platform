@@ -42,7 +42,10 @@ export function TopBar() {
         >
           Sandbox
         </Link>
-        <Link to="/docs/getting-started" className="text-sm font-semibold">
+        <Link
+          to="/docs/getting-started"
+          className="text-sm font-semibold hover:text-indigo-500"
+        >
           Documentation
         </Link>
         <h1
