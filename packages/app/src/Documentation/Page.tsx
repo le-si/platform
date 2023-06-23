@@ -6,12 +6,13 @@ function DocButton({
   name,
   route,
   children,
-  indent = 0
-}: Documentation.Group & { indent?: number }) {
+  indent = 0,
+  className
+}: Styleable & Partial<Documentation.Group> & { indent?: number }) {
   const location = useLocation();
 
   const active = location.pathname === route;
-  const softActive = location.pathname.startsWith(route);
+  const softActive = location.pathname.startsWith(route ?? "");
 
   return (
     <div
@@ -19,11 +20,12 @@ function DocButton({
         indent === 0
           ? "border-b border-zinc-300 last:border-b-0"
           : "first:pt-1 last:pb-1",
-        children && softActive && "pb-1"
+        children && softActive && "pb-1",
+        className
       )}
     >
       <Link
-        to={route}
+        to={route ?? "/docs"}
         className={classes(
           "block w-full",
           indent === 0 ? "p-3" : "p-1",
@@ -54,6 +56,8 @@ export function Page() {
     }
   }, [location.pathname]);
 
+  const isAPIReference = location.pathname === "/docs/api-reference";
+
   return (
     <div className="relative flex w-full gap-5 px-5">
       <div
@@ -67,9 +71,20 @@ export function Page() {
             <DocButton key={route.name} {...route} />
           ))}
         </div>
+        <div
+          id="redoc-sidebar-container"
+          className="bg-brand-amber-1 flex w-full flex-col overflow-hidden rounded-xl"
+        >
+          <DocButton name="API Reference" route="/docs/api-reference" />
+        </div>
       </div>
       <div className="w-[20rem] shrink-0" />
-      <div className="mx-auto flex w-full max-w-[80rem] justify-center overflow-hidden">
+      <div
+        className={classes(
+          !isAPIReference &&
+            "mx-auto flex w-full max-w-[80rem] justify-center overflow-hidden"
+        )}
+      >
         <div className="flex w-full flex-col gap-6">
           <Outlet />
           {/* <div className="flex w-full justify-between gap-7"></div> */}

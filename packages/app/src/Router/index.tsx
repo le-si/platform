@@ -44,7 +44,13 @@ export function Router() {
           <DocumentationPage />
         </Page>
       ),
-      children: Documentation.useRoutes()
+      children: [
+        ...Documentation.useRoutes(),
+        {
+          path: "/docs/api-reference",
+          element: <REST.Page />
+        }
+      ]
     },
     {
       path: "/sandbox/text-to-image",
@@ -102,10 +108,6 @@ export function Router() {
     {
       path: "/faq",
       element: <Markdown.Page>{Markdown.Pages.FAQ}</Markdown.Page>
-    },
-    {
-      path: REST.Page.url(),
-      element: <REST.Page />,
     },
     {
       path: "/account",

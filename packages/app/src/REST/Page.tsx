@@ -6,15 +6,15 @@ import { RedocContainer } from "./Redoc";
 export function Page() {
   const { data, isError } = REST.useOpenAPISpec();
 
-  return (
-    <App.Page className="">
-      {isError ? <FailedToLoadDocumentation /> : <RedocContainer spec={data} />}
-    </App.Page>
+  return isError ? (
+    <FailedToLoadDocumentation />
+  ) : (
+    <RedocContainer spec={data} />
   );
 }
 
 export namespace Page {
-  export const url = () => "/rest-api" as const;
+  export const url = () => "/docs/api-reference" as const;
 }
 
 // TODO: Make the "Contact Support" button actually do something.
