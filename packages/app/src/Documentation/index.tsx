@@ -140,8 +140,10 @@ export namespace Documentation {
         documentation.flatMap((group) => {
           const element =
             typeof group.content === "string" ? (
-              <div className="mx-auto w-full max-w-[80rem] text-left">
-                <Markdown>{group.content}</Markdown>
+              <div className="mx-auto w-full max-w-full text-left">
+                <Markdown className="w-full max-w-full 2xl:max-w-full">
+                  {group.content}
+                </Markdown>
               </div>
             ) : (
               group.content

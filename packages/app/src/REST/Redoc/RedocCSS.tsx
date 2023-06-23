@@ -17,9 +17,9 @@ export const RedocCSS = css({
 
   ".api-content > div > div > div + div": {
     borderRadius: "16px !important",
-    paddingTop: "2rem !important",
-    paddingBottom: "2rem !important",
-    height: "fit-content !important"
+    padding: "2rem !important",
+    height: "fit-content !important",
+    backgroundColor: "#3f3f46 !important"
     // maxWidth: "600px !important"
   },
 

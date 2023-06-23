@@ -7,7 +7,7 @@ export function Page({ children }: { children: string }) {
 
   return (
     <App.Page>
-      <div className="mx-auto max-w-[70rem]">
+      <div className="mx-auto max-w-[120rem]">
         <Markdown>{children}</Markdown>
       </div>
     </App.Page>

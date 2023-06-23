@@ -2,7 +2,7 @@ import * as React from "react";
 import { default as ReactMarkdown } from "react-markdown";
 import {
   default as syntaxHighlighting,
-  Options as SyntaxHighlightingOptions,
+  Options as SyntaxHighlightingOptions
 } from "rehype-highlight";
 import { remarkHeadingId as customIDForHeadingsPlugin } from "remark-custom-heading-id";
 import { default as gitHubMarkdownSupport } from "remark-gfm";
@@ -19,7 +19,7 @@ import * as Pages from "./Pages";
 
 export function Markdown({
   className,
-  children,
+  children
 }: {
   className?: string;
   children: string;
@@ -29,15 +29,15 @@ export function Markdown({
       remarkPlugins={[
         gitHubMarkdownSupport,
         customIDForHeadingsPlugin,
-        tableOfContentsSupport,
+        tableOfContentsSupport
       ]}
       rehypePlugins={[
         // autoGenerateHeaderIDs,
         AutoHeaderLinker.plugin(),
         [
           syntaxHighlighting,
-          { ignoreMissing: true } as SyntaxHighlightingOptions,
-        ],
+          { ignoreMissing: true } as SyntaxHighlightingOptions
+        ]
       ]}
       components={{
         code: Overrides.Code,
@@ -49,7 +49,7 @@ export function Markdown({
         tbody: Overrides.Table.TBody,
         th: Overrides.Table.Th,
         td: Overrides.Table.Td,
-        tr: Overrides.Table.Tr,
+        tr: Overrides.Table.Tr
       }}
       className={classes(
         "markdown-root",
@@ -82,7 +82,7 @@ export namespace Markdown {
       marginBottom: 3,
 
       // boxShadow: 5,
-      borderRadius: 1,
+      borderRadius: 1
     };
   }
 }
