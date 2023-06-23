@@ -32,7 +32,7 @@ export function RedocContainer({ spec }: { spec?: object | undefined }) {
           sortEnumValuesAlphabetically: true,
           sortTagsAlphabetically: false,
           nativeScrollbars: false,
-          scrollYOffset: remToPx(topBarHeight()),
+          scrollYOffset: remToPx(topBarHeight())
         }}
         onLoaded={handleDeepLink}
       >
@@ -48,7 +48,7 @@ export function RedocContainer({ spec }: { spec?: object | undefined }) {
               </Redoc.StoreProvider>
             </Redoc.ThemeProvider>
           ) : (
-            <div className="flex h-screen translate-y-[-100px] items-center justify-center">
+            <div className="flex h-full w-full items-center justify-center">
               <Theme.Icon.Spinner className="h-6 w-6 text-black" />
             </div>
           )

@@ -81,8 +81,7 @@ export function Page() {
       <div className="w-[20rem] shrink-0" />
       <div
         className={classes(
-          !isAPIReference &&
-            "mx-auto flex w-full max-w-[80rem] justify-center overflow-hidden"
+          "mx-auto flex w-full max-w-[80rem] justify-center overflow-hidden"
         )}
       >
         <div className="flex w-full flex-col gap-6">

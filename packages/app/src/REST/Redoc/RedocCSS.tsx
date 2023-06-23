@@ -19,8 +19,8 @@ export const RedocCSS = css({
     borderRadius: "16px !important",
     paddingTop: "2rem !important",
     paddingBottom: "2rem !important",
-    height: "fit-content !important",
-    maxWidth: "600px !important"
+    height: "fit-content !important"
+    // maxWidth: "600px !important"
   },
 
   ".react-tabs__tab-panel": {
