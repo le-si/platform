@@ -5,6 +5,17 @@ export type RedocTheme = PartialDeep<Redoc.ResolvedThemeInterface>;
 
 export function useRedocTheme(): RedocTheme {
   return {
+    sidebar: {
+      backgroundColor: "#f6f6ef",
+    },
+    typography: {
+      fontFamily: "Inter, sans-serif",
+      fontSize: "15px",
+      headings: {
+        fontFamily: "Inter, sans-serif",
+      },
+      smoothing: "antialiased",
+    }
     //   spacing: {
     //     sectionVertical: 40,
     //     sectionHorizontal: isTinyDevice ? 16 : 40,

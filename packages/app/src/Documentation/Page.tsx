@@ -1,5 +1,6 @@
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { topBarHeight } from "~/App/TopBar";
+import { Theme } from "~/Theme";
 import { Documentation } from ".";
 
 function DocButton({
@@ -7,33 +8,43 @@ function DocButton({
   route,
   children,
   indent = 0,
-  className
-}: Styleable & Partial<Documentation.Group> & { indent?: number }) {
+  className,
+  activeOverride,
+  softActiveOverride
+}: Styleable &
+  Partial<Documentation.Group> & {
+    indent?: number;
+    activeOverride?: boolean;
+    softActiveOverride?: boolean;
+  }) {
   const location = useLocation();
 
-  const active = location.pathname === route;
-  const softActive = location.pathname.startsWith(route ?? "");
+  const active = activeOverride ?? location.pathname === route;
+  const softActive =
+    softActiveOverride ?? location.pathname.startsWith(route ?? "");
 
   return (
-    <div
-      className={classes(
-        indent === 0
-          ? "border-b border-zinc-300 last:border-b-0"
-          : "first:pt-1 last:pb-1",
-        children && softActive && "pb-1",
-        className
-      )}
-    >
+    <div>
       <Link
         to={route ?? "/docs"}
         className={classes(
-          "block w-full",
-          indent === 0 ? "p-3" : "p-1",
-          active ? "bg-indigo-500 text-white" : "hover:bg-indigo-200"
+          "flex w-full items-center justify-between px-5 py-3.5 text-[14px]",
+          indent === 0
+            ? "hover:bg-[#e4e4ce] active:bg-[#e4e4ce]"
+            : "hover:bg-[#ededdf] active:bg-[#ededdf]",
+          (active || softActive) && "active",
+          className
         )}
-        style={indent > 0 ? { paddingLeft: `${indent * 1.5}rem` } : undefined}
       >
         {name}
+        {children && (
+          <Theme.Icon.ChevronRight
+            className={classes(
+              "h-[1.5em] w-[1.5em] -rotate-90 duration-200 ease-out",
+              softActive && "rotate-0 transform"
+            )}
+          />
+        )}
       </Link>
       {children && softActive && (
         <div>
@@ -56,8 +67,6 @@ export function Page() {
     }
   }, [location.pathname]);
 
-  const isAPIReference = location.pathname === "/docs/api-reference";
-
   return (
     <div className="relative flex w-full gap-5 px-5">
       <div
@@ -75,7 +84,12 @@ export function Page() {
           id="redoc-sidebar-container"
           className="bg-brand-amber-1 flex w-full flex-col overflow-hidden rounded-xl"
         >
-          <DocButton name="API Reference" route="/docs/api-reference" />
+          <DocButton
+            name="API Reference"
+            route="/docs/api-reference"
+            children={[]}
+            activeOverride={location.hash.length > 0}
+          />
         </div>
       </div>
       <div className="w-[20rem] shrink-0" />

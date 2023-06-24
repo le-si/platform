@@ -19,6 +19,7 @@ import { Upload } from "./Upload";
 import { X } from "./X";
 import { Python } from "./Python";
 import { TypeScript } from "./TypeScript";
+import { ChevronRight } from "./ChevronRight";
 
 export type Icon = Styleable & {
   color?: CSSValue;
@@ -47,7 +48,8 @@ export declare namespace Icon {
     Upload,
     X,
     Python,
-    TypeScript
+    TypeScript,
+    ChevronRight
   };
 }
 
@@ -73,4 +75,5 @@ export namespace Icon {
   Icon.X = X;
   Icon.Python = Python;
   Icon.TypeScript = TypeScript;
+  Icon.ChevronRight = ChevronRight;
 }
