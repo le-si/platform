@@ -12,8 +12,8 @@ export function NavButton({
     <Link
       to={url}
       className={classes(
-        "border-b border-zinc-300 p-3 last:border-b-0",
-        active ? "bg-indigo-500 text-white" : "duration-100 hover:bg-indigo-200"
+        "px-5 py-3.5 text-[14px] hover:bg-[#e4e4ce] active:bg-[#e4e4ce]",
+        active && "active"
       )}
     >
       {children}
