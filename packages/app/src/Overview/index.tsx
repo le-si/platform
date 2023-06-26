@@ -92,7 +92,7 @@ function Header() {
 function DocumentCard({
   title,
   svg,
-  links
+  links,
 }: {
   title: string;
   svg: string;
@@ -139,7 +139,7 @@ function Documentation() {
             links={[
               { title: "Introduction", url: "/docs/text-to-image" },
               { title: "REST API", url: "/docs/text-to-image" },
-              { title: "gRPC API", url: "/docs/text-to-image" }
+              { title: "gRPC API", url: "/docs/text-to-image" },
             ]}
           />
           <DocumentCard
@@ -150,8 +150,8 @@ function Documentation() {
               {
                 title: "Chat UI",
                 url: "https://research.stability.ai/chat",
-                newWindow: true
-              }
+                newWindow: true,
+              },
             ]}
           />
           <DocumentCard
@@ -159,7 +159,7 @@ function Documentation() {
             svg="/svg/animation-doc.webp"
             links={[
               { title: "Introduction", url: "/docs/text-to-video" },
-              { title: "gRPC API", url: "/docs/text-to-video" }
+              { title: "gRPC API", url: "/docs/text-to-video" },
             ]}
           />
           <DocumentCard
@@ -167,7 +167,7 @@ function Documentation() {
             svg="/svg/integration-doc.webp"
             links={[
               { title: "Photoshop", url: "/docs/text-to-image" },
-              { title: "Blender", url: "/docs/text-to-image" }
+              { title: "Blender", url: "/docs/text-to-image" },
             ]}
           />
         </div>
@@ -180,7 +180,7 @@ function SandboxCard({
   title,
   svg,
   link,
-  soon
+  soon,
 }: {
   title: string;
   svg: string;
@@ -284,7 +284,7 @@ function OtherCard({
   title,
   svg,
   link,
-  linkName
+  linkName,
 }: {
   title: string;
   svg: string;
@@ -292,27 +292,23 @@ function OtherCard({
   linkName?: string;
 }) {
   return (
-    <a href={link} className="group flex flex-col gap-3">
+    <Link to={link} className="group flex flex-col gap-3">
       <h1 className="text-3xl font-extralight">{title}</h1>
       <img src={svg} />
-      <a
-        href={link}
+      <Link
+        to={link}
         className="flex items-center gap-2 text-sm font-semibold text-indigo-500 duration-100 group-hover:text-indigo-400"
       >
         {linkName ?? "Learn More"} <Theme.Icon.Arrow />
-      </a>
-    </a>
+      </Link>
+    </Link>
   );
 }
 
 function Others() {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      <OtherCard
-        title="Pricing"
-        svg="/svg/pricing.webp"
-        link="https://stability.ai/pricing"
-      />
+      <OtherCard title="Pricing" svg="/svg/pricing.webp" link="/pricing" />
       <OtherCard
         title="Support"
         svg="/svg/support.webp"
