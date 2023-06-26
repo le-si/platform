@@ -2,4 +2,4 @@
 . "$(dirname -- "$0")/_/husky.sh"
 . "$(dirname "$0")/common.sh"
 
-yarn workspaces foreach --all --interlaced --verbose --parallel --jobs unlimited run lint-staged
+yarn workspaces foreach --all --interlaced --parallel --jobs unlimited run lint-staged
