@@ -2,10 +2,6 @@ import * as Stability from "@stability/sdk";
 import { CustomError } from "ts-custom-error";
 import { User } from "~/User";
 
-// export declare namespace GRPC {
-//   export {  } from "@stability/sdk";
-// }
-
 export namespace GRPC {
   export const CreateChargeRequest = Stability.GRPC.CreateChargeRequest;
   export const GetChargesRequest = Stability.GRPC.GetChargesRequest;
