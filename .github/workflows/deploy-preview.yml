@@ -20,7 +20,7 @@ jobs:
           cache: "yarn"
           cache-dependency-path: yarn.lock
       - name: Install and Build
-        run: yarn install --immutable
+        run: yarn install --immutable && yarn build
       - name: Extract Branch Name and Commit Hash
         shell: bash
         run: |

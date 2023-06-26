@@ -6,7 +6,6 @@
     "packages/*"
   ],
   "scripts": {
-    "postinstall": "is-ci && yarn build",
     "prepare": "is-ci || husky install",
     "app": "yarn workspace @stability/app",
     "sdk": "yarn workspace @stability/sdk",
