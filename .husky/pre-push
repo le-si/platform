@@ -10,3 +10,5 @@ yarn app build:types
 
 # Run the lint-staged job in the root package.json
 yarn lint-staged
+
+exit 1
