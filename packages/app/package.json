@@ -15,7 +15,8 @@
     "storybook:build": "storybook build",
     "dev:types": "tsc --noEmit --watch",
     "dev": "vite --port 3000",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "pre-push": "lint-staged"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.1.0",
