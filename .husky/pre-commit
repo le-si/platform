@@ -2,4 +2,9 @@
 . "$(dirname -- "$0")/_/husky.sh"
 . "$(dirname "$0")/common.sh"
 
-yarn workspaces foreach --all --interlaced --parallel --jobs unlimited run lint-staged
+# Ensure the entire project still compiles
+blue=$(tput setaf 4)
+normal=$(tput sgr0)
+printf "%b" "${blue}Formatting staged files... ${normal}"
+
+yarn lint-staged
