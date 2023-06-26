@@ -7,10 +7,10 @@ blue=$(tput setaf 4)
 yellow=$(tput setaf 3)
 green=$(tput setaf 2)
 normal=$(tput sgr0)
-printf "%b" "${blue}Type checking${normal}${yellow} app${normal}..."
+printf "%b" "${yellow}[app] ${blue}Type checking${normal}..."
 yarn app build:types
 printf "%b" "${green}Success${normal}\n"
 
-printf "%b" "${blue}Type checking${normal}${yellow} sdk${normal}..."
+printf "%b" "${yellow}[sdk] ${blue}Type checking${normal}..."
 yarn sdk build:types
 printf "%b" "${green}Success${normal}\n"
