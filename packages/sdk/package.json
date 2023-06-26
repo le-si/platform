@@ -41,5 +41,11 @@
     "tsc-alias": "^1.8.6",
     "tsx": "^3.12.7",
     "typescript": "5.0.4"
+  },
+  "lint-staged": {
+    "./packages/**/*.{ts,tsx,js,jsx,md}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   }
 }
