@@ -1,13 +1,10 @@
 import * as React from "react";
 import { default as ReactMarkdown } from "react-markdown";
-import {
-  default as syntaxHighlighting,
-  Options as SyntaxHighlightingOptions,
-} from "rehype-highlight";
-import { remarkHeadingId as customIDForHeadingsPlugin } from "remark-custom-heading-id";
-import { default as gitHubMarkdownSupport } from "remark-gfm";
-
-import tableOfContentsSupport from "remark-toc";
+import { default as supportForCodeHighlighting } from "rehype-highlight";
+import { default as supportForAutomaticHeaderIDs } from "rehype-slug";
+import { remarkHeadingId as supportForCustomHeaderIDs } from "remark-custom-heading-id";
+import { default as supportForGithubMarkdown } from "remark-gfm";
+import { default as supportForAutomaticTableOfContents } from "remark-toc";
 
 import { AutoHeaderLinker } from "./AutoHeaderLinker";
 
@@ -25,17 +22,14 @@ export function Markdown({
   return (
     <ReactMarkdown
       remarkPlugins={[
-        gitHubMarkdownSupport,
-        customIDForHeadingsPlugin,
-        tableOfContentsSupport,
+        supportForGithubMarkdown,
+        supportForCustomHeaderIDs,
+        supportForAutomaticTableOfContents,
       ]}
       rehypePlugins={[
-        // autoGenerateHeaderIDs,
+        supportForAutomaticHeaderIDs,
+        supportForCodeHighlighting,
         AutoHeaderLinker.plugin(),
-        [
-          syntaxHighlighting,
-          { ignoreMissing: true } as SyntaxHighlightingOptions,
-        ],
       ]}
       components={{
         code: Overrides.Code,
@@ -51,7 +45,7 @@ export function Markdown({
       }}
       className={classes(
         "markdown-root",
-        "prose dark:prose-invert mx-auto my-8 px-5 2xl:max-w-[93rem] 2xl:px-0",
+        "prose dark:prose-invert mx-auto my-8 px-5 2xl:max-w-[93rem]",
         className
       )}
     >

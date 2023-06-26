@@ -96,7 +96,7 @@ export function Page() {
       <div className="w-[20rem] shrink-0" />
       <div
         className={classes(
-          "mx-auto flex w-full max-w-[100rem] justify-center overflow-hidden"
+          "mx-auto flex w-full max-w-[100rem] justify-center overflow-x-visible"
         )}
       >
         <div className="flex w-full flex-col gap-6">

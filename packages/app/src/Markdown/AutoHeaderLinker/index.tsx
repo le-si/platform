@@ -15,7 +15,7 @@ export namespace AutoHeaderLinker {
     return {
       behavior: "prepend",
       properties: {
-        // NOTE: this must match the class name in `automatic-header-slugs.scss`
+        // NOTE: this must match the class name in `auto-header-linker.scss`
         class: "auto-header-link",
         ariaHidden: true,
         tabIndex: -1,
