@@ -58,7 +58,7 @@ function Header() {
   return (
     <div className="mt-24 flex w-full flex-col items-center gap-2">
       <img src="/svg/sai-header.svg" />
-      <h2 className="mt-4 text-lg font-light">Stability AI platform</h2>
+      <h2 className="mt-4 text-lg font-light">Stability AI Platform</h2>
       <h1 className="text-center text-5xl font-extralight">
         Explore the possibilities of generative AI
       </h1>
