@@ -7,4 +7,4 @@ blue=$(tput setaf 4)
 normal=$(tput sgr0)
 printf "%b" "${blue}Formatting staged files... ${normal}"
 
-yarn lint-staged
+yarn app lint-staged
