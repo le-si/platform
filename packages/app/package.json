@@ -15,7 +15,7 @@
     "storybook:build": "storybook build",
     "dev:types": "tsc --noEmit --watch",
     "dev": "vite --port 3000",
-    "prepare": "is-ci || cd ../.. && husky install ./app/.husky"
+    "prepare": "is-ci || cd ../.. && husky install ./packages/app/.husky"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.1.0",
@@ -75,6 +75,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
+    "lint-staged": "^13.2.2",
     "postcss": "^8.4.24",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",

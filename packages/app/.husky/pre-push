@@ -2,6 +2,8 @@
 . "$(dirname -- "$0")/_/husky.sh"
 . "$(dirname "$0")/common.sh"
 
+cd ./packages/app
+
 # Ensure the entire project still compiles
 blue=$(tput setaf 4)
 normal=$(tput sgr0)
