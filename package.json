@@ -25,5 +25,11 @@
   },
   "resolutions": {
     "eslint-plugin-react-hooks@^4.6.0": "patch:eslint-plugin-react-hooks@^4.6.0#.yarn/patches/eslint-plugin-react-hooks-npm-4.6.0-b429fac07f.patch"
+  },
+  "lint-staged": {
+    "./packages/**/*.{ts,tsx,js,jsx,md}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   }
 }
