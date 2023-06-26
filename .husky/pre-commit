@@ -7,7 +7,7 @@ blue=$(tput setaf 4)
 yellow=$(tput setaf 3)
 green=$(tput setaf 2)
 normal=$(tput sgr0)
-printf "%b" "${blue}Linting & formatting${normal}${yellow} app${normal}..."
+printf "%b" "${yellow}[app]${blue}Linting staged files${normal}..."
 yarn app lint-staged -q
 printf "%b" "${green}Success${normal}\n"
 
