@@ -4,7 +4,13 @@
 
 # Ensure the entire project still compiles
 blue=$(tput setaf 4)
+yellow=$(tput setaf 3)
+green=$(tput setaf 2)
 normal=$(tput sgr0)
-printf "%b" "${blue}Type checking... ${normal}"
+printf "%b" "${blue}Type checking${normal}${yellow} app${normal}..."
+yarn app build:types
+printf "%b" "${green}Success${normal}\n"
 
-npx eslint --no-error-on-unmatched-pattern "$(git diff --name-only origin/"$(git branch --show-current)".."$(git rev-parse --abbrev-ref)" HEAD)"
+printf "%b" "${blue}Type checking${normal}${yellow} sdk${normal}..."
+yarn sdk build:types
+printf "%b" "${green}Success${normal}\n"

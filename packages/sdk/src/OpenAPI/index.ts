@@ -23,8 +23,7 @@ export type TextToImageRequestHeaders =
   TextToImageRequest["parameters"]["header"];
 export type ImageToImageRequestHeaders =
   ImageToImageRequest["parameters"]["header"];
-export type UpscaleRequestHeaders =
-  ImageToImageRequest["parameters"]["header"];
+export type UpscaleRequestHeaders = ImageToImageRequest["parameters"]["header"];
 
 export type TextToImageRequestBody =
   TextToImageRequest["requestBody"]["content"]["application/json"];
@@ -34,11 +33,14 @@ export type UpscaleRequestBody =
   ImageToImageRequest["requestBody"]["content"]["multipart/form-data"];
 
 export type TextToImageResponseBody =
-TextToImageRequest["responses"][200]["content"]["image/png"]| TextToImageRequest["responses"][200]["content"]["application/json"];
+  | TextToImageRequest["responses"][200]["content"]["image/png"]
+  | TextToImageRequest["responses"][200]["content"]["application/json"];
 export type ImageToImageResponseBody =
-  ImageToImageRequest["responses"][200]["content"]["image/png"] | ImageToImageRequest["responses"][200]["content"]["application/json"];
+  | ImageToImageRequest["responses"][200]["content"]["image/png"]
+  | ImageToImageRequest["responses"][200]["content"]["application/json"];
 export type UpscaleResponseBody =
-  ImageToImageRequest["responses"][200]["content"]["image/png"] | ImageToImageRequest["responses"][200]["content"]["application/json"];
+  | ImageToImageRequest["responses"][200]["content"]["image/png"]
+  | ImageToImageRequest["responses"][200]["content"]["application/json"];
 
 type UserAccountRequest = Paths["/user/account"]["get"];
 

@@ -4,7 +4,13 @@
 
 # Ensure the entire project still compiles
 blue=$(tput setaf 4)
+yellow=$(tput setaf 3)
+green=$(tput setaf 2)
 normal=$(tput sgr0)
-printf "%b" "${blue}Formatting staged files... ${normal}"
+printf "%b" "${blue}Linting & formatting${normal}${yellow} app${normal}..."
+yarn app lint-staged -q
+printf "%b" "${green}Success${normal}\n"
 
-yarn app lint-staged
+printf "%b" "${blue}Linting & formatting${normal}${yellow} sdk${normal}..."
+yarn sdk lint-staged -q
+printf "%b" "${green}Success${normal}\n"
