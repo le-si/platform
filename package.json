@@ -7,12 +7,12 @@
   ],
   "scripts": {
     "postinstall": "is-ci || yarn build",
+    "prepare": "is-ci || husky install",
     "app": "yarn workspace @stability/app",
     "sdk": "yarn workspace @stability/sdk",
     "dev": "yarn workspaces foreach --all --interlaced --verbose --parallel --jobs unlimited run dev",
     "build": "yarn workspaces foreach --all --interlaced --verbose --topological --jobs unlimited run build",
-    "clean": "yarn workspaces foreach --all --interlaced --verbose --parallel --jobs unlimited run clean && rimraf node_modules",
-    "prepare": "is-ci || husky install"
+    "clean": "yarn workspaces foreach --all --interlaced --verbose --parallel --jobs unlimited run clean && rimraf node_modules"
   },
   "devDependencies": {
     "@types/is-ci": "^3",
