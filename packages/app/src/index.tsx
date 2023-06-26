@@ -8,6 +8,8 @@ import { App } from "~/App";
 
 import "./index.css";
 
+export const isDevelopment = process.env.NODE_ENV === "development";
+
 const main = async () => {
   const root = document.getElementById("app");
   root &&
