@@ -23,3 +23,6 @@ body {
     animation: blink 0.4s infinite alternate;
 }
 
+.scrollbar-container > div > a {
+    display: none !important;
+}

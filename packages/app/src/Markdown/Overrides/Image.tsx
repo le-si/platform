@@ -7,14 +7,13 @@ export const Image = ({
   ...props
 }: JSX.IntrinsicElements["img"] & ReactMarkdownProps) => (
   <span
-    style={{
-      ...Markdown.presetFloatingBlock(),
-
-      "& > img": {
-        maxWidth: "100%",
-        display: "block",
-      },
-    }}
+    style={Markdown.presetFloatingBlock()}
+    css={css`
+      & > img {
+        max-width: 100%;
+        display: block;
+      }
+    `}
   >
     <img {...props} />
   </span>

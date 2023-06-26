@@ -1,0 +1,26 @@
+.markdown-root > h1,h2,h3,h4,h5,h6 {
+  @apply relative;
+
+  &:hover, &:focus {
+    & > .auto-header-link > svg {
+      @apply visible;
+    }
+  }
+
+  & .auto-header-link {
+    @apply w-fit absolute left-[-18px] sm:left-[-24px] top-1/2 transform -translate-y-1/2;
+    @apply pr-2;
+
+    & > svg {
+        @apply w-4 h-4 sm:w-5 sm:h-5 invisible;
+    }
+
+    &:hover > svg {
+        @apply visible;
+    }
+
+    &:visited {
+      color: unset;
+    }
+  }
+}

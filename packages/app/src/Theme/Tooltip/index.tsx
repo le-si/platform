@@ -1,22 +1,15 @@
 import { AnimatePresence, motion } from "framer-motion";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { createPortal } from "react-dom";
-import { useClickAway } from "react-use";
 
-export function Tooltip({
-  children,
-  contentClasses,
-  content,
-  placement = "top",
-  delay = 0,
-  distance = 8,
-  allowOpen = true,
-  forceOpen = false,
-  showArrow = true,
-  enablePointerEvents = false,
-  className,
-  onChange,
-  openMechanism = "hover",
-}: StyleableWithChildren & {
+type Props = StyleableWithChildren<{
   content: React.ReactNode;
   contentClasses?: string;
   placement?: "top" | "bottom" | "left" | "right";
@@ -28,7 +21,23 @@ export function Tooltip({
   enablePointerEvents?: boolean;
   onChange?: (open: boolean) => void;
   openMechanism?: "click" | "hover";
-}) {
+}>;
+
+export function Tooltip({
+  children,
+  contentClasses,
+  content,
+  placement = "top",
+  delay = 800,
+  distance = 8,
+  allowOpen = true,
+  forceOpen = false,
+  showArrow = true,
+  enablePointerEvents = false,
+  className,
+  onChange,
+  openMechanism = "hover",
+}: Props) {
   const [show, setShow] = useState(false);
   const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
   const [leaveTimer, setLeaveTimer] = useState<NodeJS.Timeout | null>(null);
@@ -40,52 +49,57 @@ export function Tooltip({
   const containerRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
-    if (!containerRef.current || !(show || forceOpen)) return;
+  const updatePosition = useCallback(() => {
+    if (!containerRef.current) return;
 
     const rect = containerRef.current.getBoundingClientRect();
 
     switch (placement) {
       case "top":
         setPosition({
-          top: rect.top - distance,
-          left: rect.left + rect.width / 2,
+          top: rect.top + window.scrollY - distance,
+          left: rect.left + window.screenX + rect.width / 2,
         });
         break;
       case "bottom":
         setPosition({
-          top: rect.top + rect.height + distance,
-          left: rect.left + rect.width / 2,
+          top: rect.top + window.scrollY + rect.height + distance,
+          left: rect.left + window.screenX + rect.width / 2,
         });
         break;
       case "left":
         setPosition({
-          top: rect.top + rect.height / 2,
-          left: rect.left - distance,
+          top: rect.top + window.scrollY + rect.height / 2,
+          left: rect.left + window.screenX - distance,
         });
         break;
       case "right":
         setPosition({
-          top: rect.top + rect.height / 2,
-          left: rect.left + rect.width + distance,
+          top: rect.top + window.scrollY + rect.height / 2,
+          left: rect.left + window.screenX + rect.width + distance,
         });
         break;
     }
-  }, [placement, distance, show, content, forceOpen]);
+  }, [placement, distance]);
+
+  useLayoutEffect(() => {
+    if (!containerRef.current || !(show || forceOpen)) return;
+
+    updatePosition();
+  }, [placement, distance, show, content, forceOpen, updatePosition]);
 
   const onMouseEnter = useCallback(() => {
     if (openMechanism !== "hover") return;
-
     if (timer) clearTimeout(timer);
 
-    if (delay)
-      setTimer(
-        setTimeout(() => {
-          setShow(true);
-        }, delay)
-      );
-    else setShow(true);
-  }, [openMechanism, timer, delay]);
+    updatePosition();
+
+    if (delay) {
+      setTimer(setTimeout(() => setShow(true), delay));
+    } else {
+      setShow(true);
+    }
+  }, [openMechanism, timer, updatePosition, delay]);
 
   const onMouseLeave = useCallback(() => {
     if (openMechanism !== "hover") return;
@@ -93,31 +107,39 @@ export function Tooltip({
 
     if (enablePointerEvents) {
       if (leaveTimer) clearTimeout(leaveTimer);
-
-      setLeaveTimer(
-        setTimeout(() => {
-          setShow(false);
-        }, 200)
-      );
+      setLeaveTimer(setTimeout(() => setShow(false), 200));
     } else {
       setShow(false);
     }
   }, [enablePointerEvents, leaveTimer, openMechanism, timer]);
 
   const onClick = useCallback(
-    (e: any) => {
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       if (openMechanism !== "click") return;
+
+      updatePosition();
 
       e.stopPropagation();
       setShow(true);
     },
-    [openMechanism]
+    [openMechanism, updatePosition]
   );
 
-  useClickAway(tooltipRef, () => {
-    if (openMechanism !== "click") return;
-    setShow(false);
-  });
+  // Update the position when the window is scrolled
+  useEffect(() => {
+    if (!show && !forceOpen) return;
+
+    const handleScroll = () => {
+      if (!show && !forceOpen) return;
+      updatePosition();
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [show, forceOpen, updatePosition]);
 
   const portal = useMemo(() => document.getElementById("tooltip-root"), []);
 
@@ -125,11 +147,11 @@ export function Tooltip({
     if (onChange) onChange((show || forceOpen) && allowOpen);
   }, [show, onChange, forceOpen, allowOpen]);
 
-  if (!portal) return null;
+  if (!portal) return <>{children}</> ?? null;
 
   const tooltip = createPortal(
     <AnimatePresence>
-      {(show || forceOpen) && allowOpen && (
+      {((show && !isMobileDevice()) || forceOpen) && allowOpen && (
         <>
           {showArrow && (
             <motion.div
@@ -186,9 +208,9 @@ export function Tooltip({
               type: "tween",
               duration: 0.05,
             }}
-            // css={css`
-            //   filter: drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.5));
-            // `}
+            css={css`
+              filter: drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.5));
+            `}
             onMouseEnter={() => {
               if (timer) clearTimeout(timer);
               if (leaveTimer) clearTimeout(leaveTimer);
@@ -214,4 +236,8 @@ export function Tooltip({
       {tooltip}
     </div>
   );
+}
+
+function isMobileDevice() {
+  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 }
