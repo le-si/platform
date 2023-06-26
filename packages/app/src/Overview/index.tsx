@@ -19,39 +19,39 @@ export function Overview() {
   );
 }
 
-function Button({
-  children,
-  className,
-  link,
-  arrow,
-  onClick,
-  disabled,
-}: StyleableWithChildren & {
-  onClick?: () => void;
-  link?: string;
-  arrow?: boolean;
-  disabled?: boolean;
-}) {
-  const styles = classes(
-    "w-fit rounded-full bg-indigo-500 px-3 py-1 text-sm text-white duration-100 hover:bg-indigo-400 flex gap-2 items-center",
-    disabled && "opacity-50 cursor-not-allowed pointer-events-none",
-    className
-  );
-
-  if (link) {
-    return (
-      <Link to={link} className={styles}>
-        {children} {arrow && <Theme.Icon.Arrow />}
-      </Link>
-    );
-  }
-
-  return (
-    <button onClick={onClick} className={styles}>
-      {children} {arrow && <Theme.Icon.Arrow />}
-    </button>
-  );
-}
+// function Button({
+//   children,
+//   className,
+//   link,
+//   arrow,
+//   onClick,
+//   disabled,
+// }: StyleableWithChildren & {
+//   onClick?: () => void;
+//   link?: string;
+//   arrow?: boolean;
+//   disabled?: boolean;
+// }) {
+//   const styles = classes(
+//     "w-fit rounded-full bg-indigo-500 px-3 py-1 text-sm text-white duration-100 hover:bg-indigo-400 flex gap-2 items-center",
+//     disabled && "opacity-50 cursor-not-allowed pointer-events-none",
+//     className
+//   );
+//
+//   if (link) {
+//     return (
+//       <Link to={link} className={styles}>
+//         {children} {arrow && <Theme.Icon.Arrow />}
+//       </Link>
+//     );
+//   }
+//
+//   return (
+//     <button onClick={onClick} className={styles}>
+//       {children} {arrow && <Theme.Icon.Arrow />}
+//     </button>
+//   );
+// }
 
 function Header() {
   return (
@@ -65,27 +65,27 @@ function Header() {
   );
 }
 
-function GetStarted() {
-  return (
-    <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-      <div className="flex flex-col gap-4">
-        <h2 className="text-2xl font-light">Get Started</h2>
-        <img src="/svg/getstarted-cta.webp" className="select-none" />
-        <p>Learn how to get started with generative AI via our APIs.</p>
-        <Button>Learn More</Button>
-      </div>
-      <div className="flex flex-col gap-4">
-        <h2 className="text-2xl font-light">DreamStudio</h2>
-        <img src="/svg/dreamstudio-cta.webp" className="select-none" />
-        <p>
-          Learn about DreamStudio and StableStudio, Stability AI&apos;s image
-          generation applications.
-        </p>
-        <Button>Learn More</Button>
-      </div>
-    </div>
-  );
-}
+// function GetStarted() {
+//   return (
+//     <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+//       <div className="flex flex-col gap-4">
+//         <h2 className="text-2xl font-light">Get Started</h2>
+//         <img src="/svg/getstarted-cta.webp" className="select-none" />
+//         <p>Learn how to get started with generative AI via our APIs.</p>
+//         <Button>Learn More</Button>
+//       </div>
+//       <div className="flex flex-col gap-4">
+//         <h2 className="text-2xl font-light">DreamStudio</h2>
+//         <img src="/svg/dreamstudio-cta.webp" className="select-none" />
+//         <p>
+//           Learn about DreamStudio and StableStudio, Stability AI&apos;s image
+//           generation applications.
+//         </p>
+//         <Button>Learn More</Button>
+//       </div>
+//     </div>
+//   );
+// }
 
 function DocumentCard({
   title,

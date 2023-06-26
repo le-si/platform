@@ -3,7 +3,7 @@ import { Button, Theme } from "~/Theme";
 export function DeleteAccountModal({
   open,
   onClose,
-  onDelete
+  onDelete,
 }: {
   open: boolean;
   onClose: () => void;

@@ -7,7 +7,7 @@ import { request } from "./OpenAPI";
 import * as Samples from "./Samples";
 
 export type MultiPrompting = {
-  setOptions: (options: any) => void;
+  setOptions: (options: Record<string, unknown>) => void;
 };
 
 export type Prompt = {

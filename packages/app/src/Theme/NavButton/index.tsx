@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export function NavButton({
   children,
   url,
-  active
+  active,
 }: React.PropsWithChildren<{
   url: string;
   active?: boolean;

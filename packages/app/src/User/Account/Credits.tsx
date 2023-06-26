@@ -3,7 +3,8 @@ import React from "react";
 import { Billing } from "~/Billing";
 import { Background, Theme } from "~/Theme";
 import { isNumber } from "~/Utilities";
-import { Payments } from "./Payments";
+
+import { PaymentsTable } from "./PaymentsTable";
 
 export function Credits({ autoFocus }: { autoFocus: boolean }) {
   return (
@@ -15,7 +16,7 @@ export function Credits({ autoFocus }: { autoFocus: boolean }) {
           <BuyCredits autoFocus={autoFocus} />
         </div>
       </Background>
-      <Payments.Table />
+      <PaymentsTable />
     </div>
   );
 }
@@ -47,6 +48,7 @@ const blink = keyframes`
   50% { --tw-ring-opacity: 0 }
 `;
 
+// TODO: Test the blinking animation
 function BuyCredits({ autoFocus }: { autoFocus: boolean | undefined }) {
   const [amount, setAmount] = useState<number>(10);
   const [focused, setFocused] = useState<boolean>(!!autoFocus);
@@ -72,7 +74,9 @@ function BuyCredits({ autoFocus }: { autoFocus: boolean | undefined }) {
         <div className="w-full">
           <div
             className={classes(
-              "flex items-center justify-end overflow-hidden rounded bg-neutral-50 bg-white/20 text-neutral-900 duration-200 dark:bg-neutral-700 dark:text-white dark:placeholder-neutral-400"
+              "flex items-center justify-end overflow-hidden rounded bg-neutral-50 bg-white/20 text-neutral-900 duration-200 dark:bg-neutral-700 dark:text-white dark:placeholder-neutral-400",
+              focused &&
+                "ring-brand-500 ring-[2px] ring-offset-1 dark:ring-offset-zinc-800"
             )}
             css={css`
               animation-name: ${blink};

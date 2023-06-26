@@ -1,8 +1,10 @@
 import * as Auth0 from "@auth0/auth0-react";
 
-import { Callback } from "./Callback";
-import { User } from "..";
 import { Link } from "react-router-dom";
+
+import { User } from "..";
+
+import { Callback } from "./Callback";
 
 export declare namespace Login {
   export { Callback };
@@ -18,8 +20,8 @@ export namespace Login {
         loginWithRedirect({
           appState: { returnTo: window.location.pathname },
           authorizationParams: {
-            audience: import.meta.env.VITE_AUTH0_AUDIENCE
-          }
+            audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+          },
         }),
       [loginWithRedirect]
     );

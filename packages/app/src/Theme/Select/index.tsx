@@ -25,7 +25,7 @@ export function Select({
   placeholder,
   title,
   icon,
-  options
+  options,
 }: Select) {
   const [open, setOpen] = useState(false);
 
@@ -43,7 +43,7 @@ export function Select({
   const selectRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  useClickAway(dropdownRef, (e) => {
+  useClickAway(dropdownRef, () => {
     setOpen(false);
   });
 
@@ -55,7 +55,7 @@ export function Select({
             style={{
               left: selectRef.current?.getBoundingClientRect().left ?? 0,
               top: selectRef.current?.getBoundingClientRect().bottom ?? 0,
-              width: selectRef.current?.getBoundingClientRect().width ?? 0
+              width: selectRef.current?.getBoundingClientRect().width ?? 0,
             }}
             ref={dropdownRef}
           >
@@ -81,7 +81,7 @@ export function Select({
                     // get how far left from the ref the labelRef is
                     paddingLeft:
                       (labelRef.current?.getBoundingClientRect().left ?? 0) -
-                      (ref.current?.getBoundingClientRect().left ?? 0)
+                      (ref.current?.getBoundingClientRect().left ?? 0),
                   }}
                 >
                   <p>{option.label}</p>

@@ -16,7 +16,7 @@ export function Textarea({
   className,
   placeholder,
   title,
-  color
+  color,
 }: Textarea) {
   return (
     <div className="flex flex-col gap-2">

@@ -85,7 +85,7 @@ function SandboxButton({
   title,
   description,
   image,
-  href
+  href,
 }: {
   comingSoon?: boolean;
   title: string;
@@ -101,7 +101,7 @@ function SandboxButton({
         comingSoon ? "cursor-default opacity-50" : "hover:bg-brand-amber-2"
       )}
       {...(comingSoon && {
-        onClick: (event) => event.preventDefault()
+        onClick: (event) => event.preventDefault(),
       })}
     >
       <h1 className="flex justify-between text-2xl">{title}</h1>

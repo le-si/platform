@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { Theme } from "~/Theme";
 import { User } from "~/User";
 
-export { useSnackbar as use, type CustomContentProps } from "notistack";
-
 export function Provider({ children }: React.PropsWithChildren) {
   return (
     <SnackbarProvider

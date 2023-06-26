@@ -1,4 +1,5 @@
 import { OpenAPI } from "@stability/sdk";
+import { toError } from "~/Utilities";
 
 export async function request(
   apiKey: string,
@@ -63,8 +64,8 @@ export async function request(
         body: formData,
       }
     );
-  } catch (error: any) {
-    return [undefined, error];
+  } catch (error: unknown) {
+    return [undefined, toError(error)];
   }
 
   if (!response.ok) {

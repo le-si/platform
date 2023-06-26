@@ -22,7 +22,7 @@ export function Input({
   title,
   icon,
   percentage,
-  number
+  number,
 }: Input) {
   const [focused, setFocused] = useState(false);
   const [width, setWidth] = useState(0);
@@ -47,7 +47,7 @@ export function Input({
       setWidth(tempSpan.getBoundingClientRect().width);
       document.body.removeChild(tempSpan);
     }
-  }, [value]);
+  }, [percentage, value]);
 
   return (
     <div className="flex flex-col gap-1">
@@ -85,7 +85,7 @@ export function Input({
             style={
               percentage
                 ? {
-                    maxWidth: `${width}px`
+                    maxWidth: `${width}px`,
                   }
                 : undefined
             }

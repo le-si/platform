@@ -15,7 +15,7 @@ export function useRedocTheme(): RedocTheme {
         fontFamily: "Inter, sans-serif",
       },
       smoothing: "antialiased",
-    }
+    },
     //   spacing: {
     //     sectionVertical: 40,
     //     sectionHorizontal: isTinyDevice ? 16 : 40,

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useLocation } from "react-router-dom";
-import { topBarHeight } from "~/App/TopBar";
+import { TopBar } from "~/App/TopBar";
 import { remToPx } from "~/Utilities";
 
 export namespace Scroll {
@@ -32,7 +32,7 @@ export namespace Scroll {
 
         window.scrollTo(
           window.scrollX,
-          window.scrollY + rect.top - remToPx(topBarHeight()) - offset
+          window.scrollY + rect.top - remToPx(TopBar.height()) - offset
         );
       }
     } catch (err) {

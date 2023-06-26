@@ -13,11 +13,12 @@ export const RedocContent = MobX.observer(
             // have to use inline CSS since its being portal'd
             css={css`
               & ul {
-                padding-bottom: 0px !important;
+                padding-bottom: 0 !important;
               }
             `}
             menu={store.menu}
           />,
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           document.getElementById("redoc-sidebar-container")!
         )}
         <Redoc.ApiContentWrap className="api-content">

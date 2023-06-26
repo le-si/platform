@@ -10,7 +10,7 @@ export function Page() {
     if (location.pathname === "/account") {
       navigate("/account/overview");
     }
-  }, [location.pathname]);
+  }, [location.pathname, navigate]);
 
   return (
     <div className="mt-6 flex w-full gap-5 px-5">

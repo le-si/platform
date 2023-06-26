@@ -1,40 +1,11 @@
-import { Navigate, Route, RouteObject } from "react-router-dom";
+import { RouteObject } from "react-router-dom";
 import { Markdown } from "~/Markdown";
-import { Theme } from "~/Theme";
 
-import animation from "./Features/Animation.md?raw";
-import animationInstall from "./Features/AnimationInstall.md?raw";
-import animationParameters from "./Features/AnimationParameters.md?raw";
-import animationPricing from "./Features/AnimationPricing.md?raw";
-import animationUsing from "./Features/AnimationUsing.md?raw";
-import apiParameters from "./Features/APIParameters.md?raw";
-import clipGuidance from "./Features/CLIP.md?raw";
-import imageToImagePython from "./Features/ImageToImagePython.md?raw";
-import imageToImageTypeScript from "./Features/ImageToImageTypeScript.md?raw";
-import inpaintingPython from "./Features/InpaintingPython.md?raw";
-import inpaintingTypeScript from "./Features/InpaintingTypeScript.md?raw";
-import multiprompting from "./Features/Multiprompting.md?raw";
-import textToImagePython from "./Features/TextToImagePython.md?raw";
-import textToImageTypeScript from "./Features/TextToImageTypeScript.md?raw";
-import imageUpscalerPython from "./Features/UpscalerPython.md?raw";
-import imageUpscalerTypeScript from "./Features/UpscalerTypeScript.md?raw";
-import variants from "./Features/Variants.md?raw";
 import frequentlyAskedQuestions from "./FrequentlyAskedQuestions.md?raw";
 import authentication from "./GettingStarted/Authentication.md?raw";
 import creditsAndBilling from "./GettingStarted/CreditsAndBilling.md?raw";
 import pythonSDK from "./GettingStarted/PythonSDK.md?raw";
 import typeScriptClient from "./GettingStarted/TypeScriptClient.md?raw";
-import installingBlenderAddon from "./Integrations/InstallingBlenderAddon.md?raw";
-import installingPhotoshop from "./Integrations/InstallingPhotoshop.md?raw";
-import UsingBlenderAddonAnimation from "./Integrations/UsingBlenderAddonAnimation.md?raw";
-import UsingBlenderAddonGettingStarted from "./Integrations/UsingBlenderAddonGettingStarted.md?raw";
-import UsingBlenderAddonImageEditor from "./Integrations/UsingBlenderAddonImageEditor.md?raw";
-import UsingBlenderAddonRenderToImage from "./Integrations/UsingBlenderAddonRenderToImage.md?raw";
-import UsingBlenderUpscaler from "./Integrations/UsingBlenderUpscaler.md?raw";
-import UsingPhotoshopGettingStarted from "./Integrations/UsingPhotoshopGettingStarted.md?raw";
-import UsingPhotoshopImageToImage from "./Integrations/UsingPhotoshopImageToImage.md?raw";
-import UsingPhotoshopTextToImage from "./Integrations/UsingPhotoshopTextToImage.md?raw";
-import UsingPhotoshopUpscaler from "./Integrations/UsingPhotoshopUpscaler.md?raw";
 import releaseNotes from "./ReleaseNotes.md?raw";
 
 export type Documentation = Documentation.Group[];
@@ -80,7 +51,7 @@ export namespace Documentation {
             imageURL: "/PadLock.png",
             summary: "Learn how to create an account and manage your keys.",
 
-            content: authentication
+            content: authentication,
           },
           {
             name: "Credits + Billing",
@@ -89,7 +60,7 @@ export namespace Documentation {
             summary:
               "Learn how to get credits and which settings most affect generation costs.",
 
-            content: creditsAndBilling
+            content: creditsAndBilling,
           },
           {
             name: "Python gRPC SDK",
@@ -97,7 +68,7 @@ export namespace Documentation {
             route: "/docs/getting-started/python-sdk",
             summary: "Learn how to configure and use the Python SDK.",
 
-            content: pythonSDK
+            content: pythonSDK,
           },
           {
             name: "TypeScript gRPC Client",
@@ -105,9 +76,9 @@ export namespace Documentation {
             route: "/docs/getting-started/typescript-client",
             summary: "Learn how to configure and use the TypeScript Client.",
 
-            content: typeScriptClient
-          }
-        ]
+            content: typeScriptClient,
+          },
+        ],
       },
       {
         icon: "question",
@@ -116,7 +87,7 @@ export namespace Documentation {
         imageURL: "/QuestionDog.png",
         summary: "Have a question? We might have an answer.",
 
-        content: frequentlyAskedQuestions
+        content: frequentlyAskedQuestions,
       },
       {
         icon: "broadcast",
@@ -125,8 +96,8 @@ export namespace Documentation {
         imageURL: "/GiftBoxes.png",
         summary:
           "Check out our release notes to stay up to date on the latest Stability API features!",
-        content: releaseNotes
-      }
+        content: releaseNotes,
+      },
     ];
   }
 
@@ -152,9 +123,9 @@ export namespace Documentation {
           return [
             {
               path: group.route,
-              element: element
+              element: element,
             },
-            ...routes(group.children ?? [])
+            ...routes(group.children ?? []),
           ];
         });
 

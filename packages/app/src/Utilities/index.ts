@@ -13,3 +13,7 @@ export function remToPx(remStr: string) {
 
   return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
 }
+
+export function toError(e: unknown) {
+  return e instanceof Error ? e : Error(`${e}`);
+}

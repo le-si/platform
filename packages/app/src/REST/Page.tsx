@@ -1,4 +1,3 @@
-import { App } from "~/App";
 import { REST } from "~/REST";
 
 import { RedocContainer } from "./Redoc";
