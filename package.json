@@ -6,7 +6,7 @@
     "packages/*"
   ],
   "scripts": {
-    "postinstall": "is-ci || yarn build",
+    "postinstall": "husky install ./packages/app/.husky",
     "app": "yarn workspace @stability/app",
     "sdk": "yarn workspace @stability/sdk",
     "dev": "yarn workspaces foreach --all --interlaced --verbose --parallel --jobs unlimited run dev",

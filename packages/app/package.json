@@ -15,8 +15,7 @@
     "storybook:build": "storybook build",
     "dev:types": "tsc --noEmit --watch",
     "dev": "vite --port 3000",
-    "lint-staged": "lint-staged",
-    "pre-push": "lint-staged"
+    "prepare": "is-ci || cd ../.. && husky install ./app/.husky"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.1.0",
