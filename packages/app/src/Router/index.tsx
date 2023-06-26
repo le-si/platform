@@ -4,6 +4,7 @@ import { Documentation } from "~/Documentation";
 import { Page as DocumentationPage } from "~/Documentation/Page";
 import { Markdown } from "~/Markdown";
 import { Overview } from "~/Overview";
+import { Pricing } from "~/Pricing";
 import { REST } from "~/REST";
 
 import { Sandbox } from "~/Sandbox";
@@ -27,7 +28,7 @@ export function Router() {
         <Page>
           <Overview />
         </Page>
-      ),
+      )
     },
     {
       path: "/sandbox",
@@ -35,7 +36,15 @@ export function Router() {
         <Page>
           <List />
         </Page>
-      ),
+      )
+    },
+    {
+      path: "/pricing",
+      element: (
+        <Page>
+          <Pricing />
+        </Page>
+      )
     },
     {
       path: "/docs",
@@ -48,9 +57,9 @@ export function Router() {
         ...Documentation.useRoutes(),
         {
           path: "/docs/api-reference",
-          element: <REST.Page />,
-        },
-      ],
+          element: <REST.Page />
+        }
+      ]
     },
     {
       path: "/sandbox/text-to-image",
@@ -61,7 +70,7 @@ export function Router() {
             samples={TextToImage.Samples}
           />
         </Page>
-      ),
+      )
     },
     {
       path: "/sandbox/image-to-image",
@@ -72,7 +81,7 @@ export function Router() {
             samples={ImageToImage.Samples}
           />
         </Page>
-      ),
+      )
     },
     {
       path: "/sandbox/upscaling",
@@ -80,7 +89,7 @@ export function Router() {
         <Page noScroll noFooter>
           <Sandbox SandboxComponent={Upscaling} samples={Upscaling.Samples} />
         </Page>
-      ),
+      )
     },
     {
       path: "/sandbox/multi-prompting",
@@ -91,23 +100,23 @@ export function Router() {
             samples={MultiPrompting.Samples}
           />
         </Page>
-      ),
+      )
     },
     {
       path: User.Logout.url(),
-      element: <User.Logout />,
+      element: <User.Logout />
     },
     {
       path: User.Login.Callback.url(),
-      element: <User.Login.Callback />,
+      element: <User.Login.Callback />
     },
     {
       path: "/legal/terms-of-service",
-      element: <Markdown.Page>{Markdown.Pages.API_TOS}</Markdown.Page>,
+      element: <Markdown.Page>{Markdown.Pages.API_TOS}</Markdown.Page>
     },
     {
       path: "/faq",
-      element: <Markdown.Page>{Markdown.Pages.FAQ}</Markdown.Page>,
+      element: <Markdown.Page>{Markdown.Pages.FAQ}</Markdown.Page>
     },
     {
       path: "/account",
@@ -120,18 +129,18 @@ export function Router() {
         {
           path: "*",
           index: true,
-          element: <User.Account.Overview />,
+          element: <User.Account.Overview />
         },
         {
           path: "billing",
-          element: <User.Account.Credits autoFocus />,
+          element: <User.Account.Credits autoFocus />
         },
         {
           path: "keys",
-          element: <User.APIKeys.Table />,
-        },
-      ],
-    },
+          element: <User.APIKeys.Table />
+        }
+      ]
+    }
   ]);
 }
 

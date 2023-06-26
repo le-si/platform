@@ -55,12 +55,14 @@ export function Overview() {
 
 function Header() {
   return (
-    <div className="mt-24 flex w-full flex-col items-center gap-2">
+    <div className="mt-24 flex w-full flex-col items-center gap-4">
       <img src="/svg/sai-header.svg" />
-      <h2 className="mt-4 text-lg font-light">Stability AI Platform</h2>
-      <h1 className="text-center text-5xl font-extralight">
-        Explore the possibilities of generative AI
+      <h1 className="mt-2 text-center text-5xl font-extralight">
+        Stability AI Developer Platform
       </h1>
+      <h2 className="text-lg font-light">
+        Explore the possibilities of generative AI
+      </h2>
     </div>
   );
 }
@@ -90,7 +92,7 @@ function Header() {
 function DocumentCard({
   title,
   svg,
-  links,
+  links
 }: {
   title: string;
   svg: string;
@@ -137,7 +139,7 @@ function Documentation() {
             links={[
               { title: "Introduction", url: "/docs/text-to-image" },
               { title: "REST API", url: "/docs/text-to-image" },
-              { title: "gRPC API", url: "/docs/text-to-image" },
+              { title: "gRPC API", url: "/docs/text-to-image" }
             ]}
           />
           <DocumentCard
@@ -148,8 +150,8 @@ function Documentation() {
               {
                 title: "Chat UI",
                 url: "https://research.stability.ai/chat",
-                newWindow: true,
-              },
+                newWindow: true
+              }
             ]}
           />
           <DocumentCard
@@ -157,7 +159,7 @@ function Documentation() {
             svg="/svg/animation-doc.webp"
             links={[
               { title: "Introduction", url: "/docs/text-to-video" },
-              { title: "gRPC API", url: "/docs/text-to-video" },
+              { title: "gRPC API", url: "/docs/text-to-video" }
             ]}
           />
           <DocumentCard
@@ -165,7 +167,7 @@ function Documentation() {
             svg="/svg/integration-doc.webp"
             links={[
               { title: "Photoshop", url: "/docs/text-to-image" },
-              { title: "Blender", url: "/docs/text-to-image" },
+              { title: "Blender", url: "/docs/text-to-image" }
             ]}
           />
         </div>
@@ -178,7 +180,7 @@ function SandboxCard({
   title,
   svg,
   link,
-  soon,
+  soon
 }: {
   title: string;
   svg: string;
@@ -282,7 +284,7 @@ function OtherCard({
   title,
   svg,
   link,
-  linkName,
+  linkName
 }: {
   title: string;
   svg: string;

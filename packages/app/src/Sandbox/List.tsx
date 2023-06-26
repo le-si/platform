@@ -16,7 +16,9 @@ function Header() {
       <h1 className="mt-2 text-center text-5xl font-extralight">
         Sandbox Experiences
       </h1>
-      <h2 className="text-lg font-light">Brought to you by Stability AI</h2>
+      <h2 className="text-lg font-light">
+        Test, Learn, and Innovate with Confidence
+      </h2>
     </div>
   );
 }

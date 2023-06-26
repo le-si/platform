@@ -53,6 +53,12 @@ export function TopBar() {
         >
           Documentation
         </Link>
+        <Link
+          to="/pricing"
+          className="text-sm font-semibold hover:text-indigo-500"
+        >
+          Pricing
+        </Link>
       </div>
       <div className="flex w-1/3 items-center justify-end gap-3">
         <User.Login.Button />
