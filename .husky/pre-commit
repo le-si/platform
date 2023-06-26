@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+. "$(dirname "$0")/common.sh"
+
+# Ensure the entire project still compiles
+blue=$(tput setaf 4)
+yellow=$(tput setaf 3)
+green=$(tput setaf 2)
+normal=$(tput sgr0)
+printf "%b" "${yellow}[app] ${blue}Linting staged files${normal}..."
+yarn app lint-staged -q
+printf "%b" "${green}Success${normal}\n"
+
+printf "%b" "${yellow}[sdk] ${blue}Linting staged files${normal}..."
+yarn sdk lint-staged -q
+printf "%b" "${green}Success${normal}\n"

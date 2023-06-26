@@ -14,8 +14,7 @@
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
     "dev:types": "tsc --noEmit --watch",
-    "dev": "vite --port 3000",
-    "prepare": "is-ci || cd ../.. && husky install ./packages/app/.husky"
+    "dev": "vite --port 3000"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.1.0",
@@ -93,9 +92,9 @@
     "vite-tsconfig-paths": "^4.2.0"
   },
   "lint-staged": {
-    "./packages/**/*.{ts,tsx,js,jsx,md}": [
+    "./src/**/*.{ts,tsx,js,jsx,md}": [
       "prettier --write",
-      "eslint --fix"
+      "eslint --fix --max-warnings 0"
     ]
   }
 }

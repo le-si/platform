@@ -8,10 +8,10 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "clean": "rimraf lib && rimraf node_modules",
-    "lint": "eslint \"./src/**/*.{ts}\"",
+    "lint": "eslint \"./src/**/*.ts\"",
     "lint:fix": "yarn lint --fix",
     "generate:grpc-clients": "tsx scripts/GenerateGRPC.ts",
-    "generate:open-api-types": "openapi-typescript ./src/OpenAPI/OpenAPI.json --output ./src/OpenAPI/OpenAPI.generated.ts",
+    "generate:open-api-types": "openapi-typescript ./src/OpenAPI/OpenAPI.json --output ./src/OpenAPI/OpenAPI.generated.ts >/dev/null 2>&1",
     "build:types": "yarn generate:grpc-clients && yarn generate:open-api-types && tsc --project tsconfig.json && tsc-alias",
     "build:javascript": "tsx scripts/Build.ts",
     "build": "yarn build:types && yarn build:javascript && tsx scripts/FindAndReplaceVersion.ts",
@@ -33,6 +33,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
+    "lint-staged": "^13.2.2",
     "nodemon": "^2.0.22",
     "openapi-typescript": "latest",
     "prettier": "^2.8.8",
@@ -43,9 +44,9 @@
     "typescript": "5.0.4"
   },
   "lint-staged": {
-    "./packages/**/*.{ts,tsx,js,jsx,md}": [
+    "./src/**/*.{ts,tsx,js,jsx,md}": [
       "prettier --write",
-      "eslint --fix"
+      "eslint --fix --max-warnings 0"
     ]
   }
 }

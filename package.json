@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "postinstall": "is-ci || yarn build",
-    "prepare": "yarn app prepare",
+    "prepare": "is-ci || husky install",
     "app": "yarn workspace @stability/app",
     "sdk": "yarn workspace @stability/sdk",
     "dev": "yarn workspaces foreach --all --interlaced --verbose --parallel --jobs unlimited run dev",
@@ -19,9 +19,7 @@
     "cross-env": "^7.0.3",
     "husky": "^8.0.3",
     "is-ci": "^3.0.1",
-    "lint-staged": "^13.1.2",
-    "rimraf": "^5.0.1",
-    "yarn": "^1.22.19"
+    "rimraf": "^5.0.1"
   },
   "resolutions": {
     "eslint-plugin-react-hooks@^4.6.0": "patch:eslint-plugin-react-hooks@^4.6.0#.yarn/patches/eslint-plugin-react-hooks-npm-4.6.0-b429fac07f.patch"
