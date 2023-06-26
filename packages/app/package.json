@@ -90,5 +90,11 @@
     "vite": "^4.3.9",
     "vite-plugin-image-optimizer": "^1.1.5",
     "vite-tsconfig-paths": "^4.2.0"
+  },
+  "lint-staged": {
+    "./packages/**/*.{ts,tsx,js,jsx,md}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   }
 }
