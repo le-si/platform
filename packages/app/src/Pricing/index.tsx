@@ -1,6 +1,3 @@
-import { Link } from "react-router-dom";
-import { Markdown } from "~/Markdown";
-
 type State = {
   width: number;
   height: number;
@@ -63,7 +60,7 @@ function Code({ children, className }: StyleableWithChildren) {
   return (
     <code
       className={classes(
-        "h-fit w-fit rounded-md bg-black/10 px-1.5 py-0.5 font-mono font-light",
+        "bg-brand-amber-1 h-fit w-fit rounded-md px-1.5 py-0.5 font-mono font-light",
         className
       )}
       onClick={(e: any) => {
