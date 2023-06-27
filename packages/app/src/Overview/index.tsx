@@ -18,40 +18,6 @@ export function Overview() {
   );
 }
 
-// function Button({
-//   children,
-//   className,
-//   link,
-//   arrow,
-//   onClick,
-//   disabled,
-// }: StyleableWithChildren & {
-//   onClick?: () => void;
-//   link?: string;
-//   arrow?: boolean;
-//   disabled?: boolean;
-// }) {
-//   const styles = classes(
-//     "w-fit rounded-full bg-indigo-500 px-3 py-1 text-sm text-white duration-100 hover:bg-indigo-400 flex gap-2 items-center",
-//     disabled && "opacity-50 cursor-not-allowed pointer-events-none",
-//     className
-//   );
-//
-//   if (link) {
-//     return (
-//       <Link to={link} className={styles}>
-//         {children} {arrow && <Theme.Icon.Arrow />}
-//       </Link>
-//     );
-//   }
-//
-//   return (
-//     <button onClick={onClick} className={styles}>
-//       {children} {arrow && <Theme.Icon.Arrow />}
-//     </button>
-//   );
-// }
-
 function Header() {
   return (
     <div className="mt-24 flex w-full flex-col items-center gap-4">
