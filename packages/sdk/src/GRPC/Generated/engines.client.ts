@@ -15,25 +15,39 @@ import type { RpcOptions } from "@protobuf-ts/runtime-rpc";
  * @generated from protobuf service gooseai.EnginesService
  */
 export interface IEnginesServiceClient {
-    /**
-     * @generated from protobuf rpc: ListEngines(gooseai.ListEnginesRequest) returns (gooseai.Engines);
-     */
-    listEngines(input: ListEnginesRequest, options?: RpcOptions): UnaryCall<ListEnginesRequest, Engines>;
+  /**
+   * @generated from protobuf rpc: ListEngines(gooseai.ListEnginesRequest) returns (gooseai.Engines);
+   */
+  listEngines(
+    input: ListEnginesRequest,
+    options?: RpcOptions
+  ): UnaryCall<ListEnginesRequest, Engines>;
 }
 /**
  * @generated from protobuf service gooseai.EnginesService
  */
-export class EnginesServiceClient implements IEnginesServiceClient, ServiceInfo {
-    typeName = EnginesService.typeName;
-    methods = EnginesService.methods;
-    options = EnginesService.options;
-    constructor(private readonly _transport: RpcTransport) {
-    }
-    /**
-     * @generated from protobuf rpc: ListEngines(gooseai.ListEnginesRequest) returns (gooseai.Engines);
-     */
-    listEngines(input: ListEnginesRequest, options?: RpcOptions): UnaryCall<ListEnginesRequest, Engines> {
-        const method = this.methods[0], opt = this._transport.mergeOptions(options);
-        return stackIntercept<ListEnginesRequest, Engines>("unary", this._transport, method, opt, input);
-    }
+export class EnginesServiceClient
+  implements IEnginesServiceClient, ServiceInfo
+{
+  typeName = EnginesService.typeName;
+  methods = EnginesService.methods;
+  options = EnginesService.options;
+  constructor(private readonly _transport: RpcTransport) {}
+  /**
+   * @generated from protobuf rpc: ListEngines(gooseai.ListEnginesRequest) returns (gooseai.Engines);
+   */
+  listEngines(
+    input: ListEnginesRequest,
+    options?: RpcOptions
+  ): UnaryCall<ListEnginesRequest, Engines> {
+    const method = this.methods[0],
+      opt = this._transport.mergeOptions(options);
+    return stackIntercept<ListEnginesRequest, Engines>(
+      "unary",
+      this._transport,
+      method,
+      opt,
+      input
+    );
+  }
 }
