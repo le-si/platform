@@ -5,15 +5,14 @@ import { Theme } from "~/Theme";
 export function Overview() {
   return (
     <div className="flex flex-col gap-48">
-      <div className="mx-auto flex flex-col gap-32 px-5 2xl:max-w-[93rem] 2xl:px-0">
+      <div className="mx-auto flex w-full flex-col gap-32 px-5 2xl:max-w-[93rem] 2xl:px-0">
         <Header />
         <Sandboxes />
       </div>
       <Documentation />
-      <div className="mx-auto flex flex-col gap-64 px-5 2xl:max-w-[93rem] 2xl:px-0">
+      <div className="mx-auto mb-80 flex flex-col gap-64 px-5 2xl:max-w-[93rem] 2xl:px-0">
         <Others />
         <Testimonials />
-        <FAQ />
       </div>
     </div>
   );
@@ -67,28 +66,6 @@ function Header() {
   );
 }
 
-// function GetStarted() {
-//   return (
-//     <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-//       <div className="flex flex-col gap-4">
-//         <h2 className="text-2xl font-light">Get Started</h2>
-//         <img src="/svg/getstarted-cta.webp" className="select-none" />
-//         <p>Learn how to get started with generative AI via our APIs.</p>
-//         <Button>Learn More</Button>
-//       </div>
-//       <div className="flex flex-col gap-4">
-//         <h2 className="text-2xl font-light">DreamStudio</h2>
-//         <img src="/svg/dreamstudio-cta.webp" className="select-none" />
-//         <p>
-//           Learn about DreamStudio and StableStudio, Stability AI&apos;s image
-//           generation applications.
-//         </p>
-//         <Button>Learn More</Button>
-//       </div>
-//     </div>
-//   );
-// }
-
 function DocumentCard({
   title,
   svg,
@@ -132,7 +109,7 @@ function Documentation() {
       <div className="flex flex-col items-center gap-5">
         <img src="/svg/documentation-header.svg" />
         <h1 className="text-5xl font-extralight">Documentation</h1>
-        <div className="mt-28 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="mx-auto mt-28 grid grid-cols-1 gap-6 px-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:max-w-[93rem] 2xl:px-0">
           <DocumentCard
             svg="/svg/image-doc.webp"
             title="Image"
@@ -189,8 +166,8 @@ function SandboxCard({
 }) {
   const content = (
     <>
-      <div className="rounded-xl bg-white">
-        <img src={soon ? "/svg/soon-sandbox.webp" : svg} />
+      <div className="h-full w-full rounded-xl bg-white">
+        <img className="w-full" src={soon ? "/svg/soon-sandbox.webp" : svg} />
       </div>
       <div className="flex items-center gap-2">
         <h2
@@ -208,7 +185,7 @@ function SandboxCard({
     </>
   );
 
-  const styles = "flex flex-col gap-2 rounded-xl group";
+  const styles = "flex flex-col gap-2 rounded-xl group w-full";
 
   if (soon) {
     return <div className={styles}>{content}</div>;
@@ -223,8 +200,8 @@ function SandboxCard({
 
 function Sandboxes() {
   return (
-    <div className="mx-auto flex flex-col items-center gap-5 px-5 2xl:max-w-[93rem] 2xl:px-0">
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <div className="flex flex-col items-center gap-5">
+      <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <SandboxCard
           title="Text to Image"
           svg="/svg/text-image-sandbox.webp"
@@ -245,30 +222,6 @@ function Sandboxes() {
           svg="/svg/multi-prompting-sandbox.webp"
           link="/sandbox/multi-prompting"
         />
-        {/* <SandboxCard
-            title="Masking"
-            svg="/svg/masking-sandbox.webp"
-            link="/sandbox/masking"
-            soon
-          />
-          <SandboxCard
-            title="Animation"
-            svg="/svg/animation-sandbox.webp"
-            link="/sandbox/animation"
-            soon
-          />
-          <SandboxCard
-            title="Face enhancing"
-            svg="/svg/face-enhancing-sandbox.webp"
-            link="/sandbox/face-enhancing"
-            soon
-          />
-          <SandboxCard
-            title="Fine-Tuning"
-            svg="/svg/fine-tuning-sandbox.webp"
-            link="/sandbox/fine-tuning"
-            soon
-          /> */}
       </div>
       <Link
         to="/sandbox"
@@ -339,8 +292,4 @@ function Testimonials() {
       <img src="/svg/logos.svg" />
     </div>
   );
-}
-
-function FAQ() {
-  return <div></div>;
 }
