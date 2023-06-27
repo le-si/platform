@@ -1,6 +1,8 @@
 import * as Auth0 from "@auth0/auth0-react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { GlobalSearch } from "~/GlobalSearch";
 import { Theme } from "~/Theme";
+import { User } from "~/User";
 
 function Component() {
   const location = useLocation();
@@ -58,4 +60,23 @@ export function Page() {
 
 export namespace Page {
   export const url = () => "/account" as const;
+
+  export const searchCandidate = (): GlobalSearch.Candidate[] => [
+    {
+      route: Page.url(),
+      name: "Account",
+      content: "User account, account page",
+    },
+    {
+      route: Page.url() + "/" + User.APIKeys.Table.uri(),
+      name: "API Key Management",
+      content: "User account, account page",
+    },
+    {
+      route: Page.url() + "/" + User.Account.Credits.uri(),
+      name: "Buy Credits",
+      content:
+        "buy credits, out of credits, purchase credits, get credits, purchase history, payments",
+    },
+  ];
 }

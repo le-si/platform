@@ -1,9 +1,7 @@
 import { App } from "~/App";
 import { Markdown } from "~/Markdown";
-import { Scroll } from "~/Scroll";
 
 export function Page({ children }: React.PropsWithChildren) {
-  Scroll.useListenForURLChanges();
   return (
     <App.Page>
       <div className="mx-auto max-w-[120rem]">

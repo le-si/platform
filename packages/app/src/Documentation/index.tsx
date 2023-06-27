@@ -34,10 +34,18 @@ import UsingPhotoshopGettingStarted from "./Integrations/UsingPhotoshopGettingSt
 import UsingPhotoshopImageToImage from "./Integrations/UsingPhotoshopImageToImage.md?raw";
 import UsingPhotoshopTextToImage from "./Integrations/UsingPhotoshopTextToImage.md?raw";
 import UsingPhotoshopUpscaler from "./Integrations/UsingPhotoshopUpscaler.md?raw";
+import { Page } from "./Page";
 import releaseNotes from "./ReleaseNotes.md?raw";
 
 export type Documentation = Documentation.Group[];
+
+export declare namespace Documentation {
+  export { Page };
+}
+
 export namespace Documentation {
+  Documentation.Page = Page;
+
   export type Group = {
     /** Used to label the SideBar link & GlobalSearch results */
     name: string;
@@ -432,7 +440,7 @@ export namespace Documentation {
   export function useRoutes() {
     const documentation = Documentation.use();
 
-    const routes = React.useMemo(() => {
+    return React.useMemo(() => {
       const routes = (documentation: Documentation): RouteObject[] =>
         documentation.flatMap((group) => {
           const element =
@@ -459,7 +467,5 @@ export namespace Documentation {
 
       return routes(documentation);
     }, [documentation]);
-
-    return routes;
   }
 }

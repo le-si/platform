@@ -21,6 +21,10 @@ export function Credits({ autoFocus }: { autoFocus: boolean }) {
   );
 }
 
+export namespace Credits {
+  export const uri = () => "credits" as const;
+}
+
 function AvailableCredits() {
   const { data: balance } = Billing.Credits.Balance.use();
 
@@ -48,7 +52,7 @@ const blink = keyframes`
   50% { --tw-ring-opacity: 0 }
 `;
 
-// TODO: Test the blinking animation
+// TODO: Test the out-of-credits Snackbar with this component
 function BuyCredits({ autoFocus }: { autoFocus: boolean | undefined }) {
   const [amount, setAmount] = useState<number>(10);
   const [focused, setFocused] = useState<boolean>(!!autoFocus);

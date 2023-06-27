@@ -8,20 +8,26 @@ export namespace Scroll {
    * Scrolls to the top of the page or, if a hash is present,
    * to the element referenced in the hash.
    */
-  export function useListenForURLChanges(): void {
+  export function useScrollToTopOrHashOnNavigate(): void {
     const { pathname, hash } = useLocation();
+    const prevPathname = useRef(pathname);
 
-    React.useEffect(
-      () => (hash ? Scroll.toElementByID(hash) : Scroll.toTopOfPage()),
-      [pathname, hash]
-    );
+    React.useEffect(() => {
+      if (hash) {
+        Scroll.toElementByID(hash);
+      } else if (prevPathname.current !== pathname) {
+        Scroll.toTopOfPage();
+      }
+
+      prevPathname.current = pathname;
+    }, [pathname, hash]);
   }
 
   export function toTopOfPage() {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }
 
-  export function toElementByID(id: string, offset = 24) {
+  export function toElementByID(id: string, offset = 20) {
     try {
       const element = document.getElementById(
         id.startsWith("#") ? id.slice(1) : id

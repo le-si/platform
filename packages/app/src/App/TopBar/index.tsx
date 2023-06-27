@@ -2,21 +2,13 @@ import { Link } from "react-router-dom";
 import { User } from "~/User";
 
 export function TopBar() {
-  const [atTopScroll, setAtTopScroll] = useState(true);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setAtTopScroll(window.scrollY < 5);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const isScrolledToTop = useIsScrolledToTop();
 
   return (
     <div
       className={classes(
         "sticky top-0 z-50 flex w-full shrink-0 items-center justify-between border-b border-transparent bg-white px-5 duration-100",
-        !atTopScroll && "border-zinc-100"
+        !isScrolledToTop && "border-zinc-100"
       )}
       style={{
         height: TopBar.height(),
@@ -65,6 +57,18 @@ export function TopBar() {
       </div>
     </div>
   );
+}
+
+function useIsScrolledToTop() {
+  const [isScrolledToTop, setIsScrolledToTop] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolledToTop(window.scrollY < 5);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return isScrolledToTop;
 }
 
 export namespace TopBar {

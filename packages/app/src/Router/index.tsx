@@ -1,7 +1,6 @@
 import * as ReactRouter from "react-router-dom";
-import { Page } from "~/App/Page";
+import { App } from "~/App";
 import { Documentation } from "~/Documentation";
-import { Page as DocumentationPage } from "~/Documentation/Page";
 import { Markdown } from "~/Markdown";
 import { Overview } from "~/Overview";
 import { Pricing } from "~/Pricing";
@@ -13,45 +12,43 @@ import { List } from "~/Sandbox/List";
 import { MultiPrompting } from "~/Sandbox/MultiPrompting";
 import { TextToImage } from "~/Sandbox/TextToImage";
 import { Upscaling } from "~/Sandbox/Upscaling";
+import { Scroll } from "~/Scroll";
 import { User } from "~/User";
 
 export function Router() {
-  const path = ReactRouter.useLocation().pathname;
-
-  // reset scroll on route change
-  useEffect(() => window.scrollTo(0, 0), [path]);
+  Scroll.useScrollToTopOrHashOnNavigate();
 
   return ReactRouter.useRoutes([
     {
       path: "/",
       element: (
-        <Page>
+        <App.Page>
           <Overview />
-        </Page>
+        </App.Page>
       ),
     },
     {
       path: "/sandbox",
       element: (
-        <Page>
+        <App.Page>
           <List />
-        </Page>
+        </App.Page>
       ),
     },
     {
-      path: "/pricing",
+      path: Pricing.url(),
       element: (
-        <Page>
+        <App.Page>
           <Pricing />
-        </Page>
+        </App.Page>
       ),
     },
     {
       path: "/docs",
       element: (
-        <Page>
-          <DocumentationPage />
-        </Page>
+        <App.Page>
+          <Documentation.Page />
+        </App.Page>
       ),
       children: [
         ...Documentation.useRoutes(),
@@ -64,42 +61,42 @@ export function Router() {
     {
       path: "/sandbox/text-to-image",
       element: (
-        <Page noScroll noFooter>
+        <App.Page noScroll noFooter>
           <Sandbox
             SandboxComponent={TextToImage}
             samples={TextToImage.Samples}
           />
-        </Page>
+        </App.Page>
       ),
     },
     {
       path: "/sandbox/image-to-image",
       element: (
-        <Page noScroll noFooter>
+        <App.Page noScroll noFooter>
           <Sandbox
             SandboxComponent={ImageToImage}
             samples={ImageToImage.Samples}
           />
-        </Page>
+        </App.Page>
       ),
     },
     {
       path: "/sandbox/upscaling",
       element: (
-        <Page noScroll noFooter>
+        <App.Page noScroll noFooter>
           <Sandbox SandboxComponent={Upscaling} samples={Upscaling.Samples} />
-        </Page>
+        </App.Page>
       ),
     },
     {
       path: "/sandbox/multi-prompting",
       element: (
-        <Page noScroll noFooter>
+        <App.Page noScroll noFooter>
           <Sandbox
             SandboxComponent={MultiPrompting}
             samples={MultiPrompting.Samples}
           />
-        </Page>
+        </App.Page>
       ),
     },
     {
@@ -123,11 +120,11 @@ export function Router() {
       element: <Markdown.Page>{Markdown.Pages.FAQ}</Markdown.Page>,
     },
     {
-      path: "/account",
+      path: User.Account.Page.url(),
       element: (
-        <Page>
+        <App.Page>
           <User.Account.Page />
-        </Page>
+        </App.Page>
       ),
       children: [
         {
@@ -136,11 +133,11 @@ export function Router() {
           element: <User.Account.Overview />,
         },
         {
-          path: "billing",
+          path: User.Account.Credits.uri(),
           element: <User.Account.Credits autoFocus />,
         },
         {
-          path: "keys",
+          path: User.APIKeys.Table.uri(),
           element: <User.APIKeys.Table />,
         },
       ],

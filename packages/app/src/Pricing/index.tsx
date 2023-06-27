@@ -1,3 +1,5 @@
+import { GlobalSearch } from "~/GlobalSearch";
+
 type State = {
   width: number;
   height: number;
@@ -118,7 +120,7 @@ export function Pricing() {
   return (
     <div className="mx-auto mb-24 flex min-h-screen flex-col gap-32 px-5 2xl:max-w-[93rem] 2xl:px-0">
       <div className="mt-24 flex w-full flex-col items-center gap-4">
-        <img src="/svg/sai-header.svg" />
+        <img src="/svg/sai-header.svg" alt="header" />
         <h1 className="mt-2 text-center text-5xl font-extralight">
           Platform Pricing
         </h1>
@@ -131,4 +133,15 @@ export function Pricing() {
       <ModelList category="upscaling" />
     </div>
   );
+}
+
+export namespace Pricing {
+  export const url = () => "/pricing" as const;
+
+  export const searchCandidate = (): GlobalSearch.Candidate => ({
+    route: Pricing.url(),
+    name: "Pricing",
+    content:
+      "Model pricing, image pricing, price-per-image, price calculator, Stable Diffusion 1.5, Stable Diffusion 2.1, Stable Diffusion XL 0.9, Stable Diffusion x4 Latent Upscaler, Real-ESRGAN x2",
+  });
 }
