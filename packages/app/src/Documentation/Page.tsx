@@ -77,20 +77,20 @@ export function Page() {
           top: TopBar.height(),
         }}
       >
-        <div className="bg-brand-amber-1 flex w-full flex-col overflow-hidden rounded-xl">
-          {routes.map((route) => (
-            <DocButton key={route.name} {...route} />
-          ))}
-        </div>
         <div
           id="redoc-sidebar-container"
           className="bg-brand-amber-1 flex w-full flex-col overflow-hidden rounded-xl"
         >
+          {routes.map((route) => (
+            <DocButton key={route.name} {...route} />
+          ))}
           <DocButton
             name="API Reference"
             route="/docs/api-reference"
             activeOverride={location.hash.length > 0}
-          ></DocButton>
+          >
+            {[]}
+          </DocButton>
         </div>
       </div>
       <div className="w-[20rem] shrink-0" />

@@ -63,11 +63,10 @@ function Code({ children, className }: StyleableWithChildren) {
         "bg-brand-amber-1 h-fit w-fit rounded-md px-1.5 py-0.5 font-mono font-light",
         className
       )}
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      onClick={(e: any) => {
+      onClick={(e: React.MouseEvent<HTMLDivElement>) => {
         // select the text inside the code element
         const range = document.createRange();
-        range.selectNodeContents(e.target);
+        range.selectNodeContents(e.target as Node);
         const selection = window.getSelection();
         selection?.removeAllRanges();
         selection?.addRange(range);
@@ -107,11 +106,9 @@ function ModelList({
         {category.replace(/^\w/, (c) => c.toUpperCase())}
       </h2>
       <div className="flex flex-col gap-12">
-        {MODELS.filter((model) => model.modality === category).map(
-          (model, index) => (
-            <Model key={`model-${index}`} model={model} />
-          )
-        )}
+        {MODELS.filter((model) => model.modality === category).map((model) => (
+          <Model key={model.id} model={model} />
+        ))}
       </div>
     </div>
   );
