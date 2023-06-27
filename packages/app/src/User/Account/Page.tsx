@@ -1,7 +1,8 @@
+import * as Auth0 from "@auth0/auth0-react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Theme } from "~/Theme";
 
-export function Page() {
+function Component() {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -44,6 +45,15 @@ export function Page() {
       </div>
     </div>
   );
+}
+
+export function Page() {
+  const ProtectedComponent = Auth0.withAuthenticationRequired(Component, {
+    onRedirecting: () => <Theme.Icon.Spinner />,
+    returnTo: location.pathname,
+  });
+
+  return <ProtectedComponent />;
 }
 
 export namespace Page {

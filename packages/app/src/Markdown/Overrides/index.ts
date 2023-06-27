@@ -3,3 +3,4 @@ export * from "./Code";
 export * from "./Divider";
 export * from "./Image";
 export * from "./Table";
+export * from "./Blockquote";

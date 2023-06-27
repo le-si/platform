@@ -111,6 +111,10 @@ export function Router() {
       element: <User.Login.Callback />,
     },
     {
+      path: "/login",
+      element: <User.Login.Page />,
+    },
+    {
       path: "/legal/terms-of-service",
       element: <Markdown.Page>{Markdown.Pages.API_TOS}</Markdown.Page>,
     },

@@ -42,6 +42,7 @@ export function Markdown({
         th: Overrides.Table.Th,
         td: Overrides.Table.Td,
         tr: Overrides.Table.Tr,
+        blockquote: Overrides.Blockquote,
       }}
       className={classes(
         "markdown-root",
