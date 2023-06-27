@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import "../../GlobalVariables";
 
 import { Select } from "../Select";
-import { GridBlocks } from "../Icons";
+import { Icon } from "../Icon";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -13,28 +13,28 @@ const meta = {
   argTypes: {
     value: {
       description: "The value of the Select",
-      type: "string"
+      type: "string",
     },
     onChange: {
       description: "The function to call when the Select is changed",
-      type: "function"
+      type: "function",
     },
     disabled: {
       description: "Whether the Select is disabled or not",
-      type: "boolean"
+      type: "boolean",
     },
     placeholder: {
       description: "The placeholder text to display inside the Select",
-      type: "string"
+      type: "string",
     },
     title: {
       description: "The title of the Select",
-      type: "string"
+      type: "string",
     },
     options: {
-      description: "The options of the Select"
-    }
-  }
+      description: "The options of the Select",
+    },
+  },
 } satisfies Meta<typeof Select>;
 
 export default meta;
@@ -51,10 +51,10 @@ export const Default: Story = {
     options: [
       { value: "test", label: "test" },
       { value: "test2", label: "test2" },
-      { value: "test3", label: "test3" }
+      { value: "test3", label: "test3" },
     ],
-    icon: <GridBlocks />
-  }
+    icon: <Icon.GridBlocks />,
+  },
 };
 
 export const Disabled: Story = {
@@ -66,11 +66,11 @@ export const Disabled: Story = {
     options: [
       { value: "test", label: "test" },
       { value: "test2", label: "test2" },
-      { value: "test3", label: "test3" }
+      { value: "test3", label: "test3" },
     ],
-    icon: <GridBlocks />,
-    disabled: true
-  }
+    icon: <Icon.GridBlocks />,
+    disabled: true,
+  },
 };
 
 export const NoIcon: Story = {
@@ -82,9 +82,9 @@ export const NoIcon: Story = {
     options: [
       { value: "test", label: "test" },
       { value: "test2", label: "test2" },
-      { value: "test3", label: "test3" }
-    ]
-  }
+      { value: "test3", label: "test3" },
+    ],
+  },
 };
 
 export const SomeDisabled: Story = {
@@ -96,7 +96,7 @@ export const SomeDisabled: Story = {
     options: [
       { value: "test", label: "test" },
       { value: "test2", label: "test2", disabled: true },
-      { value: "test3", label: "test3" }
-    ]
-  }
+      { value: "test3", label: "test3" },
+    ],
+  },
 };

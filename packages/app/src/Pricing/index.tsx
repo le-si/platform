@@ -14,7 +14,7 @@ const MODELS = [
       (((state.width * state.height - 169527) * state.steps) / 30) *
       2.16e-8 *
       100,
-    formulaStylized: "((width * height - 169527) * steps / 30) * 2.16e-8 * 100"
+    formulaStylized: "((width * height - 169527) * steps / 30) * 2.16e-8 * 100",
   },
   {
     name: "Stable Diffusion 2.1",
@@ -25,7 +25,7 @@ const MODELS = [
       (((state.width * state.height - 169527) * state.steps) / 30) *
       2.16e-8 *
       100,
-    formulaStylized: "((width * height - 169527) * steps / 30) * 2.16e-8 * 100"
+    formulaStylized: "((width * height - 169527) * steps / 30) * 2.16e-8 * 100",
   },
   {
     name: "Stable Diffusion XL 0.9",
@@ -36,24 +36,24 @@ const MODELS = [
       (((state.width * state.height - 169527) * state.steps) / 30) *
       5.4e-8 *
       100,
-    formulaStylized: "((width * height - 169527) * steps / 30) * 5.4e-8 * 100"
+    formulaStylized: "((width * height - 169527) * steps / 30) * 5.4e-8 * 100",
   },
   {
     name: "Stable Diffusion x4 Latent Upscaler",
     id: `stable-diffusion-x4-latent-upscaler`,
     description: `Trained for 1.25M steps on a 10M subset of LAION containing images >2048x2048. The model was trained on crops of size 512x512 and is a text-guided latent upscaling diffusion model. In addition to the textual input, it receives a noise_level as an input parameter, which can be used to add noise to the low-resolution input according to a predefined diffusion schedule.`,
     modality: "upscaling",
-    formula: (state: State): number => 0.2,
-    formulaStylized: "0.2"
+    formula: (_state: State): number => 0.2,
+    formulaStylized: "0.2",
   },
   {
     name: "Real-ESRGAN x2",
     id: `esrgan-v1-x2plus`,
     description: `An upgraded ESRGAN trained with pure synthetic data is capable of enhancing details while removing annoying artifacts for common real-world images.`,
     modality: "upscaling",
-    formula: (state: State): number => 0.2,
-    formulaStylized: "0.2"
-  }
+    formula: (_state: State): number => 0.2,
+    formulaStylized: "0.2",
+  },
 ];
 
 function Code({ children, className }: StyleableWithChildren) {
@@ -63,6 +63,7 @@ function Code({ children, className }: StyleableWithChildren) {
         "bg-brand-amber-1 h-fit w-fit rounded-md px-1.5 py-0.5 font-mono font-light",
         className
       )}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onClick={(e: any) => {
         // select the text inside the code element
         const range = document.createRange();
@@ -96,7 +97,7 @@ function Model({ model }: { model: (typeof MODELS)[number] }) {
 }
 
 function ModelList({
-  category
+  category,
 }: {
   category: "image" | "video" | "audio" | "text" | "upscaling";
 }) {
@@ -106,9 +107,11 @@ function ModelList({
         {category.replace(/^\w/, (c) => c.toUpperCase())}
       </h2>
       <div className="flex flex-col gap-12">
-        {MODELS.filter((model) => model.modality === category).map((model) => (
-          <Model model={model} />
-        ))}
+        {MODELS.filter((model) => model.modality === category).map(
+          (model, index) => (
+            <Model key={`model-${index}`} model={model} />
+          )
+        )}
       </div>
     </div>
   );

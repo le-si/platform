@@ -10,7 +10,7 @@ export type Modal = StyleableWithChildren & {
   bottom?: React.ReactNode;
 };
 
-export function Backdrop({
+function Backdrop({
   open,
   onClose,
   className,
@@ -48,6 +48,8 @@ export function Modal({
   containerClassName,
   bottom,
 }: Modal) {
+  useCloseOnEscapeKey(open, onClose);
+
   return (
     <AnimatePresence>
       {open && (
@@ -95,6 +97,24 @@ export function Modal({
       )}
     </AnimatePresence>
   );
+}
+
+function useCloseOnEscapeKey(open?: boolean, onClose?: () => void): void {
+  React.useEffect(() => {
+    if (!open) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose?.();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open, onClose]);
 }
 
 const outSideVariants = {
