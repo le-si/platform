@@ -102,7 +102,7 @@ function ModelList({
 }) {
   return (
     <div className="flex flex-col gap-12">
-      <h2 className="border-b border-zinc-300 pb-4 text-4xl font-light">
+      <h2 className="sticky top-16 z-10 border-b border-zinc-300 bg-white py-4 text-4xl font-light">
         {category.replace(/^\w/, (c) => c.toUpperCase())}
       </h2>
       <div className="flex flex-col gap-12">
