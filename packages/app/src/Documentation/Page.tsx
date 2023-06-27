@@ -79,7 +79,7 @@ export function Page() {
       >
         <div
           id="redoc-sidebar-container"
-          className="bg-brand-amber-1 flex w-full flex-col overflow-hidden rounded-xl"
+          className="bg-brand-amber-1 flex max-h-[calc(100vh-10.5rem)] w-full flex-col overflow-hidden overflow-y-auto rounded-xl"
         >
           {routes.map((route) => (
             <DocButton key={route.name} {...route} />
