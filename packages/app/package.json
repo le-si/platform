@@ -25,6 +25,7 @@
     "@stability/sdk": "workspace:^",
     "@tanstack/react-query": "^4.29.12",
     "buffer": "^6.0.3",
+    "flexsearch": "^0.7.31",
     "framer-motion": "^10.12.16",
     "highlight.js": "^11.8.0",
     "mobx": "^6.7.0",
