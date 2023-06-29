@@ -1,15 +1,10 @@
 import * as React from "react";
 import { default as ReactMarkdown } from "react-markdown";
-import {
-  default as syntaxHighlighting,
-  Options as SyntaxHighlightingOptions
-} from "rehype-highlight";
-import { remarkHeadingId as customIDForHeadingsPlugin } from "remark-custom-heading-id";
-import { default as gitHubMarkdownSupport } from "remark-gfm";
-
-import tableOfContentsSupport from "remark-toc";
-
-import { Theme } from "~/Theme";
+import { default as supportForCodeHighlighting } from "rehype-highlight";
+import { default as supportForAutomaticHeaderIDs } from "rehype-slug";
+import { remarkHeadingId as supportForCustomHeaderIDs } from "remark-custom-heading-id";
+import { default as supportForGithubMarkdown } from "remark-gfm";
+import { default as supportForAutomaticTableOfContents } from "remark-toc";
 
 import { AutoHeaderLinker } from "./AutoHeaderLinker";
 
@@ -19,7 +14,7 @@ import * as Pages from "./Pages";
 
 export function Markdown({
   className,
-  children
+  children,
 }: {
   className?: string;
   children: string;
@@ -27,17 +22,14 @@ export function Markdown({
   return (
     <ReactMarkdown
       remarkPlugins={[
-        gitHubMarkdownSupport,
-        customIDForHeadingsPlugin,
-        tableOfContentsSupport
+        supportForGithubMarkdown,
+        supportForCustomHeaderIDs,
+        supportForAutomaticTableOfContents,
       ]}
       rehypePlugins={[
-        // autoGenerateHeaderIDs,
+        supportForAutomaticHeaderIDs,
+        supportForCodeHighlighting,
         AutoHeaderLinker.plugin(),
-        [
-          syntaxHighlighting,
-          { ignoreMissing: true } as SyntaxHighlightingOptions
-        ]
       ]}
       components={{
         code: Overrides.Code,
@@ -49,11 +41,12 @@ export function Markdown({
         tbody: Overrides.Table.TBody,
         th: Overrides.Table.Th,
         td: Overrides.Table.Td,
-        tr: Overrides.Table.Tr
+        tr: Overrides.Table.Tr,
+        blockquote: Overrides.Blockquote,
       }}
       className={classes(
         "markdown-root",
-        "prose dark:prose-invert mx-auto my-8 px-5 2xl:max-w-[93rem] 2xl:px-0",
+        "prose dark:prose-invert mx-auto my-8 px-5 2xl:max-w-[93rem]",
         className
       )}
     >
@@ -71,7 +64,6 @@ export namespace Markdown {
   Markdown.Page = Page;
   Markdown.Pages = Pages;
 
-  // TODO: Convert to TailwindCSS
   export function presetFloatingBlock(): React.CSSProperties {
     return {
       display: "inline-block",
@@ -82,7 +74,7 @@ export namespace Markdown {
       marginBottom: 3,
 
       // boxShadow: 5,
-      borderRadius: 1
+      borderRadius: 1,
     };
   }
 }

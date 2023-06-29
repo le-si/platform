@@ -54,8 +54,8 @@ export async function request(
         body,
       }
     );
-  } catch (error: any) {
-    return [undefined, error];
+  } catch (error: unknown) {
+    return [undefined, error instanceof Error ? error : Error(`${error}`)];
   }
 
   if (!response.ok) {

@@ -1,7 +1,10 @@
+import * as Auth0 from "@auth0/auth0-react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { GlobalSearch } from "~/GlobalSearch";
 import { Theme } from "~/Theme";
+import { User } from "~/User";
 
-export function Page() {
+function Component() {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -10,7 +13,7 @@ export function Page() {
     if (location.pathname === "/account") {
       navigate("/account/overview");
     }
-  }, [location.pathname]);
+  }, [location.pathname, navigate]);
 
   return (
     <div className="mt-6 flex w-full gap-5 px-5">
@@ -46,6 +49,34 @@ export function Page() {
   );
 }
 
+export function Page() {
+  const ProtectedComponent = Auth0.withAuthenticationRequired(Component, {
+    onRedirecting: () => <Theme.Icon.Spinner />,
+    returnTo: location.pathname,
+  });
+
+  return <ProtectedComponent />;
+}
+
 export namespace Page {
   export const url = () => "/account" as const;
+
+  export const searchCandidate = (): GlobalSearch.Candidate[] => [
+    {
+      route: Page.url(),
+      name: "Account",
+      content: "User account, account page",
+    },
+    {
+      route: Page.url() + "/" + User.APIKeys.Table.uri(),
+      name: "API Key Management",
+      content: "User account, account page",
+    },
+    {
+      route: Page.url() + "/" + User.Account.Credits.uri(),
+      name: "Buy Credits",
+      content:
+        "buy credits, out of credits, purchase credits, get credits, purchase history, payments",
+    },
+  ];
 }

@@ -16,7 +16,9 @@ function Header() {
       <h1 className="mt-2 text-center text-5xl font-extralight">
         Sandbox Experiences
       </h1>
-      <h2 className="text-lg font-light">Brought to you by Stability AI</h2>
+      <h2 className="text-lg font-light">
+        Test, Learn, and Innovate with Confidence
+      </h2>
     </div>
   );
 }
@@ -85,7 +87,7 @@ function SandboxButton({
   title,
   description,
   image,
-  href
+  href,
 }: {
   comingSoon?: boolean;
   title: string;
@@ -101,7 +103,7 @@ function SandboxButton({
         comingSoon ? "cursor-default opacity-50" : "hover:bg-brand-amber-2"
       )}
       {...(comingSoon && {
-        onClick: (event) => event.preventDefault()
+        onClick: (event) => event.preventDefault(),
       })}
     >
       <h1 className="flex justify-between text-2xl">{title}</h1>

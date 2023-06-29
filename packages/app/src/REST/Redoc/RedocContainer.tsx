@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import * as Redoc from "redoc";
 
-import { topBarHeight } from "~/App/TopBar";
+import { TopBar } from "~/App/TopBar";
 import { Scroll } from "~/Scroll";
 import { Theme } from "~/Theme";
 
@@ -32,7 +32,7 @@ export function RedocContainer({ spec }: { spec?: object | undefined }) {
           sortEnumValuesAlphabetically: true,
           sortTagsAlphabetically: false,
           nativeScrollbars: false,
-          scrollYOffset: remToPx(topBarHeight())
+          scrollYOffset: remToPx(TopBar.height()),
         }}
         onLoaded={handleDeepLink}
       >

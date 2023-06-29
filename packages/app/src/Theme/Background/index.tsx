@@ -9,7 +9,7 @@ export function Background({
   children,
   title,
   sidebar,
-  sidebarBottom
+  sidebarBottom,
 }: Background) {
   const content = <div className="h-full w-full p-3">{children}</div>;
 

@@ -38,7 +38,7 @@ const meta = {
       description: "The color of the circle of the textarea",
       options: ["positive", "negative", "neutral"],
       control: { type: "select" },
-    }
+    },
   },
 } satisfies Meta<typeof Textarea>;
 

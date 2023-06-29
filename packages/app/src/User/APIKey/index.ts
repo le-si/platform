@@ -5,6 +5,7 @@ import { User } from "~/User";
 import { DateTime } from "~/Utilities";
 
 export * from "./APIKeys";
+
 export type APIKey = {
   key: string;
   created: DateTime;

@@ -25,24 +25,24 @@ Our current rate limit is 150 requests within 10 seconds.
 
 ## How do I get usage statistics for my account or API keys? {#usage-statistics}
 
-_Stay tuned! This is a planned feature.​_
+> Stay tuned! This is a planned feature.​
 
 ## Can I set up independent billing API keys? {#independent-billing}
 
-_Stay tuned! This is a planned feature.​_
+> Stay tuned! This is a planned feature.​
 
 In the meantime, if you need independent credit usage, you can create separate accounts.
 
 ## Where can I find uptime, latency, and status information for the API? {#api-status}
 
-_Stay tuned! This is a planned feature.​_
+> Stay tuned! This is a planned feature.​
 
 ## What are your policies regarding privacy and terms of service?
 
-Usage of the API is subject to the [Stability AI API Terms of Service](https://platform.stability.ai/docs/terms-of-service).
+Usage of the API is subject to the [Stability AI API Terms of Service](/legal/terms-of-service).
 
 Our privacy policy is available [here](https://dreamstudio.ai/privacy-policy).
 
 ---
 
-If you haven't found the answer to your question here, please feel free to contact support by clicking on the link in the sidebar!
+If you haven't found the answer to your question here, please feel free to [contact support](/support)

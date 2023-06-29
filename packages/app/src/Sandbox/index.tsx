@@ -1,24 +1,19 @@
 import { useWindowSize } from "react-use";
 
 import { Theme } from "~/Theme";
-import { User } from "~/User";
 
 import { Code } from "./Code";
 
-export function Sandbox({
+export function Sandbox<T extends Record<string, unknown>>({
   SandboxComponent,
   samples,
 }: {
-  SandboxComponent: React.FC<{
-    setOptions: (options: any) => void;
-  }>;
+  SandboxComponent: React.FC<{ setOptions: (options: T) => void }>;
   samples: Record<Code.Language, string>;
 }) {
-  const apiKey = User.AccessToken.use();
-
   const [showCode, setShowCode] = useState(true);
   const [codeLanguage, setCodeLanguage] = useState<Code.Language>("typescript");
-  const [options, setOptions] = useState<any>({});
+  const [options, setOptions] = useState<T>({} as T);
 
   const code = useMemo(() => {
     const hasActiveOption = Object.entries(options).find(

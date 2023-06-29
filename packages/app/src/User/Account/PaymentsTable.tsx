@@ -3,52 +3,50 @@ import { Billing } from "~/Billing";
 import { Background, Theme } from "~/Theme";
 import { DateTime } from "~/Utilities";
 
-export namespace Payments {
-  export function Table() {
-    const { data: payments, isLoading } = Billing.Payments.use();
+export function PaymentsTable() {
+  const { data: payments, isLoading } = Billing.Payments.use();
 
-    const rows = payments
-      ?.filter((payment) => payment.paid)
-      ?.map((payment, index, filteredPayments) => (
-        <PaymentRow
-          key={payment.id}
-          payment={payment}
-          isLastRow={index === filteredPayments?.length - 1}
-        />
-      ));
+  const rows = payments
+    ?.filter((payment) => payment.paid)
+    ?.map((payment, index, filteredPayments) => (
+      <PaymentRow
+        key={payment.id}
+        payment={payment}
+        isLastRow={index === filteredPayments?.length - 1}
+      />
+    ));
 
-    return (
-      <Background className="h-full w-full" title="Payments">
-        <table className="w-full text-left text-sm text-neutral-500 dark:text-neutral-400">
-          <thead className="text-xs uppercase text-neutral-700 dark:text-neutral-400">
-            <tr>
-              <th scope="col" className=" py-2">
-                Date
-              </th>
-              <th scope="col" className="w-2/6 py-2">
-                Credits
-              </th>
-            </tr>
-          </thead>
+  return (
+    <Background className="h-full w-full" title="Payments">
+      <table className="w-full text-left text-sm text-neutral-500 dark:text-neutral-400">
+        <thead className="text-xs uppercase text-neutral-700 dark:text-neutral-400">
+          <tr>
+            <th scope="col" className=" py-2">
+              Date
+            </th>
+            <th scope="col" className="w-2/6 py-2">
+              Credits
+            </th>
+          </tr>
+        </thead>
 
-          <tbody>
-            {isLoading ? (
-              <LoadingRows count={2} />
-            ) : rows?.length === 0 ? (
-              <NoDataRow />
-            ) : (
-              rows
-            )}
-          </tbody>
-        </table>
-      </Background>
-    );
-  }
+        <tbody>
+          {isLoading ? (
+            <LoadingRows count={2} />
+          ) : rows?.length === 0 ? (
+            <NoDataRow />
+          ) : (
+            rows
+          )}
+        </tbody>
+      </table>
+    </Background>
+  );
 }
 
 function PaymentRow({
   payment,
-  isLastRow
+  isLastRow,
 }: {
   payment: Billing.Payment;
   isLastRow: boolean;
@@ -93,7 +91,7 @@ function NoDataRow() {
 }
 
 function Row({
-  children
+  children,
 }: React.PropsWithChildren<{
   isLastRow?: boolean;
 }>) {
@@ -103,7 +101,7 @@ function Row({
 function Cell({
   children,
   className,
-  colSpan
+  colSpan,
 }: StyleableWithChildren & {
   colSpan?: number;
 }) {

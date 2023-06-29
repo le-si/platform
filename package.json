@@ -6,7 +6,7 @@
     "packages/*"
   ],
   "scripts": {
-    "postinstall": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\" && yarn build",
+    "prepare": "is-ci || husky install",
     "app": "yarn workspace @stability/app",
     "sdk": "yarn workspace @stability/sdk",
     "dev": "yarn workspaces foreach --all --interlaced --verbose --parallel --jobs unlimited run dev",
@@ -14,17 +14,11 @@
     "clean": "yarn workspaces foreach --all --interlaced --verbose --parallel --jobs unlimited run clean && rimraf node_modules"
   },
   "devDependencies": {
+    "@types/is-ci": "^3",
     "cross-env": "^7.0.3",
     "husky": "^8.0.3",
-    "lint-staged": "^13.1.2",
-    "rimraf": "^5.0.1",
-    "yarn": "^1.22.19"
-  },
-  "lint-staged": {
-    "./packages/**/*.{ts,tsx,js,jsx,md}": [
-      "prettier --write",
-      "eslint --fix"
-    ]
+    "is-ci": "^3.0.1",
+    "rimraf": "^5.0.1"
   },
   "resolutions": {
     "eslint-plugin-react-hooks@^4.6.0": "patch:eslint-plugin-react-hooks@^4.6.0#.yarn/patches/eslint-plugin-react-hooks-npm-4.6.0-b429fac07f.patch"

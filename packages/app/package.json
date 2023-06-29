@@ -25,6 +25,7 @@
     "@stability/sdk": "workspace:^",
     "@tanstack/react-query": "^4.29.12",
     "buffer": "^6.0.3",
+    "flexsearch": "0.7.21",
     "framer-motion": "^10.12.16",
     "highlight.js": "^11.8.0",
     "mobx": "^6.7.0",
@@ -57,6 +58,8 @@
     "@storybook/react-vite": "7.0.18",
     "@storybook/testing-library": "0.0.14-next.2",
     "@tailwindcss/typography": "^0.5.9",
+    "@types/flexsearch": "^0.7.3",
+    "@types/is-ci": "^3",
     "@types/react": "^18.2.7",
     "@types/react-dom": "^18.2.4",
     "@typescript-eslint/eslint-plugin": "^5.59.8",
@@ -73,6 +76,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
+    "lint-staged": "^13.2.2",
     "postcss": "^8.4.24",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
@@ -88,5 +92,11 @@
     "vite": "^4.3.9",
     "vite-plugin-image-optimizer": "^1.1.5",
     "vite-tsconfig-paths": "^4.2.0"
+  },
+  "lint-staged": {
+    "./src/**/*.{ts,tsx,js,jsx,md}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   }
 }

@@ -11,6 +11,7 @@ const main = () => {
   InputDirectory.setup();
   GenerationCommand.execute();
   PrependCode.execute();
+  Prettier.execute();
 };
 
 namespace GenerationCommand {
@@ -129,6 +130,14 @@ namespace PrependCode {
     });
 
   export const execute = () => iterateFilesInDirectory(OutputDirectory.path());
+}
+
+namespace Prettier {
+  export const execute = () => {
+    ChildProcess.execSync(
+      `yarn prettier --write ${OutputDirectory.path()} --loglevel silent`
+    );
+  };
 }
 
 main();

@@ -16,7 +16,7 @@ import { request } from "./OpenAPI";
 import * as Samples from "./Samples";
 
 export type ImageToImage = {
-  setOptions: (options: any) => void;
+  setOptions: (options: Record<string, unknown>) => void;
 };
 
 export function ImageToImage({ setOptions }: ImageToImage) {
@@ -36,7 +36,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
 
   const [cfgScale, setCfgScale] = useState<number>(7);
   const [steps, setSteps] = useState<number>(50);
-  const [seed, setSeed] = useState<number>(0);
+  const [seed] = useState<number>(0);
   const [init, setInit] = useState<
     | {
         file: Blob;

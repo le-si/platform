@@ -4,37 +4,37 @@ const onePixelBorder = "1px solid rgba(0, 0, 0, 0.12)";
 export const RedocCSS = css({
   // Vertically align the items in the left menu
   "& ul > li > label": {
-    alignItems: "center !important"
+    alignItems: "center !important",
   },
 
   ".redoc-wrap": {
-    width: "100% !important"
+    width: "100% !important",
   },
 
   ".api-content": {
-    width: "100% !important"
+    width: "100% !important",
   },
 
   ".api-content > div > div > div + div": {
     borderRadius: "16px !important",
     padding: "2rem !important",
     height: "fit-content !important",
-    backgroundColor: "#3f3f46 !important"
+    backgroundColor: "#3f3f46 !important",
     // maxWidth: "600px !important"
   },
 
   ".react-tabs__tab-panel": {
-    borderRadius: "16px !important"
+    borderRadius: "16px !important",
   },
 
   // Keep the "Authorization" open/close chevrons on the same line as the text
   "& h5 + svg": {
-    display: "inline"
+    display: "inline",
   },
 
   // Keep request body open/close chevrons on the same line as their text
   "& table tbody tr button > svg": {
-    display: "inline"
+    display: "inline",
   },
 
   "& .menu-content": {
@@ -42,28 +42,28 @@ export const RedocCSS = css({
     paddingTop: "8px",
     borderRight: onePixelBorder,
     "& a:last-of-type": {
-      borderRight: onePixelBorder
-    }
+      borderRight: onePixelBorder,
+    },
   },
 
   // Correction for the hacky way Redoc tries to show a hierarchy line
   "& table tbody tr": {
     "&:first-of-type:not(.last) > td:first-of-type": {
       backgroundImage:
-        "linear-gradient(to bottom, transparent 0%, transparent 1.38rem, rgb(124, 124, 187, 255) 1.32rem, rgb(124, 124, 187, 255) 100%)"
+        "linear-gradient(to bottom, transparent 0%, transparent 1.38rem, rgb(124, 124, 187, 255) 1.32rem, rgb(124, 124, 187, 255) 100%)",
     },
     "&.last:first-of-type > td:first-of-type": {
-      background: "none"
+      background: "none",
     },
     "&.last > td:first-of-type": {
       backgroundImage:
-        "linear-gradient(to bottom, rgb(124, 124, 187, 255) 0%, rgb(124, 124, 187, 255) 1.38rem, transparent 1.32rem, transparent 100%);"
-    }
+        "linear-gradient(to bottom, rgb(124, 124, 187, 255) 0%, rgb(124, 124, 187, 255) 1.38rem, transparent 1.32rem, transparent 100%);",
+    },
   },
 
   "& .scrollbar-container > div > a": {
-    display: "none"
-  }
+    display: "none",
+  },
 
   // // Inline code blocks in request body parameters (most common)
   // "& p > code": {

@@ -52,6 +52,10 @@ export function Table() {
   );
 }
 
+export namespace Table {
+  export const uri = () => "keys" as const;
+}
+
 function AddKeyButton() {
   const createAPIKey = User.APIKey.Create.use();
 

@@ -1,6 +1,7 @@
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { topBarHeight } from "~/App/TopBar";
+import { TopBar } from "~/App/TopBar";
 import { Theme } from "~/Theme";
+
 import { Documentation } from ".";
 
 function DocButton({
@@ -10,7 +11,7 @@ function DocButton({
   indent = 0,
   className,
   activeOverride,
-  softActiveOverride
+  softActiveOverride,
 }: Styleable &
   Partial<Documentation.Group> & {
     indent?: number;
@@ -60,42 +61,42 @@ function DocButton({
 export function Page() {
   const routes = Documentation.create();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (location.pathname === "/docs") {
       navigate("/docs/getting-started");
     }
-  }, [location.pathname]);
+  }, [navigate, location.pathname]);
 
   return (
     <div className="relative flex w-full gap-5 px-5">
       <div
         className="fixed mt-5 flex w-full max-w-[20rem] flex-col gap-5"
         style={{
-          top: topBarHeight()
+          top: TopBar.height(),
         }}
       >
-        <div className="bg-brand-amber-1 flex w-full flex-col overflow-hidden rounded-xl">
+        <div
+          id="redoc-sidebar-container"
+          className="bg-brand-amber-1 flex max-h-[calc(100vh-10.5rem)] w-full flex-col overflow-hidden overflow-y-auto rounded-xl"
+        >
           {routes.map((route) => (
             <DocButton key={route.name} {...route} />
           ))}
-        </div>
-        <div
-          id="redoc-sidebar-container"
-          className="bg-brand-amber-1 flex w-full flex-col overflow-hidden rounded-xl"
-        >
           <DocButton
             name="API Reference"
             route="/docs/api-reference"
-            children={[]}
             activeOverride={location.hash.length > 0}
-          />
+          >
+            {[]}
+          </DocButton>
         </div>
       </div>
       <div className="w-[20rem] shrink-0" />
       <div
         className={classes(
-          "mx-auto flex w-full max-w-[100rem] justify-center overflow-hidden"
+          "mx-auto flex w-full max-w-[100rem] justify-center overflow-x-visible"
         )}
       >
         <div className="flex w-full flex-col gap-6">

@@ -5,84 +5,29 @@ import { Theme } from "~/Theme";
 export function Overview() {
   return (
     <div className="flex flex-col gap-48">
-      <div className="mx-auto flex flex-col gap-32 px-5 2xl:max-w-[93rem] 2xl:px-0">
+      <div className="mx-auto flex w-full flex-col gap-32 px-5 2xl:max-w-[93rem] 2xl:px-0">
         <Header />
         <Sandboxes />
       </div>
       <Documentation />
-      <div className="mx-auto flex flex-col gap-64 px-5 2xl:max-w-[93rem] 2xl:px-0">
+      <div className="mx-auto mb-80 flex flex-col gap-64 px-5 2xl:max-w-[93rem] 2xl:px-0">
         <Others />
         <Testimonials />
-        <FAQ />
       </div>
     </div>
-  );
-}
-
-function Button({
-  children,
-  className,
-  link,
-  arrow,
-  onClick,
-  disabled,
-}: StyleableWithChildren & {
-  onClick?: () => void;
-  link?: string;
-  arrow?: boolean;
-  disabled?: boolean;
-}) {
-  const styles = classes(
-    "w-fit rounded-full bg-indigo-500 px-3 py-1 text-sm text-white duration-100 hover:bg-indigo-400 flex gap-2 items-center",
-    disabled && "opacity-50 cursor-not-allowed pointer-events-none",
-    className
-  );
-
-  if (link) {
-    return (
-      <Link to={link} className={styles}>
-        {children} {arrow && <Theme.Icon.Arrow />}
-      </Link>
-    );
-  }
-
-  return (
-    <button onClick={onClick} className={styles}>
-      {children} {arrow && <Theme.Icon.Arrow />}
-    </button>
   );
 }
 
 function Header() {
   return (
-    <div className="mt-24 flex w-full flex-col items-center gap-2">
+    <div className="mt-24 flex w-full flex-col items-center gap-4">
       <img src="/svg/sai-header.svg" />
-      <h2 className="mt-4 text-lg font-light">Stability AI Platform</h2>
-      <h1 className="text-center text-5xl font-extralight">
-        Explore the possibilities of generative AI
+      <h1 className="mt-2 text-center text-5xl font-extralight">
+        Stability AI Developer Platform
       </h1>
-    </div>
-  );
-}
-
-function GetStarted() {
-  return (
-    <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-      <div className="flex flex-col gap-4">
-        <h2 className="text-2xl font-light">Get Started</h2>
-        <img src="/svg/getstarted-cta.webp" className="select-none" />
-        <p>Learn how to get started with generative AI via our APIs.</p>
-        <Button>Learn More</Button>
-      </div>
-      <div className="flex flex-col gap-4">
-        <h2 className="text-2xl font-light">DreamStudio</h2>
-        <img src="/svg/dreamstudio-cta.webp" className="select-none" />
-        <p>
-          Learn about DreamStudio and StableStudio, Stability AI&apos;s image
-          generation applications.
-        </p>
-        <Button>Learn More</Button>
-      </div>
+      <h2 className="text-lg font-light">
+        Explore the possibilities of generative AI
+      </h2>
     </div>
   );
 }
@@ -130,7 +75,7 @@ function Documentation() {
       <div className="flex flex-col items-center gap-5">
         <img src="/svg/documentation-header.svg" />
         <h1 className="text-5xl font-extralight">Documentation</h1>
-        <div className="mt-28 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="mx-auto mt-28 grid grid-cols-1 gap-6 px-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:max-w-[93rem] 2xl:px-0">
           <DocumentCard
             svg="/svg/image-doc.webp"
             title="Image"
@@ -187,8 +132,8 @@ function SandboxCard({
 }) {
   const content = (
     <>
-      <div className="rounded-xl bg-white">
-        <img src={soon ? "/svg/soon-sandbox.webp" : svg} />
+      <div className="h-full w-full rounded-xl bg-white">
+        <img className="w-full" src={soon ? "/svg/soon-sandbox.webp" : svg} />
       </div>
       <div className="flex items-center gap-2">
         <h2
@@ -206,7 +151,7 @@ function SandboxCard({
     </>
   );
 
-  const styles = "flex flex-col gap-2 rounded-xl group";
+  const styles = "flex flex-col gap-2 rounded-xl group w-full";
 
   if (soon) {
     return <div className={styles}>{content}</div>;
@@ -221,8 +166,8 @@ function SandboxCard({
 
 function Sandboxes() {
   return (
-    <div className="mx-auto flex flex-col items-center gap-5 px-5 2xl:max-w-[93rem] 2xl:px-0">
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <div className="flex flex-col items-center gap-5">
+      <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <SandboxCard
           title="Text to Image"
           svg="/svg/text-image-sandbox.webp"
@@ -243,30 +188,6 @@ function Sandboxes() {
           svg="/svg/multi-prompting-sandbox.webp"
           link="/sandbox/multi-prompting"
         />
-        {/* <SandboxCard
-            title="Masking"
-            svg="/svg/masking-sandbox.webp"
-            link="/sandbox/masking"
-            soon
-          />
-          <SandboxCard
-            title="Animation"
-            svg="/svg/animation-sandbox.webp"
-            link="/sandbox/animation"
-            soon
-          />
-          <SandboxCard
-            title="Face enhancing"
-            svg="/svg/face-enhancing-sandbox.webp"
-            link="/sandbox/face-enhancing"
-            soon
-          />
-          <SandboxCard
-            title="Fine-Tuning"
-            svg="/svg/fine-tuning-sandbox.webp"
-            link="/sandbox/fine-tuning"
-            soon
-          /> */}
       </div>
       <Link
         to="/sandbox"
@@ -290,27 +211,23 @@ function OtherCard({
   linkName?: string;
 }) {
   return (
-    <a href={link} className="group flex flex-col gap-3">
+    <Link to={link} className="group flex flex-col gap-3">
       <h1 className="text-3xl font-extralight">{title}</h1>
       <img src={svg} />
-      <a
-        href={link}
+      <Link
+        to={link}
         className="flex items-center gap-2 text-sm font-semibold text-indigo-500 duration-100 group-hover:text-indigo-400"
       >
         {linkName ?? "Learn More"} <Theme.Icon.Arrow />
-      </a>
-    </a>
+      </Link>
+    </Link>
   );
 }
 
 function Others() {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      <OtherCard
-        title="Pricing"
-        svg="/svg/pricing.webp"
-        link="https://stability.ai/pricing"
-      />
+      <OtherCard title="Pricing" svg="/svg/pricing.webp" link="/pricing" />
       <OtherCard
         title="Support"
         svg="/svg/support.webp"
@@ -341,8 +258,4 @@ function Testimonials() {
       <img src="/svg/logos.svg" />
     </div>
   );
-}
-
-function FAQ() {
-  return <div></div>;
 }

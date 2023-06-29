@@ -16,6 +16,23 @@
   <body>
     <div id="app"></div>
     <div id="tooltip-root"></div>
+
+    <!--Google Analytics-->
+    <script
+      async
+      type="module"
+      src="https://www.googletagmanager.com/gtag/js?id=G-T57MVM2Q3C"
+    ></script>
+    <script async>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      gtag("js", new Date());
+      gtag("config", "G-T57MVM2Q3C");
+    </script>
+
     <script type="module" src="/src/index"></script>
   </body>
 </html>

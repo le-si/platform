@@ -15,7 +15,7 @@ import { request } from "./OpenAPI";
 import * as Samples from "./Samples";
 
 export type TextToImage = {
-  setOptions: (options: any) => void;
+  setOptions: (options: Record<string, unknown>) => void;
 };
 
 export function TextToImage({ setOptions }: TextToImage) {
@@ -33,11 +33,11 @@ export function TextToImage({ setOptions }: TextToImage) {
   const [style, setStyle] =
     useState<OpenAPI.TextToImageRequestBody["style_preset"]>("enhance");
 
-  const [width, setWidth] = useState<number>(512);
-  const [height, setHeight] = useState<number>(512);
+  const [width] = useState<number>(512);
+  const [height] = useState<number>(512);
   const [cfgScale, setCfgScale] = useState<number>(7);
   const [steps, setSteps] = useState<number>(50);
-  const [seed, setSeed] = useState<number>(0);
+  const [seed] = useState<number>(0);
 
   const generate = useCallback(async () => {
     if (!apiKey) return;

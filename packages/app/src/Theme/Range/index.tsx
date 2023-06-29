@@ -16,7 +16,7 @@ export function Range({
   title,
   min,
   max,
-  step
+  step,
 }: Range) {
   return (
     <div className="flex flex-col gap-2">

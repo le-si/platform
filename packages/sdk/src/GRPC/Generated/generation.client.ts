@@ -20,14 +20,20 @@ import type { RpcOptions } from "@protobuf-ts/runtime-rpc";
  * @generated from protobuf service gooseai.GenerationService
  */
 export interface IGenerationServiceClient {
-    /**
-     * @generated from protobuf rpc: Generate(gooseai.Request) returns (stream gooseai.Answer);
-     */
-    generate(input: Request, options?: RpcOptions): ServerStreamingCall<Request, Answer>;
-    /**
-     * @generated from protobuf rpc: ChainGenerate(gooseai.ChainRequest) returns (stream gooseai.Answer);
-     */
-    chainGenerate(input: ChainRequest, options?: RpcOptions): ServerStreamingCall<ChainRequest, Answer>;
+  /**
+   * @generated from protobuf rpc: Generate(gooseai.Request) returns (stream gooseai.Answer);
+   */
+  generate(
+    input: Request,
+    options?: RpcOptions
+  ): ServerStreamingCall<Request, Answer>;
+  /**
+   * @generated from protobuf rpc: ChainGenerate(gooseai.ChainRequest) returns (stream gooseai.Answer);
+   */
+  chainGenerate(
+    input: ChainRequest,
+    options?: RpcOptions
+  ): ServerStreamingCall<ChainRequest, Answer>;
 }
 /**
  *
@@ -36,24 +42,45 @@ export interface IGenerationServiceClient {
  *
  * @generated from protobuf service gooseai.GenerationService
  */
-export class GenerationServiceClient implements IGenerationServiceClient, ServiceInfo {
-    typeName = GenerationService.typeName;
-    methods = GenerationService.methods;
-    options = GenerationService.options;
-    constructor(private readonly _transport: RpcTransport) {
-    }
-    /**
-     * @generated from protobuf rpc: Generate(gooseai.Request) returns (stream gooseai.Answer);
-     */
-    generate(input: Request, options?: RpcOptions): ServerStreamingCall<Request, Answer> {
-        const method = this.methods[0], opt = this._transport.mergeOptions(options);
-        return stackIntercept<Request, Answer>("serverStreaming", this._transport, method, opt, input);
-    }
-    /**
-     * @generated from protobuf rpc: ChainGenerate(gooseai.ChainRequest) returns (stream gooseai.Answer);
-     */
-    chainGenerate(input: ChainRequest, options?: RpcOptions): ServerStreamingCall<ChainRequest, Answer> {
-        const method = this.methods[1], opt = this._transport.mergeOptions(options);
-        return stackIntercept<ChainRequest, Answer>("serverStreaming", this._transport, method, opt, input);
-    }
+export class GenerationServiceClient
+  implements IGenerationServiceClient, ServiceInfo
+{
+  typeName = GenerationService.typeName;
+  methods = GenerationService.methods;
+  options = GenerationService.options;
+  constructor(private readonly _transport: RpcTransport) {}
+  /**
+   * @generated from protobuf rpc: Generate(gooseai.Request) returns (stream gooseai.Answer);
+   */
+  generate(
+    input: Request,
+    options?: RpcOptions
+  ): ServerStreamingCall<Request, Answer> {
+    const method = this.methods[0],
+      opt = this._transport.mergeOptions(options);
+    return stackIntercept<Request, Answer>(
+      "serverStreaming",
+      this._transport,
+      method,
+      opt,
+      input
+    );
+  }
+  /**
+   * @generated from protobuf rpc: ChainGenerate(gooseai.ChainRequest) returns (stream gooseai.Answer);
+   */
+  chainGenerate(
+    input: ChainRequest,
+    options?: RpcOptions
+  ): ServerStreamingCall<ChainRequest, Answer> {
+    const method = this.methods[1],
+      opt = this._transport.mergeOptions(options);
+    return stackIntercept<ChainRequest, Answer>(
+      "serverStreaming",
+      this._transport,
+      method,
+      opt,
+      input
+    );
+  }
 }
