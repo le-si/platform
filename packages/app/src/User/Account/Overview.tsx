@@ -16,6 +16,11 @@ export function Overview() {
   );
 }
 
+export namespace Overview {
+  export const uri = () => "overview" as const;
+  export const url = () => `${User.Account.Page.url()}/${uri()}` as const;
+}
+
 function UserDetails() {
   const { user, isLoading } = User.use();
   const navigate = useNavigate();

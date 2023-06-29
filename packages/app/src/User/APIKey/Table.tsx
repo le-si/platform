@@ -54,6 +54,7 @@ export function Table() {
 
 export namespace Table {
   export const uri = () => "keys" as const;
+  export const url = () => `${User.Account.Page.url()}/${uri()}` as const;
 }
 
 function AddKeyButton() {

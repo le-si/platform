@@ -70,7 +70,7 @@ export function Page() {
   }, [navigate, location.pathname]);
 
   return (
-    <div className="relative flex w-full gap-5 px-5">
+    <div className="w-fullgap-5 relative flex px-8">
       <div
         className="fixed mt-5 flex w-full max-w-[20rem] flex-col gap-5"
         style={{
@@ -96,7 +96,7 @@ export function Page() {
       <div className="w-[20rem] shrink-0" />
       <div
         className={classes(
-          "mx-auto flex w-full max-w-[100rem] justify-center overflow-x-visible"
+          "mx-auto flex w-full justify-center overflow-x-visible md:max-w-[35rem] lg:max-w-[50rem] 2xl:max-w-[80rem]"
         )}
       >
         <div className="flex w-full flex-col gap-6">

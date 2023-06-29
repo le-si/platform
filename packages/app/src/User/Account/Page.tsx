@@ -11,7 +11,7 @@ function Component() {
   // redirect to /account/overview if no subpage is selected
   useEffect(() => {
     if (location.pathname === "/account") {
-      navigate("/account/overview");
+      navigate(User.Account.Overview.url());
     }
   }, [location.pathname, navigate]);
 
@@ -20,20 +20,20 @@ function Component() {
       <div className="flex w-full max-w-[20rem] flex-col gap-5">
         <div className="bg-brand-amber-1 flex w-full flex-col overflow-hidden rounded-xl">
           <Theme.NavButton
-            url="/account/overview"
-            active={location.pathname === "/account/overview"}
+            url={User.Account.Overview.url()}
+            active={location.pathname === User.Account.Overview.url()}
           >
             Account
           </Theme.NavButton>
           <Theme.NavButton
-            url="/account/billing"
-            active={location.pathname === "/account/billing"}
+            url={User.Account.Credits.url()}
+            active={location.pathname === User.Account.Credits.url()}
           >
             Billing
           </Theme.NavButton>
           <Theme.NavButton
-            url="/account/keys"
-            active={location.pathname === "/account/keys"}
+            url={User.APIKeys.Table.url()}
+            active={location.pathname === User.APIKeys.Table.url()}
           >
             API Keys
           </Theme.NavButton>
