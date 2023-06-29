@@ -11,9 +11,9 @@ any snippet of code performing a NodeJS-specific action will have a comment indi
 
 ### Getting an API Key
 
-If you're not signed up you'll need to do that first: https://dreamstudio.ai/
+If you're not signed up you'll need to do that first, so please click the login button in the top right.
 
-Then you can find your API key on this page: https://dreamstudio.ai/account
+Then you can find your API key [on the account page](/account/keys).
 
 ---
 
