@@ -8,6 +8,7 @@ export type Modal = StyleableWithChildren & {
   title?: string;
   containerClassName?: string;
   bottom?: React.ReactNode;
+  showCloseButton?: boolean;
 };
 
 function Backdrop({
@@ -22,7 +23,7 @@ function Backdrop({
   return (
     <motion.div
       className={classes(
-        "absolute inset-0 z-50 flex items-center justify-center",
+        "absolute inset-0 z-[9999] flex items-center justify-center",
         className
       )}
       variants={outSideVariants}
@@ -47,6 +48,7 @@ export function Modal({
   title,
   containerClassName,
   bottom,
+  showCloseButton = true,
 }: Modal) {
   useCloseOnEscapeKey(open, onClose);
 
@@ -67,24 +69,26 @@ export function Modal({
           >
             <div
               className={classes(
-                "bg-brand-amber-1 pointer-events-auto flex flex-col overflow-hidden rounded-xl",
+                "bg-brand-amber-1 pointer-events-auto flex flex-col overflow-hidden rounded-xl ",
                 className
               )}
             >
               {title && (
                 <div className="flex items-center justify-between p-4 pb-2 text-lg text-black">
                   {title}
-                  <button
-                    className="text-black duration-100 hover:text-black/50"
-                    onClick={onClose}
-                  >
-                    <Theme.Icon.X />
-                  </button>
+                  {showCloseButton && (
+                    <button
+                      className="text-black duration-100 hover:text-black/50"
+                      onClick={onClose}
+                    >
+                      <Theme.Icon.X />
+                    </button>
+                  )}
                 </div>
               )}
               <div
                 className={classes(
-                  "p-4 text-sm text-neutral-500",
+                  "p-4 pb-10 pt-20 text-sm text-neutral-500",
                   containerClassName
                 )}
               >

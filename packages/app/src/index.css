@@ -26,3 +26,8 @@ body {
 .scrollbar-container > div > a {
     display: none !important;
 }
+
+.modal:where(.modal-box){
+    width: unset !important;
+    max-width: unset !important;
+}
