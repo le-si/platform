@@ -1,6 +1,7 @@
 import * as React from "react";
 import { default as ReactMarkdown } from "react-markdown";
 import { default as supportForCodeHighlighting } from "rehype-highlight";
+import { default as supportForRawHTML } from "rehype-raw";
 import { default as supportForAutomaticHeaderIDs } from "rehype-slug";
 import { remarkHeadingId as supportForCustomHeaderIDs } from "remark-custom-heading-id";
 import { default as supportForGithubMarkdown } from "remark-gfm";
@@ -30,6 +31,7 @@ export function Markdown({
         supportForAutomaticHeaderIDs,
         supportForCodeHighlighting,
         AutoHeaderLinker.plugin(),
+        supportForRawHTML,
       ]}
       components={{
         code: Overrides.Code,
