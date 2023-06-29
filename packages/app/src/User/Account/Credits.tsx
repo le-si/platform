@@ -2,6 +2,7 @@ import { keyframes } from "@emotion/react";
 import React from "react";
 import { Billing } from "~/Billing";
 import { Background, Theme } from "~/Theme";
+import { User } from "~/User";
 import { isNumber } from "~/Utilities";
 
 import { PaymentsTable } from "./PaymentsTable";
@@ -23,6 +24,7 @@ export function Credits({ autoFocus }: { autoFocus: boolean }) {
 
 export namespace Credits {
   export const uri = () => "credits" as const;
+  export const url = () => `${User.Account.Page.url()}/${uri()}` as const;
 }
 
 function AvailableCredits() {
