@@ -106,7 +106,7 @@ export function TextToImage({ setOptions }: TextToImage) {
   return (
     <div className="flex h-full w-full flex-col gap-6 md:min-w-[55rem]">
       <Background
-        title="Text to Image"
+        title="Text-to-Image"
         className="h-full min-h-0 w-full"
         sidebar={
           <div className="flex h-fit w-full grow flex-col gap-3">

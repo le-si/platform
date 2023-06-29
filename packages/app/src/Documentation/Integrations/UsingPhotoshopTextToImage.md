@@ -1,4 +1,4 @@
-# Text to Image in Stability for Photoshop {#text-to-image}
+# Text-to-Image in Stability for Photoshop {#text-to-image}
 
 1. Once you've completed [Getting Started](/docs/integrations/UsingPhotoshopGettingStarted), you should see the following UI:
 
@@ -22,4 +22,4 @@ By default, we use the size of the document as the size of the generated image -
 
 ![](/Photoshop/engine_selection.png)
 
-Happy diffusing! Head over to our page on [Image to Image](/docs/integrations/photoshop/image-to-image) to learn how to use this plugin to generate new assets from your existing images.
+Happy diffusing! Head over to our page on [image-to-image](/docs/integrations/photoshop/image-to-image) to learn how to use this plugin to generate new assets from your existing images.

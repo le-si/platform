@@ -12,4 +12,4 @@ Enter your API key - you can get one [here](https://dreamstudio.ai/account). Pre
 
 ![](/Photoshop/default_screen.png)
 
-If you do, you are good to go! Head over to the [Text to Image](/docs/integrations/photoshop/text-to-image) page to learn how to use the plugin to generate images.
+If you do, you are good to go! Head over to the [text-to-image](/docs/integrations/photoshop/text-to-image) page to learn how to use the plugin to generate images.

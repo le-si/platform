@@ -27,13 +27,13 @@ function Sandboxes() {
   return (
     <div className="mb-24 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       <SandboxButton
-        title="Text to Image"
+        title="Text-to-Image"
         description="Generate images from text"
         href="/sandbox/text-to-image"
         image="/svg/sandboxes/text-to-image.webp"
       />
       <SandboxButton
-        title="Image to Image"
+        title="Image-to-Image"
         description="Generate images from images"
         href="/sandbox/image-to-image"
         image="/svg/sandboxes/image-to-image.webp"
@@ -66,7 +66,7 @@ function Sandboxes() {
       />
       <SandboxButton
         comingSoon
-        title="Outpainting"
+        title="Out-Painting"
         description="Expand images with AI"
         href="/sandbox/outpainting"
         image="/svg/sandboxes/outpainting.webp"

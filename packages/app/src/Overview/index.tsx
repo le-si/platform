@@ -169,12 +169,12 @@ function Sandboxes() {
     <div className="flex flex-col items-center gap-5">
       <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <SandboxCard
-          title="Text to Image"
+          title="Text-to-Image"
           svg="/svg/text-image-sandbox.webp"
           link="/sandbox/text-to-image"
         />
         <SandboxCard
-          title="Image to Image"
+          title="Image-to-Image"
           svg="/svg/image-image-sandbox.webp"
           link="/sandbox/image-to-image"
         />

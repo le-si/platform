@@ -18,4 +18,4 @@ Once you've completed [Getting Started](/docs/integrations/UsingPhotoshopGetting
 
 You may notice some artifacting on the edges of the inpainted region of your document. This is expected, and due to the upscaler itself. We are working on improving the upscaler to reduce this artifacting, but for now, it's best to avoid using the upscaler on images with large amounts of inpainting or other seams.
 
-Happy upscaling! Head over to our page on [Image to Image](/docs/integrations/photoshop/image-to-image) to learn how to use this plugin to generate new assets from your existing images, or [Text to Image](/docs/integrations/photoshop/text-to-image) to learn how to generate new images from scratch.
+Happy upscaling! Head over to our page on [image-to-image](/docs/integrations/photoshop/image-to-image) to learn how to use this plugin to generate new assets from your existing images, or [text-to-image](/docs/integrations/photoshop/text-to-image) to learn how to generate new images from scratch.
