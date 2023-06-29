@@ -35,10 +35,16 @@ const MODELS = [
     description: `Consists of a two-step pipeline for latent diffusion: First, we use a base model to generate latents of the desired output size. In the second step, we use a specialized high-resolution model and apply a technique called SDEdit (https://arxiv.org/abs/2108.01073, also known as "img2img") to the latents generated in the first step, using the same prompt.`,
     modality: "image",
     formula: (state: State): number =>
-      (((state.width * state.height - 169527) * state.steps) / 30) *
-      5.4e-8 *
-      100,
-    formulaStylized: "((width * height - 169527) * steps / 30) * 5.4e-8 * 100",
+      100 *
+      (state.steps === 30
+        ? 0.016
+        : state.steps === 50
+        ? 0.02
+        : 0.0122 +
+          0.000127 * state.steps +
+          0.000000623 * state.steps * state.steps),
+    formulaStylized:
+      "(100 * (steps === 30 ? 0.016 : steps === 50 ? 0.02 : 0.0122 + 0.000127 * steps + 0.000000623 * steps * steps))",
   },
   {
     name: "Stable Diffusion x4 Latent Upscaler",
