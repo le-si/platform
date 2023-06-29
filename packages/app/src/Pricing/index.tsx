@@ -316,7 +316,9 @@ export namespace Pricing {
               <span className="text-xl">=</span>
               <Theme.Icon.Token className="-mr-1 h-5 w-5 text-black" />
               <span className="text-xl font-bold">{price.toFixed(2)}</span>
-              <p className="text-sm italic opacity-50">(${price.toFixed(3)})</p>
+              <p className="text-sm italic opacity-50">
+                (${(price / 100).toFixed(3)})
+              </p>
               {/* <span className="opacity-40">
                 <span className="text-xl">/</span> per sample
               </span> */}
