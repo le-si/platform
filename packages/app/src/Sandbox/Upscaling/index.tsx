@@ -166,7 +166,7 @@ export function Buttons() {
         View Documentation
       </Button>
       <Button
-        link="https://github.com/Stability-AI/platform/blob/main/packages/app/src/Sandbox/Upscale/index.tsx"
+        link="https://github.com/Stability-AI/platform/blob/main/packages/app/src/Sandbox/Upscaling/index.tsx"
         variant="secondary"
       >
         View on GitHub

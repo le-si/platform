@@ -62,7 +62,7 @@ function Footer() {
           href="https://stability.ai"
           className="text-sm font-semibold hover:text-indigo-500"
         >
-          Stability.AI
+          Stability AI
         </a>
       </div>
       <div className="flex gap-6">
