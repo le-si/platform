@@ -1,10 +1,10 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const plugin = require("tailwindcss/plugin");
 
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 module.exports = {
   mode: "jit",
-  darkMode: ["class", '[data-mode="dark"]'],
+  darkMode: ["class", "[data-mode=\"dark\"]"],
 
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   plugins: [
@@ -20,13 +20,13 @@ module.exports = {
     logs: false,
     themes: [
       "light",
-    ],
+    ]
   },
   theme: {
     extend: {
       opacity: {
         muted: 0.75,
-        "muted-extra": 0.15,
+        "muted-extra": 0.15
       },
 
       colors: {
@@ -48,7 +48,7 @@ module.exports = {
         "brand-green": "#024f2f",
         "brand-positive": "#037847",
         "brand-negative": "#a6204b",
-        "brand-warning": "#faeae8",
+        "brand-warning": "#faeae8"
       },
 
       typography: {
@@ -56,11 +56,11 @@ module.exports = {
           css: {
             img: {
               marginTop: 0,
-              marginBottom: 0,
-            },
-          },
-        },
-      },
-    },
-  },
+              marginBottom: 0
+            }
+          }
+        }
+      }
+    }
+  }
 };

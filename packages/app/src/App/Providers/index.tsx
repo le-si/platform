@@ -1,3 +1,4 @@
+import { GlobalSearch } from "~/GlobalSearch";
 import { Remote } from "~/Remote";
 import { Router } from "~/Router";
 import { Theme } from "~/Theme";
@@ -8,7 +9,9 @@ export function Providers({ children }: React.PropsWithChildren) {
     <Router.Provider>
       <Remote.Provider>
         <User.Provider>
-          <Theme.Provider>{children}</Theme.Provider>
+          <Theme.Provider>
+            <GlobalSearch.Provider>{children}</GlobalSearch.Provider>
+          </Theme.Provider>
         </User.Provider>
       </Remote.Provider>
     </Router.Provider>

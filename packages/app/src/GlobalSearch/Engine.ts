@@ -75,7 +75,8 @@ export namespace Engine {
         });
 
         return results;
-      }, []);
+      }, [])
+      .sort((a, b) => b.matchCount - a.matchCount);
   }
 
   function countMatches(content: string, query: string) {
