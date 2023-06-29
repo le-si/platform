@@ -4,7 +4,7 @@ import { Theme } from "~/Theme";
 
 export function Overview() {
   return (
-    <div className="flex flex-col gap-48">
+    <div className="flex flex-col gap-20">
       <div className="mx-auto flex w-full flex-col gap-32 px-5 2xl:max-w-[93rem] 2xl:px-0">
         <Header />
         <Sandboxes />
@@ -71,11 +71,11 @@ function DocumentCard({
 
 function Documentation() {
   return (
-    <div className="bg-brand-amber-1 py-32">
+    <div className="bg-brand-amber-1 py-24">
       <div className="flex flex-col items-center gap-5">
         <img src="/svg/documentation-header.svg" />
         <h1 className="text-5xl font-extralight">Documentation</h1>
-        <div className="mx-auto mt-28 grid grid-cols-1 gap-6 px-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:max-w-[93rem] 2xl:px-0">
+        <div className="mx-auto mt-16 grid grid-cols-1 gap-6 px-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:max-w-[93rem] 2xl:px-0">
           <DocumentCard
             svg="/svg/image-doc.webp"
             title="Image"
