@@ -10,7 +10,7 @@ Follow all the steps [here](/docs/getting-started/typescript-client) to setup th
 
 ### 2. Make the request... {#make-the-request}
 
-```ts
+```typescript
 import fs from "fs";
 import * as Generation from "./generation/generation_pb";
 import {

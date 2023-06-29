@@ -58,25 +58,25 @@ export function Tooltip({
       case "top":
         setPosition({
           top: rect.top + window.scrollY - distance,
-          left: rect.left + window.screenX + rect.width / 2,
+          left: rect.left + rect.width / 2,
         });
         break;
       case "bottom":
         setPosition({
           top: rect.top + window.scrollY + rect.height + distance,
-          left: rect.left + window.screenX + rect.width / 2,
+          left: rect.left + rect.width / 2,
         });
         break;
       case "left":
         setPosition({
           top: rect.top + window.scrollY + rect.height / 2,
-          left: rect.left + window.screenX - distance,
+          left: rect.left - distance,
         });
         break;
       case "right":
         setPosition({
           top: rect.top + window.scrollY + rect.height / 2,
-          left: rect.left + window.screenX + rect.width + distance,
+          left: rect.left + rect.width + distance,
         });
         break;
     }

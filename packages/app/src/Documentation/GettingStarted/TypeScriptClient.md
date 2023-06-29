@@ -38,7 +38,7 @@ Install these using your package manager of choice:
 
 The examples under the `Features` section assume the following is in scope:
 
-```ts
+```typescript
 import * as Generation from "./generation/generation_pb";
 import { GenerationServiceClient } from "./generation/generation_pb_service";
 import { grpc as GRPCWeb } from "@improbable-eng/grpc-web";
@@ -67,7 +67,7 @@ The code samples in this documentation will use these helpers and will assume th
 
 Please paste the following into `helpers.ts`:
 
-```ts
+```typescript
 import * as Generation from "./generation/generation_pb";
 import { GenerationServiceClient } from "./generation/generation_pb_service";
 import { grpc as GRPCWeb } from "@improbable-eng/grpc-web";
