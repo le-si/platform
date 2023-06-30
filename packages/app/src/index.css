@@ -3,31 +3,33 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: "Inter";
-    src: url("/Inter.ttf") format("truetype");
+  font-family: "Inter";
+  src: url("/Inter.ttf") format("truetype");
 }
 
 html,
 body {
-    font-family: "Inter", sans-serif;
-    font-size: 15px;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+
+  overscroll-behavior: none;
 }
 
 @keyframes blink {
-    50% {
-        --tw-ring-opacity: 0
-    }
+  50% {
+    --tw-ring-opacity: 0;
+  }
 }
 
 .animate-blink-twice {
-    animation: blink 0.4s infinite alternate;
+  animation: blink 0.4s infinite alternate;
 }
 
 .scrollbar-container > div > a {
-    display: none !important;
+  display: none !important;
 }
 
-.modal:where(.modal-box){
-    width: unset !important;
-    max-width: unset !important;
+.modal:where(.modal-box) {
+  width: unset !important;
+  max-width: unset !important;
 }

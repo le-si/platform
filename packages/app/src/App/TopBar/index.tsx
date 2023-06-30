@@ -3,7 +3,6 @@ import { User } from "~/User";
 
 export function TopBar() {
   const isScrolledToTop = useIsScrolledToTop();
-
   return (
     <div
       className={classes(
