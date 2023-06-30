@@ -7,7 +7,6 @@ export function useRedocTheme(): RedocTheme {
   return {
     sidebar: {
       backgroundColor: "transparent",
-      padding: "0",
     },
     typography: {
       fontFamily: "Inter, sans-serif",
