@@ -12,6 +12,7 @@ export const Image = ({
       & > img {
         max-width: 100%;
         display: block;
+        border-radius: 0.5rem;
       }
     `}
   >
