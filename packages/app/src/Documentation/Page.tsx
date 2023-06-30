@@ -33,7 +33,6 @@ function DocButton({
           active && "active",
           (!children || (!redirect && location.pathname === route)) &&
             "active:bg-[#e4e4ce]"
-          // !(children && softActive) && "hover:bg-[#e4e4ce]"
         )}
         style={{
           marginLeft: `${indent * 1}rem`
