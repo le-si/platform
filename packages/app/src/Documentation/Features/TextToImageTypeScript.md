@@ -19,15 +19,15 @@ import {
   onGenerationComplete,
 } from "./helpers";
 
-const request = buildGenerationRequest("stable-diffusion-xl-beta-v2-2-2", {
+const request = buildGenerationRequest("stable-diffusion-xl-1024-v0-9", {
   type: "text-to-image",
   prompts: [
     {
-      text: "expansive landscape rolling greens with blue daisies and weeping willow trees under a blue alien sky, masterful, ghibli",
+      text: "expansive landscape rolling greens with blue daisies and yggdrasil under a blue alien sky, masterful, ghibli",
     },
   ],
-  width: 512,
-  height: 512,
+  width: 1024,
+  height: 1024,
   samples: 1,
   cfgScale: 8,
   steps: 30,

@@ -46,8 +46,8 @@ os.environ['STABILITY_KEY'] = 'key-goes-here'
 stability_api = client.StabilityInference(
     key=os.environ['STABILITY_KEY'], # API Key reference.
     verbose=True, # Print debug messages.
-    engine="stable-diffusion-xl-beta-v2-2-2", # Set the engine to use for generation.
-    # Available engines: stable-diffusion-v1 stable-diffusion-v1-5 stable-diffusion-512-v2-0 stable-diffusion-768-v2-0
+    engine="stable-diffusion-xl-1024-v0-9", # Set the engine to use for generation.
+    # Available engines: stable-diffusion-xl-1024-v0-9 stable-diffusion-v1 stable-diffusion-v1-5 stable-diffusion-512-v2-0 stable-diffusion-768-v2-0
     # stable-diffusion-512-v2-1 stable-diffusion-768-v2-1 stable-diffusion-xl-beta-v2-2-2 stable-inpainting-v1-0 stable-inpainting-512-v2-0
 )
 
@@ -57,18 +57,18 @@ stability_api = client.StabilityInference(
 
 ```python
 answers = stability_api.generate(
-    prompt="an ocean filled with various objects",
-    seed=9080980, # If a seed is provided, the resulting generated image will be deterministic.
+    prompt="beautiful night sky, anime style",
+    seed=1229080980, # If a seed is provided, the resulting generated image will be deterministic.
                     # What this means is that as long as all generation parameters remain the same, you can always recall the same image simply by generating it again.
                     # Note: This isn't quite the case for CLIP Guided generations, which we tackle in the CLIP Guidance documentation.
     steps=50, # Amount of inference steps performed on image generation. Defaults to 30.
     cfg_scale=8.0, # Influences how strongly your generation is guided to match your prompt.
                    # Setting this value higher increases the strength in which it tries to match your prompt.
                    # Defaults to 7.0 if not specified.
-    width=512, # Generation width, defaults to 512 if not included.
-    height=512, # Generation height, defaults to 512 if not included.
+    width=1024, # Generation width, if not included defaults to 512 or 1024 depending on the engine.
+    height=1024, # Generation height, if not included defaults to 512 or 1024 depending on the engine.
     samples=1, # Number of images to generate, defaults to 1 if not included.
-    sampler=generation.SAMPLER_K_DPMPP_SDE # Choose which sampler we want to denoise our generation with.
+    sampler=generation.SAMPLER_K_DPMPP_2M # Choose which sampler we want to denoise our generation with.
                                                  # Defaults to k_dpmpp_2m if not specified. Clip Guidance only supports ancestral samplers.
                                                  # (Available Samplers: ddim, plms, k_euler, k_euler_ancestral, k_heun, k_dpm_2, k_dpm_2_ancestral, k_dpmpp_2s_ancestral, k_lms, k_dpmpp_2m, k_dpmpp_sde)
 )
@@ -96,21 +96,21 @@ for resp in answers:
 # Note: With multi-prompting, we can provide each prompt a specific weight. Negative weights are used to prompt the model to avoid certain concepts.
 # Prompts with token lengths beyond 77 will be truncated. Default prompt weight is 1 if not specified.
 answers = stability_api.generate(
-    prompt= [generation.Prompt(text="an ocean filled with various objects",parameters=generation.PromptParameters(weight=1)),
-    generation.Prompt(text="fish",parameters=generation.PromptParameters(weight=-1.3))], 
+    prompt= [generation.Prompt(text="beautiful night sky, anime style",parameters=generation.PromptParameters(weight=1)),
+    generation.Prompt(text="poles",parameters=generation.PromptParameters(weight=-1))],
     # In the example above we are negative prompting fish out of the initial concept.
     # When determining prompt weights, the total possible range is [-10, 10] but we recommend staying within the range of [-2, 2].
-    seed=9080980, # If a seed is provided, the resulting generated image will be deterministic.
+    seed=1229080980, # If a seed is provided, the resulting generated image will be deterministic.
                     # What this means is that as long as all generation parameters remain the same, you can always recall the same image simply by generating it again.
                     # Note: This is only true for non-CLIP Guided generations.
     steps=50, # Amount of inference steps performed on image generation. Defaults to 30.
     cfg_scale=8.0, # Influences how strongly your generation is guided to match your prompt.
                    # Setting this value higher increases the strength in which it tries to match your prompt.
                    # Defaults to 7.0 if not specified.
-    width=512, # Generation width, defaults to 512 if not included.
-    height=512, # Generation height, defaults to 512 if not included.
+    width=1024, # Generation width, if not included defaults to 512 or 1024 depending on the engine.
+    height=1024, # Generation height, if not included defaults to 512 or 1024 depending on the engine.
     samples=1, # Number of images to generate, defaults to 1 if not included.
-    sampler=generation.SAMPLER_K_DPMPP_SDE # Choose which sampler we want to denoise our generation with.
+    sampler=generation.SAMPLER_K_DPMPP_2M # Choose which sampler we want to denoise our generation with.
                                                  # Defaults to k_dpmpp_2m if not specified. Clip Guidance only supports ancestral samplers.
                                                  # (Available Samplers: ddim, plms, k_euler, k_euler_ancestral, k_heun, k_dpm_2, k_dpm_2_ancestral, k_dpmpp_2s_ancestral, k_lms, k_dpmpp_2m, k_dpmpp_sde)
 )

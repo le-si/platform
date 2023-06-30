@@ -235,6 +235,7 @@ export function buildGenerationRequest(
   //  stable-inpainting-v1-0
   //  stable-inpainting-512-v2-0
   //  stable-diffusion-xl-beta-v2-2-2
+  // stable-diffusion-xl-1024-v0-9
   //  esrgan-v1-x2plus
   const request = new Generation.Request();
   request.setEngineId(engineID);

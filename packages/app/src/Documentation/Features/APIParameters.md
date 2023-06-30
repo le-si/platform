@@ -32,19 +32,43 @@ Measured in pixels. Pixel limit is `1048576`, so technically any dimension is al
 
 ### About Dimensions {#about-dimensions}
 
-A minimum of `262k` pixels and a maximum of `1.04m` pixels are recommended when generating images with `512x512` models, and a minimum of `589k` pixels and a maximum of `1.04m` pixels for `768x768` models. The true pixel limit is `1048576`.
+A minimum of `262k` pixels and a maximum of `1.04m` pixels are recommended when generating images with `512px` models, and a minimum of `589k` pixels and a maximum of `1.04m` pixels for `768px` models. The true pixel limit is `1048576`.
 
-To avoid the dreaded `6N IndexError` it is advised to use `64px` increments when choosing an aspect ratio. Popular ratio combinations for `512x512` models include `1536x512` and `1536x384`, while `1536x640` and `1024x576` are recommended for `768x768` models.
+To avoid the dreaded `6N IndexError` it is advised to use `64px` increments when choosing an aspect ratio. Popular ratio combinations for `512px` models include `1536 x 512` and `1536 x 384`, while `1536 x 640` and `1024 x 576` are recommended for `768px` models.
 
-For `512x512` models, the minimum useful sizes are `192-256` in one dimension. For `768x768` models the minimum useful size is `384` in one dimension.
+For `512px` models, the minimum useful sizes are `192-256` in one dimension. For `768px` models the minimum useful size is `384` in one dimension.
 
 Generating images under the recommended dimensions may result in undesirable artifacts.
 
-#### Note: `stable-diffusion-xl-beta-v2-2-2` comes with some special considerations with regard to the dimensions it can generate images at: 
+#### Note: `stable-diffusion-xl-beta-v2-2-2` AKA `SDXL Beta v0.8` comes with some special considerations with regard to the dimensions it can generate images at:
 
-- SDXL can generate images at a maximum of either `512x896` or `896x512`. 
+`stable-diffusion-xl-beta-v2-2-2` is a `512px` model and can generate images at a maximum of either `512 x 896` or `896 x 512`.
 
-- If either the width or the height (but not both) of an image generation request is greater than `512px`, the other side (width or height, respectively) cannot be beyond `512px` in dimension.
+If either the width or the height (but not both) of an image generation request is greater than `512px`, the other side (width or height, respectively) cannot be beyond `512px` in dimension.
+
+#### Note: `stable-diffusion-xl-1024-v0-9` AKA `SDXL v0.9` comes with some special considerations with regard to the dimensions it can generate images at:
+
+`stable-diffusion-xl-1024-v0-9` is a `1024px` model. However, it has also been trained to support multiple aspect ratios, a clear improvement over previous models that would often see repeated subjects / concepts in wide or tall aspect ratio generations.
+
+`stable-diffusion-xl-1024-v0-9` supports generating images at the following dimensions:
+
+- `1024 x 1024`
+
+- `1152 x 896`
+
+- `896 x 1152`
+
+- `1216 x 832`
+
+- `832 x 1216`
+
+- `1344 x 768`
+
+- `768 x 1344`
+
+- `1536 x 640`
+
+- `640 x 1536`
 
 <br/>
 
@@ -66,7 +90,7 @@ Number of images to generate. Allows for batch image generations.
 
 ### CFG Scale {#cfg_scale}
 
-Dictates how closely the engine attempts to match a generation to the provided prompt. v2-x models respond well to lower CFG (4-8), where as v1-x models respond well to a higher range (IE: 7-14).
+Dictates how closely the engine attempts to match a generation to the provided prompt. v2-x models respond well to lower CFG (IE: 4-8), where as v1-x models respond well to a higher range (IE: 7-14) and SDXL models respond well to a wider range (IE: 4-12).
 
 | Parameter | Default | Typical | Allowable | Affects Pricing? |
 | --------- | ------- | ------- | --------- | ---------------- |
@@ -82,24 +106,26 @@ Engine (model) to use. Available engines:
 - stable-diffusion-768-v2-0
 - stable-diffusion-512-v2-1
 - stable-diffusion-768-v2-1
-- (`SDXL`) stable-diffusion-xl-beta-v2-2-2 
-    - **Note:** At the API default settings (`30` Steps, `512x512` Dimensions), this model costs `0.5` credits per generated image. For additional information please check out the [SDXL Pricing Table](/docs/getting-started/credits-and-billing#sdxl-pricing-table). 
+- (`SDXL`) stable-diffusion-xl-beta-v2-2-2
+  - **Note:** This model has special pricing considerations. For additional information please check out the [SDXL Beta Pricing Table](/docs/getting-started/credits-and-billing#sdxl-pricing-tables).
+- (`SDXL`) stable-diffusion-xl-1024-v0-9
+  - **Note:** This model has special pricing considerations. For additional information please check out the [SDXL v0.9 Pricing Table](/docs/getting-started/credits-and-billing#sdxl-pricing-tables).
 - stable-inpainting-v1-0
 - stable-inpainting-512-v2-0
 - esrgan-v1-x2plus
 - stable-diffusion-x4-latent-upscaler
 
-| Parameter | Default                         | Typical                         | Allowable                       | Affects Pricing?                              |
-| --------- | ------------------------------- | ------------------------------- | ------------------------------- | --------------------------------------------- |
-| engine    | stable-diffusion-xl-beta-v2-2-2 | stable-diffusion-xl-beta-v2-2-2 | <a href="#engine">See Above<a>  | <a href="#engine">See Above<a>                |
+| Parameter | Default                       | Typical                       | Allowable                      | Affects Pricing?               |
+| --------- | ----------------------------- | ----------------------------- | ------------------------------ | ------------------------------ |
+| engine    | stable-diffusion-xl-1024-v0-9 | stable-diffusion-xl-1024-v0-9 | <a href="#engine">See Above<a> | <a href="#engine">See Above<a> |
 
 ### Image Upscaler {#image-upscaler}
 
 Dictates the parameters sent to our image upscaling engine. Check out the examples on our [Image Upscaling](/docs/features/image-upscaling) documentation to learn how to execute an image upscaling call via our gRPC API.
 
-| Parameter             | Default     | Typical     | Allowable                                                                                       | Affects Pricing? |
-| --------------------- | ----------- | ----------- | ----------------------------------------------------------------------------------------------- | ---------------- |
-| stability_api.upscale | init_image= | init_image= | init_image=, width= **or** height= (but not both), seed=, steps=, cfg_scale=, and prompt=       | Yes              |
+| Parameter             | Default     | Typical     | Allowable                                                                                 | Affects Pricing? |
+| --------------------- | ----------- | ----------- | ----------------------------------------------------------------------------------------- | ---------------- |
+| stability_api.upscale | init_image= | init_image= | init_image=, width= **or** height= (but not both), seed=, steps=, cfg_scale=, and prompt= | Yes              |
 
 ### Sampler {#sampler}
 
@@ -194,7 +220,6 @@ SDK CLI switch for opening artifacts using PIL.
 | --------- | ------- | ---------------- |
 | show      | --show  | No               |
 
-
-**Note:** This is a living page and may not be representative of all of the parameters currently available for image generation. 
+**Note:** This is a living page and may not be representative of all of the parameters currently available for image generation.
 
 Please check out our [protobuf reference](https://github.com/Stability-AI/api-interfaces/blob/main/src/proto/generation.proto) for a complete list of parameters available for image generation.

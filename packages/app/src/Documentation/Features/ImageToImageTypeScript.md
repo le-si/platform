@@ -31,19 +31,19 @@ import {
 // stepScheduleStart, which is done via the following formula: stepScheduleStart = 1 - imageStrength.  This means
 // an image strength of 40% would result in a stepScheduleStart of 0.6.
 const imageStrength = 0.4;
-const request = buildGenerationRequest("stable-diffusion-xl-beta-v2-2-2", {
+const request = buildGenerationRequest("stable-diffusion-xl-1024-v0-9", {
   type: "image-to-image",
   prompts: [
     {
-      text: "sketchy crayon outline on old paper of a rocket-ship launching from rolling greens with blue daisies and weeping willow trees under a blue alien sky",
+      text: "crayon drawing of rocket ship launching from forest",
     },
   ],
   stepScheduleStart: 1 - imageStrength,
   initImage: fs.readFileSync("./init_image.png"),
-  seed: 123467458,
+  seed: 121245125,
   samples: 1,
   cfgScale: 8,
-  steps: 30,
+  steps: 50,
   sampler: Generation.DiffusionSampler.SAMPLER_K_DPMPP_2M,
 });
 

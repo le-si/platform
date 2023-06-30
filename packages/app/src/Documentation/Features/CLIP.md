@@ -47,8 +47,8 @@ stability_api = client.StabilityInference(
     key=os.environ['STABILITY_KEY'], # API Key reference.
     verbose=True, # Print debug messages.
     engine="stable-diffusion-v1-5", # Set the engine to use for generation.
-    # Available engines: stable-diffusion-v1 stable-diffusion-v1-5 stable-diffusion-512-v2-0 stable-diffusion-768-v2-0 
-    # stable-diffusion-512-v2-1 stable-diffusion-768-v2-1 stable-diffusion-xl-beta-v2-2-2 (<- incompatible with CLIP Guidance) stable-inpainting-v1-0 stable-inpainting-512-v2-0 
+    # Available engines: stable-diffusion-v1 stable-diffusion-v1-5 stable-diffusion-512-v2-0 stable-diffusion-768-v2-0
+    # stable-diffusion-512-v2-1 stable-diffusion-768-v2-1 stable-diffusion-xl-beta-v2-2-2 stable-diffusion-xl-1024-v0-9 (<- SDXL is incompatible with CLIP Guidance) stable-inpainting-v1-0 stable-inpainting-512-v2-0
 )
 ```
 
@@ -67,7 +67,7 @@ answers = stability_api.generate(
     height=512, # Generation height, defaults to 512 if not included.
     sampler=generation.SAMPLER_K_DPMPP_2S_ANCESTRAL, # Choose which sampler we want to denoise our generation with. Defaults to k_dpmpp_2s_ancestral. CLIP Guidance only supports ancestral samplers.
                                                      # (Available Samplers: ddim, k_euler_ancestral, k_dpm_2_ancestral, k_dpmpp_2s_ancestral)
-    # guidance_preset=generation.GUIDANCE_PRESET_FAST_BLUE # Enables CLIP Guidance. 
+    # guidance_preset=generation.GUIDANCE_PRESET_FAST_BLUE # Enables CLIP Guidance.
                                                          # (Available Presets: _NONE, _FAST_BLUE, _FAST_GREEN)
 )
 
@@ -93,7 +93,7 @@ for resp in answers:
 # Set up our initial generation parameters.
 answers = stability_api.generate(
     prompt="expansive landscape rolling greens with blue daisies and weeping willow trees under a blue alien sky, masterful, ghibli",
-    seed=123126, # Note: Seeded CLIP Guided generations will attempt to stay near its original generation. 
+    seed=123126, # Note: Seeded CLIP Guided generations will attempt to stay near its original generation.
                  # However unlike non-clip guided inference, there's no way to guarantee a deterministic result, even with the same seed.
     steps=50, # Step Count defaults to 30 if not specified here.
     cfg_scale=7.0, # Influences how strongly your generation is guided to match your prompt. Setting this value higher increases the strength in which it tries to match your prompt. Defaults to 7.0 if not specified.
@@ -101,7 +101,7 @@ answers = stability_api.generate(
     height=512, # Generation height, defaults to 512 if not included.
     sampler=generation.SAMPLER_K_DPMPP_2S_ANCESTRAL, # Choose which sampler we want to denoise our generation with. Defaults to k_dpmpp_2s_ancestral. CLIP Guidance only supports ancestral samplers.
                                                      # (Available Samplers: ddim, k_euler_ancestral, k_dpm_2_ancestral, k_dpmpp_2s_ancestral)
-    guidance_preset=generation.GUIDANCE_PRESET_FAST_BLUE # Enables CLIP Guidance. 
+    guidance_preset=generation.GUIDANCE_PRESET_FAST_BLUE # Enables CLIP Guidance.
                                                          # (Available Presets: _NONE, _FAST_BLUE, _FAST_GREEN)
 )
 
