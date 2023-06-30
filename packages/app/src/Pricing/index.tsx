@@ -33,7 +33,8 @@ const MODELS = [
         min: 10,
         max: 150
       }
-    ]
+    ],
+    static: false
   },
   {
     name: "Stable Diffusion 1.5",
@@ -69,7 +70,8 @@ const MODELS = [
         min: 10,
         max: 150
       }
-    ]
+    ],
+    static: false
   },
   {
     name: "Stable Diffusion 2.1",
@@ -105,7 +107,8 @@ const MODELS = [
         min: 10,
         max: 150
       }
-    ]
+    ],
+    static: false
   },
   {
     name: "Stable Diffusion x4 Latent Upscaler",
@@ -114,7 +117,8 @@ const MODELS = [
     modality: "upscaling",
     formula: (_state: State): number => 0.2,
     formulaStylized: "0.2",
-    variables: []
+    variables: [],
+    static: true
   },
   {
     name: "Real-ESRGAN x2",
@@ -123,7 +127,8 @@ const MODELS = [
     modality: "upscaling",
     formula: (_state: State): number => 0.2,
     formulaStylized: "0.2",
-    variables: []
+    variables: [],
+    static: true
   }
 ];
 
@@ -157,6 +162,7 @@ function Model({ model }: { model: (typeof MODELS)[number] }) {
       </div>
       <div className="flex flex-col gap-8 md:items-end">
         <p className="text-lg">{model.description}</p>
+        <hr className="border-px w-full border-zinc-100" />
         <Pricing.Widget model={model} />
       </div>
     </div>
@@ -174,7 +180,7 @@ function ModelList({
 }) {
   return (
     <div className="mb-24 flex flex-col gap-12">
-      <div className="grid justify-between gap-2 border-zinc-500 bg-white py-4 sm:grid-cols-2">
+      <div className="grid justify-between gap-2 border-t border-zinc-500 bg-white py-4 sm:grid-cols-2">
         <div>
           <img className="h-80 rounded-3xl" src={image} alt={category} />
         </div>
@@ -276,11 +282,13 @@ export namespace Pricing {
       height: 512,
       steps: 50
     });
+    const [revealCalculator, setRevealCalculator] = React.useState(false);
 
     const price = model.formula(state);
 
     return (
       <div className="flex w-full flex-col gap-6">
+        <p>Credit Calculator</p>
         {model.variables.length > 0 && (
           <div className="flex flex-wrap justify-start gap-3">
             {model.variables.map((variable) => (
@@ -305,26 +313,44 @@ export namespace Pricing {
             ))}
           </div>
         )}
-        <div className="bg-brand-amber-2 flex flex-col gap-1 rounded-xl border border-zinc-300 p-3">
-          <div className="flex flex-wrap items-center gap-3">
-            <p className="flex items-center gap-2 font-mono">
-              <Code className="bg-transparent p-0 opacity-75">
-                {model.formulaStylized}
-              </Code>
-            </p>
+        <div className="flex flex-col gap-1 rounded-xl bg-zinc-100 p-3">
+          <p className="text-sm">Credit Cost</p>
+          <div className="flex items-end justify-between gap-3">
             <div className="flex items-center gap-2">
-              <span className="text-xl">=</span>
               <Theme.Icon.Token className="-mr-1 h-5 w-5 text-black" />
               <span className="text-xl font-bold">{price.toFixed(2)}</span>
               <p className="text-sm italic opacity-50">
                 (${(price / 100).toFixed(3)})
               </p>
-              {/* <span className="opacity-40">
-                <span className="text-xl">/</span> per sample
-              </span> */}
             </div>
+            {!model.static && (
+              <button
+                onClick={() => setRevealCalculator(!revealCalculator)}
+                className="flex gap-1 text-sm opacity-80 hover:opacity-100"
+              >
+                {revealCalculator ? "Hide" : "Show"} Calculation{" "}
+                <Theme.Icon.ChevronRight
+                  className={classes(
+                    "h-5 w-5 duration-100",
+                    revealCalculator ? "rotate-180 transform" : ""
+                  )}
+                />
+              </button>
+            )}
           </div>
+          {revealCalculator && (
+            <p className="mt-6 flex items-center gap-2 font-mono">
+              <Code className="bg-transparent p-0 text-xs opacity-75">
+                {model.formulaStylized}
+              </Code>
+            </p>
+          )}
         </div>
+        {model.static && (
+          <p className="text-sm italic opacity-75">
+            Credit cost is static for this model.
+          </p>
+        )}
       </div>
     );
   }
