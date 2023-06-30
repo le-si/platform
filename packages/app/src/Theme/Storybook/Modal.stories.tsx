@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import "../../GlobalVariables";
 
-import { Modal } from "../Modal";
+import { Modal, Props } from "../Modal";
 import { Input } from "../Input";
 import { Button } from "../Button";
 
-function ModalDemo(props: Modal) {
+function ModalDemo(props: Props) {
   const [open, setOpen] = React.useState(false);
 
   return (

@@ -3,6 +3,7 @@ import { useWindowSize } from "react-use";
 import { Theme } from "~/Theme";
 
 import { Code } from "./Code";
+import { List } from "./List";
 
 export function Sandbox<T extends Record<string, unknown>>({
   SandboxComponent,
@@ -58,4 +59,12 @@ export function Sandbox<T extends Record<string, unknown>>({
       </div>
     </div>
   );
+}
+
+export declare namespace Sandbox {
+  export { List };
+}
+
+export namespace Sandbox {
+  Sandbox.List = List;
 }

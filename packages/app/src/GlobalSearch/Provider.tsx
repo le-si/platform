@@ -11,7 +11,7 @@ export function Provider({ children }: React.PropsWithChildren) {
 
   /** @see https://react-hotkeys-hook.vercel.app */
   useHotkeys(["meta+k", "ctrl+k"], () => setIsOpen(!isOpen), {
-    enableOnFormTags: ["INPUT"],
+    enableOnFormTags: ["INPUT", "TEXTAREA"],
     preventDefault: ({ key, ctrlKey, metaKey }) =>
       key === "k" && (ctrlKey || metaKey),
   });
