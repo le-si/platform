@@ -34,6 +34,7 @@ import UsingPhotoshopGettingStarted from "./Integrations/UsingPhotoshopGettingSt
 import UsingPhotoshopImageToImage from "./Integrations/UsingPhotoshopImageToImage.md?raw";
 import UsingPhotoshopTextToImage from "./Integrations/UsingPhotoshopTextToImage.md?raw";
 import UsingPhotoshopUpscaler from "./Integrations/UsingPhotoshopUpscaler.md?raw";
+import { ListPage } from "./ListPage";
 import { Page } from "./Page";
 import releaseNotes from "./ReleaseNotes.md?raw";
 
@@ -81,7 +82,6 @@ export namespace Documentation {
         imageURL: "/RocketLaunch.png",
         summary:
           "Learn how to authenticate, use credits, and make calls to our APIs.",
-        redirect: "/docs/getting-started/authentication",
         children: [
           {
             name: "Authentication",
@@ -124,7 +124,6 @@ export namespace Documentation {
         route: "/docs/features",
         imageURL: "/PaintingRobot.png",
         summary: "Try out our gRPC clients for Python and TypeScript.",
-        redirect: "/docs/features/api-parameters",
         children: [
           {
             name: "Parameters",
@@ -290,7 +289,6 @@ export namespace Documentation {
         imageURL: "/Photoshop/PipeBoys.png",
         summary:
           "Learn how to use the official Stability integrations for Blender and Photoshop.",
-        redirect: "/docs/integrations/blender",
 
         children: [
           {
@@ -299,7 +297,6 @@ export namespace Documentation {
             summary:
               "Learn how to use the Stability plugin to generate images, animations and textures right inside Blender.",
             imageURL: "/Blender/fancy_city.png",
-            redirect: "/docs/integrations/blender/install",
             children: [
               {
                 name: "Installing",
@@ -391,12 +388,14 @@ export namespace Documentation {
           const element =
             !group.content && group.redirect ? (
               <Navigate to={group.redirect} replace />
-            ) : typeof group.content === "string" ? (
+            ) : typeof group.content === "string" && !group.children ? (
               <div className="mx-auto w-full max-w-full text-left">
                 <Markdown className="w-full max-w-full 2xl:max-w-full">
                   {group.content}
                 </Markdown>
               </div>
+            ) : group.children ? (
+              <ListPage group={group} />
             ) : (
               group.content
             );

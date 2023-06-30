@@ -11,7 +11,8 @@ function DocButton({
   indent = 0,
   className,
   activeOverride,
-  childrenOverride
+  childrenOverride,
+  redirect
 }: Styleable &
   Partial<Documentation.Group> & {
     indent?: number;
@@ -30,7 +31,8 @@ function DocButton({
         className={classes(
           "overflow-hidden rounded-lg text-black/75 duration-75 hover:bg-black/10 hover:text-black active:text-black",
           active && "active",
-          !children && "active:bg-[#e4e4ce]"
+          (!children || (!redirect && location.pathname === route)) &&
+            "active:bg-[#e4e4ce]"
           // !(children && softActive) && "hover:bg-[#e4e4ce]"
         )}
         style={{
@@ -44,6 +46,8 @@ function DocButton({
             className
           )}
           onClick={(e) => {
+            if (!redirect && children && location.pathname !== route) return;
+
             if (children && active) {
               e.preventDefault();
               setExpanded(!expanded);
