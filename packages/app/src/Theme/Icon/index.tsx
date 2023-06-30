@@ -4,12 +4,14 @@ import { Arrow } from "./Arrow";
 import { Check } from "./Check";
 import { ChevronRight } from "./ChevronRight";
 import { Code } from "./Code";
+import { Coin } from "./Coin";
 import { Copy } from "./Copy";
 import { Engine } from "./Engine";
 import { ExternalLink } from "./ExternalLink";
 import { Eye } from "./Eye";
 import { EyeOff } from "./EyeOff";
 import { GridBlocks } from "./GridBlocks";
+import { Help } from "./Help";
 import { Image } from "./Image";
 import { Info } from "./Info";
 import { Link } from "./Link";
@@ -51,7 +53,9 @@ export declare namespace Icon {
     Python,
     TypeScript,
     ChevronRight,
-    Token
+    Token,
+    Coin,
+    Help
   };
 }
 
@@ -79,4 +83,6 @@ export namespace Icon {
   Icon.TypeScript = TypeScript;
   Icon.ChevronRight = ChevronRight;
   Icon.Token = Token;
+  Icon.Coin = Coin;
+  Icon.Help = Help;
 }
