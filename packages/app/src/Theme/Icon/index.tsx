@@ -55,7 +55,7 @@ export declare namespace Icon {
     ChevronRight,
     Token,
     Coin,
-    Help
+    Help,
   };
 }
 

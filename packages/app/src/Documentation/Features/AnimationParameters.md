@@ -36,7 +36,7 @@ These are general parameters that can influence the resulting animations regardl
 | Use Inpainting Model          | use_inpainting_model    | Off                    | On/Off                                                                 | Yes             | No              |
 | FPS                           | fps                     | 12                     | >0                                                                     | No              | No              |
 | Mask Min Value                | mask_min_value          | 0.25                   | 0.05 - 0.5                                                             | Yes             | No              |
-| Mask Binarization THR         | mask_binarization_thr	  | 0.5	                   | 0 - 1	                                                                | No	          | No              |
+| Mask Binarization THR         | mask_binarization_thr   | 0.5                    | 0 - 1                                                                  | No              | No              |
 
 #### **Available Models:** {#available-models}
 
@@ -47,9 +47,10 @@ These are general parameters that can influence the resulting animations regardl
 - stable-diffusion-512-v2-1
 - stable-diffusion-768-v2-1
 - stable-diffusion-xl-beta-v2-2-2
+- stable-diffusion-xl-1024-v0-9
 - stable-diffusion-depth-v2-0
 
-**Note:** `stable-diffusion-xl-beta-v2-2-2` has special dimension considerations that need to be adhered to. Please read check out this section of our [Parameters](https://platform.stability.ai/docs/features/api-parameters#about-dimensions) page to learn more.
+**Note:** `stable-diffusion-xl-beta-v2-2-2` and `stable-diffusion-xl-1024-v0-9` have special dimension considerations. Please check out this section of our [API Parameters](https://platform.stability.ai/docs/features/api-parameters#about-dimensions) page to learn more.
 
 #### **Available Samplers:** {#available-samplers}
 
@@ -85,7 +86,7 @@ When **Animate Colour Match** is on, an extra image is generated for each key-fr
 
 ## 2D & 3D Parameters {#2d-&-3d-parameters}
 
-Camera parameters that can be keyframed across the duration of your animation. Accepts positive and negative values, with negative operating in the inverse direction of the positive. Usually, these parameters are unbounded in terms of value range. 
+Camera parameters that can be keyframed across the duration of your animation. Accepts positive and negative values, with negative operating in the inverse direction of the positive. Usually, these parameters are unbounded in terms of value range.
 
 | Parameters    | SDK Parameter Name | Default | Allowable    | Keyframe Syntax |
 | ------------- | ------------------ | ------- | ------------ | --------------- |

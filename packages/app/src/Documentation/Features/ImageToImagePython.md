@@ -46,8 +46,8 @@ os.environ['STABILITY_KEY'] = 'key-goes-here'
 stability_api = client.StabilityInference(
     key=os.environ['STABILITY_KEY'], # API Key reference.
     verbose=True, # Print debug messages.
-    engine="stable-diffusion-xl-beta-v2-2-2", # Set the engine to use for generation.
-    # Available engines: stable-diffusion-v1 stable-diffusion-v1-5 stable-diffusion-512-v2-0 stable-diffusion-768-v2-0
+    engine="stable-diffusion-xl-1024-v0-9", # Set the engine to use for generation.
+    # Available engines: stable-diffusion-xl-1024-v0-9 stable-diffusion-v1 stable-diffusion-v1-5 stable-diffusion-512-v2-0 stable-diffusion-768-v2-0
     # stable-diffusion-512-v2-1 stable-diffusion-768-v2-1 stable-diffusion-xl-beta-v2-2-2 stable-inpainting-v1-0 stable-inpainting-512-v2-0
 )
 ```
@@ -57,16 +57,16 @@ stability_api = client.StabilityInference(
 ```python
 # Set up our initial generation parameters.
 answers = stability_api.generate(
-    prompt="a rocket-ship launching from rolling greens with blue daisies and weeping willow trees under a blue alien sky, artstation, masterful, ghibli",
-    seed=892226758, # If a seed is provided, the resulting generated image will be deterministic.
+    prompt="rocket ship launching from forest with flower garden under a blue sky, masterful, ghibli",
+    seed=121245125, # If a seed is provided, the resulting generated image will be deterministic.
                     # What this means is that as long as all generation parameters remain the same, you can always recall the same image simply by generating it again.
                     # Note: This isn't quite the case for CLIP Guided generations, which we tackle in the CLIP Guidance documentation.
-    steps=30, # Amount of inference steps performed on image generation. Defaults to 30.
+    steps=50, # Amount of inference steps performed on image generation. Defaults to 30.
     cfg_scale=8.0, # Influences how strongly your generation is guided to match your prompt.
                    # Setting this value higher increases the strength in which it tries to match your prompt.
                    # Defaults to 7.0 if not specified.
-    width=512, # Generation width, defaults to 512 if not included.
-    height=512, # Generation height, defaults to 512 if not included.
+    width=1024, # Generation width, defaults to 512 if not included.
+    height=1024, # Generation height, defaults to 512 if not included.
     sampler=generation.SAMPLER_K_DPMPP_2M # Choose which sampler we want to denoise our generation with.
                                                  # Defaults to k_dpmpp_2m if not specified. Clip Guidance only supports ancestral samplers.
                                                  # (Available Samplers: ddim, plms, k_euler, k_euler_ancestral, k_heun, k_dpm_2, k_dpm_2_ancestral, k_dpmpp_2s_ancestral, k_lms, k_dpmpp_2m, k_dpmpp_sde)
@@ -93,17 +93,17 @@ for resp in answers:
 ```python
 # Set up our initial generation parameters.
 answers2 = stability_api.generate(
-    prompt="sketchy crayon outline on old paper of a rocket-ship launching from rolling greens with blue daisies and weeping willow trees under a blue alien sky",
+    prompt="crayon drawing of rocket ship launching from forest",
     init_image=img, # Assign our previously generated img as our Initial Image for transformation.
     start_schedule=0.6, # Set the strength of our prompt in relation to our initial image.
-    seed=123467458, # If attempting to transform an image that was previously generated with our API,
+    seed=123463446, # If attempting to transform an image that was previously generated with our API,
                     # initial images benefit from having their own distinct seed rather than using the seed of the original image generation.
-    steps=30, # Amount of inference steps performed on image generation. Defaults to 30.
+    steps=50, # Amount of inference steps performed on image generation. Defaults to 30.
     cfg_scale=8.0, # Influences how strongly your generation is guided to match your prompt.
                    # Setting this value higher increases the strength in which it tries to match your prompt.
                    # Defaults to 7.0 if not specified.
-    width=512, # Generation width, defaults to 512 if not included.
-    height=512, # Generation height, defaults to 512 if not included.
+    width=1024, # Generation width, defaults to 512 if not included.
+    height=1024, # Generation height, defaults to 512 if not included.
     sampler=generation.SAMPLER_K_DPMPP_2M # Choose which sampler we want to denoise our generation with.
                                                  # Defaults to k_dpmpp_2m if not specified. Clip Guidance only supports ancestral samplers.
                                                  # (Available Samplers: ddim, plms, k_euler, k_euler_ancestral, k_heun, k_dpm_2, k_dpm_2_ancestral, k_dpmpp_2s_ancestral, k_lms, k_dpmpp_2m, k_dpmpp_sde)

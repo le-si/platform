@@ -4,6 +4,8 @@ Image upscaling is an effective way to enlarge both local images and images gene
 
 A key advantage of `stable-diffusion-x4-latent-upscaler`, although slower and more expensive than `esrgan-v1-x2plus`, is its ability to use the diffusion process in a similar manner to how our Stable Diffusion models work to increase the perceived level of detail while upscaling the input image.
 
+Please note that it is possible to generate images with our models that may not be able to be passed into an upscaler in the same API call. For example, if you generate an image with a resolution of `1024 x 1024`, you will not be able to pass that image into the `stable-diffusion-x4-latent-upscaler` engine as the input limit for that engine is `512 x 768`.
+
 **Note:** While the `stable-diffusion-x4-latent-upscaler` engine can be invoked via our existing TypeScript client, these additional optional parameters are not yet available:
 
 - `prompt`

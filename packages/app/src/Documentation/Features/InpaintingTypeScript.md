@@ -12,13 +12,13 @@ Follow all the steps [here](/docs/getting-started/typescript-client) to setup th
 
 ### Given the following ... {#init-image}
 
-- `512x512` init image residing at `./init_image.png`:
+- `1024x1024` init image residing at `./init_image.png`:
 
-![Init Image](/Inpainting-C2.png)
+![Init Image](/Inpainting-C1.png)
 
-- `512x512` mask image residing at `./mask_image.png`:
+- `1024x1024` mask image residing at `./mask_image.png`:
 
-![Mask Image](/Inpainting-C4.png)
+![Mask Image](/Inpainting-C3.png)
 
 ### 2. Make the request... {#make-the-request}
 
@@ -31,19 +31,19 @@ import {
   onGenerationComplete,
 } from "./helpers";
 
-const request = buildGenerationRequest("stable-diffusion-xl-beta-v2-2-2", {
+const request = buildGenerationRequest("stable-diffusion-xl-1024-v0-9", {
   type: "image-to-image-masking",
   initImage: fs.readFileSync("./init_image.png"),
   maskImage: fs.readFileSync("./mask_image.png"),
   prompts: [
     {
-      text: "rainbow galactic nebula, star-filled sky, spectral, psychedelic, masterpiece",
+      text: "rainbow starship",
     },
   ],
-  seed: 1823948,
+  seed: 44332211,
   samples: 1,
   cfgScale: 8,
-  steps: 30,
+  steps: 50,
   sampler: Generation.DiffusionSampler.SAMPLER_K_DPMPP_2M,
 });
 
@@ -56,7 +56,7 @@ executeGenerationRequest(client, request, metadata)
 
 ### Resulting image written to `image-<seed>.png`:
 
-![Result](/Inpainting-C5.png)
+![Result](/Inpainting-C4.png)
 
 **Note:** This is not representative of all of the parameters available for image generation.
 

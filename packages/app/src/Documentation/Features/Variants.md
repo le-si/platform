@@ -48,8 +48,8 @@ os.environ['STABILITY_KEY'] = 'key-goes-here'
 stability_api = client.StabilityInference(
     key=os.environ['STABILITY_KEY'], # API Key reference.
     verbose=True, # Print debug messages.
-    engine="stable-diffusion-xl-beta-v2-2-2", # Set the engine to use for generation.
-    # Available engines: stable-diffusion-v1 stable-diffusion-v1-5 stable-diffusion-512-v2-0 stable-diffusion-768-v2-0
+    engine="stable-diffusion-xl-1024-v0-9", # Set the engine to use for generation.
+    # Available engines: stable-diffusion-xl-1024-v0-9 stable-diffusion-v1 stable-diffusion-v1-5 stable-diffusion-512-v2-0 stable-diffusion-768-v2-0
     # stable-diffusion-512-v2-1 stable-diffusion-768-v2-1 stable-diffusion-xl-beta-v2-2-2 stable-inpainting-v1-0 stable-inpainting-512-v2-0
 )
 ```
@@ -59,18 +59,18 @@ stability_api = client.StabilityInference(
 ```python
 # Set up our initial generation parameters.
 answers = stability_api.generate(
-    prompt="Giant ice cream cone melting and creating a river through a city, with boats floating down it, high detail, fast-paced, wide angled, aerial view, colorful, fun, stylized graphics",
-    seed=112446758, # If a seed is provided, the resulting generated image will be deterministic.
+    prompt="single sticker illustration ice cream cone highly detailed, simple background",
+    seed=112446111, # If a seed is provided, the resulting generated image will be deterministic.
                     # What this means is that as long as all generation parameters remain the same, you can always recall the same image simply by generating it again.
                     # Note: This isn't quite the case for CLIP Guided generations, which we tackle in the CLIP Guidance documentation.
     steps=50, # Step Count defaults to 50 if not specified here.
     cfg_scale=8.0, # Influences how strongly your generation is guided to match your prompt.
                    # Setting this value higher increases the strength in which it tries to match your prompt.
                    # Defaults to 7.0 if not specified.
-    width=512, # Generation width, defaults to 512 if not included.
-    height=512, # Generation height, defaults to 512 if not included.
+    width=1024, # Generation width, if not included defaults to 512 or 1024 depending on the engine.
+    height=1024, # Generation height, if not included defaults to 512 or 1024 depending on the engine.
     samples=1, # Number of images to generate, defaults to 1 if not included.
-    sampler=generation.SAMPLER_K_DPMPP_2S_ANCESTRAL # Choose which sampler we want to denoise our generation with.
+    sampler=generation.SAMPLER_K_DPMPP_2M # Choose which sampler we want to denoise our generation with.
                                                  # Defaults to k_dpmpp_2m if not specified. Clip Guidance only supports ancestral samplers.
                                                  # (Available Samplers: ddim, plms, k_euler, k_euler_ancestral, k_heun, k_dpm_2, k_dpm_2_ancestral, k_dpmpp_2s_ancestral, k_lms, k_dpmpp_2m, k_dpmpp_sde)
 )
@@ -100,16 +100,16 @@ By changing only the seed we can use our previous generation as a base for our n
 ```python
 # Set up our initial generation parameters.
 answers = stability_api.generate(
-    prompt="Giant ice cream cone melting and creating a river through a city, with boats floating down it, high detail, fast-paced, wide angled, aerial view, colorful, fun, stylized graphics",
+    prompt="single sticker illustration ice cream cone highly detailed, simple background",
     init_image=img, # Assign our previously generated img as our Initial Image for transformation.
     start_schedule=0.7, # Set the strength of our prompt in relation to our initial image.
-    seed=123467458, # If attempting to transform an image that was previously generated with our API, initial images benefit from having their own distinct seed rather than using the seed of the original image generation.
-    steps=30, # Amount of inference steps performed on image generation. Defaults to 30. 
+    seed=2413523623, # If attempting to transform an image that was previously generated with our API, initial images benefit from having their own distinct seed rather than using the seed of the original image generation.
+    steps=50, # Amount of inference steps performed on image generation. Defaults to 30.
     cfg_scale=8.0, # Influences how strongly your generation is guided to match your prompt. Setting this value higher increases the strength in which it tries to match your prompt. Defaults to 7.0 if not specified.
-    width=512, # Generation width, defaults to 512 if not included.
-    height=512, # Generation height, defaults to 512 if not included.
+    width=1024, # Generation width, if not included defaults to 512 or 1024 depending on the engine.
+    height=1024, # Generation height, if not included defaults to 512 or 1024 depending on the engine.
     samples=4, # Number of images to generate, defaults to 1 if not included.
-    sampler=generation.SAMPLER_K_DPMPP_2S_ANCESTRAL # Choose which sampler we want to denoise our generation with.
+    sampler=generation.SAMPLER_K_DPMPP_2M # Choose which sampler we want to denoise our generation with.
                                                  # Defaults to k_dpmpp_2m if not specified. Clip Guidance only supports ancestral samplers.
                                                  # (Available Samplers: ddim, plms, k_euler, k_euler_ancestral, k_heun, k_dpm_2, k_dpm_2_ancestral, k_dpmpp_2s_ancestral, k_lms, k_dpmpp_2m, k_dpmpp_sde)
 )
