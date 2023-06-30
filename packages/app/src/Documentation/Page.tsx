@@ -10,8 +10,7 @@ function DocButton({
   children,
   indent = 0,
   className,
-  // activeOverride,
-  softActiveOverride,
+  activeOverride,
   childrenOverride
 }: Styleable &
   Partial<Documentation.Group> & {
@@ -23,8 +22,7 @@ function DocButton({
   const location = useLocation();
   const [expanded, setExpanded] = useState(true);
 
-  const active =
-    softActiveOverride ?? location.pathname.startsWith(route ?? "");
+  const active = activeOverride ?? location.pathname.startsWith(route ?? "");
 
   return (
     <div className="my-0.5 flex flex-col gap-0.5 first:mt-0 last:mb-0">
@@ -109,7 +107,6 @@ export function Page() {
           <DocButton
             name="API Reference"
             route="/docs/api-reference"
-            activeOverride={location.hash.length > 0}
             childrenOverride={<div id="redoc-sidebar-container" />}
           >
             {[]}
