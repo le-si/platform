@@ -104,16 +104,19 @@ export function Page() {
         }}
       >
         <div className="flex max-h-[calc(100vh-10.5rem)] w-full flex-col overflow-y-auto">
-          {routes.map((route) => (
+          {routes.slice(0, 1).map((route) => (
             <DocButton key={route.name} {...route} />
           ))}
           <DocButton
-            name="API Reference"
+            name="REST API"
             route="/docs/api-reference"
             childrenOverride={<div id="redoc-sidebar-container" />}
           >
             {[]}
           </DocButton>
+          {routes.slice(1).map((route) => (
+            <DocButton key={route.name} {...route} />
+          ))}
         </div>
       </div>
       <div className="w-[20rem] shrink-0" />
