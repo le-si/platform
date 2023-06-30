@@ -119,10 +119,10 @@ export function Page() {
       <div className="w-[20rem] shrink-0" />
       <div
         className={classes(
-          "mx-auto flex w-full max-w-[100rem] justify-center overflow-x-visible"
+          "mx-auto flex w-full min-w-0 max-w-[100rem] justify-center"
         )}
       >
-        <div className="flex w-full flex-col gap-6">
+        <div className="flex w-full flex-col">
           <Outlet />
           {/* <div className="flex w-full justify-between gap-7"></div> */}
           {/* TODO: next/previous buttons */}

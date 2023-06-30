@@ -37,6 +37,7 @@ import UsingPhotoshopUpscaler from "./Integrations/UsingPhotoshopUpscaler.md?raw
 import { ListPage } from "./ListPage";
 import { Page } from "./Page";
 import releaseNotes from "./ReleaseNotes.md?raw";
+import { TabPage } from "./TabPage";
 
 export type Documentation = Documentation.Group[];
 
@@ -59,6 +60,9 @@ export namespace Documentation {
 
     /** The content to render */
     content?: Markdown | React.ReactElement | React.ReactNode;
+
+    /** Optional tabs to render (alternate markdown pages) **/
+    tabs?: Omit<Group, "route">[];
 
     /** Optional sidebar icon */
     icon?: React.ReactElement | React.ReactNode;
@@ -138,19 +142,21 @@ export namespace Documentation {
             route: "/docs/features/text-to-image",
             imageURL: "/PaintingRobot.png",
             summary: "Learn how to generate images from text.",
-            redirect: "/docs/features/text-to-image/python",
-            children: [
+            tabs: [
               {
-                name: "Text-to-Image (Python)",
-                route: "/docs/features/text-to-image/python",
+                name: "Python",
                 content: textToImagePython,
-                icon: <Theme.Icon.Python />
+                icon: <Theme.Icon.Python className="h-4 w-4" />
               },
               {
-                name: "Text-to-Image (TypeScript)",
-                route: "/docs/features/text-to-image/typescript",
+                name: "TypeScript",
                 content: textToImageTypeScript,
-                icon: <Theme.Icon.TypeScript />
+                icon: <Theme.Icon.TypeScript className="h-4 w-4" />
+              },
+              {
+                name: "REST API Reference",
+                redirect:
+                  "/docs/api-reference#tag/v1generation/operation/textToImage"
               }
             ]
           },
@@ -159,19 +165,21 @@ export namespace Documentation {
             route: "/docs/features/image-to-image",
             imageURL: "/FloatingArtOrSomething.png",
             summary: "Learn how to generate images from existing images.",
-            redirect: "/docs/features/image-to-image/python",
-            children: [
+            tabs: [
               {
-                name: "Image-to-Image (Python)",
-                route: "/docs/features/image-to-image/python",
+                name: "Python",
                 content: imageToImagePython,
-                icon: <Theme.Icon.Python />
+                icon: <Theme.Icon.Python className="h-4 w-4" />
               },
               {
-                name: "Image-to-Image (TypeScript)",
-                route: "/docs/features/image-to-image/typescript",
+                name: "TypeScript",
                 content: imageToImageTypeScript,
-                icon: <Theme.Icon.TypeScript />
+                icon: <Theme.Icon.TypeScript className="h-4 w-4" />
+              },
+              {
+                name: "REST API Reference",
+                redirect:
+                  "/docs/api-reference#tag/v1generation/operation/imageToImage"
               }
             ]
           },
@@ -181,19 +189,21 @@ export namespace Documentation {
             imageURL: "/VRDog.png",
             summary:
               "Learn how to paint anything into existing images and how masking works.",
-            redirect: "/docs/features/inpainting/python",
-            children: [
+            tabs: [
               {
-                name: "Inpainting (Python)",
-                route: "/docs/features/inpainting/python",
+                name: "Python",
                 content: inpaintingPython,
-                icon: <Theme.Icon.Python />
+                icon: <Theme.Icon.Python className="h-4 w-4" />
               },
               {
-                name: "Inpainting (TypeScript)",
-                route: "/docs/features/inpainting/typescript",
+                name: "TypeScript",
                 content: inpaintingTypeScript,
-                icon: <Theme.Icon.TypeScript />
+                icon: <Theme.Icon.TypeScript className="h-4 w-4" />
+              },
+              {
+                name: "REST API Reference",
+                redirect:
+                  "/docs/api-reference#tag/v1generation/operation/masking"
               }
             ]
           },
@@ -210,7 +220,6 @@ export namespace Documentation {
             route: "/docs/features/animation",
             imageURL: "/Animation/using.jpg",
             summary: "Learn how to create animations with our API.",
-            redirect: "/docs/features/animation/install",
             children: [
               {
                 name: "Installing",
@@ -247,20 +256,21 @@ export namespace Documentation {
             route: "/docs/features/image-upscaling",
             imageURL: "/img2upscale.png",
             summary: "Learn how to upscale your images with our API.",
-            redirect: "/docs/features/image-upscaling/python",
-
-            children: [
+            tabs: [
               {
-                name: "Upscaling (Python)",
-                route: "/docs/features/image-upscaling/python",
+                name: "Python",
                 content: imageUpscalerPython,
-                icon: <Theme.Icon.Python />
+                icon: <Theme.Icon.Python className="h-4 w-4" />
               },
               {
-                name: "Upscaling (TypeScript)",
-                route: "/docs/features/image-upscaling/typescript",
+                name: "TypeScript",
                 content: imageUpscalerTypeScript,
-                icon: <Theme.Icon.TypeScript />
+                icon: <Theme.Icon.TypeScript className="h-4 w-4" />
+              },
+              {
+                name: "REST API Reference",
+                redirect:
+                  "/docs/api-reference#tag/v1generation/operation/upscaleImage"
               }
             ]
           },
@@ -396,6 +406,8 @@ export namespace Documentation {
               </div>
             ) : group.children ? (
               <ListPage group={group} />
+            ) : group.tabs ? (
+              <TabPage group={group} />
             ) : (
               group.content
             );
