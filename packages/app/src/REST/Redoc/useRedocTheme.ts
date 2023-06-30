@@ -6,7 +6,8 @@ export type RedocTheme = PartialDeep<Redoc.ResolvedThemeInterface>;
 export function useRedocTheme(): RedocTheme {
   return {
     sidebar: {
-      backgroundColor: "#f6f6ef",
+      backgroundColor: "transparent",
+      padding: "0",
     },
     typography: {
       fontFamily: "Inter, sans-serif",

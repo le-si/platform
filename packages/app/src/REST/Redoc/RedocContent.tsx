@@ -14,6 +14,29 @@ export const RedocContent = MobX.observer(
             css={css`
               & ul {
                 padding-bottom: 0 !important;
+                padding-left: 1rem !important;
+              }
+
+              & label {
+                padding: 0 !important;
+              }
+
+              & label {
+                padding-top: 0.5rem !important;
+                padding-bottom: 0.5rem !important;
+                padding-left: 0.75rem !important;
+                padding-right: 0.75rem !important;
+                margin-bottom: 1.875px !important;
+                margin-top: 1.875px !important;
+                border-radius: 7.5px !important;
+              }
+
+              & label:hover {
+                background-color: #e5e5e5 !important;
+              }
+
+              & label.active {
+                background-color: #e4e4ce !important;
               }
             `}
             menu={store.menu}
