@@ -58,7 +58,7 @@ export namespace Modal {
   };
 
   export const useState = GlobalState.create<State>((set) => ({
-    isOpen: true,
+    isOpen: false,
     setIsOpen: (isOpen) => set({ isOpen }),
   }));
 }
