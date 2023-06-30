@@ -43,13 +43,13 @@ html.dark {
 // Non-sandbox code blocks
 .prose:not(.sandbox) {
   .code-block-header {
-    @apply flex items-center justify-between bg-gray-600 px-4 py-1 text-xs text-white;
+    @apply flex items-center justify-between border-b border-zinc-600 px-4 py-1 text-xs text-white;
   }
 
   pre {
     @apply p-0;
     @apply rounded-none;
-    @apply rounded shadow-sm;
+    @apply rounded-xl shadow-sm;
 
     div.hljs {
       background-color: transparent;

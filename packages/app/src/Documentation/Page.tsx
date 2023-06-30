@@ -23,8 +23,7 @@ function DocButton({
   const location = useLocation();
   const [expanded, setExpanded] = useState(true);
 
-  const active = activeOverride ?? location.pathname === route;
-  const softActive =
+  const active =
     softActiveOverride ?? location.pathname.startsWith(route ?? "");
 
   return (
@@ -32,7 +31,7 @@ function DocButton({
       <div
         className={classes(
           "overflow-hidden rounded-lg text-black/75 duration-75 hover:bg-black/10 hover:text-black active:text-black",
-          softActive && "active",
+          active && "active",
           !children && "active:bg-[#e4e4ce]"
           // !(children && softActive) && "hover:bg-[#e4e4ce]"
         )}
@@ -47,9 +46,11 @@ function DocButton({
             className
           )}
           onClick={(e) => {
-            if (children && softActive) {
+            if (children && active) {
               e.preventDefault();
               setExpanded(!expanded);
+            } else {
+              setExpanded(true);
             }
           }}
         >
@@ -58,7 +59,7 @@ function DocButton({
             <Theme.Icon.ChevronRight
               className={classes(
                 "h-[1.5em] w-[1.5em] -rotate-90 duration-200 ease-out",
-                softActive && "rotate-0 transform"
+                active && "rotate-0 transform"
               )}
             />
           )}
@@ -66,7 +67,7 @@ function DocButton({
       </div>
       <div
         className={classes(
-          (children || childrenOverride) && softActive && expanded
+          (children || childrenOverride) && active && expanded
             ? "block"
             : "hidden"
         )}
@@ -101,7 +102,7 @@ export function Page() {
           top: TopBar.height()
         }}
       >
-        <div className="flex max-h-[calc(100vh-10.5rem)] w-full flex-col gap-1 overflow-y-auto">
+        <div className="flex max-h-[calc(100vh-10.5rem)] w-full flex-col overflow-y-auto">
           {routes.map((route) => (
             <DocButton key={route.name} {...route} />
           ))}

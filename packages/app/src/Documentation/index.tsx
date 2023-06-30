@@ -89,7 +89,7 @@ export namespace Documentation {
             imageURL: "/PadLock.png",
             summary: "Learn how to create an account and manage your keys.",
 
-            content: authentication,
+            content: authentication
           },
           {
             name: "Credits + Billing",
@@ -98,7 +98,7 @@ export namespace Documentation {
             summary:
               "Learn how to get credits and which settings most affect generation costs.",
 
-            content: creditsAndBilling,
+            content: creditsAndBilling
           },
           {
             name: "Python gRPC SDK",
@@ -106,7 +106,7 @@ export namespace Documentation {
             route: "/docs/getting-started/python-sdk",
             summary: "Learn how to configure and use the Python SDK.",
 
-            content: pythonSDK,
+            content: pythonSDK
           },
           {
             name: "TypeScript gRPC Client",
@@ -114,9 +114,9 @@ export namespace Documentation {
             route: "/docs/getting-started/typescript-client",
             summary: "Learn how to configure and use the TypeScript Client.",
 
-            content: typeScriptClient,
-          },
-        ],
+            content: typeScriptClient
+          }
+        ]
       },
       {
         icon: "puzzle",
@@ -132,7 +132,7 @@ export namespace Documentation {
             imageURL: "/APIParameters.png",
             summary:
               "Learn about all of the parameters available for gRPC API calls.",
-            content: apiParameters,
+            content: apiParameters
           },
           {
             name: "Text-to-Image",
@@ -145,15 +145,15 @@ export namespace Documentation {
                 name: "Text-to-Image (Python)",
                 route: "/docs/features/text-to-image/python",
                 content: textToImagePython,
-                icon: <Theme.Icon.Python />,
+                icon: <Theme.Icon.Python />
               },
               {
                 name: "Text-to-Image (TypeScript)",
                 route: "/docs/features/text-to-image/typescript",
                 content: textToImageTypeScript,
-                icon: <Theme.Icon.TypeScript />,
-              },
-            ],
+                icon: <Theme.Icon.TypeScript />
+              }
+            ]
           },
           {
             name: "Image-to-Image",
@@ -166,15 +166,15 @@ export namespace Documentation {
                 name: "Image-to-Image (Python)",
                 route: "/docs/features/image-to-image/python",
                 content: imageToImagePython,
-                icon: <Theme.Icon.Python />,
+                icon: <Theme.Icon.Python />
               },
               {
                 name: "Image-to-Image (TypeScript)",
                 route: "/docs/features/image-to-image/typescript",
                 content: imageToImageTypeScript,
-                icon: <Theme.Icon.TypeScript />,
-              },
-            ],
+                icon: <Theme.Icon.TypeScript />
+              }
+            ]
           },
           {
             name: "Inpainting + Masking",
@@ -188,15 +188,15 @@ export namespace Documentation {
                 name: "Inpainting (Python)",
                 route: "/docs/features/inpainting/python",
                 content: inpaintingPython,
-                icon: <Theme.Icon.Python />,
+                icon: <Theme.Icon.Python />
               },
               {
                 name: "Inpainting (TypeScript)",
                 route: "/docs/features/inpainting/typescript",
                 content: inpaintingTypeScript,
-                icon: <Theme.Icon.TypeScript />,
-              },
-            ],
+                icon: <Theme.Icon.TypeScript />
+              }
+            ]
           },
           {
             name: "CLIP Guidance",
@@ -204,7 +204,7 @@ export namespace Documentation {
             imageURL: "/ClipGuiderButReal.png",
             summary: "Learn how to use CLIP to guide image generation.",
 
-            content: clipGuidance,
+            content: clipGuidance
           },
           {
             name: "Animation",
@@ -218,30 +218,30 @@ export namespace Documentation {
                 route: "/docs/features/animation/install",
                 imageURL: "/Animation/installing.jpg",
                 summary: "Learn how to install the Animation SDK.",
-                content: animationInstall,
+                content: animationInstall
               },
               {
                 name: "Using",
                 route: "/docs/features/animation/using",
                 imageURL: "/Animation/using.jpg",
                 summary: "Learn how to use the Animation SDK.",
-                content: animationUsing,
+                content: animationUsing
               },
               {
                 name: "Parameters",
                 route: "/docs/features/animation/parameters",
                 imageURL: "/Animation/parameters.jpg",
                 summary: "Learn about the various Animation SDK parameters.",
-                content: animationParameters,
+                content: animationParameters
               },
               {
                 name: "Pricing",
                 route: "/docs/features/animation/pricing",
                 imageURL: "/Animation/pricing.jpg",
                 summary: "Learn about how we price Animation API usage.",
-                content: animationPricing,
-              },
-            ],
+                content: animationPricing
+              }
+            ]
           },
           {
             name: "Image Upscaling",
@@ -255,15 +255,15 @@ export namespace Documentation {
                 name: "Upscaling (Python)",
                 route: "/docs/features/image-upscaling/python",
                 content: imageUpscalerPython,
-                icon: <Theme.Icon.Python />,
+                icon: <Theme.Icon.Python />
               },
               {
                 name: "Upscaling (TypeScript)",
                 route: "/docs/features/image-upscaling/typescript",
                 content: imageUpscalerTypeScript,
-                icon: <Theme.Icon.TypeScript />,
-              },
-            ],
+                icon: <Theme.Icon.TypeScript />
+              }
+            ]
           },
           {
             name: "Multi-prompting",
@@ -271,7 +271,7 @@ export namespace Documentation {
             imageURL: "/MultiPrompt.png",
             summary: "Learn how to use multi-prompting and prompt weighting.",
 
-            content: multiprompting,
+            content: multiprompting
           },
           {
             name: "Variants",
@@ -279,9 +279,9 @@ export namespace Documentation {
             imageURL: "/Variants.png",
             summary: "Learn how to create variants of generated images.",
 
-            content: variants,
-          },
-        ],
+            content: variants
+          }
+        ]
       },
       {
         icon: "wrench",
@@ -308,7 +308,7 @@ export namespace Documentation {
                 summary:
                   "Learn how to install the Stability addon for Blender.",
 
-                content: installingBlenderAddon,
+                content: installingBlenderAddon
               },
               {
                 name: "Get Started",
@@ -317,7 +317,7 @@ export namespace Documentation {
                 summary:
                   "Learn how to use the Stability addon for Blender to generate images from text.",
 
-                content: UsingBlenderAddonGettingStarted,
+                content: UsingBlenderAddonGettingStarted
               },
               {
                 name: "Render-to-Image",
@@ -326,7 +326,7 @@ export namespace Documentation {
                 summary:
                   "Learn how to use the Stability addon for Blender to generate images from your renders.",
 
-                content: UsingBlenderAddonRenderToImage,
+                content: UsingBlenderAddonRenderToImage
               },
               {
                 name: "Generate Textures",
@@ -335,7 +335,7 @@ export namespace Documentation {
                 summary:
                   "Learn how to use the Stability addon for Blender to generate images from your existing textures.",
 
-                content: UsingBlenderAddonImageEditor,
+                content: UsingBlenderAddonImageEditor
               },
               {
                 name: "Animation",
@@ -344,7 +344,7 @@ export namespace Documentation {
                 summary:
                   "Learn how to use the Stability addon for Blender to generate animations from your videos.",
 
-                content: UsingBlenderAddonAnimation,
+                content: UsingBlenderAddonAnimation
               },
               {
                 name: "Upscaler",
@@ -353,66 +353,11 @@ export namespace Documentation {
                 summary:
                   "Learn how to use the Stability addon for Blender to upscale your rendered images and animations.",
 
-                content: UsingBlenderUpscaler,
-              },
-            ],
-          },
-          {
-            name: "Photoshop",
-            route: "/docs/integrations/photoshop",
-            imageURL: "/Photoshop/Photoshop.png",
-            summary:
-              "Learn how to use the Stability plugin to generate images right inside Photoshop.",
-            redirect: "/docs/integrations/photoshop/install",
-            children: [
-              {
-                name: "Installing",
-                route: "/docs/integrations/photoshop/install",
-                imageURL: "/Photoshop/installing.png",
-                summary:
-                  "Learn how to install the Stability plugin for Photoshop.",
-
-                content: installingPhotoshop,
-              },
-              {
-                name: "Get Started",
-                route: "/docs/integrations/photoshop/get-started",
-                imageURL: "/Photoshop/get_started.png",
-                summary:
-                  "Learn how to authenticate and configure the Stability plugin for Photoshop.",
-
-                content: UsingPhotoshopGettingStarted,
-              },
-              {
-                name: "Text-to-Image",
-                route: "/docs/integrations/photoshop/text-to-image",
-                imageURL: "/Photoshop/concept_art.png",
-                summary:
-                  "Learn how to use the Stability plugin for Photoshop to generate images from text, using Stable Diffusion.",
-
-                content: UsingPhotoshopTextToImage,
-              },
-              {
-                name: "Image-to-Image",
-                route: "/docs/integrations/photoshop/image-to-image",
-                imageURL: "/Photoshop/famous_paintings.png",
-                summary:
-                  "Learn how to use the Stability plugin for Photoshop to generate images from your content, using Stable Diffusion.",
-
-                content: UsingPhotoshopImageToImage,
-              },
-              {
-                name: "Upscaler",
-                route: "/docs/integrations/photoshop/upscaler",
-                imageURL: "/Photoshop/upscaler.png",
-                summary:
-                  "Learn how to use the Stability plugin for Photoshop to upscale your content.",
-
-                content: UsingPhotoshopUpscaler,
-              },
-            ],
-          },
-        ],
+                content: UsingBlenderUpscaler
+              }
+            ]
+          }
+        ]
       },
       {
         icon: "question",
@@ -421,7 +366,7 @@ export namespace Documentation {
         imageURL: "/QuestionDog.png",
         summary: "Have a question? We might have an answer.",
 
-        content: frequentlyAskedQuestions,
+        content: frequentlyAskedQuestions
       },
       {
         icon: "broadcast",
@@ -430,8 +375,8 @@ export namespace Documentation {
         imageURL: "/GiftBoxes.png",
         summary:
           "Check out our release notes to stay up to date on the latest Stability API features!",
-        content: releaseNotes,
-      },
+        content: releaseNotes
+      }
     ];
   }
 
@@ -459,9 +404,9 @@ export namespace Documentation {
           return [
             {
               path: group.route,
-              element: element,
+              element: element
             },
-            ...routes(group.children ?? []),
+            ...routes(group.children ?? [])
           ];
         });
 
