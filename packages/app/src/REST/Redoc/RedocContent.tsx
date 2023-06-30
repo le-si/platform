@@ -38,6 +38,10 @@ export const RedocContent = MobX.observer(
               & label.active {
                 background-color: #e4e4ce !important;
               }
+
+              & ul > li > label {
+                align-items: center !important;
+              }
             `}
             menu={store.menu}
           />,
