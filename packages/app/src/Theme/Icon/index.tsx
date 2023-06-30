@@ -4,18 +4,21 @@ import { Arrow } from "./Arrow";
 import { Check } from "./Check";
 import { ChevronRight } from "./ChevronRight";
 import { Code } from "./Code";
+import { Coin } from "./Coin";
 import { Copy } from "./Copy";
 import { Engine } from "./Engine";
 import { ExternalLink } from "./ExternalLink";
 import { Eye } from "./Eye";
 import { EyeOff } from "./EyeOff";
 import { GridBlocks } from "./GridBlocks";
+import { Help } from "./Help";
 import { Image } from "./Image";
 import { Info } from "./Info";
 import { Link } from "./Link";
 import { Plus } from "./Plus";
 import { Python } from "./Python";
 import { Spinner } from "./Spinner";
+import { Token } from "./Token";
 import { TypeScript } from "./TypeScript";
 import { Union } from "./Union";
 import { Upload } from "./Upload";
@@ -50,6 +53,9 @@ export declare namespace Icon {
     Python,
     TypeScript,
     ChevronRight,
+    Token,
+    Coin,
+    Help,
   };
 }
 
@@ -76,4 +82,7 @@ export namespace Icon {
   Icon.Python = Python;
   Icon.TypeScript = TypeScript;
   Icon.ChevronRight = ChevronRight;
+  Icon.Token = Token;
+  Icon.Coin = Coin;
+  Icon.Help = Help;
 }

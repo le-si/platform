@@ -1,10 +1,22 @@
 import { Link } from "react-router-dom";
+import { GlobalSearch } from "~/GlobalSearch";
 
-export function List() {
+type Props = {
+  readonly noHeader?: boolean;
+  readonly smallGrid?: boolean;
+  readonly hideComingSoon?: boolean;
+};
+
+export function List({ noHeader, smallGrid, hideComingSoon }: Props) {
   return (
-    <div className="mx-auto flex min-h-screen flex-col gap-32 px-5 2xl:max-w-[93rem] 2xl:px-0">
-      <Header />
-      <Sandboxes />
+    <div
+      className={classes(
+        "mx-auto flex  flex-col gap-32 px-5 2xl:max-w-[93rem] 2xl:px-0",
+        !smallGrid && "min-h-screen"
+      )}
+    >
+      {!noHeader && <Header />}
+      <Sandboxes smallGrid={smallGrid} hideComingSoon={hideComingSoon} />
     </div>
   );
 }
@@ -23,9 +35,18 @@ function Header() {
   );
 }
 
-function Sandboxes() {
+function Sandboxes({
+  smallGrid,
+  hideComingSoon,
+}: Pick<Props, "smallGrid" | "hideComingSoon">) {
   return (
-    <div className="mb-24 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div
+      className={classes(
+        "mb-24 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3",
+        smallGrid && "lg:grid-cols-2",
+        !smallGrid && "xl:grid-cols-4"
+      )}
+    >
       <SandboxButton
         title="Text-to-Image"
         description="Generate images from text"
@@ -52,6 +73,7 @@ function Sandboxes() {
       />
       <SandboxButton
         comingSoon
+        hideComingSoon={hideComingSoon}
         title="Inpainting"
         description="Edit images with AI"
         href="/sandbox/masking"
@@ -59,6 +81,7 @@ function Sandboxes() {
       />
       <SandboxButton
         comingSoon
+        hideComingSoon={hideComingSoon}
         title="Chat UI"
         description="Communicate with language models"
         href="/sandbox/chat"
@@ -66,6 +89,7 @@ function Sandboxes() {
       />
       <SandboxButton
         comingSoon
+        hideComingSoon={hideComingSoon}
         title="Out-Painting"
         description="Expand images with AI"
         href="/sandbox/outpainting"
@@ -73,6 +97,7 @@ function Sandboxes() {
       />
       <SandboxButton
         comingSoon
+        hideComingSoon={hideComingSoon}
         title="Fine-Tuning"
         description="Train image models with your data"
         href="/sandbox/fine-tuning"
@@ -84,23 +109,30 @@ function Sandboxes() {
 
 function SandboxButton({
   comingSoon,
+  hideComingSoon,
   title,
   description,
   image,
   href,
 }: {
-  comingSoon?: boolean;
   title: string;
   description: string;
   image?: string;
   href: string;
-}) {
+} & (
+  | { comingSoon: true; hideComingSoon?: boolean }
+  | { comingSoon?: false; hideComingSoon?: never }
+)) {
+  const modalState = GlobalSearch.Modal.useState();
+
   return (
     <Link
       to={href}
+      onClick={() => modalState.setIsOpen(false)}
       className={classes(
         "bg-brand-amber-1 group flex flex-col gap-3 rounded-2xl p-5 duration-100",
-        comingSoon ? "cursor-default opacity-50" : "hover:bg-brand-amber-2"
+        comingSoon ? "cursor-default opacity-50" : "hover:bg-brand-amber-2",
+        comingSoon && hideComingSoon && "hidden"
       )}
       {...(comingSoon && {
         onClick: (event) => event.preventDefault(),

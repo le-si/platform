@@ -1,11 +1,15 @@
 import { Engine } from "./Engine";
+import { Modal } from "./Modal";
+import { Provider } from "./Provider";
 
 export declare namespace GlobalSearch {
-  export { Engine };
+  export { Engine, Modal, Provider };
 }
 
 export namespace GlobalSearch {
   GlobalSearch.Engine = Engine;
+  GlobalSearch.Modal = Modal;
+  GlobalSearch.Provider = Provider;
 
   export type Candidate = {
     readonly route: string;

@@ -1,43 +1,16 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useEffect } from "react";
 
 import { Theme } from "~/Theme";
 
-export type Modal = StyleableWithChildren & {
+export type Props = StyleableWithChildren & {
   open?: boolean;
   onClose?: () => void;
   title?: string;
   containerClassName?: string;
   bottom?: React.ReactNode;
+  showCloseButton?: boolean;
 };
-
-function Backdrop({
-  open,
-  onClose,
-  className,
-}: {
-  open?: boolean;
-  onClose?: () => void;
-  className?: string;
-}) {
-  return (
-    <motion.div
-      className={classes(
-        "absolute inset-0 z-50 flex items-center justify-center",
-        className
-      )}
-      variants={outSideVariants}
-      initial="closed"
-      animate={open ? "open" : "closed"}
-      exit="closed"
-      onClick={onClose}
-    >
-      <motion.div
-        onClick={onClose}
-        className="fixed inset-0 bg-zinc-900 bg-opacity-40"
-      />
-    </motion.div>
-  );
-}
 
 export function Modal({
   open,
@@ -47,7 +20,8 @@ export function Modal({
   title,
   containerClassName,
   bottom,
-}: Modal) {
+  showCloseButton = true,
+}: Props) {
   useCloseOnEscapeKey(open, onClose);
 
   return (
@@ -58,7 +32,7 @@ export function Modal({
 
           <motion.div
             className={classes(
-              "pointer-events-none fixed inset-0 z-[9999] flex items-center justify-center"
+              "pointer-events-none fixed inset-0 z-[9999] flex items-center justify-center sm:p-8"
             )}
             variants={insideVariants}
             initial="closed"
@@ -67,24 +41,26 @@ export function Modal({
           >
             <div
               className={classes(
-                "bg-brand-amber-1 pointer-events-auto flex flex-col overflow-hidden rounded-xl",
+                "bg-brand-amber-1 pointer-events-auto flex flex-col rounded-xl",
                 className
               )}
             >
               {title && (
                 <div className="flex items-center justify-between p-4 pb-2 text-lg text-black">
                   {title}
-                  <button
-                    className="text-black duration-100 hover:text-black/50"
-                    onClick={onClose}
-                  >
-                    <Theme.Icon.X />
-                  </button>
+                  {showCloseButton && (
+                    <button
+                      className="text-black duration-100 hover:text-black/50"
+                      onClick={onClose}
+                    >
+                      <Theme.Icon.X />
+                    </button>
+                  )}
                 </div>
               )}
               <div
                 className={classes(
-                  "p-4 text-sm text-neutral-500",
+                  "p-4 pb-10 pt-20 text-sm text-neutral-500",
                   containerClassName
                 )}
               >
@@ -115,6 +91,47 @@ function useCloseOnEscapeKey(open?: boolean, onClose?: () => void): void {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [open, onClose]);
+}
+
+function Backdrop({
+  open,
+  onClose,
+  className,
+}: {
+  open?: boolean;
+  onClose?: () => void;
+  className?: string;
+}) {
+  useScrollLock();
+
+  return (
+    <motion.div
+      className={classes(
+        "absolute inset-0 z-[9999] flex items-center justify-center",
+        className
+      )}
+      variants={outSideVariants}
+      initial="closed"
+      animate={open ? "open" : "closed"}
+      exit="closed"
+      onClick={onClose}
+    >
+      <motion.div
+        onClick={onClose}
+        className="fixed inset-0 bg-zinc-900 bg-opacity-40"
+      />
+    </motion.div>
+  );
+}
+
+function useScrollLock() {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, []);
 }
 
 const outSideVariants = {

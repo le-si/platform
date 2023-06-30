@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import "../../GlobalVariables";
 
-import { Modal } from "../Modal";
-import { Input } from "../Input";
 import { Button } from "../Button";
+import { Input } from "../Input";
+import { Modal, Props } from "../Modal";
 
-function ModalDemo(props: Modal) {
+function ModalDemo(props: Props) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -28,24 +28,24 @@ const meta = {
   argTypes: {
     title: {
       description: "Title of the modal",
-      type: "string"
+      type: "string",
     },
     children: {
-      description: "Content of the modal"
+      description: "Content of the modal",
     },
     open: {
       description: "Whether the modal is open or not",
-      type: "boolean"
+      type: "boolean",
     },
     onClose: {
       description: "Function to call when the modal is closed",
-      type: "function"
+      type: "function",
     },
     className: {
       description: "Extra class names to apply to the modal",
-      type: "string"
-    }
-  }
+      type: "string",
+    },
+  },
 } satisfies Meta<typeof Modal>;
 
 export default meta;
@@ -57,28 +57,46 @@ export const Default: Story = {
   args: {
     title: "Modal",
     children: "This is a modal",
-    onClose: () => console.log("Closed!")
-  }
+    onClose: () => console.log("Closed!"),
+  },
 };
 
 export const NoTitle: Story = {
   args: {
     children: "This is a modal with no title",
-    onClose: () => console.log("Closed!")
-  }
+    onClose: () => console.log("Closed!"),
+  },
+};
+
+export const Empty: Story = {
+  args: {
+    children: "This is a modal without an explicit close button or title",
+    onClose: () => console.log("Closed!"),
+    showCloseButton: false,
+    className: "",
+  },
 };
 
 export const Inputs: Story = {
   args: {
     title: "Modal",
     children: (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col items-center justify-center gap-4">
         <Input title="Input 1" />
         <Input title="Input 2" />
         <Input title="Input 3" />
       </div>
     ),
-    className: "w-96",
-    onClose: () => console.log("Closed!")
-  }
+    className: "",
+    onClose: () => console.log("Closed!"),
+  },
+};
+
+export const Buttons: Story = {
+  args: {
+    title: "Modal",
+    children: "This is a modal with buttons",
+    onClose: () => console.log("Closed!"),
+    bottom: <button className="btn">Button!</button>,
+  },
 };

@@ -11,9 +11,9 @@ any snippet of code performing a NodeJS-specific action will have a comment indi
 
 ### Getting an API Key
 
-If you're not signed up you'll need to do that first: https://dreamstudio.ai/
+If you're not signed up you'll need to do that first, so please click the login button in the top right.
 
-Then you can find your API key on this page: https://dreamstudio.ai/account
+Then you can find your API key [on the account page](/account/keys).
 
 ---
 
@@ -38,7 +38,7 @@ Install these using your package manager of choice:
 
 The examples under the `Features` section assume the following is in scope:
 
-```ts
+```typescript
 import * as Generation from "./generation/generation_pb";
 import { GenerationServiceClient } from "./generation/generation_pb_service";
 import { grpc as GRPCWeb } from "@improbable-eng/grpc-web";
@@ -67,7 +67,7 @@ The code samples in this documentation will use these helpers and will assume th
 
 Please paste the following into `helpers.ts`:
 
-```ts
+```typescript
 import * as Generation from "./generation/generation_pb";
 import { GenerationServiceClient } from "./generation/generation_pb_service";
 import { grpc as GRPCWeb } from "@improbable-eng/grpc-web";

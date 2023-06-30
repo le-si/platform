@@ -70,7 +70,8 @@ export namespace Page {
     {
       route: Page.url() + "/" + User.APIKeys.Table.uri(),
       name: "API Key Management",
-      content: "User account, account page",
+      content:
+        "api key, api keys, api key management, api key table, api key list",
     },
     {
       route: Page.url() + "/" + User.Account.Credits.uri(),
