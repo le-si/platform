@@ -29,6 +29,8 @@ export function Input({
   const inputRef = useRef<HTMLInputElement>(null);
   const [localValue, setLocalValue] = useState<string>(value?.toString() ?? "");
 
+  useEffect(() => setLocalValue(value?.toString() ?? ""), [value]);
+
   useLayoutEffect(() => {
     if (percentage) {
       // calculate scrollWidth of value

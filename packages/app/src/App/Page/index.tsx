@@ -44,6 +44,12 @@ function Footer() {
     <div className="mt-auto flex h-16 w-full items-center justify-between border-t border-zinc-100 bg-white px-5">
       <div className="flex gap-6">
         <Link
+          to="/support"
+          className="text-sm font-semibold hover:text-indigo-500"
+        >
+          Support
+        </Link>
+        <Link
           to="/legal/terms-of-service"
           className="text-sm font-semibold hover:text-indigo-500"
         >
@@ -67,7 +73,7 @@ function Footer() {
       </div>
       <div className="flex gap-6">
         <a
-          href="https://discord.gg/5fgDen6CPU"
+          href="https://discord.gg/stablediffusion"
           className="text-sm font-semibold hover:text-indigo-500"
         >
           Discord

@@ -13,6 +13,7 @@ import { MultiPrompting } from "~/Sandbox/MultiPrompting";
 import { TextToImage } from "~/Sandbox/TextToImage";
 import { Upscaling } from "~/Sandbox/Upscaling";
 import { Scroll } from "~/Scroll";
+import { Support } from "~/Support";
 import { User } from "~/User";
 
 export function Router() {
@@ -141,6 +142,14 @@ export function Router() {
           element: <User.APIKeys.Table />,
         },
       ],
+    },
+    {
+      path: Support.Page.url(),
+      element: (
+        <App.Page noScroll>
+          <Support.Page />
+        </App.Page>
+      ),
     },
   ]);
 }

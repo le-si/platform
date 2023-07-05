@@ -231,7 +231,8 @@ function Others() {
       <OtherCard
         title="Support"
         svg="/svg/support.webp"
-        link="https://stability.ai/support"
+        link="/support"
+        linkName="Contact Us"
       />
       <OtherCard
         title="Status"
