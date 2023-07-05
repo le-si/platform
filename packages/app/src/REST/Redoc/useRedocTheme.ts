@@ -3,7 +3,6 @@ import { PartialDeep } from "type-fest";
 
 export type RedocTheme = PartialDeep<Redoc.ResolvedThemeInterface>;
 
-// TODO: Fix the breakpoints on smaller screens
 export function useRedocTheme(): RedocTheme {
   return {
     sidebar: {
@@ -17,11 +16,11 @@ export function useRedocTheme(): RedocTheme {
       },
       smoothing: "antialiased",
     },
-    // breakpoints: {
-    //   small: "640px",
-    //   medium: "1024px",
-    //   large: "1024px",
-    // },
+    breakpoints: {
+      small: "1024px",
+      medium: "1280px",
+      large: "1680px",
+    },
     //   spacing: {
     //     sectionVertical: 40,
     //     sectionHorizontal: isTinyDevice ? 16 : 40,
