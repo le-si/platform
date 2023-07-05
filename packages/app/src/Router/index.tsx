@@ -1,5 +1,5 @@
 import * as ReactRouter from "react-router-dom";
-import { App } from "~/App";
+import { Theme } from "~/Theme";
 import { Documentation } from "~/Documentation";
 import { Markdown } from "~/Markdown";
 import { Overview } from "~/Overview";
@@ -23,134 +23,134 @@ export function Router() {
     {
       path: "/",
       element: (
-        <App.Page>
+        <Theme.Page>
           <Overview />
-        </App.Page>
-      ),
+        </Theme.Page>
+      )
     },
     {
       path: "/sandbox",
       element: (
-        <App.Page>
+        <Theme.Page>
           <List />
-        </App.Page>
-      ),
+        </Theme.Page>
+      )
     },
     {
       path: Pricing.url(),
       element: (
-        <App.Page>
+        <Theme.Page>
           <Pricing />
-        </App.Page>
-      ),
+        </Theme.Page>
+      )
     },
     {
       path: "/docs",
       element: (
-        <App.Page>
+        <Theme.Page>
           <Documentation.Page />
-        </App.Page>
+        </Theme.Page>
       ),
       children: [
         ...Documentation.useRoutes(),
         {
           path: "/docs/api-reference",
-          element: <REST.Page />,
-        },
-      ],
+          element: <REST.Page />
+        }
+      ]
     },
     {
       path: "/sandbox/text-to-image",
       element: (
-        <App.Page noScroll noFooter>
+        <Theme.Page noScroll noFooter>
           <Sandbox
             SandboxComponent={TextToImage}
             samples={TextToImage.Samples}
           />
-        </App.Page>
-      ),
+        </Theme.Page>
+      )
     },
     {
       path: "/sandbox/image-to-image",
       element: (
-        <App.Page noScroll noFooter>
+        <Theme.Page noScroll noFooter>
           <Sandbox
             SandboxComponent={ImageToImage}
             samples={ImageToImage.Samples}
           />
-        </App.Page>
-      ),
+        </Theme.Page>
+      )
     },
     {
       path: "/sandbox/upscaling",
       element: (
-        <App.Page noScroll noFooter>
+        <Theme.Page noScroll noFooter>
           <Sandbox SandboxComponent={Upscaling} samples={Upscaling.Samples} />
-        </App.Page>
-      ),
+        </Theme.Page>
+      )
     },
     {
       path: "/sandbox/multi-prompting",
       element: (
-        <App.Page noScroll noFooter>
+        <Theme.Page noScroll noFooter>
           <Sandbox
             SandboxComponent={MultiPrompting}
             samples={MultiPrompting.Samples}
           />
-        </App.Page>
-      ),
+        </Theme.Page>
+      )
     },
     {
       path: User.Logout.url(),
-      element: <User.Logout />,
+      element: <User.Logout />
     },
     {
       path: User.Login.Callback.url(),
-      element: <User.Login.Callback />,
+      element: <User.Login.Callback />
     },
     {
       path: "/login",
-      element: <User.Login.Page />,
+      element: <User.Login.Page />
     },
     {
       path: "/legal/terms-of-service",
-      element: <Markdown.Page>{Markdown.Pages.API_TOS}</Markdown.Page>,
+      element: <Markdown.Page>{Markdown.Pages.API_TOS}</Markdown.Page>
     },
     {
       path: "/faq",
-      element: <Markdown.Page>{Markdown.Pages.FAQ}</Markdown.Page>,
+      element: <Markdown.Page>{Markdown.Pages.FAQ}</Markdown.Page>
     },
     {
       path: User.Account.Page.url(),
       element: (
-        <App.Page>
+        <Theme.Page>
           <User.Account.Page />
-        </App.Page>
+        </Theme.Page>
       ),
       children: [
         {
           path: "*",
           index: true,
-          element: <User.Account.Overview />,
+          element: <User.Account.Overview />
         },
         {
           path: User.Account.Credits.uri(),
-          element: <User.Account.Credits autoFocus />,
+          element: <User.Account.Credits autoFocus />
         },
         {
           path: User.APIKeys.Table.uri(),
-          element: <User.APIKeys.Table />,
-        },
-      ],
+          element: <User.APIKeys.Table />
+        }
+      ]
     },
     {
       path: Support.Page.url(),
       element: (
-        <App.Page noScroll>
+        <Theme.Page noScroll>
           <Support.Page />
-        </App.Page>
-      ),
-    },
+        </Theme.Page>
+      )
+    }
   ]);
 }
 

@@ -35,7 +35,7 @@ function Header() {
 function DocumentCard({
   title,
   svg,
-  links,
+  links
 }: {
   title: string;
   svg: string;
@@ -51,10 +51,12 @@ function DocumentCard({
       <img src={svg} />
       <div className="flex flex-col gap-2">
         {links.map((link) => (
-          <a
+          <Link
             key={link.title}
-            href={link.url}
+            to={link.url}
             className="flex items-center gap-2 text-sm font-semibold text-indigo-500 duration-100 hover:text-indigo-400"
+            target={link.newWindow ? "_blank" : undefined}
+            rel="noopener noreferrer"
           >
             {link.title}&nbsp;
             {link.newWindow ? (
@@ -62,7 +64,7 @@ function DocumentCard({
             ) : (
               <Theme.Icon.Arrow />
             )}
-          </a>
+          </Link>
         ))}
       </div>
     </div>
@@ -80,38 +82,35 @@ function Documentation() {
             svg="/svg/image-doc.webp"
             title="Image"
             links={[
-              { title: "Introduction", url: "/docs/text-to-image" },
-              { title: "REST API", url: "/docs/text-to-image" },
-              { title: "gRPC API", url: "/docs/text-to-image" },
+              { title: "Introduction", url: "/docs/getting-started" },
+              { title: "REST API", url: "/docs/api-reference" },
+              { title: "gRPC API", url: "/docs/features" }
             ]}
           />
           <DocumentCard
             title="Language"
             svg="/svg/language-doc.webp"
             links={[
-              { title: "Models", url: "/docs/text-to-text" },
+              // { title: "Models", url: "/docs/text-to-text" },
               {
                 title: "Chat UI",
                 url: "https://research.stability.ai/chat",
-                newWindow: true,
-              },
+                newWindow: true
+              }
             ]}
           />
           <DocumentCard
             title="Animation"
             svg="/svg/animation-doc.webp"
             links={[
-              { title: "Introduction", url: "/docs/text-to-video" },
-              { title: "gRPC API", url: "/docs/text-to-video" },
+              { title: "Introduction", url: "/docs/features/animation" },
+              { title: "gRPC API", url: "/docs/features/animation/parameters" }
             ]}
           />
           <DocumentCard
             title="Integrations"
             svg="/svg/integration-doc.webp"
-            links={[
-              { title: "Photoshop", url: "/docs/text-to-image" },
-              { title: "Blender", url: "/docs/text-to-image" },
-            ]}
+            links={[{ title: "Blender", url: "/docs/integrations/blender" }]}
           />
         </div>
       </div>
@@ -123,7 +122,7 @@ function SandboxCard({
   title,
   svg,
   link,
-  soon,
+  soon
 }: {
   title: string;
   svg: string;
@@ -203,7 +202,7 @@ function OtherCard({
   title,
   svg,
   link,
-  linkName,
+  linkName
 }: {
   title: string;
   svg: string;

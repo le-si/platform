@@ -16,7 +16,7 @@ export function Page() {
     description: "",
     priority: 1,
     status: 2,
-    source: 2,
+    source: 2
   });
 
   useEffect(
@@ -24,7 +24,7 @@ export function Page() {
       setForm((form) => ({
         ...form,
         name: user?.name ?? "",
-        email: user?.email ?? "",
+        email: user?.email ?? ""
       })),
     [user?.name, user?.email]
   );
@@ -35,14 +35,14 @@ export function Page() {
   useEffect(() => {
     submitMutation.isSuccess &&
       enqueueSnackbar("Your ticket has been submitted!", {
-        variant: "success",
+        variant: "success"
       });
   }, [submitMutation.isSuccess]);
 
   useEffect(() => {
     submitMutation.isError &&
       enqueueSnackbar(`${submitMutation.error}`, {
-        variant: "error",
+        variant: "error"
       });
   }, [submitMutation.isError, submitMutation.error]);
 
@@ -60,7 +60,7 @@ export function Page() {
           onChange={(e) => {
             setForm({
               ...form,
-              name: e,
+              name: e
             });
           }}
         />
@@ -74,7 +74,7 @@ export function Page() {
           onChange={(e) => {
             setForm({
               ...form,
-              email: e,
+              email: e
             });
           }}
         />
@@ -88,12 +88,12 @@ export function Page() {
           onChange={(value) =>
             setForm({
               ...form,
-              type: value,
+              type: value
             })
           }
           options={fields.data?.choices.map((choice: any) => ({
             label: choice.label,
-            value: choice.label,
+            value: choice.label
           }))}
         />
         <label className={`-mb-1 mt-1 text-sm font-semibold text-white/50`}>
@@ -106,7 +106,7 @@ export function Page() {
           onChange={(e) => {
             setForm({
               ...form,
-              subject: e,
+              subject: e
             });
           }}
         />
@@ -120,7 +120,7 @@ export function Page() {
           onChange={(e) =>
             setForm({
               ...form,
-              description: e,
+              description: e
             })
           }
         />
@@ -131,7 +131,7 @@ export function Page() {
         >
           Submit
         </Theme.Button>
-        <p className="opacity-muted-extra py-4 text-center">
+        <p className="py-4 text-center opacity-70">
           You can also email us at&nbsp;
           <a href="mailto:dreamstudio@stability.ai">dreamstudio@stability.ai</a>
         </p>

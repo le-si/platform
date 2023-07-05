@@ -15,5 +15,7 @@ export { Range } from "./Range";
 export { IconButton } from "./IconButton";
 export { CopyToClipboard } from "./CopyToClipboard";
 export { NavButton } from "./NavButton";
+export { Page } from "./Page";
+export { NotFound } from "./Page/NotFound";
 
 export * as Theme from ".";
