@@ -183,7 +183,7 @@ export function Tooltip({
               top: `${position.top}px`,
               left: `${Math.min(
                 position.left,
-                window.innerWidth - (tooltipRef.current?.offsetWidth ?? 0) + 32
+                window.innerWidth - (tooltipRef.current?.offsetWidth ?? 0) + 64
               )}px`,
             }}
             className={classes(

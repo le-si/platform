@@ -11,7 +11,8 @@ function DocButton({
   indent = 0,
   className,
   activeOverride,
-  childrenOverride
+  childrenOverride,
+  redirect
 }: Styleable &
   Partial<Documentation.Group> & {
     indent?: number;
@@ -30,8 +31,8 @@ function DocButton({
         className={classes(
           "overflow-hidden rounded-lg text-black/75 duration-75 hover:bg-black/10 hover:text-black active:text-black",
           active && "active",
-          !children && "active:bg-[#e4e4ce]"
-          // !(children && softActive) && "hover:bg-[#e4e4ce]"
+          (!children || (!redirect && location.pathname === route)) &&
+            "active:bg-[#e4e4ce]"
         )}
         style={{
           marginLeft: `${indent * 1}rem`
@@ -44,6 +45,8 @@ function DocButton({
             className
           )}
           onClick={(e) => {
+            if (!redirect && children && location.pathname !== route) return;
+
             if (children && active) {
               e.preventDefault();
               setExpanded(!expanded);
@@ -101,25 +104,28 @@ export function Page() {
         }}
       >
         <div className="flex max-h-[calc(100vh-10.5rem)] w-full flex-col overflow-y-auto">
-          {routes.map((route) => (
+          {routes.slice(0, 1).map((route) => (
             <DocButton key={route.name} {...route} />
           ))}
           <DocButton
-            name="API Reference"
+            name="REST API"
             route="/docs/api-reference"
             childrenOverride={<div id="redoc-sidebar-container" />}
           >
             {[]}
           </DocButton>
+          {routes.slice(1).map((route) => (
+            <DocButton key={route.name} {...route} />
+          ))}
         </div>
       </div>
       <div className="w-[20rem] shrink-0" />
       <div
         className={classes(
-          "mx-auto flex w-full max-w-[100rem] justify-center overflow-x-visible"
+          "mx-auto flex w-full min-w-0 max-w-[100rem] justify-center"
         )}
       >
-        <div className="flex w-full flex-col gap-6">
+        <div className="flex w-full flex-col">
           <Outlet />
           {/* <div className="flex w-full justify-between gap-7"></div> */}
           {/* TODO: next/previous buttons */}

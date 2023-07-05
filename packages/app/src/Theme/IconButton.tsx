@@ -4,6 +4,7 @@ import { Theme } from "~/Theme/index";
 type Props = StyleableWithChildren<{
   tooltip?: string;
   tooltipPlacement?: React.ComponentProps<typeof Theme.Tooltip>["placement"];
+  tooltipDelay?: number;
   onTooltipOpenOrClose?: (open: boolean) => void;
   forceTooltipOpen?: boolean;
   onClick?: () => void;
@@ -15,6 +16,7 @@ type Props = StyleableWithChildren<{
 export function IconButton({
   tooltip,
   tooltipPlacement,
+  tooltipDelay,
   onTooltipOpenOrClose,
   forceTooltipOpen,
   onClick,
@@ -31,6 +33,7 @@ export function IconButton({
       placement={tooltipPlacement}
       onChange={onTooltipOpenOrClose}
       forceOpen={forceTooltipOpen}
+      delay={tooltipDelay}
     >
       <button
         className={classes(

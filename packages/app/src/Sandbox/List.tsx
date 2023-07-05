@@ -128,7 +128,7 @@ function SandboxButton({
   return (
     <Link
       to={href}
-      onClick={() => modalState.setIsOpen(false)}
+      onClick={() => modalState.close()}
       className={classes(
         "bg-brand-amber-1 group flex flex-col gap-3 rounded-2xl p-5 duration-100",
         comingSoon ? "cursor-default opacity-50" : "hover:bg-brand-amber-2",

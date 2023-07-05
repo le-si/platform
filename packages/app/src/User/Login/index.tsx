@@ -1,6 +1,7 @@
 import * as Auth0 from "@auth0/auth0-react";
 
 import { Link } from "react-router-dom";
+import { Theme } from "~/Theme";
 
 import { User } from "..";
 
@@ -40,12 +41,14 @@ export namespace Login {
       );
     } else {
       return (
-        <Link
-          to="/account/overview"
-          className="rounded-full ring-1 ring-transparent duration-100 hover:ring hover:ring-indigo-500"
-        >
-          <User.Avatar />
-        </Link>
+        <Theme.Tooltip content="View your account page" placement="bottom">
+          <Link
+            to="/account/overview"
+            className="block rounded-full ring-1 ring-transparent duration-100 hover:ring hover:ring-indigo-500"
+          >
+            <User.Avatar />
+          </Link>
+        </Theme.Tooltip>
       );
     }
   }
