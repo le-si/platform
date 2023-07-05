@@ -13,6 +13,7 @@ import { remToPx } from "~/Utilities";
 import { RedocContent } from "./RedocContent";
 import { useRedocTheme } from "./useRedocTheme";
 import { useRedocURLHotfix } from "./useRedocURLHotfix";
+import "./redoc-styles.scss";
 
 /** Container & boilerplate for the Redoc documentation */
 export function RedocContainer({ spec }: { spec?: object | undefined }) {

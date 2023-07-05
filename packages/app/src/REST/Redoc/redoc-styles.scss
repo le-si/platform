@@ -1,0 +1,143 @@
+$onePixelBorder: 1px solid rgba(0, 0, 0, 0.12);
+
+.redoc-wrap {
+  // Vertically align the items in the left menu
+  ul > li > label {
+    align-items: center !important;
+  }
+
+  .redoc-wrap {
+    width: 100% !important;
+  }
+
+  .api-content {
+    width: 100% !important;
+  }
+
+  .api-content > div > div > div + div {
+    border-radius: 16px !important;
+    padding: 2rem !important;
+    height: fit-content !important;
+    background-color: #3f3f46 !important;
+  }
+
+  .react-tabs__tab-panel {
+    border-radius: 16px !important;
+  }
+
+  // Keep the "Authorization" open/close chevrons on the same line as the text
+  h5 + svg {
+    display: inline;
+  }
+
+  // Keep request body open/close chevrons on the same line as their text
+  table tbody tr button > svg {
+    display: inline;
+  }
+
+  .menu-content {
+    cursor: pointer;
+    padding-top: 8px;
+    border-right: $onePixelBorder;
+
+    a:last-of-type {
+      border-right: $onePixelBorder;
+    }
+  }
+
+  // Correction for the hacky way Redoc tries to show a hierarchy line
+  table tbody tr {
+    &:first-of-type:not(.last) > td:first-of-type {
+      background-image: linear-gradient(to bottom, transparent 0%, transparent 1.38rem, rgb(124, 124, 187, 255) 1.32rem, rgb(124, 124, 187, 255) 100%);
+    }
+
+    &.last:first-of-type > td:first-of-type {
+      background: none;
+    }
+
+    &.last > td:first-of-type {
+      background-image: linear-gradient(to bottom, rgb(124, 124, 187, 255) 0%, rgb(124, 124, 187, 255) 1.38rem, transparent 1.32rem, transparent 100%);
+    }
+  }
+
+  // Add gaps between server drop-down, "Request samples" section, and "Response samples" section
+  .scrollbar-container > div > a {
+    display: none;
+  }
+
+  // Request samples & Response samples labels
+  div div > div h3 {
+    @apply mt-6 mb-1.5;
+  }
+
+  // Request samples & Response samples buttons
+  ul.react-tabs__tab-list {
+    li {
+      @apply bg-zinc-900 opacity-60;
+
+      border: 2px solid transparent;
+      transition-property: all;
+      transition-duration: 400ms;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+      &:hover {
+        @apply opacity-100
+      }
+
+      // Selected tab
+      &.react-tabs__tab--selected {
+        color: white !important;
+
+        &:focus {
+          outline: unset;
+        }
+
+        @apply opacity-100 bg-zinc-900 border-2 border-purple-500;
+
+        &.tab-success {
+          @apply border-2 border-green-500;
+        }
+        &.tab-error {
+          @apply border-2 border-red-500;
+        }
+      }
+    }
+  }
+
+  // Inline code blocks in request body parameters (most common)
+   p > code {
+     border: $onePixelBorder;
+     padding: 2px 4px 2px 4px !important;
+   }
+
+   // Inline code blocks in spans
+   span > code {
+     border: $onePixelBorder;
+     padding: 2px 4px 2px 4px !important;
+   }
+
+   // Inline code blocks in a list
+   li > code {
+     border: $onePixelBorder;
+     padding: 2px 4px 2px 4px !important;
+   }
+
+  table tbody {
+    // Discriminator drop-down
+    div:has(> select) {
+      @apply mt-4;
+      @apply min-w-[12rem];
+      > svg {
+        @apply text-gray-900;
+      }
+
+      > label {
+        @apply text-gray-900;
+      }
+
+      @apply bg-brand-amber-2;
+      border: $onePixelBorder;
+    }
+  }
+}
+
