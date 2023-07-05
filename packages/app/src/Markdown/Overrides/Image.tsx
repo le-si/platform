@@ -11,6 +11,7 @@ export const Image = ({
     css={css`
       & > img {
         max-width: 100%;
+        max-height: 30rem;
         display: block;
         border-radius: 0.5rem;
       }

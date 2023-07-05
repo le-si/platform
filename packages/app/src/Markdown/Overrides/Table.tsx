@@ -2,14 +2,14 @@ import React from "react";
 import {
   TableDataCellProps,
   TableHeaderCellProps,
-  TableRowProps,
+  TableRowProps
 } from "react-markdown/lib/ast-to-react";
 import { ReactMarkdownProps } from "react-markdown/lib/complex-types";
 
 import { Markdown } from "~/Markdown";
 
 export function Table({
-  children,
+  children
 }: React.DetailedHTMLProps<
   React.TableHTMLAttributes<HTMLTableElement>,
   HTMLTableElement
@@ -32,13 +32,11 @@ export namespace Table {
   }
 
   export function Th({ children }: TableHeaderCellProps) {
-    return (
-      <th className="whitespace-nowrap text-center font-bold">{children}</th>
-    );
+    return <th className="whitespace-nowrap font-bold">{children}</th>;
   }
 
   export function Td({ children }: TableDataCellProps) {
-    return <td className="text-center">{children}</td>;
+    return <td>{children}</td>;
   }
 
   export function Tr({ children, isHeader }: TableRowProps) {
