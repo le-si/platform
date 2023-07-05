@@ -29,7 +29,23 @@ export function Page({
 
       {!noFooter ? (
         <>
-          <div className="min-h-screen">{children}</div>
+          <div
+            style={
+              noScroll
+                ? {
+                    height: `calc(100vh - (${TopBar.height()} + ${
+                      noFooter ? "0rem" : "4rem"
+                    }))`
+                  }
+                : {
+                    minHeight: `calc(100vh - (${TopBar.height()} + ${
+                      noFooter ? "0rem" : "4rem"
+                    }))`
+                  }
+            }
+          >
+            {children}
+          </div>
           <Footer />
         </>
       ) : (
@@ -59,13 +75,16 @@ function Footer() {
           to="/legal/terms-of-service"
           className="text-sm font-semibold hover:text-indigo-500"
         >
-          Terms of Service
+          ToS
         </Link>
         <Link
           to="/legal/privacy-policy"
           className="text-sm font-semibold hover:text-indigo-500"
         >
-          Privacy Policy
+          Privacy
+        </Link>
+        <Link to="/faq" className="text-sm font-semibold hover:text-indigo-500">
+          FAQ
         </Link>
         <a
           href="https://stability.ai"

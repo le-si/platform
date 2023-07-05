@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Link } from "react-router-dom";
 import { GlobalSearch } from "~/GlobalSearch";
 import { User } from "~/User";
@@ -13,7 +12,7 @@ export function TopBar() {
         !isScrolledToTop && "border-zinc-100"
       )}
       style={{
-        height: TopBar.height(),
+        height: TopBar.height()
       }}
     >
       <div className="w-1/3">

@@ -150,6 +150,10 @@ export function Router() {
           <Support.Page />
         </Theme.Page>
       )
+    },
+    {
+      path: "*",
+      element: <Theme.NotFound />
     }
   ]);
 }

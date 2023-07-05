@@ -18,7 +18,6 @@ import textToImageTypeScript from "./Features/TextToImageTypeScript.md?raw";
 import imageUpscalerPython from "./Features/UpscalerPython.md?raw";
 import imageUpscalerTypeScript from "./Features/UpscalerTypeScript.md?raw";
 import variants from "./Features/Variants.md?raw";
-import frequentlyAskedQuestions from "./FrequentlyAskedQuestions.md?raw";
 import authentication from "./GettingStarted/Authentication.md?raw";
 import creditsAndBilling from "./GettingStarted/CreditsAndBilling.md?raw";
 import pythonSDK from "./GettingStarted/PythonSDK.md?raw";
@@ -88,7 +87,7 @@ export namespace Documentation {
             imageURL: "/PadLock.png",
             summary: "Learn how to create an account and manage your keys.",
 
-            content: authentication,
+            content: authentication
           },
           {
             name: "Credits + Billing",
@@ -97,7 +96,7 @@ export namespace Documentation {
             summary:
               "Learn how to get credits and which settings most affect generation costs.",
 
-            content: creditsAndBilling,
+            content: creditsAndBilling
           },
           {
             name: "Python gRPC SDK",
@@ -105,7 +104,7 @@ export namespace Documentation {
             route: "/docs/getting-started/python-sdk",
             summary: "Learn how to configure and use the Python SDK.",
 
-            content: pythonSDK,
+            content: pythonSDK
           },
           {
             name: "TypeScript gRPC Client",
@@ -113,9 +112,9 @@ export namespace Documentation {
             route: "/docs/getting-started/typescript-client",
             summary: "Learn how to configure and use the TypeScript Client.",
 
-            content: typeScriptClient,
-          },
-        ],
+            content: typeScriptClient
+          }
+        ]
       },
       {
         icon: "puzzle",
@@ -130,7 +129,7 @@ export namespace Documentation {
             imageURL: "/APIParameters.png",
             summary:
               "Learn about all of the parameters available for gRPC API calls.",
-            content: apiParameters,
+            content: apiParameters
           },
           {
             name: "Text-to-Image",
@@ -141,19 +140,19 @@ export namespace Documentation {
               {
                 name: "Python",
                 content: textToImagePython,
-                icon: <Theme.Icon.Python className="h-4 w-4" />,
+                icon: <Theme.Icon.Python className="h-4 w-4" />
               },
               {
                 name: "TypeScript",
                 content: textToImageTypeScript,
-                icon: <Theme.Icon.TypeScript className="h-4 w-4" />,
+                icon: <Theme.Icon.TypeScript className="h-4 w-4" />
               },
               {
                 name: "REST API Reference",
                 redirect:
-                  "/docs/api-reference#tag/v1generation/operation/textToImage",
-              },
-            ],
+                  "/docs/api-reference#tag/v1generation/operation/textToImage"
+              }
+            ]
           },
           {
             name: "Image-to-Image",
@@ -164,19 +163,19 @@ export namespace Documentation {
               {
                 name: "Python",
                 content: imageToImagePython,
-                icon: <Theme.Icon.Python className="h-4 w-4" />,
+                icon: <Theme.Icon.Python className="h-4 w-4" />
               },
               {
                 name: "TypeScript",
                 content: imageToImageTypeScript,
-                icon: <Theme.Icon.TypeScript className="h-4 w-4" />,
+                icon: <Theme.Icon.TypeScript className="h-4 w-4" />
               },
               {
                 name: "REST API Reference",
                 redirect:
-                  "/docs/api-reference#tag/v1generation/operation/imageToImage",
-              },
-            ],
+                  "/docs/api-reference#tag/v1generation/operation/imageToImage"
+              }
+            ]
           },
           {
             name: "Inpainting + Masking",
@@ -188,19 +187,19 @@ export namespace Documentation {
               {
                 name: "Python",
                 content: inpaintingPython,
-                icon: <Theme.Icon.Python className="h-4 w-4" />,
+                icon: <Theme.Icon.Python className="h-4 w-4" />
               },
               {
                 name: "TypeScript",
                 content: inpaintingTypeScript,
-                icon: <Theme.Icon.TypeScript className="h-4 w-4" />,
+                icon: <Theme.Icon.TypeScript className="h-4 w-4" />
               },
               {
                 name: "REST API Reference",
                 redirect:
-                  "/docs/api-reference#tag/v1generation/operation/masking",
-              },
-            ],
+                  "/docs/api-reference#tag/v1generation/operation/masking"
+              }
+            ]
           },
           {
             name: "CLIP Guidance",
@@ -208,7 +207,7 @@ export namespace Documentation {
             imageURL: "/ClipGuiderButReal.png",
             summary: "Learn how to use CLIP to guide image generation.",
 
-            content: clipGuidance,
+            content: clipGuidance
           },
           {
             name: "Animation",
@@ -221,30 +220,30 @@ export namespace Documentation {
                 route: "/docs/features/animation/install",
                 imageURL: "/Animation/installing.jpg",
                 summary: "Learn how to install the Animation SDK.",
-                content: animationInstall,
+                content: animationInstall
               },
               {
                 name: "Using",
                 route: "/docs/features/animation/using",
                 imageURL: "/Animation/using.jpg",
                 summary: "Learn how to use the Animation SDK.",
-                content: animationUsing,
+                content: animationUsing
               },
               {
                 name: "Parameters",
                 route: "/docs/features/animation/parameters",
                 imageURL: "/Animation/parameters.jpg",
                 summary: "Learn about the various Animation SDK parameters.",
-                content: animationParameters,
+                content: animationParameters
               },
               {
                 name: "Pricing",
                 route: "/docs/features/animation/pricing",
                 imageURL: "/Animation/pricing.jpg",
                 summary: "Learn about how we price Animation API usage.",
-                content: animationPricing,
-              },
-            ],
+                content: animationPricing
+              }
+            ]
           },
           {
             name: "Image Upscaling",
@@ -255,19 +254,19 @@ export namespace Documentation {
               {
                 name: "Python",
                 content: imageUpscalerPython,
-                icon: <Theme.Icon.Python className="h-4 w-4" />,
+                icon: <Theme.Icon.Python className="h-4 w-4" />
               },
               {
                 name: "TypeScript",
                 content: imageUpscalerTypeScript,
-                icon: <Theme.Icon.TypeScript className="h-4 w-4" />,
+                icon: <Theme.Icon.TypeScript className="h-4 w-4" />
               },
               {
                 name: "REST API Reference",
                 redirect:
-                  "/docs/api-reference#tag/v1generation/operation/upscaleImage",
-              },
-            ],
+                  "/docs/api-reference#tag/v1generation/operation/upscaleImage"
+              }
+            ]
           },
           {
             name: "Multi-prompting",
@@ -275,7 +274,7 @@ export namespace Documentation {
             imageURL: "/MultiPrompt.png",
             summary: "Learn how to use multi-prompting and prompt weighting.",
 
-            content: multiprompting,
+            content: multiprompting
           },
           {
             name: "Variants",
@@ -283,9 +282,9 @@ export namespace Documentation {
             imageURL: "/Variants.png",
             summary: "Learn how to create variants of generated images.",
 
-            content: variants,
-          },
-        ],
+            content: variants
+          }
+        ]
       },
       {
         icon: "wrench",
@@ -310,7 +309,7 @@ export namespace Documentation {
                 summary:
                   "Learn how to install the Stability addon for Blender.",
 
-                content: installingBlenderAddon,
+                content: installingBlenderAddon
               },
               {
                 name: "Get Started",
@@ -319,7 +318,7 @@ export namespace Documentation {
                 summary:
                   "Learn how to use the Stability addon for Blender to generate images from text.",
 
-                content: UsingBlenderAddonGettingStarted,
+                content: UsingBlenderAddonGettingStarted
               },
               {
                 name: "Render-to-Image",
@@ -328,7 +327,7 @@ export namespace Documentation {
                 summary:
                   "Learn how to use the Stability addon for Blender to generate images from your renders.",
 
-                content: UsingBlenderAddonRenderToImage,
+                content: UsingBlenderAddonRenderToImage
               },
               {
                 name: "Generate Textures",
@@ -337,7 +336,7 @@ export namespace Documentation {
                 summary:
                   "Learn how to use the Stability addon for Blender to generate images from your existing textures.",
 
-                content: UsingBlenderAddonImageEditor,
+                content: UsingBlenderAddonImageEditor
               },
               {
                 name: "Animation",
@@ -346,7 +345,7 @@ export namespace Documentation {
                 summary:
                   "Learn how to use the Stability addon for Blender to generate animations from your videos.",
 
-                content: UsingBlenderAddonAnimation,
+                content: UsingBlenderAddonAnimation
               },
               {
                 name: "Upscaler",
@@ -355,20 +354,11 @@ export namespace Documentation {
                 summary:
                   "Learn how to use the Stability addon for Blender to upscale your rendered images and animations.",
 
-                content: UsingBlenderUpscaler,
-              },
-            ],
-          },
-        ],
-      },
-      {
-        icon: "question",
-        name: "FAQ",
-        route: "/docs/reference/faq",
-        imageURL: "/QuestionDog.png",
-        summary: "Have a question? We might have an answer.",
-
-        content: frequentlyAskedQuestions,
+                content: UsingBlenderUpscaler
+              }
+            ]
+          }
+        ]
       },
       {
         icon: "broadcast",
@@ -377,8 +367,8 @@ export namespace Documentation {
         imageURL: "/GiftBoxes.png",
         summary:
           "Check out our release notes to stay up to date on the latest Stability API features!",
-        content: releaseNotes,
-      },
+        content: releaseNotes
+      }
     ];
   }
 
@@ -410,9 +400,9 @@ export namespace Documentation {
           return [
             {
               path: group.route,
-              element: element,
+              element: element
             },
-            ...routes(group.children ?? []),
+            ...routes(group.children ?? [])
           ];
         });
 
