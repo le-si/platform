@@ -47,7 +47,7 @@ export function Page() {
   }, [submitMutation.isError, submitMutation.error]);
 
   return (
-    <div className="mt-16 flex h-full w-full flex-col items-center justify-center">
+    <div className="flex h-full w-full flex-col items-center justify-center">
       <div className="align-center mx-auto flex w-full max-w-[40rem] flex-col justify-center gap-2 px-5 transition-all duration-300">
         <h1 className="mb-4 text-4xl font-bold">Support</h1>
         <label className={`-mb-1 mt-1 text-sm font-semibold text-white/50`}>
