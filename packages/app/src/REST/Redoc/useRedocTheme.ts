@@ -16,6 +16,11 @@ export function useRedocTheme(): RedocTheme {
       },
       smoothing: "antialiased",
     },
+    breakpoints: {
+      small: "1024px",
+      medium: "1280px",
+      large: "1680px",
+    },
     //   spacing: {
     //     sectionVertical: 40,
     //     sectionHorizontal: isTinyDevice ? 16 : 40,

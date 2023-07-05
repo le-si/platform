@@ -1,6 +1,7 @@
 import * as ReactQuery from "@tanstack/react-query";
 import { Environment } from "~/Environment";
 import { GlobalSearch } from "~/GlobalSearch";
+import { REST } from "~/REST/index";
 
 const queryKey = (): ReactQuery.QueryKey => ["rest-api-spec"];
 
@@ -16,8 +17,8 @@ export function useOpenAPISpec(
         .then(async (spec) => {
           // Index the REST API spec, so it shows up in the global search.
           await GlobalSearch.Engine.addToIndex({
-            route: "/rest-api",
-            name: "REST API",
+            route: REST.Page.url(),
+            name: "REST API Reference",
             content: JSON.stringify(spec),
           });
 

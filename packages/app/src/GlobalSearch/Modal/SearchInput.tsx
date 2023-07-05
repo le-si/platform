@@ -2,10 +2,12 @@ export function SearchInput({
   value,
   closeModal,
   onChange,
+  onKeyDown,
 }: {
   readonly value: string;
   readonly closeModal: () => void;
   readonly onChange: React.ChangeEventHandler<HTMLInputElement>;
+  readonly onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
 }) {
   const ref = React.useRef<HTMLInputElement>(null);
 
@@ -15,11 +17,13 @@ export function SearchInput({
     <div className={"relative w-full"}>
       <input
         ref={ref}
+        tabIndex={0}
         type="text"
         placeholder="Search..."
         className="input-lg bg-brand-amber-1 w-full rounded-tl-xl rounded-tr-xl border-b border-zinc-300 outline-none"
         value={value}
         onChange={onChange}
+        onKeyDown={onKeyDown}
       />
       <CloseButton closeModal={closeModal} />
     </div>

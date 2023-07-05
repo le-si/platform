@@ -50,6 +50,12 @@ function Footer() {
           Support
         </Link>
         <Link
+          to="https://stabilityai.instatus.com/"
+          className="text-sm font-semibold hover:text-indigo-500"
+        >
+          Status
+        </Link>
+        <Link
           to="/legal/terms-of-service"
           className="text-sm font-semibold hover:text-indigo-500"
         >
@@ -61,14 +67,11 @@ function Footer() {
         >
           Privacy Policy
         </Link>
-        <Link to="/faq" className="text-sm font-semibold hover:text-indigo-500">
-          FAQs
-        </Link>
         <a
           href="https://stability.ai"
           className="text-sm font-semibold hover:text-indigo-500"
         >
-          Stability AI
+          stability.ai
         </a>
       </div>
       <div className="flex gap-6">
