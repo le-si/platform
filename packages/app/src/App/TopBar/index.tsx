@@ -1,8 +1,11 @@
+import * as React from "react";
 import { Link } from "react-router-dom";
+import { GlobalSearch } from "~/GlobalSearch";
 import { User } from "~/User";
 
 export function TopBar() {
   const isScrolledToTop = useIsScrolledToTop();
+
   return (
     <div
       className={classes(
@@ -51,7 +54,9 @@ export function TopBar() {
           Pricing
         </Link>
       </div>
+
       <div className="flex w-1/3 items-center justify-end gap-3">
+        <GlobalSearch.Modal.OpenButton />
         <User.Login.Button />
       </div>
     </div>

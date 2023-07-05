@@ -6,14 +6,15 @@ import { REST } from "~/REST";
 import { Sandbox } from "~/Sandbox";
 import { Theme } from "~/Theme";
 
+import { OpenButton } from "./OpenButton";
 import { SearchInput } from "./SearchInput";
 import { SearchResults } from "./SearchResults";
 
 export function Modal() {
   const [text, setText] = React.useState("");
-  const { isOpen, setIsOpen } = Modal.useState();
+  const { isOpen, close } = Modal.useState();
   const [results, setResults] = React.useState<GlobalSearch.Result[]>([]);
-  const closeModal = React.useCallback(() => setIsOpen(false), [setIsOpen]);
+  const closeModal = React.useCallback(() => close(), [close]);
 
   const [, cancelDebounce] = useDebounce(
     () => setResults(text.length < 2 ? [] : GlobalSearch.Engine.search(text)),
@@ -60,14 +61,22 @@ export function Modal() {
   );
 }
 
+export declare namespace Modal {
+  export { OpenButton };
+}
+
 export namespace Modal {
+  Modal.OpenButton = OpenButton;
+
   export type State = {
     isOpen: boolean;
-    setIsOpen: (isOpen: boolean) => void;
+    open: () => void;
+    close: () => void;
   };
 
   export const useState = GlobalState.create<State>((set) => ({
     isOpen: false,
-    setIsOpen: (isOpen) => set({ isOpen }),
+    open: () => set({ isOpen: true }),
+    close: () => set({ isOpen: false }),
   }));
 }

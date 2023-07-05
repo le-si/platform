@@ -17,6 +17,7 @@ import { Info } from "./Info";
 import { Link } from "./Link";
 import { Plus } from "./Plus";
 import { Python } from "./Python";
+import { Search } from "./Search";
 import { Spinner } from "./Spinner";
 import { Token } from "./Token";
 import { TypeScript } from "./TypeScript";
@@ -46,6 +47,7 @@ export declare namespace Icon {
     Info,
     Link,
     Plus,
+    Search,
     Spinner,
     Union,
     Upload,
@@ -75,6 +77,7 @@ export namespace Icon {
   Icon.Info = Info;
   Icon.Link = Link;
   Icon.Plus = Plus;
+  Icon.Search = Search;
   Icon.Spinner = Spinner;
   Icon.Union = Union;
   Icon.Upload = Upload;
