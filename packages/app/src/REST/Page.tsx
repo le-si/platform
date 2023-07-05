@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom";
 import { REST } from "~/REST";
+import { Support } from "~/Support";
 
 import { RedocContainer } from "./Redoc";
 
@@ -16,17 +18,23 @@ export namespace Page {
   export const url = () => "/docs/api-reference" as const;
 }
 
-// TODO: Make the "Contact Support" button actually do something.
 function FailedToLoadDocumentation() {
+  const navigate = useNavigate();
+
   return (
-    <div className="flex flex-col items-center space-y-2 text-center">
-      <h4 className="text-secondary text-2xl">
+    <div className="flex h-[calc(100vh-20rem)] flex-col items-center justify-center gap-4 space-y-2 text-center">
+      <h4 className="text-2xl font-bold">
         Failed to load the REST documentation.
       </h4>
-      <h6 className="text-secondary text-xl">
+      <p className="flex items-center text-xl">
         If the problem persists please{" "}
-        <button className="text-red-600">contact support</button>
-      </h6>
+        <button
+          className="btn btn-sm btn-accent ml-2"
+          onClick={() => navigate(Support.Page.url())}
+        >
+          contact support
+        </button>
+      </p>
     </div>
   );
 }

@@ -48,9 +48,7 @@ export function RedocContainer({ spec }: { spec?: object | undefined }) {
               </Redoc.StoreProvider>
             </Redoc.ThemeProvider>
           ) : (
-            <div className="flex h-full w-full items-center justify-center">
-              <Theme.Icon.Spinner className="h-6 w-6 text-black" />
-            </div>
+            <Theme.Loading.Overlay />
           )
         }
       </Redoc.StoreBuilder>

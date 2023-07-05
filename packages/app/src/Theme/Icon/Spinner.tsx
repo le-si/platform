@@ -7,7 +7,7 @@ export function Spinner({ className, ...props }: Theme.Icon) {
       fill="none"
       viewBox="0 0 24 24"
       className={classes(
-        "flex h-5 w-5 animate-spin text-gray-500 dark:text-gray-400",
+        "flex h-6 w-6 animate-spin text-gray-500 dark:text-gray-400",
         className
       )}
       {...props}
@@ -28,3 +28,15 @@ export function Spinner({ className, ...props }: Theme.Icon) {
     </svg>
   );
 }
+
+/*
+  return (
+    <span
+      className={classes(
+        "loading loading-spinner loading-lg bg-brand-amber-3",
+        className
+      )}
+      {...props}
+    />
+  );
+ */

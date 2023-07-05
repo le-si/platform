@@ -1,4 +1,5 @@
 import * as Auth0 from "@auth0/auth0-react";
+import { Theme } from "~/Theme";
 
 export function Page() {
   const { loginWithRedirect } = Auth0.useAuth0();
@@ -13,5 +14,5 @@ export function Page() {
     },
   });
 
-  return null;
+  return <Theme.Loading.Overlay />;
 }

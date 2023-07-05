@@ -17,5 +17,6 @@ export { CopyToClipboard } from "./CopyToClipboard";
 export { NavButton } from "./NavButton";
 export { Page } from "./Page";
 export { NotFound } from "./Page/NotFound";
+export { Loading } from "./Loading";
 
 export * as Theme from ".";
