@@ -12,7 +12,7 @@ function DocButton({
   className,
   activeOverride,
   childrenOverride,
-  redirect,
+  redirect
 }: Styleable &
   Partial<Documentation.Group> & {
     indent?: number;
@@ -35,7 +35,7 @@ function DocButton({
             "active:bg-[#e4e4ce]"
         )}
         style={{
-          marginLeft: `${indent * 1}rem`,
+          marginLeft: `${indent * 1}rem`
         }}
       >
         <Link
@@ -96,14 +96,14 @@ export function Page() {
   }, [navigate, location.pathname]);
 
   return (
-    <div className="relative flex w-full gap-5 px-5">
+    <div className="relative flex w-full flex-col gap-5 px-5 sm:flex-row">
       <div
-        className="fixed mt-5 flex w-full max-w-[20rem] flex-col gap-5"
+        className="mt-5 w-full flex-col gap-5 sm:fixed sm:max-w-[20rem]"
         style={{
-          top: TopBar.height(),
+          top: TopBar.height()
         }}
       >
-        <div className="flex max-h-[calc(100vh-10.5rem)] w-full flex-col overflow-y-auto">
+        <div className="flex w-full flex-col overflow-y-auto sm:max-h-[calc(100vh-10.5rem)]">
           {routes.slice(0, 1).map((route) => (
             <DocButton key={route.name} {...route} />
           ))}
@@ -119,7 +119,7 @@ export function Page() {
           ))}
         </div>
       </div>
-      <div className="w-[20rem] shrink-0" />
+      <div className="hidden w-[20rem] shrink-0 sm:block" />
       <div
         className={classes(
           "mx-auto flex w-full min-w-0 max-w-[100rem] justify-center"

@@ -16,9 +16,9 @@ function Component() {
   }, [location.pathname, location.search, navigate]);
 
   return (
-    <div className="mt-6 flex w-full gap-5 px-5">
-      <div className="flex w-full max-w-[20rem] flex-col gap-5">
-        <div className="flex w-full flex-col gap-1">
+    <div className="mt-6 flex w-full flex-col gap-5 px-5 sm:flex-row">
+      <div className="flex w-full flex-col gap-5 sm:max-w-[20rem]">
+        <div className="flex w-full gap-1 sm:flex-col">
           <Theme.NavButton
             url={User.Account.Overview.url()}
             active={location.pathname === User.Account.Overview.url()}

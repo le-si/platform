@@ -5,7 +5,7 @@ import { Documentation } from ".";
 
 export function ListPage({ group }: { group: Documentation.Group }) {
   return (
-    <div className="my-[30px] flex flex-col gap-8 px-5">
+    <div className="my-[30px] flex flex-col gap-8 sm:px-5">
       <h1 className="text-4xl font-extrabold">{group.name}</h1>
       <p className="text-base">{group.summary}</p>
       {typeof group.content === "string" ? (
