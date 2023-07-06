@@ -29,7 +29,7 @@ export function TabPage({ group }: { group: Documentation.Group }) {
 
   return (
     <>
-      <div className="sticky top-16 z-50 flex items-center justify-between gap-1 border-b border-zinc-100 bg-white py-3 text-sm">
+      <div className="sticky top-16 z-10 flex items-center justify-between gap-1 border-b border-zinc-100 bg-white py-3 text-sm">
         <div className="flex items-center gap-1">
           {group.tabs
             ?.filter((t) => !t.redirect)
@@ -43,7 +43,7 @@ export function TabPage({ group }: { group: Documentation.Group }) {
                 onClick={() => setTab(i)}
               >
                 {t.icon}
-                {t.name}
+                <span className="hidden sm:inline-block">{t.name}</span>
               </div>
             ))}
         </div>
