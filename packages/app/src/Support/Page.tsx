@@ -47,7 +47,7 @@ export function Page() {
   }, [submitMutation.isError, submitMutation.error]);
 
   return (
-    <div className="mt-16 flex h-full w-full flex-col items-center justify-center">
+    <div className="flex h-full w-full flex-col items-center justify-center">
       <div className="align-center mx-auto flex w-full max-w-[40rem] flex-col justify-center gap-2 px-5 transition-all duration-300">
         <h1 className="mb-4 text-4xl font-bold">Support</h1>
         <label className={`-mb-1 mt-1 text-sm font-semibold text-white/50`}>
@@ -91,7 +91,7 @@ export function Page() {
               type: value,
             })
           }
-          options={fields.data?.choices.map((choice: any) => ({
+          options={fields.data?.choices.map((choice: { label: string }) => ({
             label: choice.label,
             value: choice.label,
           }))}
@@ -131,7 +131,7 @@ export function Page() {
         >
           Submit
         </Theme.Button>
-        <p className="opacity-muted-extra py-4 text-center">
+        <p className="py-4 text-center opacity-70">
           You can also email us at&nbsp;
           <a href="mailto:dreamstudio@stability.ai">dreamstudio@stability.ai</a>
         </p>

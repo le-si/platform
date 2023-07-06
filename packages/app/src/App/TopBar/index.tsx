@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Link } from "react-router-dom";
 import { GlobalSearch } from "~/GlobalSearch";
 import { User } from "~/User";

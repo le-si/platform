@@ -1,5 +1,4 @@
 import * as ReactRouter from "react-router-dom";
-import { App } from "~/App";
 import { Documentation } from "~/Documentation";
 import { Markdown } from "~/Markdown";
 import { Overview } from "~/Overview";
@@ -14,6 +13,7 @@ import { TextToImage } from "~/Sandbox/TextToImage";
 import { Upscaling } from "~/Sandbox/Upscaling";
 import { Scroll } from "~/Scroll";
 import { Support } from "~/Support";
+import { Theme } from "~/Theme";
 import { User } from "~/User";
 
 export function Router() {
@@ -23,33 +23,33 @@ export function Router() {
     {
       path: "/",
       element: (
-        <App.Page>
+        <Theme.Page>
           <Overview />
-        </App.Page>
+        </Theme.Page>
       ),
     },
     {
       path: "/sandbox",
       element: (
-        <App.Page>
+        <Theme.Page>
           <List />
-        </App.Page>
+        </Theme.Page>
       ),
     },
     {
       path: Pricing.url(),
       element: (
-        <App.Page>
+        <Theme.Page>
           <Pricing />
-        </App.Page>
+        </Theme.Page>
       ),
     },
     {
       path: "/docs",
       element: (
-        <App.Page>
+        <Theme.Page>
           <Documentation.Page />
-        </App.Page>
+        </Theme.Page>
       ),
       children: [
         ...Documentation.useRoutes(),
@@ -62,42 +62,42 @@ export function Router() {
     {
       path: "/sandbox/text-to-image",
       element: (
-        <App.Page noScroll noFooter>
+        <Theme.Page noScroll noFooter>
           <Sandbox
             SandboxComponent={TextToImage}
             samples={TextToImage.Samples}
           />
-        </App.Page>
+        </Theme.Page>
       ),
     },
     {
       path: "/sandbox/image-to-image",
       element: (
-        <App.Page noScroll noFooter>
+        <Theme.Page noScroll noFooter>
           <Sandbox
             SandboxComponent={ImageToImage}
             samples={ImageToImage.Samples}
           />
-        </App.Page>
+        </Theme.Page>
       ),
     },
     {
       path: "/sandbox/upscaling",
       element: (
-        <App.Page noScroll noFooter>
+        <Theme.Page noScroll noFooter>
           <Sandbox SandboxComponent={Upscaling} samples={Upscaling.Samples} />
-        </App.Page>
+        </Theme.Page>
       ),
     },
     {
       path: "/sandbox/multi-prompting",
       element: (
-        <App.Page noScroll noFooter>
+        <Theme.Page noScroll noFooter>
           <Sandbox
             SandboxComponent={MultiPrompting}
             samples={MultiPrompting.Samples}
           />
-        </App.Page>
+        </Theme.Page>
       ),
     },
     {
@@ -123,9 +123,9 @@ export function Router() {
     {
       path: User.Account.Page.url(),
       element: (
-        <App.Page>
+        <Theme.Page>
           <User.Account.Page />
-        </App.Page>
+        </Theme.Page>
       ),
       children: [
         {
@@ -146,10 +146,14 @@ export function Router() {
     {
       path: Support.Page.url(),
       element: (
-        <App.Page noScroll>
+        <Theme.Page noScroll>
           <Support.Page />
-        </App.Page>
+        </Theme.Page>
       ),
+    },
+    {
+      path: "*",
+      element: <Theme.NotFound />,
     },
   ]);
 }

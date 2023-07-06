@@ -12,7 +12,7 @@ function DocButton({
   className,
   activeOverride,
   childrenOverride,
-  redirect
+  redirect,
 }: Styleable &
   Partial<Documentation.Group> & {
     indent?: number;
@@ -35,7 +35,7 @@ function DocButton({
             "active:bg-[#e4e4ce]"
         )}
         style={{
-          marginLeft: `${indent * 1}rem`
+          marginLeft: `${indent * 1}rem`,
         }}
       >
         <Link
@@ -100,7 +100,7 @@ export function Page() {
       <div
         className="fixed mt-5 flex w-full max-w-[20rem] flex-col gap-5"
         style={{
-          top: TopBar.height()
+          top: TopBar.height(),
         }}
       >
         <div className="flex max-h-[calc(100vh-10.5rem)] w-full flex-col overflow-y-auto">

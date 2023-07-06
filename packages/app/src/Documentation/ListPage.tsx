@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Markdown } from "~/Markdown";
+
 import { Documentation } from ".";
 
 export function ListPage({ group }: { group: Documentation.Group }) {
@@ -16,18 +17,24 @@ export function ListPage({ group }: { group: Documentation.Group }) {
       ) : (
         group.content
       )}
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {group.children?.map((child) => (
           <Link
             to={child.route}
             key={child.name}
-            className="group flex cursor-pointer gap-4"
+            className="group flex cursor-pointer flex-col gap-4"
           >
-            <div className="ring-brand-amber-2 aspect-square h-20 w-20 shrink-0 grow-0 overflow-hidden rounded-lg ring-[5px] duration-200 ease-in-out">
+            <div className="bg-brand-amber-2 relative aspect-square w-full shrink-0 grow-0 overflow-hidden rounded-xl p-4">
+              <div className="absolute left-[50%] top-[50%] aspect-square h-[55%] w-[55%] translate-x-[-50%] translate-y-[-50%] transform overflow-hidden">
+                <img
+                  src={child.imageURL}
+                  alt={child.name}
+                  className="h-full w-full object-cover duration-100 ease-in-out group-hover:scale-105"
+                />
+              </div>
               <img
-                src={child.imageURL}
-                alt={child.name}
-                className="aspect-square h-full w-full object-cover duration-100 ease-in-out group-hover:scale-105"
+                src={"/svg/grid.svg"}
+                className="aspect-square h-full w-full"
               />
             </div>
 

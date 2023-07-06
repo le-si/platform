@@ -16,10 +16,11 @@ export function useRedocTheme(): RedocTheme {
       },
       smoothing: "antialiased",
     },
-    //   spacing: {
-    //     sectionVertical: 40,
-    //     sectionHorizontal: isTinyDevice ? 16 : 40,
-    //   },
+    breakpoints: {
+      small: "1024px",
+      medium: "1280px",
+      large: "1680px",
+    },
     //   breakpoints: {
     //     small: `${theme.breakpoints.values.md}px`,
     //     medium: `1900px`,

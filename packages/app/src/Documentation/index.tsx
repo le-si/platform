@@ -18,7 +18,6 @@ import textToImageTypeScript from "./Features/TextToImageTypeScript.md?raw";
 import imageUpscalerPython from "./Features/UpscalerPython.md?raw";
 import imageUpscalerTypeScript from "./Features/UpscalerTypeScript.md?raw";
 import variants from "./Features/Variants.md?raw";
-import frequentlyAskedQuestions from "./FrequentlyAskedQuestions.md?raw";
 import authentication from "./GettingStarted/Authentication.md?raw";
 import creditsAndBilling from "./GettingStarted/CreditsAndBilling.md?raw";
 import pythonSDK from "./GettingStarted/PythonSDK.md?raw";
@@ -85,7 +84,7 @@ export namespace Documentation {
           {
             name: "Authentication",
             route: "/docs/getting-started/authentication",
-            imageURL: "/PadLock.png",
+            imageURL: "/auth-dochead.png",
             summary: "Learn how to create an account and manage your keys.",
 
             content: authentication,
@@ -93,7 +92,7 @@ export namespace Documentation {
           {
             name: "Credits + Billing",
             route: "/docs/getting-started/credits-and-billing",
-            imageURL: "/Coins.png",
+            imageURL: "/credits-dochead.png",
             summary:
               "Learn how to get credits and which settings most affect generation costs.",
 
@@ -101,7 +100,7 @@ export namespace Documentation {
           },
           {
             name: "Python gRPC SDK",
-            imageURL: "/Snake.png",
+            imageURL: "/python-sdk-dochead.png",
             route: "/docs/getting-started/python-sdk",
             summary: "Learn how to configure and use the Python SDK.",
 
@@ -109,7 +108,7 @@ export namespace Documentation {
           },
           {
             name: "TypeScript gRPC Client",
-            imageURL: "/AbstractShapes.png",
+            imageURL: "/typescript-sdk-dochead.png",
             route: "/docs/getting-started/typescript-client",
             summary: "Learn how to configure and use the TypeScript Client.",
 
@@ -122,12 +121,13 @@ export namespace Documentation {
         name: "gRPC API",
         route: "/docs/features",
         imageURL: "/PaintingRobot.png",
-        summary: "Try out our gRPC clients for Python and TypeScript.",
+        summary:
+          "Learn how to authenticate, use credits, and make calls to our gRPC API.",
         children: [
           {
             name: "Parameters",
             route: "/docs/features/api-parameters",
-            imageURL: "/APIParameters.png",
+            imageURL: "/parameters-dochead.png",
             summary:
               "Learn about all of the parameters available for gRPC API calls.",
             content: apiParameters,
@@ -135,7 +135,7 @@ export namespace Documentation {
           {
             name: "Text-to-Image",
             route: "/docs/features/text-to-image",
-            imageURL: "/PaintingRobot.png",
+            imageURL: "/text-to-image-dochead.png",
             summary: "Learn how to generate images from text.",
             tabs: [
               {
@@ -158,7 +158,7 @@ export namespace Documentation {
           {
             name: "Image-to-Image",
             route: "/docs/features/image-to-image",
-            imageURL: "/FloatingArtOrSomething.png",
+            imageURL: "/image-to-image-dochead.png",
             summary: "Learn how to generate images from existing images.",
             tabs: [
               {
@@ -181,7 +181,7 @@ export namespace Documentation {
           {
             name: "Inpainting + Masking",
             route: "/docs/features/inpainting",
-            imageURL: "/VRDog.png",
+            imageURL: "/inpainting-dochead.png",
             summary:
               "Learn how to paint anything into existing images and how masking works.",
             tabs: [
@@ -205,7 +205,7 @@ export namespace Documentation {
           {
             name: "CLIP Guidance",
             route: "/docs/features/clip-guidance",
-            imageURL: "/ClipGuiderButReal.png",
+            imageURL: "/clip-guidance-dochead.png",
             summary: "Learn how to use CLIP to guide image generation.",
 
             content: clipGuidance,
@@ -213,7 +213,7 @@ export namespace Documentation {
           {
             name: "Animation",
             route: "/docs/features/animation",
-            imageURL: "/Animation/using.jpg",
+            imageURL: "/animation-dochead.png",
             summary: "Learn how to create animations with our API.",
             children: [
               {
@@ -249,7 +249,7 @@ export namespace Documentation {
           {
             name: "Image Upscaling",
             route: "/docs/features/image-upscaling",
-            imageURL: "/img2upscale.png",
+            imageURL: "/upscaling-dochead.png",
             summary: "Learn how to upscale your images with our API.",
             tabs: [
               {
@@ -272,7 +272,7 @@ export namespace Documentation {
           {
             name: "Multi-prompting",
             route: "/docs/features/multi-prompting",
-            imageURL: "/MultiPrompt.png",
+            imageURL: "/multi-prompting-dochead.png",
             summary: "Learn how to use multi-prompting and prompt weighting.",
 
             content: multiprompting,
@@ -280,7 +280,7 @@ export namespace Documentation {
           {
             name: "Variants",
             route: "/docs/features/variants",
-            imageURL: "/Variants.png",
+            imageURL: "/variants-dochead.png",
             summary: "Learn how to create variants of generated images.",
 
             content: variants,
@@ -293,7 +293,7 @@ export namespace Documentation {
         route: "/docs/integrations",
         imageURL: "/Photoshop/PipeBoys.png",
         summary:
-          "Learn how to use the official Stability integrations for Blender and Photoshop.",
+          "Learn how to use the official Stability integrations for Blender.",
 
         children: [
           {
@@ -301,7 +301,7 @@ export namespace Documentation {
             route: "/docs/integrations/blender",
             summary:
               "Learn how to use the Stability plugin to generate images, animations and textures right inside Blender.",
-            imageURL: "/Blender/fancy_city.png",
+            imageURL: "/blender-dochead.png",
             children: [
               {
                 name: "Installing",
@@ -360,15 +360,6 @@ export namespace Documentation {
             ],
           },
         ],
-      },
-      {
-        icon: "question",
-        name: "FAQ",
-        route: "/docs/reference/faq",
-        imageURL: "/QuestionDog.png",
-        summary: "Have a question? We might have an answer.",
-
-        content: frequentlyAskedQuestions,
       },
       {
         icon: "broadcast",

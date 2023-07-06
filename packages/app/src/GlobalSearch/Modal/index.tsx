@@ -37,6 +37,20 @@ export function Modal() {
     }
   }, [cancelDebounce, isOpen]);
 
+  const searchResultsRef = React.useRef<HTMLDivElement>(null);
+
+  // Pass onKeyDown handler to the SearchInput component
+  const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (
+    event
+  ) => {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      console.log("Tab key pressed");
+      // Focus on the SearchResults component when Tab key is pressed
+      searchResultsRef.current?.focus();
+    }
+  };
+
   return (
     <Theme.Modal
       open={isOpen}
@@ -48,6 +62,7 @@ export function Modal() {
         value={text}
         closeModal={closeModal}
         onChange={(event) => setText(event.target.value)}
+        onKeyDown={handleKeyDown}
       />
 
       {text.length <= 1 ? (
@@ -55,7 +70,11 @@ export function Modal() {
           <Sandbox.List noHeader smallGrid hideComingSoon />
         </div>
       ) : (
-        <SearchResults results={results} closeModal={closeModal} />
+        <SearchResults
+          results={results}
+          closeModal={closeModal}
+          ref={searchResultsRef}
+        />
       )}
     </Theme.Modal>
   );

@@ -7,7 +7,9 @@ export function Provider({ children }: React.PropsWithChildren) {
   const navigate = useNavigate();
   const onRedirect = React.useCallback(
     (appState?: Auth0.AppState) =>
-      navigate(appState?.returnTo ?? window.location.pathname),
+      navigate(appState?.returnTo ?? window.location.pathname, {
+        replace: true,
+      }),
     [navigate]
   );
 

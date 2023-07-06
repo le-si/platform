@@ -11,9 +11,9 @@ function Component() {
   // redirect to /account/overview if no subpage is selected
   useEffect(() => {
     if (location.pathname === "/account") {
-      navigate(User.Account.Overview.url());
+      navigate(User.Account.Overview.url() + location.search);
     }
-  }, [location.pathname, navigate]);
+  }, [location.pathname, location.search, navigate]);
 
   return (
     <div className="mt-6 flex w-full gap-5 px-5">
@@ -51,8 +51,8 @@ function Component() {
 
 export function Page() {
   const ProtectedComponent = Auth0.withAuthenticationRequired(Component, {
-    onRedirecting: () => <Theme.Icon.Spinner />,
-    returnTo: location.pathname,
+    onRedirecting: () => <Theme.Loading.Overlay />,
+    returnTo: location.pathname + location.search,
   });
 
   return <ProtectedComponent />;
