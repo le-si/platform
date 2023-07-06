@@ -7,7 +7,7 @@ export function Code({
   code,
   language,
   setLanguage,
-  onClose,
+  onClose
 }: {
   code: Code;
   language: Code.Language;
@@ -53,7 +53,7 @@ export function Code({
       </div>
 
       <div className="h-full overflow-auto">
-        <Markdown className="sandbox m-0 h-full rounded-t-none p-0 text-[0.95rem] leading-3">
+        <Markdown className="sandbox m-0 h-full rounded-t-none p-0 text-[0.95rem] leading-3 sm:px-0">
           {Code.toMarkdownCodeBlock(code, language)}
         </Markdown>
       </div>
@@ -96,7 +96,7 @@ export namespace Code {
       if (!ref.current) return;
       if (!spans.current.length)
         spans.current = [
-          ...ref.current.querySelectorAll<HTMLSpanElement>("span"),
+          ...ref.current.querySelectorAll<HTMLSpanElement>("span")
         ];
 
       const currentContents = spans.current.map(
@@ -146,7 +146,7 @@ export namespace Code {
           opacity: 1;
           transition: opacity ${fadeInSpeed}ms ease-out;
         }
-      `,
+      `
     };
   };
 }
@@ -154,7 +154,7 @@ export namespace Code {
 function LanguageButton({
   language,
   onClick,
-  active,
+  active
 }: {
   language: string;
   onClick: () => void;
