@@ -48,7 +48,7 @@ const MODELS = [
     formulaStylized: "((width * height - 169527) * steps / 30) * 2.16e-8 * 100",
     variables: [
       {
-        name: "width",
+        name: "Width",
         description: "Width of the image in pixels",
         type: "number",
         min: 512,
@@ -56,7 +56,7 @@ const MODELS = [
         step: 1,
       },
       {
-        name: "height",
+        name: "Height",
         description: "Height of the image in pixels",
         type: "number",
         min: 512,
@@ -64,7 +64,7 @@ const MODELS = [
         step: 1,
       },
       {
-        name: "steps",
+        name: "Steps",
         description: "Number of steps to run the model for",
         type: "number",
         min: 10,
@@ -85,7 +85,7 @@ const MODELS = [
     formulaStylized: "((width * height - 169527) * steps / 30) * 2.16e-8 * 100",
     variables: [
       {
-        name: "width",
+        name: "Width",
         description: "Width of the image in pixels",
         type: "number",
         min: 512,
@@ -93,7 +93,7 @@ const MODELS = [
         step: 1,
       },
       {
-        name: "height",
+        name: "Height",
         description: "Height of the image in pixels",
         type: "number",
         min: 512,
@@ -101,7 +101,7 @@ const MODELS = [
         step: 1,
       },
       {
-        name: "steps",
+        name: "Steps",
         description: "Number of steps to run the model for",
         type: "number",
         min: 10,
@@ -239,9 +239,10 @@ export function Pricing() {
                   className="prose text-indigo-500 hover:underline"
                   to="/account/billing"
                 >
-                  Account page
+                  account page
                 </Link>
               </span>
+              .
               <br />
               <br />
               Currently we have a pay as you go system, we’ll add subscriptions
@@ -251,7 +252,6 @@ export function Pricing() {
           </div>
         </div>
       </div>
-
       <ModelList
         category="image"
         image="/image-pricing.webp"
@@ -320,7 +320,7 @@ export namespace Pricing {
               <Theme.Icon.Token className="-mr-1 h-5 w-5 text-black" />
               <span className="text-xl font-bold">{price.toFixed(2)}</span>
               <p className="text-sm italic opacity-50">
-                (${(price / 100).toFixed(3)})
+                ${(price / 100).toFixed(3)}
               </p>
             </div>
             {!model.static && (

@@ -43,6 +43,7 @@ function DocumentCard({
     title: string;
     url: string;
     newWindow?: boolean;
+    soon?: boolean;
   }[];
 }) {
   return (
@@ -54,13 +55,22 @@ function DocumentCard({
           <a
             key={link.title}
             href={link.url}
-            className="flex items-center gap-2 text-sm font-semibold text-indigo-500 duration-100 hover:text-indigo-400"
+            onClick={link.soon ? (e) => e.preventDefault() : doNothing}
+            className={classes(
+              "flex items-center gap-2 text-sm font-semibold text-indigo-500 duration-100",
+              link.soon
+                ? "cursor-not-allowed text-gray-400"
+                : "hover:text-indigo-400"
+            )}
           >
             {link.title}&nbsp;
             {link.newWindow ? (
               <Theme.Icon.ExternalLink />
             ) : (
               <Theme.Icon.Arrow />
+            )}
+            {link.soon && (
+              <span className="text-xs font-light italic">Coming Soon™</span>
             )}
           </a>
         ))}
@@ -94,6 +104,7 @@ function Documentation() {
                 title: "Chat UI",
                 url: "https://research.stability.ai/chat",
                 newWindow: true,
+                soon: true,
               },
             ]}
           />
