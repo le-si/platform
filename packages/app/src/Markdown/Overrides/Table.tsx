@@ -2,14 +2,14 @@ import React from "react";
 import {
   TableDataCellProps,
   TableHeaderCellProps,
-  TableRowProps
+  TableRowProps,
 } from "react-markdown/lib/ast-to-react";
 import { ReactMarkdownProps } from "react-markdown/lib/complex-types";
 
 import { Markdown } from "~/Markdown";
 
 export function Table({
-  children
+  children,
 }: React.DetailedHTMLProps<
   React.TableHTMLAttributes<HTMLTableElement>,
   HTMLTableElement

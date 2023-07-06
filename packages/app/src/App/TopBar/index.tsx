@@ -12,7 +12,7 @@ export function TopBar() {
         !isScrolledToTop && "border-zinc-100"
       )}
       style={{
-        height: TopBar.height()
+        height: TopBar.height(),
       }}
     >
       <div className="w-1/3">

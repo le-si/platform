@@ -35,7 +35,7 @@ function Header() {
 function DocumentCard({
   title,
   svg,
-  links
+  links,
 }: {
   title: string;
   svg: string;
@@ -84,7 +84,7 @@ function Documentation() {
             links={[
               { title: "Introduction", url: "/docs/getting-started" },
               { title: "REST API", url: "/docs/api-reference" },
-              { title: "gRPC API", url: "/docs/features" }
+              { title: "gRPC API", url: "/docs/features" },
             ]}
           />
           <DocumentCard
@@ -95,8 +95,8 @@ function Documentation() {
               {
                 title: "Chat UI",
                 url: "https://research.stability.ai/chat",
-                newWindow: true
-              }
+                newWindow: true,
+              },
             ]}
           />
           <DocumentCard
@@ -104,7 +104,7 @@ function Documentation() {
             svg="/svg/animation-doc.webp"
             links={[
               { title: "Introduction", url: "/docs/features/animation" },
-              { title: "gRPC API", url: "/docs/features/animation/parameters" }
+              { title: "gRPC API", url: "/docs/features/animation/parameters" },
             ]}
           />
           <DocumentCard
@@ -122,7 +122,7 @@ function SandboxCard({
   title,
   svg,
   link,
-  soon
+  soon,
 }: {
   title: string;
   svg: string;
@@ -202,7 +202,7 @@ function OtherCard({
   title,
   svg,
   link,
-  linkName
+  linkName,
 }: {
   title: string;
   svg: string;

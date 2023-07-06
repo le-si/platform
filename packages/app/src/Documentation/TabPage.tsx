@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Markdown } from "~/Markdown";
 import { Theme } from "~/Theme";
+
 import { Documentation } from ".";
 
 export function TabPage({ group }: { group: Documentation.Group }) {
@@ -17,12 +18,12 @@ export function TabPage({ group }: { group: Documentation.Group }) {
 
   useEffect(() => {
     navigate(`#${currentTab.name}`, { replace: true });
-  }, [tab]);
+  }, [currentTab.name, navigate, tab]);
 
   useEffect(() => {
     const index = group.tabs?.findIndex((t) => t.name === location.hash);
     if (index !== undefined && index !== -1) setTab(index);
-  }, [location.hash]);
+  }, [group.tabs, location.hash]);
 
   return (
     <>
@@ -30,6 +31,7 @@ export function TabPage({ group }: { group: Documentation.Group }) {
         {group.tabs?.map((t, i) =>
           t.redirect ? (
             <Link
+              key={`redirect-${t.name}`}
               className="hover:bg-brand-amber-1 flex cursor-pointer items-center justify-center gap-1 rounded px-2 py-1.5 duration-100"
               to={t.redirect}
             >

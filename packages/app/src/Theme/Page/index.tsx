@@ -7,7 +7,7 @@ export function Page({
   children,
   className,
   noScroll,
-  noFooter
+  noFooter,
 }: StyleableWithChildren & {
   noScroll?: boolean;
   noFooter?: boolean;
@@ -20,7 +20,7 @@ export function Page({
           ? {
               height: `calc(100vh - (${TopBar.height()} + ${
                 noFooter ? "0rem" : "4rem"
-              }))`
+              }))`,
             }
           : undefined
       }
@@ -35,12 +35,12 @@ export function Page({
                 ? {
                     height: `calc(100vh - (${TopBar.height()} + ${
                       noFooter ? "0rem" : "4rem"
-                    }))`
+                    }))`,
                   }
                 : {
                     minHeight: `calc(100vh - (${TopBar.height()} + ${
                       noFooter ? "0rem" : "4rem"
-                    }))`
+                    }))`,
                   }
             }
           >
