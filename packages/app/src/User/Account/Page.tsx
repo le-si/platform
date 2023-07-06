@@ -18,7 +18,7 @@ function Component() {
   return (
     <div className="mt-6 flex w-full gap-5 px-5">
       <div className="flex w-full max-w-[20rem] flex-col gap-5">
-        <div className="bg-brand-amber-1 flex w-full flex-col overflow-hidden rounded-xl">
+        <div className="flex w-full flex-col gap-1">
           <Theme.NavButton
             url={User.Account.Overview.url()}
             active={location.pathname === User.Account.Overview.url()}
@@ -52,7 +52,7 @@ function Component() {
 export function Page() {
   const ProtectedComponent = Auth0.withAuthenticationRequired(Component, {
     onRedirecting: () => <Theme.Loading.Overlay />,
-    returnTo: location.pathname + location.search,
+    returnTo: location.pathname + location.search
   });
 
   return <ProtectedComponent />;
@@ -65,19 +65,19 @@ export namespace Page {
     {
       route: Page.url(),
       name: "Account",
-      content: "User account, account page",
+      content: "User account, account page"
     },
     {
       route: Page.url() + "/" + User.APIKeys.Table.uri(),
       name: "API Key Management",
       content:
-        "api key, api keys, api key management, api key table, api key list",
+        "api key, api keys, api key management, api key table, api key list"
     },
     {
       route: Page.url() + "/" + User.Account.Credits.uri(),
       name: "Buy Credits",
       content:
-        "buy credits, out of credits, purchase credits, get credits, purchase history, payments",
-    },
+        "buy credits, out of credits, purchase credits, get credits, purchase history, payments"
+    }
   ];
 }
