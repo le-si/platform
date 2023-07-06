@@ -323,7 +323,7 @@ export namespace Pricing {
                 ${(price / 100).toFixed(3)}
               </p>
             </div>
-            {!model.static && (
+            {false && !model.static && (
               <button
                 onClick={() => setRevealCalculator(!revealCalculator)}
                 className="flex gap-1 text-sm opacity-80 hover:opacity-100"
@@ -338,7 +338,7 @@ export namespace Pricing {
               </button>
             )}
           </div>
-          {revealCalculator && (
+          {false && revealCalculator && (
             <p className="mt-6 flex items-center gap-2 font-mono">
               <Code className="bg-transparent p-0 text-xs opacity-75">
                 {model.formulaStylized}
