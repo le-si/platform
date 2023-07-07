@@ -8,10 +8,10 @@ function Component() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // redirect to /account/overview if no subpage is selected
+  // redirect to /account/keys if no subpage is selected
   useEffect(() => {
     if (location.pathname === "/account") {
-      navigate(User.Account.Overview.url() + location.search);
+      navigate(User.APIKeys.Table.url() + location.search);
     }
   }, [location.pathname, location.search, navigate]);
 
@@ -19,6 +19,12 @@ function Component() {
     <div className="mt-6 flex w-full flex-col gap-5 px-5 sm:flex-row">
       <div className="flex w-full flex-col gap-5 sm:max-w-[20rem]">
         <div className="flex w-full gap-1 sm:flex-col">
+          <Theme.NavButton
+            url={User.APIKeys.Table.url()}
+            active={location.pathname === User.APIKeys.Table.url()}
+          >
+            API Keys
+          </Theme.NavButton>
           <Theme.NavButton
             url={User.Account.Overview.url()}
             active={location.pathname === User.Account.Overview.url()}
@@ -30,12 +36,6 @@ function Component() {
             active={location.pathname === User.Account.Credits.url()}
           >
             Billing
-          </Theme.NavButton>
-          <Theme.NavButton
-            url={User.APIKeys.Table.url()}
-            active={location.pathname === User.APIKeys.Table.url()}
-          >
-            API Keys
           </Theme.NavButton>
         </div>
         <div className="bg-brand-amber-1 flex w-full flex-col overflow-hidden rounded-xl">

@@ -23,8 +23,8 @@ export namespace Login {
         loginWithRedirect({
           appState: { returnTo: window.location.pathname },
           authorizationParams: {
-            audience: import.meta.env.VITE_AUTH0_AUDIENCE,
-          },
+            audience: import.meta.env.VITE_AUTH0_AUDIENCE
+          }
         }),
       [loginWithRedirect]
     );
@@ -43,7 +43,7 @@ export namespace Login {
       return (
         <Theme.Tooltip content="View your account page" placement="bottom">
           <Link
-            to="/account/overview"
+            to="/account/keys"
             className="block rounded-full ring-1 ring-transparent duration-100 hover:ring hover:ring-indigo-500"
           >
             <User.Avatar />
