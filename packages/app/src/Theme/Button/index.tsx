@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Theme } from "~/Theme";
 
 export type Button = StyleableWithChildren & {
@@ -17,12 +18,20 @@ export function Button({
   className,
   variant,
   link,
-  loading,
+  loading
 }: Button) {
+  const navigate = useNavigate();
   return (
     <button
       disabled={disabled}
-      onClick={link && !onClick ? () => window.open(link, "_blank") : onClick}
+      onClick={
+        link && !onClick
+          ? () =>
+              link.startsWith("/")
+                ? navigate(link)
+                : window.open(link, "_blank")
+          : onClick
+      }
       className={classes(
         active && "hover",
         "h-fit w-full max-w-[20rem] grow-0 rounded-lg p-2.5 text-sm text-white duration-100 focus:outline-1 focus:outline-black/10",

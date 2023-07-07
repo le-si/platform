@@ -57,7 +57,7 @@ export function Upscaling({ setOptions }: Upscaling) {
   useEffect(() => {
     setOptions({
       engineID,
-      height: height * scale,
+      height: height * scale
     });
   }, [engineID, setOptions, height, scale]);
 
@@ -82,7 +82,7 @@ export function Upscaling({ setOptions }: Upscaling) {
 
                 setInit({
                   file: blob,
-                  url: URL.createObjectURL(blob),
+                  url: URL.createObjectURL(blob)
                 });
               }}
               onClear={() => setInit(undefined)}
@@ -94,12 +94,12 @@ export function Upscaling({ setOptions }: Upscaling) {
               options={[
                 {
                   label: "Real-ESRGAN x2",
-                  value: "esrgan-v1-x2plus",
+                  value: "esrgan-v1-x2plus"
                 },
                 {
                   label: "Stable Diffusion x4 Latent Upscaler",
-                  value: "stable-diffusion-x4-latent-upscaler",
-                },
+                  value: "stable-diffusion-x4-latent-upscaler"
+                }
               ]}
             />
           </div>
@@ -159,10 +159,7 @@ export function Upscaling({ setOptions }: Upscaling) {
 export function Buttons() {
   return (
     <>
-      <Button
-        link="https://stabilityai.readme.io/reference/upscaleimage"
-        variant="secondary"
-      >
+      <Button link="/docs/features/image-upscaling" variant="secondary">
         View Documentation
       </Button>
       <Button
