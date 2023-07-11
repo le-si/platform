@@ -11,7 +11,7 @@ export function TopBar() {
     <div className={classes("sticky top-0 z-50 flex w-full shrink-0 flex-col")}>
       <div
         style={{
-          height: TopBar.height()
+          height: TopBar.height(),
         }}
         className={classes(
           "flex shrink-0 items-center justify-between border-b border-transparent bg-white px-5 duration-100",
