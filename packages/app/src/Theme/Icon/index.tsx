@@ -24,6 +24,7 @@ import { TypeScript } from "./TypeScript";
 import { Union } from "./Union";
 import { Upload } from "./Upload";
 import { X } from "./X";
+import { Menu } from "./Menu";
 
 export type Icon = Styleable & {
   color?: CSSValue;
@@ -58,6 +59,7 @@ export declare namespace Icon {
     Token,
     Coin,
     Help,
+    Menu
   };
 }
 
@@ -88,4 +90,5 @@ export namespace Icon {
   Icon.Token = Token;
   Icon.Coin = Coin;
   Icon.Help = Help;
+  Icon.Menu = Menu;
 }

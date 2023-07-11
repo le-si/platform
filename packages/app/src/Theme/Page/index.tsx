@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 
 import { TopBar } from "~/App/TopBar";
+import { Theme } from "..";
 
 // TODO: Move this to Theme so we can reference it as Theme.Page
 export function Page({
   children,
   className,
   noScroll,
-  noFooter,
+  noFooter
 }: StyleableWithChildren & {
   noScroll?: boolean;
   noFooter?: boolean;
@@ -20,7 +21,7 @@ export function Page({
           ? {
               height: `calc(100vh - (${TopBar.height()} + ${
                 noFooter ? "0rem" : "4rem"
-              }))`,
+              }))`
             }
           : undefined
       }
@@ -35,12 +36,12 @@ export function Page({
                 ? {
                     height: `calc(100vh - (${TopBar.height()} + ${
                       noFooter ? "0rem" : "4rem"
-                    }))`,
+                    }))`
                   }
                 : {
                     minHeight: `calc(100vh - (${TopBar.height()} + ${
                       noFooter ? "0rem" : "4rem"
-                    }))`,
+                    }))`
                   }
             }
           >
@@ -57,19 +58,13 @@ export function Page({
 
 function Footer() {
   return (
-    <div className="mt-auto flex h-16 w-full items-center justify-between border-t border-zinc-100 bg-white px-5">
-      <div className="flex gap-6">
+    <div className="mt-auto flex w-full items-start justify-between border-t border-zinc-100 bg-white px-5 sm:h-16 sm:items-center">
+      <div className="flex flex-col gap-6 py-6 sm:flex-row sm:p-0">
         <Link
           to="/support"
           className="text-sm font-semibold hover:text-indigo-500"
         >
           Support
-        </Link>
-        <Link
-          to="https://stabilityai.instatus.com/"
-          className="text-sm font-semibold hover:text-indigo-500"
-        >
-          Status
         </Link>
         <Link
           to="/legal/terms-of-service"
@@ -86,19 +81,31 @@ function Footer() {
         <Link to="/faq" className="text-sm font-semibold hover:text-indigo-500">
           FAQ
         </Link>
+      </div>
+      <div className="flex flex-col gap-6 py-6 sm:flex-row sm:p-0">
         <a
           href="https://stability.ai"
-          className="text-sm font-semibold hover:text-indigo-500"
+          className="flex items-center gap-2 text-sm font-semibold hover:text-indigo-500"
+          target={"_blank"}
+          rel="noreferrer"
         >
-          stability.ai
+          stability.ai <Theme.Icon.ExternalLink />
         </a>
-      </div>
-      <div className="flex gap-6">
         <a
           href="https://discord.gg/stablediffusion"
-          className="text-sm font-semibold hover:text-indigo-500"
+          className="flex items-center gap-2 text-sm font-semibold hover:text-indigo-500"
+          target={"_blank"}
+          rel="noreferrer"
         >
-          Discord
+          Discord <Theme.Icon.ExternalLink />
+        </a>
+        <a
+          href="https://stabilityai.instatus.com/"
+          className="flex items-center gap-2 text-sm font-semibold hover:text-indigo-500"
+          target={"_blank"}
+          rel="noreferrer"
+        >
+          API Status <Theme.Icon.ExternalLink />
         </a>
       </div>
     </div>

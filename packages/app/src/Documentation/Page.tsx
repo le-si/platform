@@ -12,7 +12,7 @@ function DocButton({
   className,
   activeOverride,
   childrenOverride,
-  redirect,
+  redirect
 }: Styleable &
   Partial<Documentation.Group> & {
     indent?: number;
@@ -35,7 +35,7 @@ function DocButton({
             "active:bg-[#e4e4ce]"
         )}
         style={{
-          marginLeft: `${indent * 1}rem`,
+          marginLeft: `${indent * 1}rem`
         }}
       >
         <Link
@@ -84,6 +84,37 @@ function DocButton({
   );
 }
 
+function flattenRoutes(routes: Documentation.Group[]): Documentation.Group[] {
+  return routes.reduce<Documentation.Group[]>((acc, route) => {
+    acc.push(route);
+    if (route.children) {
+      acc.push(...flattenRoutes(route.children));
+    }
+    return acc;
+  }, []);
+}
+
+function findDocCursor(
+  routes: Documentation.Group[],
+  location: string
+): {
+  prev: Documentation.Group | null;
+  next: Documentation.Group | null;
+} {
+  // flatten out the routes into a single array
+  const flattenedRoutes = flattenRoutes(routes);
+
+  // find the index of the current route
+  const currentIndex = flattenedRoutes.findIndex(
+    (route) => route.route === location
+  );
+
+  return {
+    prev: flattenedRoutes[currentIndex - 1] ?? null,
+    next: flattenedRoutes[currentIndex + 1] ?? null
+  };
+}
+
 export function Page() {
   const routes = Documentation.create();
   const navigate = useNavigate();
@@ -95,15 +126,20 @@ export function Page() {
     }
   }, [navigate, location.pathname]);
 
+  const cursor = useMemo(
+    () => findDocCursor(routes, location.pathname),
+    [routes, location.pathname]
+  );
+
   return (
-    <div className="relative flex w-full gap-5 px-5">
+    <div className="relative flex w-full flex-col gap-5 px-5 sm:flex-row">
       <div
-        className="fixed mt-5 flex w-full max-w-[20rem] flex-col gap-5"
+        className="mt-5 w-full flex-col gap-5 sm:fixed sm:max-w-[20rem]"
         style={{
-          top: TopBar.height(),
+          top: TopBar.height()
         }}
       >
-        <div className="flex max-h-[calc(100vh-10.5rem)] w-full flex-col overflow-y-auto">
+        <div className="flex w-full flex-col overflow-y-auto sm:max-h-[calc(100vh-10.5rem)]">
           {routes.slice(0, 1).map((route) => (
             <DocButton key={route.name} {...route} />
           ))}
@@ -119,16 +155,40 @@ export function Page() {
           ))}
         </div>
       </div>
-      <div className="w-[20rem] shrink-0" />
+      <div className="hidden w-[20rem] shrink-0 sm:block" />
       <div
         className={classes(
-          "mx-auto flex w-full min-w-0 max-w-[100rem] justify-center"
+          "mx-auto flex w-full min-w-0 max-w-[80rem] justify-center"
         )}
       >
-        <div className="flex w-full flex-col">
+        <div className="flex w-full flex-col gap-8">
           <Outlet />
-          {/* <div className="flex w-full justify-between gap-7"></div> */}
-          {/* TODO: next/previous buttons */}
+          <div className="mb-8 flex w-full justify-between gap-8 sm:mb-24 sm:px-5 sm:py-8">
+            {cursor?.prev ? (
+              <div className="flex gap-2 rounded-lg">
+                <Link
+                  to={cursor.prev.route}
+                  className="flex items-center gap-1 text-sm font-semibold duration-100 hover:text-indigo-500 sm:text-lg"
+                >
+                  <Theme.Icon.ChevronRight className="h-4 w-4 rotate-90" />
+                  {cursor.prev.name}
+                </Link>
+              </div>
+            ) : (
+              <div />
+            )}
+            {cursor?.next && (
+              <div className="flex gap-2 rounded-lg">
+                <Link
+                  to={cursor.next.route}
+                  className="flex items-center gap-1 text-sm font-semibold duration-100 hover:text-indigo-500 sm:text-lg"
+                >
+                  {cursor.next.name}
+                  <Theme.Icon.ChevronRight className="h-4 w-4 -rotate-90" />
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

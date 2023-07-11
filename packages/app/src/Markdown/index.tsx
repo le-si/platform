@@ -15,7 +15,7 @@ import * as Pages from "./Pages";
 
 export function Markdown({
   className,
-  children,
+  children
 }: {
   className?: string;
   children: string;
@@ -25,13 +25,13 @@ export function Markdown({
       remarkPlugins={[
         supportForGithubMarkdown,
         supportForCustomHeaderIDs,
-        supportForAutomaticTableOfContents,
+        supportForAutomaticTableOfContents
       ]}
       rehypePlugins={[
         supportForAutomaticHeaderIDs,
         supportForCodeHighlighting,
         AutoHeaderLinker.plugin(),
-        supportForRawHTML,
+        supportForRawHTML
       ]}
       components={{
         code: Overrides.Code,
@@ -44,11 +44,11 @@ export function Markdown({
         th: Overrides.Table.Th,
         td: Overrides.Table.Td,
         tr: Overrides.Table.Tr,
-        blockquote: Overrides.Blockquote,
+        blockquote: Overrides.Blockquote
       }}
       className={classes(
         "markdown-root",
-        "prose dark:prose-invert mx-auto my-8 px-5 2xl:max-w-[93rem]",
+        "prose dark:prose-invert mx-auto my-8 sm:px-5 2xl:max-w-[93rem]",
         className
       )}
     >
@@ -76,7 +76,7 @@ export namespace Markdown {
       marginBottom: 3,
 
       // boxShadow: 5,
-      borderRadius: 1,
+      borderRadius: 1
     };
   }
 }
