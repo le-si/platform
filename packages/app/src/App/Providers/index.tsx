@@ -8,11 +8,11 @@ export function Providers({ children }: React.PropsWithChildren) {
   return (
     <Router.Provider>
       <Remote.Provider>
-        <User.Provider>
-          <Theme.Provider>
+        <Theme.Provider>
+          <User.Provider>
             <GlobalSearch.Provider>{children}</GlobalSearch.Provider>
-          </Theme.Provider>
-        </User.Provider>
+          </User.Provider>
+        </Theme.Provider>
       </Remote.Provider>
     </Router.Provider>
   );
