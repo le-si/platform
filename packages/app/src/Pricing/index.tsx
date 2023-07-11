@@ -31,10 +31,10 @@ const MODELS = [
         description: "Number of steps to run the model for",
         type: "number",
         min: 10,
-        max: 150
-      }
+        max: 150,
+      },
     ],
-    static: false
+    static: false,
   },
   {
     name: "Stable Diffusion 1.5",
@@ -53,7 +53,7 @@ const MODELS = [
         type: "number",
         min: 512,
         max: 1024,
-        step: 1
+        step: 1,
       },
       {
         name: "Height",
@@ -61,17 +61,17 @@ const MODELS = [
         type: "number",
         min: 512,
         max: 1024,
-        step: 1
+        step: 1,
       },
       {
         name: "Steps",
         description: "Number of steps to run the model for",
         type: "number",
         min: 10,
-        max: 150
-      }
+        max: 150,
+      },
     ],
-    static: false
+    static: false,
   },
   {
     name: "Stable Diffusion 2.1",
@@ -90,7 +90,7 @@ const MODELS = [
         type: "number",
         min: 512,
         max: 1024,
-        step: 1
+        step: 1,
       },
       {
         name: "Height",
@@ -98,17 +98,17 @@ const MODELS = [
         type: "number",
         min: 512,
         max: 1024,
-        step: 1
+        step: 1,
       },
       {
         name: "Steps",
         description: "Number of steps to run the model for",
         type: "number",
         min: 10,
-        max: 150
-      }
+        max: 150,
+      },
     ],
-    static: false
+    static: false,
   },
   {
     name: "Stable Diffusion x4 Latent Upscaler",
@@ -124,16 +124,16 @@ const MODELS = [
         description: "Width of the image in pixels",
         type: "number",
         min: 256,
-        max: 1024
+        max: 1024,
       },
       {
         name: "Height",
         description: "Height of the image in pixels",
         type: "number",
         min: 256,
-        max: 1024
-      }
-    ]
+        max: 1024,
+      },
+    ],
   },
   {
     name: "Real-ESRGAN x2",
@@ -143,8 +143,8 @@ const MODELS = [
     formula: (_state: State): number => 0.2,
     formulaStylized: "0.2",
     variables: [],
-    static: true
-  }
+    static: true,
+  },
 ];
 
 function Code({ children, className }: StyleableWithChildren) {
@@ -187,7 +187,7 @@ function Model({ model }: { model: (typeof MODELS)[number] }) {
 function ModelList({
   category,
   image,
-  description
+  description,
 }: {
   category: "image" | "video" | "audio" | "text" | "upscaling";
   image: string;
@@ -288,14 +288,14 @@ export namespace Pricing {
     route: Pricing.url(),
     name: "Pricing",
     content:
-      "Model pricing, image pricing, price-per-image, price calculator, Stable Diffusion 1.5, Stable Diffusion 2.1, Stable Diffusion XL 0.9, Stable Diffusion x4 Latent Upscaler, Real-ESRGAN x2"
+      "Model pricing, image pricing, price-per-image, price calculator, Stable Diffusion 1.5, Stable Diffusion 2.1, Stable Diffusion XL 0.9, Stable Diffusion x4 Latent Upscaler, Real-ESRGAN x2",
   });
 
   export function Widget({ model }: { model: (typeof MODELS)[number] }) {
     const [state, setState] = React.useState<State>({
       width: 512,
       height: 512,
-      steps: 50
+      steps: 50,
     });
     const [revealCalculator, setRevealCalculator] = React.useState(false);
 
