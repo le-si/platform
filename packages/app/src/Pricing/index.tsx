@@ -235,13 +235,11 @@ export function Pricing() {
           <div className="bg-brand-amber-1 flex flex-col gap-3 rounded-3xl p-6">
             <h2 className="text-2xl">How does pricing work?</h2>
             <p>
-              To start using our APIs you need to buy credits. You are issued
-              with 25 free credits when signing up to trial our offering.
+              To start using our APIs you will need need to purchase credits. 25 free credits are issued
+              to all new signups to allow a limited trial of our platform before committing to a purchase.
               <br />
-              <br /> A credit is a unit of currency expended when generating
-              images while using our APIs. Credit usage scales according to the
-              compute required to generate your image. Changing the parameters
-              can decrease and increase the amount of credits used.
+              <br /> A credit is a unit of currency expended while using our APIs. 
+              Credit usage scales according to the compute required to complete your request.
             </p>
           </div>
           <div className="bg-brand-amber-1 flex flex-col gap-3 rounded-3xl p-6">
@@ -260,9 +258,7 @@ export function Pricing() {
               .
               <br />
               <br />
-              Currently we have a pay as you go system, we’ll add subscriptions
-              soon. Credits can be purchased on the account page in any desired
-              amount, with a minimum $10 purchase for 1000 credits.
+             Credit purchases are currently a pay-as-you-go type system. Credits can be purchased via the account page, starting with a minimum purchase amount of $10 for 1000 credits.
             </p>
           </div>
         </div>
@@ -275,7 +271,7 @@ export function Pricing() {
       <ModelList
         category="upscaling"
         image="/upscaling-pricing.webp"
-        description="Increase the size of your images using our 4x Latent Upscaler and 2x ESRGAN."
+        description="Increase the size of your images by 4x using our Latent Upscaler or by 2x via ESRGAN."
       />
     </div>
   );
