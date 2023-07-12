@@ -241,7 +241,7 @@ export function TextToImage({ setOptions }: TextToImage) {
 export function Buttons() {
   return (
     <>
-      <Button link="/docs/features/image-to-image" variant="secondary">
+      <Button link="/docs/features/text-to-image" variant="secondary">
         View Documentation
       </Button>
       <Button
