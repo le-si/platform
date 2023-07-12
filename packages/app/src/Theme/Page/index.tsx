@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { TopBar } from "~/App/TopBar";
+
 import { Theme } from "..";
 
 // TODO: Move this to Theme so we can reference it as Theme.Page
@@ -8,7 +9,7 @@ export function Page({
   children,
   className,
   noScroll,
-  noFooter
+  noFooter,
 }: StyleableWithChildren & {
   noScroll?: boolean;
   noFooter?: boolean;
@@ -21,7 +22,7 @@ export function Page({
           ? {
               height: `calc(100vh - (${TopBar.height()} + ${
                 noFooter ? "0rem" : "4rem"
-              }))`
+              }))`,
             }
           : undefined
       }
@@ -36,12 +37,12 @@ export function Page({
                 ? {
                     height: `calc(100vh - (${TopBar.height()} + ${
                       noFooter ? "0rem" : "4rem"
-                    }))`
+                    }))`,
                   }
                 : {
                     minHeight: `calc(100vh - (${TopBar.height()} + ${
                       noFooter ? "0rem" : "4rem"
-                    }))`
+                    }))`,
                   }
             }
           >

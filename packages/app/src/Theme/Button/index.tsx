@@ -18,7 +18,7 @@ export function Button({
   className,
   variant,
   link,
-  loading
+  loading,
 }: Button) {
   const navigate = useNavigate();
   return (

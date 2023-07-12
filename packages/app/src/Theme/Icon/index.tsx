@@ -15,6 +15,7 @@ import { Help } from "./Help";
 import { Image } from "./Image";
 import { Info } from "./Info";
 import { Link } from "./Link";
+import { Menu } from "./Menu";
 import { Plus } from "./Plus";
 import { Python } from "./Python";
 import { Search } from "./Search";
@@ -24,7 +25,6 @@ import { TypeScript } from "./TypeScript";
 import { Union } from "./Union";
 import { Upload } from "./Upload";
 import { X } from "./X";
-import { Menu } from "./Menu";
 
 export type Icon = Styleable & {
   color?: CSSValue;
@@ -59,7 +59,7 @@ export declare namespace Icon {
     Token,
     Coin,
     Help,
-    Menu
+    Menu,
   };
 }
 

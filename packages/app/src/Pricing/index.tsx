@@ -235,11 +235,13 @@ export function Pricing() {
           <div className="bg-brand-amber-1 flex flex-col gap-3 rounded-3xl p-6">
             <h2 className="text-2xl">How does pricing work?</h2>
             <p>
-              To start using our APIs you will need need to purchase credits. 25 free credits are issued
-              to all new signups to allow a limited trial of our platform before committing to a purchase.
+              To start using our APIs you will need need to purchase credits. 25
+              free credits are issued to all new signups to allow a limited
+              trial of our platform before committing to a purchase.
               <br />
-              <br /> A credit is a unit of currency expended while using our APIs. 
-              Credit usage scales according to the compute required to complete your request.
+              <br /> A credit is a unit of currency expended while using our
+              APIs. Credit usage scales according to the compute required to
+              complete your request.
             </p>
           </div>
           <div className="bg-brand-amber-1 flex flex-col gap-3 rounded-3xl p-6">
@@ -258,7 +260,9 @@ export function Pricing() {
               .
               <br />
               <br />
-             Credit purchases are currently a pay-as-you-go type system. Credits can be purchased via the account page, starting with a minimum purchase amount of $10 for 1000 credits.
+              Credit purchases are currently a pay-as-you-go type system.
+              Credits can be purchased via the account page, starting with a
+              minimum purchase amount of $10 for 1000 credits.
             </p>
           </div>
         </div>

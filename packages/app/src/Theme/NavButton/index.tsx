@@ -4,7 +4,7 @@ export function NavButton({
   children,
   className,
   url,
-  active
+  active,
 }: StyleableWithChildren<{
   url: string;
   active?: boolean;
