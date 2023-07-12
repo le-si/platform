@@ -38,43 +38,49 @@ function ErrorHandler({ children }: React.PropsWithChildren) {
   const { enqueueSnackbar } = Theme.Snackbar.use();
 
   useEffect(() => {
-    if (!error) return;
+    if (!error || canIgnoreError(error)) return;
 
-    if (Auth0Error.is(error)) {
-      if (Auth0Error.canIgnore(error)) return;
+    console.error("[Auth0]", toJSON(error));
 
-      console.error("[Auth0]", toJSON(error));
-
-      enqueueSnackbar(error.error_description, {
-        variant: "error",
-        preventDuplicate: true,
-      });
-    } else {
-      console.error("[Auth0]", toJSON(error));
-
-      enqueueSnackbar(error.message, {
-        variant: "error",
-        preventDuplicate: true,
-      });
-    }
+    enqueueSnackbar(getErrorMessage(error), {
+      variant: isUnverifiedEmailError(error) ? "warning" : "error",
+      preventDuplicate: true,
+    });
   }, [enqueueSnackbar, error]);
 
   return <>{children}</>;
 }
 
-type Auth0Error = SetRequired<Auth0.OAuthError, "error_description" | "error">;
-namespace Auth0Error {
-  export const is = (x: unknown): x is Auth0Error =>
+type AuthError = SetRequired<Auth0.OAuthError, "error_description" | "error">;
+function isAuthError(x: unknown): x is AuthError {
+  return (
     x instanceof Error &&
     "error" in x &&
     typeof x.error === "string" &&
     x.error.length > 0 &&
     "error_description" in x &&
     typeof x.error_description === "string" &&
-    x.error_description.length > 0;
+    x.error_description.length > 0
+  );
+}
 
-  export const canIgnore = (error: Auth0Error): boolean =>
-    error.error === "login_required" || error.error === "cancelled";
+function isUnverifiedEmailError(error: Error): boolean {
+  return (
+    isAuthError(error) &&
+    error.error === "unauthorized" &&
+    error.error_description === "Please verify your email before logging in."
+  );
+}
+
+function canIgnoreError(error: Error): boolean {
+  return (
+    isAuthError(error) &&
+    (error.error === "login_required" || error.error === "cancelled")
+  );
+}
+
+function getErrorMessage(error: Error): string {
+  return isAuthError(error) ? error.error_description : error.message;
 }
 
 function toJSON(value: unknown) {

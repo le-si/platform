@@ -17,6 +17,7 @@ export type Prompt = {
 
 export function MultiPrompting({ setOptions }: MultiPrompting) {
   const apiKey = User.AccessToken.use();
+  const outOfCreditsHandler = User.Account.Credits.useOutOfCreditsHandler();
 
   const [imageURL, setImageURL] = useState<string | undefined>(undefined);
   const [generating, setGenerating] = useState<boolean>(false);
@@ -55,12 +56,13 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
 
     setGenerating(false);
     if (error) {
+      outOfCreditsHandler(error);
       setError(error.message);
       setImageURL(undefined);
     } else {
       setImageURL(url);
     }
-  }, [apiKey, engineID, style, prompts, cfgScale, steps]);
+  }, [outOfCreditsHandler, apiKey, engineID, style, prompts, cfgScale, steps]);
 
   useEffect(() => {
     setOptions({

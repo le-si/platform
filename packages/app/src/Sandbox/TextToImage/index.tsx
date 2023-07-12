@@ -20,6 +20,7 @@ export type TextToImage = {
 
 export function TextToImage({ setOptions }: TextToImage) {
   const apiKey = User.AccessToken.use();
+  const outOfCreditsHandler = User.Account.Credits.useOutOfCreditsHandler();
 
   const [imageURL, setImageURL] = useState<string | undefined>(undefined);
   const [generating, setGenerating] = useState<boolean>(false);
@@ -60,12 +61,14 @@ export function TextToImage({ setOptions }: TextToImage) {
 
     setGenerating(false);
     if (error) {
+      outOfCreditsHandler(error);
       setError(error.message);
       setImageURL(undefined);
     } else {
       setImageURL(url);
     }
   }, [
+    outOfCreditsHandler,
     apiKey,
     engineID,
     style,
@@ -211,7 +214,7 @@ export function TextToImage({ setOptions }: TextToImage) {
                   <pre
                     className={classes(
                       error
-                        ? "rounded border border-red-300 p-3 font-mono text-red-500"
+                        ? "whitespace-pre-wrap rounded border border-red-300 p-3 font-mono text-sm text-red-500"
                         : "text-brand-orange select-none font-sans"
                     )}
                   >

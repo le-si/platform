@@ -129,12 +129,13 @@ const OutOfCreditsSnackbar = React.forwardRef<
   const { closeSnackbar } = Theme.Snackbar.use();
   const navigate = useNavigate();
 
-  if (persist)
-    console.error("Setting persist on OutOfCredits is not supported");
+  if (persist) {
+    console.error("Setting 'persist' on OutOfCreditsSnackbar is not supported");
+  }
 
   const onClick = useCallback(() => {
     closeSnackbar(id);
-    navigate(User.Account.Page.url());
+    navigate(User.Account.Credits.url());
   }, [closeSnackbar, id, navigate]);
 
   return (

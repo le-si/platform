@@ -18,7 +18,8 @@ export namespace Login {
 
   const use = () => {
     const { loginWithRedirect } = Auth0.useAuth0();
-    const onClick = useCallback(
+
+    return useCallback(
       () =>
         loginWithRedirect({
           appState: { returnTo: window.location.pathname },
@@ -28,7 +29,6 @@ export namespace Login {
         }),
       [loginWithRedirect]
     );
-    return onClick;
   };
 
   export function CTA() {

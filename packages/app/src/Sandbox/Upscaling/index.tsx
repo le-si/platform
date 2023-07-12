@@ -12,6 +12,7 @@ export type Upscaling = {
 
 export function Upscaling({ setOptions }: Upscaling) {
   const apiKey = User.AccessToken.use();
+  const outOfCreditsHandler = User.Account.Credits.useOutOfCreditsHandler();
 
   const [imageURL, setImageURL] = useState<string | undefined>(undefined);
   const [generating, setGenerating] = useState<boolean>(false);
@@ -47,12 +48,13 @@ export function Upscaling({ setOptions }: Upscaling) {
 
     setGenerating(false);
     if (error) {
+      outOfCreditsHandler(error);
       setError(error.message);
       setImageURL(undefined);
     } else {
       setImageURL(url);
     }
-  }, [apiKey, engineID, init, height, scale]);
+  }, [outOfCreditsHandler, apiKey, engineID, init, height, scale]);
 
   useEffect(() => {
     setOptions({

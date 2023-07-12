@@ -21,6 +21,7 @@ export type ImageToImage = {
 
 export function ImageToImage({ setOptions }: ImageToImage) {
   const apiKey = User.AccessToken.use();
+  const outOfCreditsHandler = User.Account.Credits.useOutOfCreditsHandler();
 
   const [imageURL, setImageURL] = useState<string | undefined>(undefined);
   const [generating, setGenerating] = useState<boolean>(false);
@@ -67,6 +68,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
 
     setGenerating(false);
     if (error) {
+      outOfCreditsHandler(error);
       setError(error.message);
       setImageURL(undefined);
     } else {
@@ -74,15 +76,16 @@ export function ImageToImage({ setOptions }: ImageToImage) {
     }
   }, [
     apiKey,
-    engineID,
-    style,
-    positivePrompt,
-    negativePrompt,
     cfgScale,
-    steps,
-    seed,
+    engineID,
+    outOfCreditsHandler,
     init?.file,
     initStrength,
+    negativePrompt,
+    positivePrompt,
+    seed,
+    steps,
+    style,
   ]);
 
   useEffect(() => {

@@ -24,6 +24,7 @@ import { Token } from "./Token";
 import { TypeScript } from "./TypeScript";
 import { Union } from "./Union";
 import { Upload } from "./Upload";
+import { User } from "./User";
 import { X } from "./X";
 
 export type Icon = Styleable & {
@@ -60,6 +61,7 @@ export declare namespace Icon {
     Coin,
     Help,
     Menu,
+    User,
   };
 }
 
@@ -91,4 +93,5 @@ export namespace Icon {
   Icon.Coin = Coin;
   Icon.Help = Help;
   Icon.Menu = Menu;
+  Icon.User = User;
 }
