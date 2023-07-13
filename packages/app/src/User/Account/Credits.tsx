@@ -1,5 +1,6 @@
 import { keyframes } from "@emotion/react";
 import React from "react";
+import { Link } from "react-router-dom";
 import { Billing } from "~/Billing";
 import { Background, Theme } from "~/Theme";
 import { User } from "~/User";
@@ -75,7 +76,12 @@ function BuyCredits({ autoFocus }: { autoFocus: boolean | undefined }) {
 
   return (
     <div className="flex flex-col gap-3">
-      <h1>Purchase credits</h1>
+      <h1>
+        Purchase Stability API credits on&nbsp;
+        <Link to="https://dreamstudio.ai/account" className="text-brand-indigo">
+          DreamStudio
+        </Link>
+      </h1>
       <div className="flex flex-col gap-2">
         <div className="w-full">
           <div
