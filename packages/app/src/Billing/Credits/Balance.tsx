@@ -3,7 +3,6 @@ import * as ReactQuery from "@tanstack/react-query";
 import { Billing } from "~/Billing";
 import { GRPC } from "~/GRPC";
 import { Remote } from "~/Remote";
-import { Theme } from "~/Theme";
 
 export type Balance = Billing.Credits;
 export namespace Balance {
@@ -12,7 +11,7 @@ export namespace Balance {
 
   export const use = () => {
     const grpc = GRPC.use();
-    const { enqueueSnackbar } = Theme.Snackbar.use();
+
     return ReactQuery.useQuery({
       enabled: grpc !== undefined,
 
@@ -30,19 +29,7 @@ export namespace Balance {
           id: org.id,
         });
 
-        const balance = response.paymentInfo?.balance;
-        if (balance === undefined || balance === 0) {
-          enqueueSnackbar(
-            "Uh oh, no credits! You'll need credits to generate images.",
-            {
-              variant: "outOfCredits",
-            }
-          );
-
-          return 0;
-        }
-
-        return balance;
+        return response.paymentInfo?.balance ?? 0;
       },
     });
   };

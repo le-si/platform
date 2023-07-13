@@ -23,7 +23,7 @@ export function CodeBlock({ code, children, language, ...props }: Props) {
 
 function Header({
   language,
-  code
+  code,
 }: {
   language: string | undefined;
   code: string;

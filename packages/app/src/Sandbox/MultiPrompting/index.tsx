@@ -17,6 +17,7 @@ export type Prompt = {
 
 export function MultiPrompting({ setOptions }: MultiPrompting) {
   const apiKey = User.AccessToken.use();
+  const outOfCreditsHandler = User.Account.Credits.useOutOfCreditsHandler();
 
   const [imageURL, setImageURL] = useState<string | undefined>(undefined);
   const [generating, setGenerating] = useState<boolean>(false);
@@ -28,8 +29,8 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
   const [prompts, setPrompts] = useState<Prompt[]>([
     {
       text: "A painting of a cat",
-      weight: 1
-    }
+      weight: 1,
+    },
   ]);
 
   const [style, setStyle] =
@@ -55,12 +56,13 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
 
     setGenerating(false);
     if (error) {
+      outOfCreditsHandler(error);
       setError(error.message);
       setImageURL(undefined);
     } else {
       setImageURL(url);
     }
-  }, [apiKey, engineID, style, prompts, cfgScale, steps]);
+  }, [outOfCreditsHandler, apiKey, engineID, style, prompts, cfgScale, steps]);
 
   useEffect(() => {
     setOptions({
@@ -68,7 +70,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
       prompts,
       style,
       cfgScale,
-      steps
+      steps,
     });
   }, [engineID, style, prompts, cfgScale, steps, setOptions]);
 
@@ -86,16 +88,16 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
               options={[
                 {
                   label: "Stable Diffusion XL",
-                  value: "stable-diffusion-xl-beta-v2-2-2"
+                  value: "stable-diffusion-xl-beta-v2-2-2",
                 },
                 {
                   label: "Stable Diffusion 1.5",
-                  value: "stable-diffusion-v1-5"
+                  value: "stable-diffusion-v1-5",
                 },
                 {
                   label: "Stable Diffusion 2.1",
-                  value: "stable-diffusion-512-v2-1"
-                }
+                  value: "stable-diffusion-512-v2-1",
+                },
               ]}
             />
             <Theme.Select
@@ -123,7 +125,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
                 { label: "Cinematic", value: "cinematic" },
                 { label: "3D Model", value: "3d-model" },
                 { label: "Pixel Art", value: "pixel-art" },
-                { label: "Tile Texture", value: "tile-texture" }
+                { label: "Tile Texture", value: "tile-texture" },
               ]}
             />
             <Theme.Input
@@ -198,8 +200,8 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
                     ...prompts,
                     {
                       text: "",
-                      weight: 1
-                    }
+                      weight: 1,
+                    },
                   ])
                 }
               >
@@ -247,7 +249,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
               )
             ) : (
               <div className="flex w-full shrink-0 flex-col items-center justify-center">
-                <User.Login.Button />
+                <User.Login.CTA />
               </div>
             )}
           </div>

@@ -133,7 +133,7 @@ export function Page() {
         </Theme.Button>
         <p className="py-4 text-center opacity-70">
           You can also email us at&nbsp;
-          <a href="mailto:dreamstudio@stability.ai">dreamstudio@stability.ai</a>
+          <a href="mailto:platform@stability.ai">platform@stability.ai</a>
         </p>
       </div>
     </div>

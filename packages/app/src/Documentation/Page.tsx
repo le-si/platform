@@ -12,7 +12,7 @@ function DocButton({
   className,
   activeOverride,
   childrenOverride,
-  redirect
+  redirect,
 }: Styleable &
   Partial<Documentation.Group> & {
     indent?: number;
@@ -35,7 +35,7 @@ function DocButton({
             "active:bg-[#e4e4ce]"
         )}
         style={{
-          marginLeft: `${indent * 1}rem`
+          marginLeft: `${indent * 1}rem`,
         }}
       >
         <Link
@@ -111,7 +111,7 @@ function findDocCursor(
 
   return {
     prev: flattenedRoutes[currentIndex - 1] ?? null,
-    next: flattenedRoutes[currentIndex + 1] ?? null
+    next: flattenedRoutes[currentIndex + 1] ?? null,
   };
 }
 
@@ -136,7 +136,7 @@ export function Page() {
       <div
         className="mt-5 w-full flex-col gap-5 sm:fixed sm:max-w-[20rem]"
         style={{
-          top: TopBar.height()
+          top: TopBar.height(),
         }}
       >
         <div className="flex w-full flex-col overflow-y-auto sm:max-h-[calc(100vh-10.5rem)]">

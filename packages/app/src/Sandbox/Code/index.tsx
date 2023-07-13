@@ -7,7 +7,7 @@ export function Code({
   code,
   language,
   setLanguage,
-  onClose
+  onClose,
 }: {
   code: Code;
   language: Code.Language;
@@ -96,7 +96,7 @@ export namespace Code {
       if (!ref.current) return;
       if (!spans.current.length)
         spans.current = [
-          ...ref.current.querySelectorAll<HTMLSpanElement>("span")
+          ...ref.current.querySelectorAll<HTMLSpanElement>("span"),
         ];
 
       const currentContents = spans.current.map(
@@ -146,7 +146,7 @@ export namespace Code {
           opacity: 1;
           transition: opacity ${fadeInSpeed}ms ease-out;
         }
-      `
+      `,
     };
   };
 }
@@ -154,7 +154,7 @@ export namespace Code {
 function LanguageButton({
   language,
   onClick,
-  active
+  active,
 }: {
   language: string;
   onClick: () => void;

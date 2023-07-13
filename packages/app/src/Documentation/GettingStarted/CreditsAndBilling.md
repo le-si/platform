@@ -1,12 +1,12 @@
 # 💰 Credits + Billing
 
-Credits are required to use [DreamStudio](https://dreamstudio.ai) or the API.
+Credits are required to use [DreamStudio](https://dreamstudio.ai) or to submit requests to our API.
 
 All new users are granted `25` free credits upon creating an account.
 
 ## What is a Credit? {#what-is-a-credit}
 
-A credit is a unit of currency expended when generating images with [DreamStudio](https://dreamstudio.ai). Credit usage scales according to the compute required to generate your image.
+A credit is a unit of currency expended when generating images with [DreamStudio](https://dreamstudio.ai) or after submitting a request to our API. Credit usage scales according to the compute required to complete your request.
 
 ## Buying Credits {#buying-credits}
 

@@ -26,6 +26,33 @@ export function Credits({ autoFocus }: { autoFocus: boolean }) {
 export namespace Credits {
   export const uri = () => "credits" as const;
   export const url = () => `${User.Account.Page.url()}/${uri()}` as const;
+
+  export const useOutOfCreditsHandler = () => {
+    const { enqueueSnackbar } = Theme.Snackbar.use();
+
+    return React.useCallback(
+      (error: Error) => {
+        const errorJSON = parseJSON<{ name: string }>(error.message);
+
+        if (errorJSON?.name === "insufficient_balance") {
+          return enqueueSnackbar({
+            message:
+              "Uh oh, no credits! You'll need credits to generate images.",
+            variant: "outOfCredits",
+          });
+        }
+      },
+      [enqueueSnackbar]
+    );
+  };
+
+  function parseJSON<T>(json: string): T | undefined {
+    try {
+      return JSON.parse(json);
+    } catch (error) {
+      return undefined;
+    }
+  }
 }
 
 function AvailableCredits() {
@@ -34,13 +61,13 @@ function AvailableCredits() {
   return (
     <div className="flex flex-row items-end justify-between">
       <span className="text-brand-400 text-3xl font-bold">
-        {!balance ? (
+        {balance === undefined ? (
           <Theme.Skeleton className="h-4 w-24" />
         ) : (
           <Billing.Credits credits={balance} />
         )}
       </span>
-      {!balance ? (
+      {balance === undefined ? (
         <Theme.Skeleton className="h-4 w-28" />
       ) : (
         <div className="opacity-muted flex text-xs tracking-wide">

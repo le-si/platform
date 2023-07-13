@@ -6,7 +6,7 @@ import {
   ImageContainer,
   Input,
   Select,
-  Textarea
+  Textarea,
 } from "~/Theme";
 import { DropZone } from "~/Theme/DropZone";
 
@@ -21,6 +21,7 @@ export type ImageToImage = {
 
 export function ImageToImage({ setOptions }: ImageToImage) {
   const apiKey = User.AccessToken.use();
+  const outOfCreditsHandler = User.Account.Credits.useOutOfCreditsHandler();
 
   const [imageURL, setImageURL] = useState<string | undefined>(undefined);
   const [generating, setGenerating] = useState<boolean>(false);
@@ -67,6 +68,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
 
     setGenerating(false);
     if (error) {
+      outOfCreditsHandler(error);
       setError(error.message);
       setImageURL(undefined);
     } else {
@@ -74,15 +76,16 @@ export function ImageToImage({ setOptions }: ImageToImage) {
     }
   }, [
     apiKey,
-    engineID,
-    style,
-    positivePrompt,
-    negativePrompt,
     cfgScale,
-    steps,
-    seed,
+    engineID,
+    outOfCreditsHandler,
     init?.file,
-    initStrength
+    initStrength,
+    negativePrompt,
+    positivePrompt,
+    seed,
+    steps,
+    style,
   ]);
 
   useEffect(() => {
@@ -94,7 +97,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
       cfgScale,
       steps,
       seed,
-      imageStrength: initStrength
+      imageStrength: initStrength,
     });
   }, [
     engineID,
@@ -106,7 +109,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
     seed,
     setOptions,
     initStrength,
-    init
+    init,
   ]);
 
   return (
@@ -137,11 +140,11 @@ export function ImageToImage({ setOptions }: ImageToImage) {
                 const blob = new Blob([file], { type: "image/png" });
                 setInit({
                   file: blob,
-                  url: URL.createObjectURL(blob)
+                  url: URL.createObjectURL(blob),
                 });
               }}
               imageStyle={{
-                opacity: initStrength
+                opacity: initStrength,
               }}
               onClear={() => setInit(undefined)}
             >
@@ -162,16 +165,16 @@ export function ImageToImage({ setOptions }: ImageToImage) {
               options={[
                 {
                   label: "Stable Diffusion XL",
-                  value: "stable-diffusion-xl-beta-v2-2-2"
+                  value: "stable-diffusion-xl-beta-v2-2-2",
                 },
                 {
                   label: "Stable Diffusion 1.5",
-                  value: "stable-diffusion-v1-5"
+                  value: "stable-diffusion-v1-5",
                 },
                 {
                   label: "Stable Diffusion 2.1",
-                  value: "stable-diffusion-512-v2-1"
-                }
+                  value: "stable-diffusion-512-v2-1",
+                },
               ]}
             />
             <Select
@@ -199,7 +202,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
                 { label: "Cinematic", value: "cinematic" },
                 { label: "3D Model", value: "3d-model" },
                 { label: "Pixel Art", value: "pixel-art" },
-                { label: "Tile Texture", value: "tile-texture" }
+                { label: "Tile Texture", value: "tile-texture" },
               ]}
             />
             <Input
@@ -255,7 +258,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
               )
             ) : (
               <div className="flex w-full shrink-0 flex-col items-center justify-center">
-                <User.Login.Button />
+                <User.Login.CTA />
               </div>
             )}
           </div>

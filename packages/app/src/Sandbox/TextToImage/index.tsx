@@ -6,7 +6,7 @@ import {
   ImageContainer,
   Input,
   Select,
-  Textarea
+  Textarea,
 } from "~/Theme";
 
 import { User } from "~/User";
@@ -20,6 +20,7 @@ export type TextToImage = {
 
 export function TextToImage({ setOptions }: TextToImage) {
   const apiKey = User.AccessToken.use();
+  const outOfCreditsHandler = User.Account.Credits.useOutOfCreditsHandler();
 
   const [imageURL, setImageURL] = useState<string | undefined>(undefined);
   const [generating, setGenerating] = useState<boolean>(false);
@@ -60,12 +61,14 @@ export function TextToImage({ setOptions }: TextToImage) {
 
     setGenerating(false);
     if (error) {
+      outOfCreditsHandler(error);
       setError(error.message);
       setImageURL(undefined);
     } else {
       setImageURL(url);
     }
   }, [
+    outOfCreditsHandler,
     apiKey,
     engineID,
     style,
@@ -75,7 +78,7 @@ export function TextToImage({ setOptions }: TextToImage) {
     height,
     cfgScale,
     steps,
-    seed
+    seed,
   ]);
 
   useEffect(() => {
@@ -88,7 +91,7 @@ export function TextToImage({ setOptions }: TextToImage) {
       height,
       cfgScale,
       steps,
-      seed
+      seed,
     });
   }, [
     engineID,
@@ -100,7 +103,7 @@ export function TextToImage({ setOptions }: TextToImage) {
     cfgScale,
     steps,
     seed,
-    setOptions
+    setOptions,
   ]);
 
   return (
@@ -132,16 +135,16 @@ export function TextToImage({ setOptions }: TextToImage) {
               options={[
                 {
                   label: "Stable Diffusion XL",
-                  value: "stable-diffusion-xl-beta-v2-2-2"
+                  value: "stable-diffusion-xl-beta-v2-2-2",
                 },
                 {
                   label: "Stable Diffusion 1.5",
-                  value: "stable-diffusion-v1-5"
+                  value: "stable-diffusion-v1-5",
                 },
                 {
                   label: "Stable Diffusion 2.1",
-                  value: "stable-diffusion-512-v2-1"
-                }
+                  value: "stable-diffusion-512-v2-1",
+                },
               ]}
             />
             <Select
@@ -169,7 +172,7 @@ export function TextToImage({ setOptions }: TextToImage) {
                 { label: "Cinematic", value: "cinematic" },
                 { label: "3D Model", value: "3d-model" },
                 { label: "Pixel Art", value: "pixel-art" },
-                { label: "Tile Texture", value: "tile-texture" }
+                { label: "Tile Texture", value: "tile-texture" },
               ]}
             />
             <Input
@@ -211,7 +214,7 @@ export function TextToImage({ setOptions }: TextToImage) {
                   <pre
                     className={classes(
                       error
-                        ? "rounded border border-red-300 p-3 font-mono text-red-500"
+                        ? "whitespace-pre-wrap rounded border border-red-300 p-3 font-mono text-sm text-red-500"
                         : "text-brand-orange select-none font-sans"
                     )}
                   >
@@ -225,7 +228,7 @@ export function TextToImage({ setOptions }: TextToImage) {
               )
             ) : (
               <div className="flex w-full shrink-0 flex-col items-center justify-center">
-                <User.Login.Button />
+                <User.Login.CTA />
               </div>
             )}
           </div>
@@ -241,7 +244,7 @@ export function TextToImage({ setOptions }: TextToImage) {
 export function Buttons() {
   return (
     <>
-      <Button link="/docs/features/image-to-image" variant="secondary">
+      <Button link="/docs/features/text-to-image" variant="secondary">
         View Documentation
       </Button>
       <Button

@@ -12,6 +12,7 @@ export type Upscaling = {
 
 export function Upscaling({ setOptions }: Upscaling) {
   const apiKey = User.AccessToken.use();
+  const outOfCreditsHandler = User.Account.Credits.useOutOfCreditsHandler();
 
   const [imageURL, setImageURL] = useState<string | undefined>(undefined);
   const [generating, setGenerating] = useState<boolean>(false);
@@ -47,17 +48,18 @@ export function Upscaling({ setOptions }: Upscaling) {
 
     setGenerating(false);
     if (error) {
+      outOfCreditsHandler(error);
       setError(error.message);
       setImageURL(undefined);
     } else {
       setImageURL(url);
     }
-  }, [apiKey, engineID, init, height, scale]);
+  }, [outOfCreditsHandler, apiKey, engineID, init, height, scale]);
 
   useEffect(() => {
     setOptions({
       engineID,
-      height: height * scale
+      height: height * scale,
     });
   }, [engineID, setOptions, height, scale]);
 
@@ -82,7 +84,7 @@ export function Upscaling({ setOptions }: Upscaling) {
 
                 setInit({
                   file: blob,
-                  url: URL.createObjectURL(blob)
+                  url: URL.createObjectURL(blob),
                 });
               }}
               onClear={() => setInit(undefined)}
@@ -94,12 +96,12 @@ export function Upscaling({ setOptions }: Upscaling) {
               options={[
                 {
                   label: "Real-ESRGAN x2",
-                  value: "esrgan-v1-x2plus"
+                  value: "esrgan-v1-x2plus",
                 },
                 {
                   label: "Stable Diffusion x4 Latent Upscaler",
-                  value: "stable-diffusion-x4-latent-upscaler"
-                }
+                  value: "stable-diffusion-x4-latent-upscaler",
+                },
               ]}
             />
           </div>
@@ -143,7 +145,7 @@ export function Upscaling({ setOptions }: Upscaling) {
               )
             ) : (
               <div className="flex w-full shrink-0 flex-col items-center justify-center">
-                <User.Login.Button />
+                <User.Login.CTA />
               </div>
             )}
           </div>
