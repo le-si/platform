@@ -27,7 +27,7 @@ export function Samples({
                 language={language}
                 active={language === activeLanguage}
                 onClick={() => {
-                  setActiveLanguage(language);
+                  language && setActiveLanguage(language);
                   setSampleIndex(index);
                 }}
               />

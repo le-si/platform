@@ -14,7 +14,7 @@ export function Code({
 }: StyleableWithChildren & {
   language?: Language;
 }) {
-  const highlighting = HighlightChanges.use(children, language);
+  const highlighting = HighlightChanges.use(`${children}`, language);
   if (typeof children !== "string") return null;
   return (
     <div

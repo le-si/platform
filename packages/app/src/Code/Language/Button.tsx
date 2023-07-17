@@ -5,7 +5,7 @@ export function Button({
   active,
   onClick,
 }: {
-  language: Code.Language;
+  language?: Code.Language;
   active?: boolean;
   onClick: () => void;
 }) {

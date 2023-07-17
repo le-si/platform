@@ -1,7 +1,7 @@
 import { Code } from "~/Code";
 
 export namespace HighlightChanges {
-  export const use = (code: Code, language: Code.Language) => {
+  export const use = (code: Code, language?: Code.Language) => {
     const fadeInSpeed = 150;
     const fadeOutSpeed = 750;
     const fadeOutDelay = 1000;
