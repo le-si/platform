@@ -229,7 +229,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
                   <pre
                     className={classes(
                       error
-                        ? "rounded border border-red-300 p-3 font-mono text-red-500"
+                        ? "whitespace-pre-wrap rounded border border-red-300 p-3 font-mono text-sm text-red-500"
                         : "text-brand-orange select-none font-sans"
                     )}
                   >
