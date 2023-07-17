@@ -8,13 +8,13 @@ Prefer to run locally? Execute `python -m stability_sdk animate --gui` or click 
 
 ## Code Sample {#animation-code-sample}
 
-In order to create animations with the SDK, a connection to the Stability servers must first be established. The API `Context` class is used to manage the connection. You will need to supply an API key which you can create under your Account Settings in [DreamStudio](https://dreamstudio.ai/account).
+In order to create animations with the SDK, a connection to the Stability servers must first be established. The API `Context` class is used to manage the connection. You will need to supply an API key which you can create using the [account page](https://platform.stability.ai/account).
 
 ```python
 from stability_sdk import api
 
 STABILITY_HOST = "grpc.stability.ai:443"
-STABILITY_KEY = "" # API key from https://dreamstudio.ai/account
+STABILITY_KEY = "" # API key from https://platform.stability.ai/account
 
 context = api.Context(STABILITY_HOST, STABILITY_KEY)
 ```

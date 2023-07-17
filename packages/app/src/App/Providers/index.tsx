@@ -1,3 +1,4 @@
+import { CookieNotice } from "~/CookieNotice";
 import { GlobalSearch } from "~/GlobalSearch";
 import { Remote } from "~/Remote";
 import { Router } from "~/Router";
@@ -10,7 +11,9 @@ export function Providers({ children }: React.PropsWithChildren) {
       <Remote.Provider>
         <Theme.Provider>
           <User.Provider>
-            <GlobalSearch.Provider>{children}</GlobalSearch.Provider>
+            <CookieNotice.Provider>
+              <GlobalSearch.Provider>{children}</GlobalSearch.Provider>
+            </CookieNotice.Provider>
           </User.Provider>
         </Theme.Provider>
       </Remote.Provider>

@@ -1,6 +1,6 @@
 # 💰 Credits + Billing
 
-Credits are required to use [DreamStudio](https://dreamstudio.ai) or to submit requests to our API.
+Credits are required to use both Stability API's and [DreamStudio](https://dreamstudio.ai).
 
 All new users are granted `25` free credits upon creating an account.
 

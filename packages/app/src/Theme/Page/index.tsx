@@ -28,7 +28,6 @@ export function Page({
       }
     >
       <TopBar />
-
       {!noFooter ? (
         <>
           <div
@@ -60,6 +59,9 @@ export function Page({
 function Footer() {
   return (
     <div className="relative mt-auto flex w-full items-start justify-between border-t border-zinc-100 bg-white px-5 md:items-center lg:h-16">
+      <div className="opacity-muted pointer-events-none absolute bottom-0 left-0 right-0 top-0 flex items-end justify-center whitespace-nowrap p-6 italic lg:items-center">
+        © STABILITY AI LTD, 2023
+      </div>
       <div className="flex flex-col gap-6 py-6 lg:flex-row lg:p-0">
         <Link
           to="/support"
@@ -83,9 +85,7 @@ function Footer() {
           FAQ
         </Link>
       </div>
-      <div className="opacity-muted absolute bottom-0 left-0 right-0 top-0 flex items-end justify-center whitespace-nowrap p-6 italic lg:items-center">
-        © STABILITY AI LTD, 2023
-      </div>
+
       <div className="flex flex-col gap-6 py-6 lg:flex-row lg:p-0">
         <a
           href="https://stability.ai"

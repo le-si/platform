@@ -48,7 +48,7 @@ const MODELS = [
     formulaStylized: "((width * height - 169527) * steps / 30) * 2.16e-8 * 100",
     variables: [
       {
-        name: "Width",
+        name: "width",
         description: "Width of the image in pixels",
         type: "number",
         min: 512,
@@ -56,7 +56,7 @@ const MODELS = [
         step: 1,
       },
       {
-        name: "Height",
+        name: "height",
         description: "Height of the image in pixels",
         type: "number",
         min: 512,
@@ -64,7 +64,7 @@ const MODELS = [
         step: 1,
       },
       {
-        name: "Steps",
+        name: "steps",
         description: "Number of steps to run the model for",
         type: "number",
         min: 10,
@@ -85,7 +85,7 @@ const MODELS = [
     formulaStylized: "((width * height - 169527) * steps / 30) * 2.16e-8 * 100",
     variables: [
       {
-        name: "Width",
+        name: "width",
         description: "Width of the image in pixels",
         type: "number",
         min: 512,
@@ -93,7 +93,7 @@ const MODELS = [
         step: 1,
       },
       {
-        name: "Height",
+        name: "height",
         description: "Height of the image in pixels",
         type: "number",
         min: 512,
@@ -101,7 +101,7 @@ const MODELS = [
         step: 1,
       },
       {
-        name: "Steps",
+        name: "steps",
         description: "Number of steps to run the model for",
         type: "number",
         min: 10,
@@ -120,14 +120,14 @@ const MODELS = [
     formulaStylized: "(width * height) > 512 * 512 ? 12 : 8",
     variables: [
       {
-        name: "Width",
+        name: "width",
         description: "Width of the image in pixels",
         type: "number",
         min: 256,
         max: 1024,
       },
       {
-        name: "Height",
+        name: "height",
         description: "Height of the image in pixels",
         type: "number",
         min: 256,
@@ -235,8 +235,8 @@ export function Pricing() {
           <div className="bg-brand-amber-1 flex flex-col gap-3 rounded-3xl p-6">
             <h2 className="text-2xl">How does pricing work?</h2>
             <p>
-              Most API usage requires credits, where the final cost is roughly
-              based on the amount of compute needed to fulfill the request.
+              Most API usage requires credits, where the total price is in part
+              based on the amount of compute required to fulfill the request.
             </p>
             <p>
               Pricing is subject to change as we improve our models and

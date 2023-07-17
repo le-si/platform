@@ -12,7 +12,7 @@ export function Overview() {
       <Documentation />
       <div className="mx-auto mb-80 flex flex-col gap-64 px-5 2xl:max-w-[93rem] 2xl:px-0">
         <Others />
-        <Testimonials />
+        {/*<Testimonials />*/}
       </div>
     </div>
   );
@@ -259,14 +259,14 @@ function Others() {
   );
 }
 
-function Testimonials() {
-  return (
-    <div className="flex flex-col gap-12 text-center">
-      <h1 className="text-4xl font-extralight leading-[2.75rem]">
-        Join industry-leaders making the most of
-        <br /> generative AI with Stability AI
-      </h1>
-      <img src="/svg/logos.svg" />
-    </div>
-  );
-}
+// function Testimonials() {
+//   return (
+//     <div className="flex flex-col gap-12 text-center">
+//       <h1 className="text-4xl font-extralight leading-[2.75rem]">
+//         Join industry-leaders making the most of
+//         <br /> generative AI with Stability AI
+//       </h1>
+//       <img src="/svg/logos.svg" />
+//     </div>
+//   );
+// }
