@@ -86,6 +86,7 @@ export function Page() {
           placeholder="Category"
           className="max-w-full"
           onChange={(value) =>
+            value &&
             setForm({
               ...form,
               type: value,

@@ -9,7 +9,12 @@ export function Sandbox<T extends Record<string, unknown>>({
   SandboxComponent,
   samples,
 }: {
-  SandboxComponent: React.FC<{ setOptions: (options: T) => void }>;
+  SandboxComponent: React.FC<{ setOptions: (options: T) => void }> & {
+    formatOptions: (
+      options: Omit<T, "engineID">,
+      language: Code.Language
+    ) => string;
+  };
   samples: Record<Code.Language, string>;
 }) {
   const [showCode, setShowCode] = useState(true);
@@ -23,15 +28,15 @@ export function Sandbox<T extends Record<string, unknown>>({
 
     if (!hasActiveOption) return undefined;
 
-    const code = samples[codeLanguage]
+    return samples[codeLanguage]
       .trim()
-      .replace("{apiKey}", "YOUR API KEY");
-
-    // replace {VALUE} with the value from the options object
-    return Object.entries(options).reduce((acc, [key, value]) => {
-      return acc.replace(`{${key}}`, `${value}`);
-    }, code);
-  }, [samples, codeLanguage, options]);
+      .replace("{apiKey}", "YOUR API KEY")
+      .replace("{engineID}", options.engineID as string)
+      .replace(
+        "{OPTIONS}",
+        SandboxComponent.formatOptions(omitEngineID<T>(options), codeLanguage)
+      );
+  }, [options, samples, codeLanguage, SandboxComponent]);
 
   const size = useWindowSize();
 
@@ -59,6 +64,13 @@ export function Sandbox<T extends Record<string, unknown>>({
       </div>
     </div>
   );
+}
+
+function omitEngineID<T extends Record<string, unknown>>(
+  options: T
+): Omit<T, "engineID"> {
+  const { engineID: _engineID, ...rest } = options;
+  return rest;
 }
 
 export declare namespace Sandbox {

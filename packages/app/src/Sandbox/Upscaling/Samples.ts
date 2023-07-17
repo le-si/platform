@@ -3,12 +3,16 @@ import fetch from 'node-fetch';
 import FormData from 'form-data';
 import fs from 'node:fs';
 
+interface GenerationResponse {
+  artifacts: Array<{ base64: string seed: number finishReason: string }>
+}
+
 // NOTE: This example is using a NodeJS FormData library.
 // Browsers should use their native FormData class.
 // React Native apps should also use their native FormData class.
 const formData = new FormData();
 formData.append('image', fs.readFileSync('../init_image.png'));
-formData.append('height', {height});
+{OPTIONS}
 
 const response = await fetch(
   "https://api.stability.ai/v1/generation/{engineID}/image-to-image/upscale",
@@ -27,19 +31,11 @@ if (!response.ok) {
   throw new Error(\`Non-200 response: \${await response.text()}\`)
 }
 
-interface GenerationResponse {
-  artifacts: Array<{
-    base64: string
-    seed: number
-    finishReason: string
-  }>
-}
-
 const responseJSON = (await response.json()) as GenerationResponse;
 
 responseJSON.artifacts.forEach((image, index) => {
   fs.writeFileSync(
-    \`out/v1_img2img_\${index}.png\`,
+    \`./out/img2img_\${image.seed}.png\`,
     Buffer.from(image.base64, 'base64')
   )
 });
@@ -55,7 +51,7 @@ import fs from 'node:fs';
 // React Native apps should also use their native FormData class.
 const formData = new FormData();
 formData.append('image', fs.readFileSync('../init_image.png'));
-formData.append('height', {height});
+{OPTIONS}
 
 const response = await fetch(
   "https://api.stability.ai/v1/generation/{engineID}/image-to-image/upscale",
@@ -78,7 +74,7 @@ const responseJSON = await response.json();
 
 responseJSON.artifacts.forEach((image, index) => {
   fs.writeFileSync(
-    \`out/v1_img2img_\${index}.png\`,
+    \`./out/img2img_\${image.seed}.png\`,
     Buffer.from(image.base64, 'base64')
   )
 });
@@ -99,7 +95,7 @@ response = requests.post(
         "image": open("../init_image.png", "rb")
     },
     data={
-        "height": {height},
+        {OPTIONS}
     }
 )
 
@@ -109,6 +105,6 @@ if response.status_code != 200:
 data = response.json()
 
 for i, image in enumerate(data["artifacts"]):
-    with open(f"./out/v1_img2img_{i}.png", "wb") as f:
+    with open(f"./out/img2img_{image["seed"]}.png", "wb") as f:
         f.write(base64.b64decode(image["base64"]))
 `;

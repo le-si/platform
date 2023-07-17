@@ -1,34 +1,23 @@
 export const typescript = `import { OpenAPI } from "@stability/sdk";
 
+interface GenerationResponse {
+  artifacts: Array<{ base64: string seed: number finishReason: string }>
+}
+
 export const textToImage = async () => {
   const path: OpenAPI.TextToImageRequestPath =
     "https://api.stability.ai/v1/generation/{engineID}/text-to-image";
 
   const headers: OpenAPI.TextToImageRequestHeaders = {
-    Accept: "image/png",
+    Accept: "application/json",
     Authorization: "Bearer {apiKey}"
   };
 
   const body: OpenAPI.TextToImageRequestBody = {
-    width: {width},
-    height: {height},
-    seed: {seed},
-    steps: {steps},
-    cfg_scale: {cfgScale},
-    style_preset: "{style}",
-    text_prompts: [
-      {
-        text: "{positivePrompt}",
-        weight: 1,
-      },
-      {
-        text: "{negativePrompt}",
-        weight: -1,
-      }
-    ]
+    {OPTIONS}
   };
 
-  return fetch(
+  const response = fetch(
     path,
     {
       headers,
@@ -36,6 +25,19 @@ export const textToImage = async () => {
       body: JSON.stringify(body),
     }
   );
+  
+  if (!response.ok) {
+    throw new Error(\`Non-200 response: \${await response.text()}\`)
+  }
+  
+  const responseJSON = (await response.json()) as GenerationResponse
+  
+  responseJSON.artifacts.forEach((image, index) => {
+    fs.writeFileSync(
+      \`./out/txt2img_\${image.seed}.png\`,
+      Buffer.from(image.base64, 'base64')
+    )
+  })
 };
 `;
 
@@ -44,30 +46,15 @@ export const javascript = `export const textToImage = async () => {
     "https://api.stability.ai/v1/generation/{engineID}/text-to-image";
 
   const headers = {
-    Accept: "image/png",
+    Accept: "application/json",
     Authorization: "Bearer {apiKey}"
   };
 
   const body = {
-    width: {width},
-    height: {height},
-    seed: {seed},
-    steps: {steps},
-    cfg_scale: {cfgScale},
-    style_preset: "{style}",
-    text_prompts: [
-      {
-        text: "{positivePrompt}",
-        weight: 1,
-      },
-      {
-        text: "{negativePrompt}",
-        weight: -1,
-      }
-    ]
+    {OPTIONS}
   };
 
-  return fetch(
+  const response = fetch(
     path,
     {
       headers,
@@ -75,34 +62,34 @@ export const javascript = `export const textToImage = async () => {
       body: JSON.stringify(body),
     }
   );
+  
+  if (!response.ok) {
+    throw new Error(\`Non-200 response: \${await response.text()}\`)
+  }
+  
+  const responseJSON = await response.json();
+  
+  responseJSON.artifacts.forEach((image, index) => {
+    fs.writeFileSync(
+      \`./out/txt2img_\${image.seed}.png\`,
+      Buffer.from(image.base64, 'base64')
+    )
+  })
 };
 `;
 
-export const python = `import requests
+export const python = `
+import base64
+import requests
 
 url = "https://api.stability.ai/v1/generation/{engineID}/text-to-image"
 
 body = {
-  "width": {width},
-  "height": {height},
-  "seed": {seed},
-  "steps": {steps},
-  "cfg_scale": {cfgScale},
-  "style_preset": "{style}",
-  "text_prompts": [
-    {
-      "text": "{positivePrompt}",
-      "weight": 1,
-    },
-    {
-      "text": "{negativePrompt}",
-      "weight": -1,
-    }
-  ],
+  {OPTIONS}
 }
 
 headers = {
-  "Accept": "image/png",
+  "Accept": "application/json",
   "Content-Type": "application/json",
   "Authorization": "Bearer {apiKey}",
 }
@@ -113,8 +100,12 @@ response = requests.post(
   json=body,
 )
 
-image = response.content
+if response.status_code != 200:
+    raise Exception("Non-200 response: " + str(response.text))
 
-with open("image.png", "wb") as file:
-  file.write(image)
+data = response.json()
+
+for i, image in enumerate(data["artifacts"]):
+    with open(f"./out/txt2img_{image["seed"]}.png", "wb") as f:
+        f.write(base64.b64decode(image["base64"]))
 `;
