@@ -235,34 +235,38 @@ export function Pricing() {
           <div className="bg-brand-amber-1 flex flex-col gap-3 rounded-3xl p-6">
             <h2 className="text-2xl">How does pricing work?</h2>
             <p>
-              To start using our APIs you will need need to purchase credits. 25
-              free credits are issued to all new signups to allow a limited
-              trial of our platform before committing to a purchase.
-              <br />
-              <br /> A credit is a unit of currency expended while using our
-              APIs. Credit usage scales according to the compute required to
-              complete your request.
+              Most API usage requires credits, where the final cost is roughly
+              based on the amount of compute needed to fulfill the request.
+            </p>
+            <p>
+              Pricing is subject to change as we improve our models and
+              infrastructure. We work hard to&nbsp;
+              <Link
+                className="prose text-indigo-500 hover:underline"
+                to="https://twitter.com/DreamStudioAI/status/1598183304007557120"
+                target="_blank"
+              >
+                deliver cost-savings
+              </Link>
+              &nbsp;where possible.
             </p>
           </div>
           <div className="bg-brand-amber-1 flex flex-col gap-3 rounded-3xl p-6">
             <h2 className="text-2xl">Buying Credits</h2>
             <p>
-              After depleting your free credits, additional credits can be
-              purchased via the{" "}
-              <span>
-                <Link
-                  className="prose text-indigo-500 hover:underline"
-                  to="/account/billing"
-                >
-                  account page
-                </Link>
-              </span>
+              After depleting your initial 25 free credits, additional credits
+              can be purchased via the&nbsp;
+              <Link
+                className="prose text-indigo-500 hover:underline"
+                to="/account/billing"
+              >
+                account page
+              </Link>
               .
-              <br />
-              <br />
-              Credit purchases are currently a pay-as-you-go type system.
-              Credits can be purchased via the account page, starting with a
-              minimum purchase amount of $10 for 1000 credits.
+            </p>
+            <p>
+              Credits are priced at $10 per 1,000 credits, which is enough
+              credits for roughly 500 SDXL images.
             </p>
           </div>
         </div>
