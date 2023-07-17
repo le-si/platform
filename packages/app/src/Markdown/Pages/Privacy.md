@@ -1,111 +1,453 @@
-# **Stability AI Platform Privacy Policy**
+# Privacy Policy
 
-This Privacy Policy describes how Dream Studio and its affiliates ("Stable Diffusion", “Dream Studio”,”Stability.ai”, "we," "our" or "us") collect, use, and share information in connection with a customer’s use of our platforms, services, products and solutions (collectively, the "Services"). Except as expressly set forth herein, the use of information collected through the Services will be limited to the purpose of providing the Services for which you have paid for. If you do not agree with the terms, do not access or use the Services, sites, solutions, products or other aspects of the Dream Studio business.
+**Last Updated August 8th, 2022**
 
-## This Privacy Policy (the "Privacy Policy") does not apply to data our customers may process when using our Services.
+This privacy notice for Stability.AI ("Company," "we," "us," or "our") describes how and why we might collect, store,
+use, and/or share ("process") your information when you use our services ("Services"), such as when you:
 
-We may collect and receive information about users of our Services ("users," "you," or "your") from various sources, including: (i) information you provide through your user account on the Services (your "Account"); (ii) your use of the Services; and (iii) from third-party websites, services and partners. We recommend that you read this Privacy Policy in full to ensure you are fully informed. If you have any questions about this Privacy Policy or Dream Studio's data collection, use, and disclosure practices, please contact us at dreamstudio@stability.ai.
+- Visit our website at stability.ai or any website of ours that links to this privacy notice
 
-## **1. Information We Collect**
+- Engage with us in other related ways ― including any sales, marketing, or events
 
-Information You Provide
+Questions or concerns? Reading this privacy notice will help you understand your privacy rights and choices. If you
+disagree with our policies and practices, please do not use our Services. If you still have questions or concerns,
+please contact us at info@stability.ai.
 
-1. **Account Registration**. When you create an Account, we ask for your contact information, including items such as name, company name, address, email address, and telephone number. If you choose to refer another individual or entity to our Services, we may also collect their email address as well.
-2. **Payment Information**. When you add your financial account information to your Account, that information is directed to our third-party payment processor. We do not store your financial account information on our systems; however, we have access to, and may retain, user information through our third-party payment processor.
-3. **Communications**. If you contact us directly, we may receive additional information about you such as your name, email address, phone number, the contents of the message and/or attachments you may send us, and any other information you may choose to provide. We may also receive a confirmation when you open an email from us
-   We only require that you provide personal information that is necessary to set up an Account.
-4. **Stored Content**. When you use the Services to produce an image from a text prompt (“Content”), Stability stores your Content and associated metadata (i.e., image specifications, seeds, and text prompts) in a “history” section of your Account so that you may browse and retrieve Content you previously have generated using the Services (“Stored Content”).  Stored Content will be associated with your Account in order to provide you with access to it, and therefore can be used to identify you.
+### SUMMARY OF KEY POINTS
 
-Information We Collect When You Use Our Services.
+**_This summary provides key points from our privacy notice, but you can find out more details about any of these topics
+by clicking the link following each key point or by using our table of contents below to find the section you are
+looking for._**
 
-1. **Cookies and Other Tracking Technologies**. As is true of most cloud platforms as a service provider, we gather certain information automatically and store it in log files. In addition, when you use our Services, we may collect certain information automatically from your device. This information may include internet protocol (IP) addresses, browser type, internet service provider (ISP), referring/exit pages, operating system, date/time stamp, clickstream data, landing page, and referring URL. To collect this information, a cookie may be set on your computer or device when you visit our Services. Cookies contain a small amount of information that allows our servers to recognize you. We may automatically collect information about your use of features of our Services, about the functionality of our Services, frequency of visits, and other information related to your interactions with the Services. We may track your use across different websites and services. In some countries, including countries in the European Economic Area ("EEA"), the information referenced above in this paragraph may be considered personal information under applicable data protection laws.
-   Content: The API requests and images or artifacts or other response content created during the API transaction.
+**What personal information do we process?**\
+When you visit, use, or navigate our Services, we may process personal information depending on how you interact with
+Stability.AI and the Services, your choices, and the products and features you use.
+Do we process any sensitive personal information?
+We do not process sensitive personal information.
 
-2. **Usage of our Services**. When you use our Services, we may collect information about your engagement with and utilization of our Services, such as processor and memory usage, storage capacity, navigation of our Services, and system-level metrics. We use this data to operate the Services, maintain and improve the performance and utilization of the Services, develop new features, protect the security and safety of our Services and our customers, and provide customer support. We also use this data to develop aggregate analysis and business intelligence that enable us to operate, protect, make informed decisions, and report on the performance of our business.
+**Do you receive any information from third parties?**\
+We do not receive any information from third parties.
 
-Information We Receive from Third Parties.
+**How do you process my information?**\
+We process your information to provide, improve, and administer our Services, communicate with you for security and
+fraud prevention, and comply with the law. We may also process your information for other purposes with your consent. We
+process your information only when we have a valid legal reason.
 
-1. **Third-Party Accounts**. If you choose to link our Services to a third-party account, we will receive information about that account, such as your authentication token from the third-party account, to authorize linking. If you wish to limit the information available to us, you should visit the privacy settings of your third-party accounts to learn about your options.
+**In what situations and with which parties do we share personal information?**\
+We may share information in specific situations and with specific third parties.
 
-## **2. How We Use Information**
+**How do we keep your information safe?**\
+We have organisational and technical processes and procedures to protect your personal information. However, no
+electronic transmission over the internet or information storage technology can be guaranteed to be 100% secure, so we
+cannot promise or guarantee that hackers, cybercriminals, or other unauthorised third parties will not be able to defeat
+our security and improperly collect, access, steal, or modify your information.
 
-We use the information we collect in various ways, including to:
+**What are your rights?**\
+Depending on where you are located geographically, the applicable privacy law may mean you have certain rights regarding
+your personal information.
 
-Provide, operate, and maintain our Services;
-Improve, personalize, and expand our Services;
-Understand and analyze how you use our Services;
-Develop new products, services, features, and functionality;
-Communicate with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the Service, and for marketing and promotional purposes
-Process your use transactions;
-Send you text messages and push notifications;
-Find and prevent fraud; and
-For compliance purposes, including enforcing our Terms of Service, or other legal rights, or as may be required by applicable laws and regulations or requested by any judicial process or governmental agency.
+**How do I exercise my rights?**\
+The easiest way to exercise your rights is to contact us. We will consider and act upon any request in accordance with
+applicable data protection laws.
 
-## **3. How We Share Information**
+### TABLE OF CONTENTS
 
-We may share the information we collect in various ways, including the following:
+[//]: # "Will be replaced with the ToC by the markdown processor"
 
-- **Vendors and Service Providers**. We may share information with third-party vendors and service providers that provide services to us or on our behalf, such as helping to provide our Services, for promotional and/or marketing purposes, and to provide you with information relevant to you such as customer and technical support, product announcements, software updates, special offers, or other information.
-- **Aggregate Information**. Where legally permissible, we may use and share information about users with our partners in aggregated or anonymized form that cannot reasonably be used to identify you.
-- **Third-Party Partners**. We also share information about users with third-party partners in order to receive additional publicly available information about you.
-- **Information We Share When You Come to Us Through a Referral**. If you create an Account to use our Services through a referral, we may share information with your referrer to let them know.
-- **Analytics**. We use analytics providers such as Google Analytics. Google Analytics uses cookies to collect non-identifying information. Google provides some additional privacy options regarding its Analytics cookies at http://www.google.com/policies/privacy/partners/.
-- **Business Transfers**. Information may be disclosed and otherwise transferred to any potential acquirer, successor, or assignee as part of any proposed merger, acquisition, debt financing, sale of assets, or similar transaction, or in the event of insolvency, bankruptcy, or receivership in which information is transferred to one or more third parties as one of our business assets.
-- **As Required By Law and Similar Disclosures**. We may also share information to (i) satisfy any applicable law, regulation, legal process, or governmental request; (ii) enforce this Privacy Policy and our Terms of Service, including investigation of potential violations hereof; (iii) detect, prevent, or otherwise address fraud, security, or technical issues; (iv) respond to your requests; or (v) protect our rights, property or safety, our users and the public. This includes exchanging information with other companies and organizations for fraud protection and spam/malware prevention.
+### 1. WHAT INFORMATION DO WE COLLECT?
 
-## **4. Legal Basis for Processing Personal Information**
+**In Short:** We collect personal information that you provide to us.
 
-Our legal basis for collecting and using the personal information described above will depend on the personal information concerned and the specific context in which we collect it.
+We collect personal information that you voluntarily provide to us when you express an interest in obtaining information
+about us or our products and Services, when you participate in activities on the Services, or when you contact us.
 
-However, we will normally collect personal information from you only (i) where we need the personal information to satisfy our standard “know-your-customer” practices and policies; (ii) where we need the personal information to perform the Services; (iii) where the processing is in our legitimate interests and not overridden by your rights; or (iv) where we have your consent to do so. We have a legitimate interest in operating our Services and communicating with you as necessary to provide these Services, for example when responding to your queries, improving our platform, undertaking marketing, or for the purposes of detecting or preventing illegal activities.
+**Personal Information Provided by You.**\
+The personal information we collect depends on the context of your interactions with the Services and us, your choices,
+and the products and features you use. The personal information we collect may include the following:
 
-In some cases, we may also have a legal obligation to collect personal information from you or may otherwise need the personal information to protect your vital interests or those of another person.
+- application information
+- communication information
+- usage information
+- cookies
+- log data
 
-If we ask you to provide personal information to comply with a legal or business requirement or to perform the Services for you, we will make this clear at the relevant time and advise you whether the provision of your personal information is mandatory or not (as well as of the possible consequences if you do not provide your personal information).
+**Sensitive Information.**\
+We do not process sensitive information.
+All personal information you provide must be true, complete, and accurate, and you must notify us of any changes to such
+personal information.
 
-## **5. Third-party Services**
+**Information automatically collected**
 
-You may access other third-party services through the Services, for example by clicking on links to those third-party services from within the Services. We are not responsible for the privacy policies, terms of service and/or practices of these third-party services, and we encourage you to carefully review their privacy policies.
+**_In Short:_** Some information — such as your Internet Protocol (IP) address and/or browser and
+device characteristics — is collected automatically when you interact with the chatbot.
 
-## **6. Security**
+We automatically collect certain information when you visit, use, or navigate the Services. This information does not
+reveal your specific identity (like your name or contact information). It may include device and usage information, such
+as your IP address, browser and device characteristics, operating system, language preferences, referring URLs, device
+name, country, location, information about how and when you use our Services, and other technical information. This
+information is primarily needed to maintain the security and operation of our Services and for our internal analytics
+and reporting purposes. Like many businesses, we also collect information through cookies and similar technologies.
 
-Dream Studio is committed to protecting your information. To do so, we employ a variety of security technologies and measures designed to protect information from unauthorized access, use, or disclosure. The measures we use are designed to provide a level of security appropriate to the risk of processing your personal information. However, please bear in mind that the Internet and any online platform cannot be guaranteed to be 100% secure.
+The information we collect includes the following:
 
-## **7. Data Retention**
+- **Log and Usage Data**. Log and usage data are service-related, diagnostic, usage, and performance information our
+  servers automatically collect when you access or use our Services, which we record in log files. Depending on how you
+  interact with us, this log data may include your IP address, device information, browser type, and settings and
+  information about your activity in the Services (such as the date/time stamps associated with your usage, pages and
+  files viewed, searches, and other actions you take such as which features you use), device event information (such as
+  system activity, error reports (sometimes called "crash dumps"), and hardware settings).
 
-We retain personal information we collect from you where we have an ongoing legitimate business need to do so (for example, to provide you with a service you have requested or to comply with applicable legal, tax, or accounting requirements). When we have no ongoing legitimate business need to process your personal information, we will either delete or anonymize it or, if this is not possible (for example, because your personal information has been stored in standard backup archives), then we will securely store your personal information and isolate it from any further processing until deletion is possible.
+- **Device Data**. We collect device data such as information about your computer, phone, tablet, or other devices you
+  use to access the Services. Depending on the device used, this data may include information such as your IP address (
+  or proxy server), device and application identification numbers, location, browser type, hardware model, Internet
+  service provider and/or mobile carrier, operating system, and system configuration information.
 
-## **8. Access**
+- **Location Data**. We collect location data, such as information about your device's location, which can be either
+  precise or imprecise. How much information we collect depends on the type and settings of the device you use to access
+  the Services. For example, we may use GPS and other technologies to collect geolocation data that tells us your
+  current location (based on your IP address). You can opt out of allowing us to collect this information either by
+  refusing access or disabling your Location setting on your device. However, if you choose to opt out, you may not be
+  able to use certain aspects of the Services.
 
-If you are a registered user, you may access certain information associated with your Account by logging into our Services or emailing dreamstudio@stability.ai. If you terminate your Account, any public activity on your Account prior to deletion may remain stored on our servers and may remain accessible to the public. To protect your privacy and security, we may also take reasonable steps to verify your identity before updating or removing your information. The information you provide us may be archived or stored periodically by us according to standard backup processes conducted in the ordinary course of business for disaster recovery purposes. Your ability to access and correct your information may be temporarily limited where access and correction could: inhibit Dream Studio’s ability to comply with a legal obligation; inhibit Dream Studio’s ability to investigate, make or defend legal claims; result in disclosure of personal information about a third party; or result in breach of a contract or disclosure of trade secrets or other proprietary business information belonging to Dream Studio or a third party.
+### 2. HOW DO WE PROCESS YOUR INFORMATION?
 
-## **9. Your Data Protection Rights Under the General Data Protection Regulation (GDPR)**
+**_In Short:_** We process your information to provide, improve, and administer our Services, communicate with you for
+security and fraud prevention, and comply with the law. We may also process your information for other purposes with
+your consent.
 
-If you are an individual and a resident of the EEA, you have the following data protection rights:
+**We process your personal information for a variety of reasons, depending on how you interact with our Services,
+including:**
 
-- If you wish to access, correct, update, or request deletion of your personal information, you can do so at any time by emailing dreamstudio@stability.ai.
-- In addition, you can object to the processing of your personal information, ask us to restrict the processing of your personal information, or request portability of your personal information. Again, you can exercise these rights by emailing dreamstudio@stability.ai.
-- You have the right to opt-out of marketing communications we send you at any time. You can exercise this right by clicking on the "unsubscribe" or "opt-out" link in the marketing emails we send you. To opt-out of other forms of marketing, please contact us by emailing dreamstudio@stability.ai.
-- Similarly, if we have collected and processed your personal information with your consent, then you can withdraw your consent at any time. Withdrawing your consent will not affect the lawfulness of any processing we conducted prior to your withdrawal, nor will it affect the processing of your personal information conducted in reliance on lawful processing grounds other than consent.
-- You have the right to complain to a data protection authority about our collection and use of your personal information. For more information, please contact your local data protection authority.
-- We respond to all requests we receive from individuals wishing to exercise their data protection rights in accordance with applicable data protection laws.
+To send you marketing and promotional communications.
+We may process the personal information you send to us for our marketing purposes if
+this is in accordance with your marketing preferences. You can opt out of our marketing
+emails at any time.
 
-## **10. Your Choices**
+- **To send you marketing and promotional communications.**\
+  We may process the personal information you send to us for our marketing purposes if this is in accordance with your
+  marketing preferences. You can opt out of our marketing emails at any time.
 
-You can use some of the features of the Services without registering, thereby limiting the type of information that we collect. You may unsubscribe from receiving certain promotional emails from us. If you wish to do so, simply follow the instructions found at the end of the email. Even if you unsubscribe, we may still contact you for informational, transactional, account-related, or similar purposes. Many browsers have an option for disabling cookies, which may prevent your browser from accepting new cookies or enable selective use of cookies. Please note that, if you choose not to accept cookies, some features and the personalization of our Services may no longer work for you.
+- **To deliver targeted advertising to you.**\
+  We may process your information to develop and display personalised content and advertising tailored to your
+  interests, location, and more.
 
-## **11. Children's Privacy**
+- **To protect our Services.**\
+  We may process your information as part of our efforts to keep our Services safe and secure, including fraud
+  monitoring and prevention.
 
-Dream Studio does not knowingly collect information from children under the age of 18, and children under 18 are prohibited from using our Services. If you learn that a child has provided us with personal information in violation of this Privacy Policy, you can alert us at dreamstudio@stability.ai.
+- **To identify usage trends.**\
+  We may process information about how you use our Services to better understand how they are being used so we can
+  improve them.
 
-## **12. Changes to this Privacy Policy**
+- **To determine the effectiveness of our marketing and promotional campaigns.**\
+  We may process your information to better understand how to provide marketing and promotional campaigns that are most
+  relevant to you.
 
-This Privacy Policy may be modified from time to time, so please review it frequently. Changes to this Privacy Policy will be posted on our websites. If we materially change the ways in which we use or share personal information previously collected from you through our Services, we will notify you through our Services, by email, or other communication if you have signed up for notifications
+- **To save or protect an individual's vital interest.**\
+  We may process your information when necessary to save or protect an individual’s vital interest and prevent harm.
 
-## **13. International Data Transfers**
+### 3. WHAT LEGAL BASES DO WE RELY ON TO PROCESS YOUR INFORMATION?
 
-Dream Studio is a global business. We may transfer personal information to countries other than the country in which the data was originally collected. These countries may not have the same data protection laws as the country in which you initially provided the information. When we transfer your personal information to other countries, we will protect that information as described in this Privacy Policy.
+**_In Short:_** We only process your personal information when we believe it is necessary and we have a valid legal
+reason (i.e., legal basis) to do so under applicable law, like with your consent, to comply with laws, to provide you
+with services to enter into or fulfil our contractual obligations, to protect your rights, or to fulfil our legitimate
+business interests.
 
-## **Contact Us**
+**_This section applies to you if you are in the EU or the UK._**
 
-If you have any questions or concerns about this Privacy Policy, please feel free to email us at dreamstudio@stability.ai. The data controller of your personal information is Dream Studio, Inc.
+The General Data Protection Regulation (GDPR) and UK GDPR require us to explain the valid legal bases we rely on to
+process your personal information. As such, we may rely on the following legal bases to process your personal
+information:
+
+- **Consent.**\
+  We may process your information if you have permitted us (i.e., consent) to use your personal information for a
+  specific purpose. You can withdraw your consent at any time.
+
+- **Legitimate Interests.**\
+  We may process your information when we believe it is reasonably necessary to achieve our legitimate business
+  interests. Those interests do not outweigh your interests and fundamental rights and freedoms. For example, we may
+  process your personal information for some of the purposes described to:
+
+  - § Send users information about special offers and discounts on our products and
+    services
+
+  - § Develop and display personalised and relevant advertising content for our users
+
+  - § Analyse how the chatbot is being used so we can improve it and all our Services to
+    engage and retain users
+
+  - § Support our marketing activities
+
+  - § Diagnose problems and/or prevent fraudulent activities
+
+- **Legal Obligations.**\
+  We may process your information where we believe it is necessary for compliance with our legal obligations, such as to
+  cooperate with a law enforcement body or regulatory agency, exercise or defend our legal rights, or disclose your
+  information as evidence in litigation in which we are involved.
+
+- **Vital Interests.**\
+  We may process your information where we believe it is necessary to protect your vital interests or the vital
+  interests of a third party, such as in situations involving potential threats to the safety of any person.
+
+In legal terms, we are generally the “data controller” under European data protection laws of the personal information
+described in this privacy notice since we determine the means and/or purposes of the data processing we perform. This
+privacy notice does not apply to the personal information we process as a “data processor” on behalf of our customers.
+In those situations, the customer with that we provide services and with whom we have entered into a data processing
+agreement is the “data controller” responsible for your personal information, and we merely process your information on
+their behalf in accordance with your instructions. To know more about our customers' privacy practices, you should read
+their privacy policies and direct any questions you have to them.
+
+_If you are located in Canada, this section applies to you._
+
+We may process your information if you have given us specific permission (i.e., express consent) to use your personal
+information for a specific purpose or in situations where your permission can be inferred (i.e., implied consent). You
+can withdraw your consent at any time.
+
+In some exceptional cases, we may be legally permitted under applicable law to process your information without your
+consent, including, for example:
+
+- If collection is clearly in the interests of an individual and consent cannot be obtained promptly.
+- For investigations and fraud detection, and prevention.
+- For business transactions, provided certain conditions are met.
+- If it is contained in a witness statement, the collection is necessary to assess, process, or settle an insurance
+  claim.
+- Identifying injured, ill, or deceased persons and communicating with next of kin.
+- If we have reasonable grounds to believe an individual has been, is, or maybe a victim of financial abuse.
+- If it is reasonable to expect collection and use with consent would compromise the availability or the accuracy of the
+  information and the collection is reasonable for purposes related to investigating a breach of an agreement or a
+  contravention of the laws of Canada or a province.
+- If disclosure is required to comply with a subpoena, warrant, court order, or rules of the court relating to the
+  production of records
+- If an individual produced it during their employment, business, or profession, the collection is consistent with the
+  purposes for which the information was produced.
+- If the collection is solely for journalistic, artistic, or literary purposes.
+- If the information is publicly available and is specified by the regulations.
+
+### 4. WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION?
+
+**_In Short:_** We may share information in specific situations described in this section and/or with the following
+third parties
+
+We may need to share your personal information in the following situations:
+
+- **Business Transfers.**\
+  We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company
+  assets, financing, or acquisition of all or a portion of our business to another company.
+
+### 5. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?
+
+**_In Short:_** We may use cookies and other tracking technologies to collect and store your
+information.
+
+We may use cookies and similar tracking technologies (like web beacons and pixels) to access or store information. Our
+Cookie Notice sets out specific information about how we use such technologies and how you can refuse certain cookies.
+
+### 6. HOW LONG DO WE KEEP YOUR INFORMATION?
+
+**_In Short:_** We keep your information for as long as necessary to fulfil the purposes outlined in
+this privacy notice unless otherwise required by law.
+
+We will only keep your personal information for as long as it is necessary for the purposes set out in this privacy
+notice unless a longer retention period is required or permitted by law (such as tax, accounting, or other legal
+requirements). No purpose in this notice will require us to keep your personal information for longer than one (1) year.
+
+When we have no ongoing legitimate business need to process your personal information, we will either delete or
+anonymise such information, or, if this is not possible (for example, because your personal information has been stored
+in backup archives), then we will securely store your personal information and isolate it from any further processing
+until deletion is possible.
+
+### 7. HOW DO WE KEEP YOUR INFORMATION SAFE?
+
+**_In Short:_** We aim to protect your personal information through organisational and technical security measures.
+
+We have implemented appropriate and reasonable technical and organisational security measures designed to protect the
+security of any personal information we process. However, despite our safeguards and efforts to secure your information,
+no electronic transmission over the Internet or information storage technology can be guaranteed to be 100% secure, so
+we cannot promise or guarantee that hackers, cybercriminals, or other unauthorised third parties will not be able to
+defeat our security and improperly collect, access, steal, or modify your information. Although we will do our best to
+protect your personal information, the transmission of personal information to and from our Services is at your own
+risk. You should only access the Services within a secure environment.
+
+### 8. WHAT ARE YOUR PRIVACY RIGHTS?
+
+**_In Short:_** In some regions, such as the European Economic Area (EEA), United Kingdom (UK), and Canada, you have
+rights that allow you greater access to and control over your personal information. You may review, change, or terminate
+your account at any time.
+
+You have certain rights under applicable data protection laws in some regions (like the EEA, UK, and Canada). These may
+include the right (i) to request access and obtain a copy of your personal information, (ii) to request rectification or
+erasure; (iii) to restrict the processing of your personal information; and (iv), if applicable, to data portability. In
+certain circumstances, you may also have the right to object to processing your personal information. We will consider
+and act upon any request in accordance with applicable data protection laws.
+
+If you are located in the EEA or UK and believe we are unlawfully processing your personal
+information, you also have the right to complain to your local data protection supervisory
+authority.
+
+**Withdrawing your consent:**\
+If we rely on your consent to process your personal information, which may be express and/or implied consent, depending
+on the applicable law, you have the right to withdraw your consent at any time.
+
+However, please note that this will not affect the lawfulness of the processing before its withdrawal, nor when
+applicable law allows, will it affect the processing of your personal information conducted in reliance on lawful
+processing grounds other than consent.
+
+**Opting out of marketing and promotional communications:**\
+You can unsubscribe from our marketing and promotional communications at any time by clicking on the unsubscribe link in
+our emails or by contacting us. You will then be removed from the marketing lists. However, we may still communicate
+with you, for example, to send you service-related messages necessary for the administration and use of your account, to
+respond to service requests, or for other non-marketing purposes.
+
+**Cookies and similar technologies:**\
+Most Web browsers are set to accept cookies by default. If you prefer, you can usually set your browser to remove and
+reject cookies. If you choose to remove or reject the cookies, this could affect certain features or services of our
+Services.
+
+### 9. CONTROLS FOR DO-NOT-TRACK FEATURES
+
+Most web browsers, mobile operating systems, and mobile applications include a Do-Not-Track ("DNT") feature or setting
+you can activate to signal your privacy preference and not to have data about your online browsing activities monitored
+and collected. No uniform technology standard for recognising and implementing DNT signals has been finalised at this
+stage. As such, we do not currently respond to DNT browser signals or any other mechanism that automatically
+communicates your choice not to be tracked online. If a standard for online tracking is adopted that we must follow in
+the future, we will inform you about that practice in a revised version of this privacy notice.
+
+### 10. DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?
+
+**_In Short:_** Yes, if you are a resident of California, you are granted specific rights regarding access to your
+personal information.
+
+California Civil Code Section 1798.83, also known as the "Shine The Light" law, permits our users who are California
+residents to request and obtain from us, once a year and free of charge, information about categories of personal
+information (if any) we disclosed to third parties for direct marketing purposes and the names and addresses of all
+third parties with which we shared personal information in the immediately preceding calendar year. If you are a
+California resident and would like to make such a request, please submit your request in writing using the contact
+information provided below.
+
+If you are under 18 years of age, reside in California, and have a registered account with Services, you have the right
+to request the removal of unwanted data that you publicly post on the Services. To request the removal of such data,
+please get in touch with us using the contact information provided below. Include the email address associated with your
+account and a statement that you reside in California. We will ensure the data is not publicly displayed on the
+Services, but please be aware that the data may not be completely or comprehensively removed from all our systems (e.g.,
+backups, etc.).
+
+**CCPA Privacy Notice**
+
+The California Code of Regulations defines a "resident" as:
+
+(1) every individual who is in the State of California for other than a temporary or transitory purpose and\
+(2) every individual who is domiciled in the State of California who is outside the State of California for a temporary
+or transitory purpose
+
+All other individuals are defined as "non-residents.”
+
+If this definition of "resident" applies to you, we must adhere to certain rights and obligations regarding your
+personal information.
+
+We may also collect other personal information outside of these categories in instances where you interact with us in
+person, online, or by phone or mail in the context of:
+
+- Receiving help through our customer support channels;
+- Participation in customer surveys or contests; and
+- Facilitate the delivery of our Services and respond to your inquiries.
+
+**How do we use and share your personal information?**\
+This privacy notice can find more information about our data collection and sharing practices.
+
+You may contact us by email at info@stability.ai.
+
+If you are using an authorised agent to exercise your right to opt-out, we may deny a request if the authorised agent
+does not submit proof that they have been validly authorised to act on your behalf.
+
+**Will your information be shared with anyone else?**
+
+We may disclose your personal information with our service providers according to a written contract between each
+service provider and us. Each service provider is a for-profit entity that processes the information on our behalf.
+
+We may use your personal information for our own business purposes, such as for undertaking internal research for
+technological development and demonstration. This is not considered the "selling" of your personal information.
+
+Stability.AI has not disclosed or sold any personal information to third parties for a business or commercial purpose in
+the preceding twelve (12) months. Stability.AI will not sell personal information to website visitors, users, and other
+consumers in the future.
+
+**Your rights concerning your personal data**
+
+**_Right to request deletion of the data — Request to delete_**
+
+You can ask for the deletion of your personal information. If you ask us to delete your personal information, we will
+respect your request and delete your personal information, subject to certain exceptions provided by law, such as (but
+not limited to) the exercise by another consumer of his or her right to free speech, our compliance requirements
+resulting from a legal obligation, or any processing that may be required to protect against illegal activities.
+
+**_Right to be informed — Request to know:_**
+
+Depending on the circumstances, you have a right to know:
+
+- whether we collect and use your personal information;
+- the categories of personal information that we collect;
+- the purposes for which the collected personal information is used;
+- whether we sell your personal information to third parties;
+- the categories of personal information that we sold or disclosed for a business purpose;
+- the categories of third parties to whom the personal information was sold or disclosed for a business purpose; and
+- the business or commercial purpose for collecting or selling personal information.
+
+In accordance with applicable law, we are not obligated to provide or delete consumer information de-identified in
+response to a consumer request or re-identify individual data to verify a consumer request.
+
+**_Right to Non-Discrimination for the Exercise of a Consumer’s Privacy Rights_**
+
+We will not discriminate against you if you exercise your privacy rights.
+
+**_Verification process_**
+
+Upon receiving your request, we will need to verify your identity to determine whether you are the same person with whom
+we have the information in our system. These verification efforts require us to ask you to provide information so that
+we can match it with the information you have previously provided us. For instance, depending on the type of request you
+submit, we may ask you to provide certain information so that we can match the information you provide with the
+information we already have on file, or we may contact you through a communication method (e.g., phone or email) that
+you have previously provided to us. We may also use other verification methods as the circumstances dictate.
+
+We will only use the personal information provided in your request to verify your identity or authority to make the
+request. To the extent possible, we will avoid requesting additional information from you for the purposes of
+verification. However, if we cannot verify your identity from the information already maintained by us, we may request
+that you provide additional information for the purposes of verifying your identity and for security or fraud-prevention
+purposes. We will delete such additional information as soon as we finish verifying you.
+
+**_Other privacy rights_**
+
+- You may object to the processing of your personal information.
+- You may request correction of your personal data if it is incorrect or no longer relevant or ask to restrict the
+  processing of the information.
+- You can designate an authorized agent to request the CCPA on your behalf. We may deny a request from an authorized
+  agent that does not submit proof that they have been validly authorized to act on your behalf in accordance with the
+  CCPA.
+- You may request to opt out from future selling of your personal information to third parties. Upon receiving an
+  opt-out request, we will act upon the request as soon as feasibly possible, but no later than fifteen (15) days from
+  the date of the request submission.
+
+To exercise these rights, you can contact us by email at info@stability.ai or by referring to the contact details at the
+bottom of this document. If you have a complaint about how we handle your data, we would like to hear from you.
+
+### 11. DO WE MAKE UPDATES TO THIS NOTICE?
+
+**_In Short:_** Yes, we will update this notice as necessary to stay compliant with relevant laws.
+
+We may update this privacy notice from time to time. The updated version will be indicated by an updated "Revised" date
+and the updated version will be effective as soon as it is accessible. If we make material changes to this privacy
+notice, we may notify you either by prominently posting a notice of such changes or by directly sending you a
+notification. We encourage you to review this privacy notice frequently to be informed of how we are protecting your
+information.
+
+### 12. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?
+
+If you have questions or comments about this notice, email us at info@stability.ai.
+
+If you are a resident of the United Kingdom, the "data controller" of your personal information is Stability AI. You can
+contact us directly regarding processing your information by Stability AI by emailing us at info@stability.ai.
+
+### 13. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?
+
+Based on the applicable laws of your country, you may have the right to request access to the personal information we
+collect from you, change that information, or delete it in some circumstances. To request to review, update, or delete
+your personal information, please get in touch with us at info@stability.ai.
