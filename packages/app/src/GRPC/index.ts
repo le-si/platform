@@ -6,6 +6,7 @@ import { User } from "~/User";
 export namespace GRPC {
   export const CreateChargeRequest = Stability.GRPC.CreateChargeRequest;
   export const GetChargesRequest = Stability.GRPC.GetChargesRequest;
+  export const CreateProjectRequest = Stability.GRPC.CreateProjectRequest;
 
   export const use = () => {
     const accessToken = User.AccessToken.use();
