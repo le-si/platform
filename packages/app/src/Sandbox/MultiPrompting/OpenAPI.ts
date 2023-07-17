@@ -1,4 +1,5 @@
 import { OpenAPI } from "@stability/sdk";
+import { StylePresets } from "~/Sandbox/StylePresets";
 
 export async function request(
   apiKey: string,
@@ -9,8 +10,8 @@ export async function request(
   steps?: OpenAPI.TextToImageRequestBody["steps"]
 ): Promise<[string | undefined, Error | undefined]> {
   const body = JSON.stringify({
+    ...StylePresets.toJSON(style),
     text_prompts: prompts,
-    style_preset: style,
     samples: 1,
     cfg_scale: cfgScale,
     steps,

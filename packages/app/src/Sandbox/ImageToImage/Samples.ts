@@ -3,19 +3,16 @@ import fetch from 'node-fetch';
 import FormData from 'form-data';
 import fs from 'node:fs';
 
+interface GenerationResponse {
+  artifacts: Array<{ base64: string seed: number finishReason: string }>
+}
+
 // NOTE: This example is using a NodeJS FormData library.
 // Browsers should use their native FormData class.
 // React Native apps should also use their native FormData class.
 const formData = new FormData();
 formData.append('init_image', fs.readFileSync('../init_image.png'));
-formData.append('init_image_mode', 'IMAGE_STRENGTH');
-formData.append('image_strength', {imageStrength});
-formData.append('text_prompts[0][text]', "{positivePrompt}");
-formData.append('text_prompts[0][weight]', 1);
-formData.append('text_prompts[1][text]', "{negativePrompt}");
-formData.append('text_prompts[1][weight]', -1);
-formData.append('cfg_scale', {cfgScale});
-formData.append('steps', {steps});
+{OPTIONS}
 
 const response = await fetch(
   "https://api.stability.ai/v1/generation/{engineID}/image-to-image",
@@ -34,19 +31,11 @@ if (!response.ok) {
   throw new Error(\`Non-200 response: \${await response.text()}\`)
 }
 
-interface GenerationResponse {
-  artifacts: Array<{
-    base64: string
-    seed: number
-    finishReason: string
-  }>
-}
-
 const responseJSON = (await response.json()) as GenerationResponse;
 
 responseJSON.artifacts.forEach((image, index) => {
   fs.writeFileSync(
-    \`out/v1_img2img_\${index}.png\`,
+    \`./out/img2img_\${image.seed}.png\`,
     Buffer.from(image.base64, 'base64')
   )
 });
@@ -62,14 +51,7 @@ import fs from 'node:fs';
 // React Native apps should also use their native FormData class.
 const formData = new FormData();
 formData.append('init_image', fs.readFileSync('../init_image.png'));
-formData.append('init_image_mode', 'IMAGE_STRENGTH');
-formData.append('image_strength', {imageStrength});
-formData.append('text_prompts[0][text]', "{positivePrompt}");
-formData.append('text_prompts[0][weight]', 1);
-formData.append('text_prompts[1][text]', "{negativePrompt}");
-formData.append('text_prompts[1][weight]', -1);
-formData.append('cfg_scale', {cfgScale});
-formData.append('steps', {steps});
+{OPTIONS}
 
 const response = await fetch(
   "https://api.stability.ai/v1/generation/{engineID}/image-to-image",
@@ -92,7 +74,7 @@ const responseJSON = await response.json();
 
 responseJSON.artifacts.forEach((image, index) => {
   fs.writeFileSync(
-    \`out/v1_img2img_\${index}.png\`,
+    \`./out/img2img_\${image.seed}.png\`,
     Buffer.from(image.base64, 'base64')
   )
 });
@@ -113,18 +95,7 @@ response = requests.post(
         "init_image": open("../init_image.png", "rb")
     },
     data={
-        "image_strength": {imageStrength},
-        "init_image_mode": "IMAGE_STRENGTH",
-        "text_prompts[0][text]": "{positivePrompt}",
-        "text_prompts[0][weight]": 1,
-        "text_prompts[1][text]": "{negativePrompt}",
-        "text_prompts[1][weight]": -1,
-        "style_preset": "{style}",
-        "height": {height},
-        "width": {width},
-        "cfg_scale": {cfgScale},
-        "seed": {seed},
-        "steps": {steps},
+        {OPTIONS}
     }
 )
 
@@ -134,6 +105,6 @@ if response.status_code != 200:
 data = response.json()
 
 for i, image in enumerate(data["artifacts"]):
-    with open(f"./out/v1_img2img_{i}.png", "wb") as f:
+    with open(f"./out/img2img_{image["seed"]}.png", "wb") as f:
         f.write(base64.b64decode(image["base64"]))
 `;

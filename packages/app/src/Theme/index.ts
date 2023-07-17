@@ -2,6 +2,7 @@ export { Button } from "./Button";
 export { Textarea } from "./Textarea";
 export { ImageContainer } from "./ImageContainer";
 export { Icon } from "./Icon";
+export { Footer } from "./Footer";
 export { PickButton } from "./PickButton";
 export { Input } from "./Input";
 export { Select } from "./Select";
