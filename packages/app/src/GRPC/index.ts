@@ -1,10 +1,7 @@
 import * as Stability from "@stability/sdk";
 import { CustomError } from "ts-custom-error";
-import { User } from "~/User";
 
-// export declare namespace GRPC {
-//   export {  } from "@stability/sdk";
-// }
+import { User } from "~/User";
 
 export namespace GRPC {
   export const CreateChargeRequest = Stability.GRPC.CreateChargeRequest;
@@ -22,11 +19,11 @@ export namespace GRPC {
       });
 
       const dashboard = new Stability.GRPC.DashboardServiceClient(transport);
-
       return {
         dashboard,
-        generation: new Stability.GRPC.GenerationServiceClient(transport),
         engines: new Stability.GRPC.DashboardServiceClient(transport),
+        fineTuning: new Stability.GRPC.FineTuningServiceClient(transport),
+        generation: new Stability.GRPC.GenerationServiceClient(transport),
         project: new Stability.GRPC.ProjectServiceClient(transport),
         organization: {
           get: async (): Promise<
@@ -37,14 +34,12 @@ export namespace GRPC {
               ({ isDefault }) => isDefault
             );
 
-            if (!defaultOrganization) {
+            if (!defaultOrganization)
               return new OrganizationError("No default organization found!");
-            }
 
             const { organization } = defaultOrganization;
-            if (!organization) {
+            if (!organization)
               return new OrganizationError("No organization found!");
-            }
 
             return organization;
           },

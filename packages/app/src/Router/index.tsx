@@ -1,10 +1,12 @@
 import * as ReactRouter from "react-router-dom";
+
 import { Documentation } from "~/Documentation";
+import { FineTuning } from "~/FineTuning";
+import { FineTuningTesting } from "~/FineTuning/Testing";
 import { Markdown } from "~/Markdown";
 import { Overview } from "~/Overview";
 import { Pricing } from "~/Pricing";
 import { REST } from "~/REST";
-
 import { Sandbox } from "~/Sandbox";
 import { ImageToImage } from "~/Sandbox/ImageToImage";
 import { List } from "~/Sandbox/List";
@@ -58,6 +60,14 @@ export function Router() {
           element: <REST.Page />,
         },
       ],
+    },
+    {
+      path: "/sandbox/fine-tuning",
+      element: <FineTuning />,
+    },
+    {
+      path: "/sandbox/fine-tuning/testing",
+      element: <FineTuningTesting />,
     },
     {
       path: "/sandbox/text-to-image",
