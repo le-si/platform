@@ -4,7 +4,7 @@ import { useClickAway } from "react-use";
 export type Select = Styleable & {
   value?: string;
   disabled?: boolean;
-  onChange?: (value: string) => void;
+  onChange?: (value: string | undefined) => void;
   placeholder?: string;
   title?: string;
   icon?: React.ReactNode;
@@ -12,7 +12,7 @@ export type Select = Styleable & {
 };
 
 export type Option = {
-  value: string;
+  value: string | undefined;
   label: string;
   disabled?: boolean;
 };

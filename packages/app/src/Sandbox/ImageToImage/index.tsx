@@ -1,4 +1,7 @@
 import { OpenAPI } from "@stability/sdk";
+import { Code } from "~/Sandbox/Code";
+import { StylePresets } from "~/Sandbox/StylePresets";
+import { TextPrompts } from "~/Sandbox/TextPrompts";
 
 import {
   Background,
@@ -7,6 +10,7 @@ import {
   Input,
   Select,
   Textarea,
+  Theme,
 } from "~/Theme";
 import { DropZone } from "~/Theme/DropZone";
 
@@ -90,14 +94,15 @@ export function ImageToImage({ setOptions }: ImageToImage) {
 
   useEffect(() => {
     setOptions({
+      init_image_mode: "IMAGE_STRENGTH",
+      image_strength: initStrength,
+      samples: 1,
       engineID,
-      positivePrompt,
-      negativePrompt,
-      style,
-      cfgScale,
       steps,
       seed,
-      imageStrength: initStrength,
+      cfg_scale: cfgScale,
+      style_preset: style,
+      text_prompts: TextPrompts.toArray(positivePrompt, negativePrompt),
     });
   }, [
     engineID,
@@ -161,7 +166,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
             <Select
               title="Model"
               value={engineID}
-              onChange={setEngineID}
+              onChange={(value) => value && setEngineID(value)}
               options={[
                 {
                   label: "Stable Diffusion XL",
@@ -185,25 +190,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
                   value as OpenAPI.TextToImageRequestBody["style_preset"]
                 )
               }
-              options={[
-                { label: "Enhance", value: "enhance" },
-                { label: "Anime", value: "anime" },
-                { label: "Photographic", value: "photographic" },
-                { label: "Digital Art", value: "digital-art" },
-                { label: "Comic Book", value: "comic-book" },
-                { label: "Fantasy Art", value: "fantasy-art" },
-                { label: "Line Art", value: "line-art" },
-                { label: "Analog Film", value: "analog-film" },
-                { label: "Neon Punk", value: "neon-punk" },
-                { label: "Isometric", value: "isometric" },
-                { label: "Low Poly", value: "low-poly" },
-                { label: "Origami", value: "origami" },
-                { label: "Modeling Compound", value: "modeling-compound" },
-                { label: "Cinematic", value: "cinematic" },
-                { label: "3D Model", value: "3d-model" },
-                { label: "Pixel Art", value: "pixel-art" },
-                { label: "Tile Texture", value: "tile-texture" },
-              ]}
+              options={StylePresets.options()}
             />
             <Input
               number
@@ -222,11 +209,17 @@ export function ImageToImage({ setOptions }: ImageToImage) {
         sidebarBottom={
           <Button
             variant="primary"
-            className="h-16 rounded-none"
+            className="relative h-16 rounded-none"
             disabled={generating || !positivePrompt || !apiKey || !init}
             onClick={generate}
           >
             Generate
+            <Theme.Icon.Spinner
+              className={classes(
+                "absolute right-[30%] text-white",
+                !generating && "hidden"
+              )}
+            />
           </Button>
         }
       >
@@ -244,7 +237,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
                   <pre
                     className={classes(
                       error
-                        ? "rounded border border-red-300 p-3 font-mono text-red-500"
+                        ? "whitespace-pre-wrap rounded border border-red-300 p-3 font-mono text-sm text-red-500"
                         : "text-brand-orange select-none font-sans"
                     )}
                   >
@@ -289,3 +282,27 @@ export function Buttons() {
 
 ImageToImage.Samples = Samples;
 ImageToImage.Buttons = Buttons;
+ImageToImage.formatOptions = (
+  options: Record<string, unknown>,
+  codeLanguage: Code.Language
+) => {
+  return Object.entries(options)
+    .reduce((acc, [key, value]) => {
+      if (value === undefined) return acc;
+
+      if (key === "text_prompts") {
+        return acc.concat(...TextPrompts.toFormData(value, codeLanguage));
+      }
+
+      if (typeof value === "string") {
+        value = `"${value}"`;
+      } else {
+        value = `${value}`;
+      }
+
+      return codeLanguage === "python"
+        ? acc.concat(`\t\t"${key}": ${value},\n`)
+        : acc.concat(`formData.append('${key}', ${value});\n`);
+    }, "")
+    .trim();
+};

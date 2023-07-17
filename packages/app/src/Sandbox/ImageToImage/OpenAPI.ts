@@ -1,4 +1,6 @@
 import { OpenAPI } from "@stability/sdk";
+import { StylePresets } from "~/Sandbox/StylePresets";
+import { TextPrompts } from "~/Sandbox/TextPrompts";
 import { toError } from "~/Utilities";
 
 export async function request(
@@ -13,28 +15,16 @@ export async function request(
   steps?: OpenAPI.ImageToImageRequestBody["steps"],
   initStrength?: OpenAPI.ImageToImageRequestBody["image_strength"]
 ): Promise<[string | undefined, Error | undefined]> {
-  const prompts = [
-    {
-      text: positivePrompt,
-      weight: 1,
-    },
-  ];
-
-  if (negativePrompt) {
-    prompts.push({
-      text: negativePrompt,
-      weight: -1,
-    });
-  }
+  const prompts = TextPrompts.toArray(positivePrompt, negativePrompt);
 
   const body = {
     init_image_mode: "IMAGE_STRENGTH",
+    image_strength: initStrength,
     "text_prompts[0][text]": prompts[0]?.text,
     "text_prompts[0][weight]": prompts[0]?.weight,
     "text_prompts[1][text]": prompts[1]?.text,
     "text_prompts[1][weight]": prompts[1]?.weight,
-    image_strength: initStrength,
-    style_preset: style,
+    ...StylePresets.toJSON(style),
     samples: 1,
     cfg_scale: cfgScale,
     seed,

@@ -1,4 +1,5 @@
-import { Background, Button, ImageContainer, Select } from "~/Theme";
+import { Code } from "~/Sandbox/Code";
+import { Background, Button, ImageContainer, Select, Theme } from "~/Theme";
 import { DropZone } from "~/Theme/DropZone";
 
 import { User } from "~/User";
@@ -19,13 +20,7 @@ export function Upscaling({ setOptions }: Upscaling) {
   const [engineID, setEngineID] = useState<string>("esrgan-v1-x2plus");
   const [error, setError] = useState<string | undefined>(undefined);
 
-  const [init, setInit] = useState<
-    | {
-        file: Blob;
-        url: string;
-      }
-    | undefined
-  >();
+  const [init, setInit] = useState<{ file: Blob; url: string } | undefined>();
   const [height, setHeight] = useState<number>(0);
 
   const scale = useMemo(
@@ -92,7 +87,7 @@ export function Upscaling({ setOptions }: Upscaling) {
             <Select
               title="Model"
               value={engineID}
-              onChange={setEngineID}
+              onChange={(value) => value && setEngineID(value)}
               options={[
                 {
                   label: "Real-ESRGAN x2",
@@ -109,11 +104,17 @@ export function Upscaling({ setOptions }: Upscaling) {
         sidebarBottom={
           <Button
             variant="primary"
-            className="h-16 rounded-none"
+            className="relative h-16 rounded-none"
             disabled={generating || !init || !apiKey}
             onClick={generate}
           >
             Upscale
+            <Theme.Icon.Spinner
+              className={classes(
+                "absolute right-[30%] text-white",
+                !generating && "hidden"
+              )}
+            />
           </Button>
         }
       >
@@ -131,7 +132,7 @@ export function Upscaling({ setOptions }: Upscaling) {
                   <pre
                     className={classes(
                       error
-                        ? "rounded border border-red-300 p-3 font-mono text-red-500"
+                        ? "whitespace-pre-wrap rounded border border-red-300 p-3 font-mono text-sm text-red-500"
                         : "text-brand-orange select-none font-sans"
                     )}
                   >
@@ -176,3 +177,13 @@ export function Buttons() {
 
 Upscaling.Samples = Samples;
 Upscaling.Buttons = Buttons;
+Upscaling.formatOptions = (
+  options: Record<string, unknown>,
+  language: Code.Language
+) => {
+  if (language === "python") {
+    return `"height": ${options.height}`;
+  } else {
+    return `formData.append("height", ${options.height});`;
+  }
+};
