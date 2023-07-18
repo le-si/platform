@@ -1,17 +1,21 @@
 import { FineTuning } from "~/FineTuning";
 import { Theme } from "~/Theme";
 
-export function Modes({
-  onModeSelected,
-}: {
-  onModeSelected: (mode: Mode) => void;
-}) {
+export function Modes({ onModeSelected }: { onModeSelected: () => void }) {
+  const selectMode = useCallback(
+    (mode: Mode) => {
+      FineTuning.Input.set({ mode });
+      onModeSelected();
+    },
+    [onModeSelected]
+  );
+
   return (
     <FineTuning.Wrapper>
       <div className="flex flex-col gap-6 lg:flex-row">
-        <Mode.Face onModeSelected={() => onModeSelected("Face")} />
-        <Mode.Style onModeSelected={() => onModeSelected("Style")} />
-        <Mode.Object onModeSelected={() => onModeSelected("Object")} />
+        <Mode.Face onModeSelected={() => selectMode("Face")} />
+        <Mode.Style onModeSelected={() => selectMode("Style")} />
+        <Mode.Object onModeSelected={() => selectMode("Object")} />
       </div>
     </FineTuning.Wrapper>
   );

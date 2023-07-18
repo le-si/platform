@@ -1,38 +1,33 @@
-import { FineTuning } from "~/FineTuning";
+import { GlobalState } from "~/GlobalState";
 
 export namespace Steps {
-  export const use = () => {
-    const [stepIndex, setStepIndex] = useState(1);
+  export const use = () => State.use(({ index }) => index);
 
-    const onNextStep = useCallback(
-      () => setStepIndex((stepIndex) => stepIndex + 1),
-      []
-    );
+  export const next = () => State.use.getState().next();
+  export const previous = () => State.use.getState().previous();
 
-    const onPreviousStep = useCallback(
-      () => setStepIndex((stepIndex) => Math.max(0, stepIndex - 1)),
-      []
-    );
+  type State = {
+    index: number;
 
-    const steps = useMemo(
-      () => [
-        <FineTuning.Introduction key="1" onGetStarted={onNextStep} />,
-        <FineTuning.Modes key="2" onModeSelected={onNextStep} />,
-        "3",
-        "4",
-        "5",
-      ],
-      [onNextStep]
-    );
-
-    const step = useMemo(() => steps[stepIndex], [stepIndex, steps]);
-
-    return {
-      step,
-      steps,
-      stepIndex,
-      onNextStep,
-      onPreviousStep,
-    };
+    next: () => void;
+    previous: () => void;
   };
+
+  namespace State {
+    export const use = GlobalState.create<State>((set) => ({
+      index: 2,
+
+      next: () =>
+        set((state) => ({
+          ...state,
+          index: state.index + 1,
+        })),
+
+      previous: () =>
+        set((state) => ({
+          ...state,
+          index: Math.max(0, state.index - 1),
+        })),
+    }));
+  }
 }

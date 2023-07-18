@@ -1,36 +1,31 @@
 import { Sandbox } from "~/SandboxV2";
 
 import { Icon } from "./Icon";
+import { Input } from "./Input";
 import { Introduction } from "./Introduction";
 import { Mode, Modes } from "./Mode";
 import { Steps } from "./Step";
 
 export function FineTuning() {
-  const { step, steps, stepIndex, onPreviousStep } = FineTuning.Steps.use();
-
-  const [input, setInput] = useState<FineTuning.Input>({});
-
-  input;
-  setInput;
-
+  const step = Steps.use();
   return (
     <Sandbox
       icon={<Icon />}
       title="Fine-Tuning"
       titleRight={
         <div
-          onClick={onPreviousStep}
+          onClick={Steps.previous}
           className={classes(
             "flex items-center gap-2",
-            stepIndex > 0 ? "cursor-pointer" : "cursor-default"
+            step > 0 ? "cursor-pointer" : "cursor-default"
           )}
         >
-          {stepIndex > 0 && (
+          {step > 0 && (
             <FineTuning.ArrowRight className="opacity-muted rotate-180" />
           )}
           <div>
-            Step {stepIndex + 1}
-            <span className="opacity-muted"> / {steps.length}</span>
+            Step {step + 1}
+            <span className="opacity-muted"> / 5</span>
           </div>
         </div>
       }
@@ -43,18 +38,15 @@ export function FineTuning() {
 }
 
 export declare namespace FineTuning {
-  export { Introduction, Mode, Modes, Steps };
+  export { Input, Introduction, Mode, Modes, Steps };
 }
 
 export namespace FineTuning {
+  FineTuning.Input = Input;
   FineTuning.Introduction = Introduction;
   FineTuning.Mode = Mode;
   FineTuning.Modes = Modes;
   FineTuning.Steps = Steps;
-
-  export type Input = {
-    mode?: Mode;
-  };
 
   export const route = () => "/fine-tuning" as const;
 
