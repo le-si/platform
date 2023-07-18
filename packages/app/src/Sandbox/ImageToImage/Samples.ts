@@ -3,10 +3,6 @@ import fetch from 'node-fetch';
 import FormData from 'form-data';
 import fs from 'node:fs';
 
-interface GenerationResponse {
-  artifacts: Array<{ base64: string seed: number finishReason: string }>
-}
-
 // NOTE: This example is using a NodeJS FormData library.
 // Browsers should use their native FormData class.
 // React Native apps should also use their native FormData class.

@@ -18,7 +18,7 @@ export function Sandbox<T extends Record<string, unknown>>({
   samples: Record<Code.Language, string>;
 }) {
   const [showCode, setShowCode] = useState(true);
-  const [codeLanguage, setCodeLanguage] = useState<Code.Language>("typescript");
+  const [codeLanguage, setCodeLanguage] = useState<Code.Language>("javascript");
   const [options, setOptions] = useState<T>({} as T);
 
   const code = useMemo(() => {
@@ -30,7 +30,7 @@ export function Sandbox<T extends Record<string, unknown>>({
 
     return samples[codeLanguage]
       .trim()
-      .replace("{apiKey}", "YOUR API KEY")
+      .replace("{apiKey}", "YOUR_API_KEY")
       .replace("{engineID}", options.engineID as string)
       .replace(
         "{OPTIONS}",

@@ -24,11 +24,6 @@ export function Code({
     >
       <div className="flex w-full gap-1 border-b border-[#424242] bg-[#2b2b2b] p-2">
         <LanguageButton
-          language="Typescript"
-          onClick={() => setLanguage("typescript")}
-          active={language === "typescript"}
-        />
-        <LanguageButton
           language="Javascript"
           onClick={() => setLanguage("javascript")}
           active={language === "javascript"}
