@@ -10,7 +10,7 @@ In the example below, this is accomplished by providing the gRPC API with a gray
 
 Follow all the steps [here](/docs/getting-started/typescript-client) to setup the gRPC client and helper functions.
 
-### Given the following ... {#init-image}
+### Given the following... {#init-image}
 
 - `1024x1024` init image residing at `./init_image.png`:
 

@@ -55,7 +55,7 @@ stability_api = client.StabilityInference(
 )
 ```
 
-### 4. Import the image we want to work with and a mask to inform which areas of the image we want affected by the diffusion process.... {#import-image-assets}
+### 4. Import the image we want to work with and a mask to inform which areas of the image we want affected by the diffusion process... {#import-image-assets}
 
 ```python
 img = Image.open('/content/image.png')
