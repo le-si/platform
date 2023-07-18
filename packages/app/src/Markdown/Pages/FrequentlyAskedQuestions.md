@@ -41,7 +41,7 @@ In the meantime, if you need independent credit usage, you can create separate a
 
 Usage of the API is subject to the [Stability AI API Terms of Service](/legal/terms-of-service).
 
-Our privacy policy is available [here](https://dreamstudio.ai/privacy-policy).
+Our privacy policy is available [here](/legal/privacy-policy).
 
 ---
 

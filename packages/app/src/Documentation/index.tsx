@@ -311,7 +311,7 @@ export namespace Documentation {
         route: "/docs/integrations",
         imageURL: "/Photoshop/PipeBoys.png",
         summary:
-          "Learn how to use the official Stability integrations for Blender.",
+          "Learn how to use the official Stability API integration for Blender.",
 
         children: [
           {

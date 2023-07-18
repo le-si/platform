@@ -31,10 +31,10 @@ import stability_sdk.interfaces.gooseai.generation.generation_pb2 as generation
 os.environ['STABILITY_HOST'] = 'grpc.stability.ai:443'
 
 # Sign up for an account at the following link to get an API Key.
-# https://dreamstudio.ai/
+# https://platform.stability.ai/
 
 # Click on the following link once you have created an account to be taken to your API Key.
-# https://dreamstudio.ai/account
+# https://platform.stability.ai/account
 
 # Paste your API Key below.
 

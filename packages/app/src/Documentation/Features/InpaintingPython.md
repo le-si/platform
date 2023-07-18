@@ -32,12 +32,13 @@ from torchvision.transforms import GaussianBlur
 os.environ['STABILITY_HOST'] = 'grpc.stability.ai:443'
 
 # Sign up for an account at the following link to get an API Key.
-# https://dreamstudio.ai/
+# https://platform.stability.ai/
 
 # Click on the following link once you have created an account to be taken to your API Key.
-# https://dreamstudio.ai/account
+# https://platform.stability.ai/account
 
 # Paste your API Key below.
+
 os.environ['STABILITY_KEY'] = 'apikeyhere'
 ```
 
@@ -54,7 +55,7 @@ stability_api = client.StabilityInference(
 )
 ```
 
-### 4. Import the image we want to work with and a mask to inform which areas of the image we want affected by the diffusion process.... {#import-image-assets}
+### 4. Import the image we want to work with and a mask to inform which areas of the image we want affected by the diffusion process... {#import-image-assets}
 
 ```python
 img = Image.open('/content/image.png')

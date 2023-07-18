@@ -10,7 +10,7 @@ Below we outline how the various settings and options within the Animation API c
 
 1. **Still Image Generation**
 
-   Credit usage will be consistent with the credit usage for stand-alone still image generation. See our [Credits and Billing page](https://platform.stability.ai/docs/getting-started/credits-and-billing#settings-and-credit-usage) for more information on still image generation credit usage.
+   Credit usage will be consistent with the credit usage for stand-alone still image generation. See our [Pricing](/pricing) page for more information on still image generation credit usage.
 
    Selecting the Inpaint Border option will double the selected number of steps to generate the still image.
 
@@ -37,7 +37,7 @@ Below we outline how the various settings and options within the Animation API c
 
 **Resolution,** **Steps** and **Cadence** have the highest impact on the credits used to generate an animation.
 
-**Resolution** and **Steps** are covered in detail in the [still image API documentation](https://platform.stability.ai/docs/features/api-parameters).
+**Resolution** and **Steps** are covered in detail in the [still image API documentation](/docs/features/api-parameters).
 
 The **Diffusion Cadence Curve** parameter plays an important role here. It determines if a frame is generated using a still image and animation operations, or animation operations only.
 

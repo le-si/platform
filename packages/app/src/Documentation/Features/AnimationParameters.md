@@ -50,11 +50,11 @@ These are general parameters that can influence the resulting animations regardl
 - stable-diffusion-xl-1024-v0-9
 - stable-diffusion-depth-v2-0
 
-**Note:** `stable-diffusion-xl-beta-v2-2-2` and `stable-diffusion-xl-1024-v0-9` have special dimension considerations. Please check out this section of our [API Parameters](https://platform.stability.ai/docs/features/api-parameters#about-dimensions) page to learn more.
+**Note:** `stable-diffusion-xl-beta-v2-2-2` and `stable-diffusion-xl-1024-v0-9` have special dimension considerations. Please check out this section of our [API Parameters](/docs/features/api-parameters#about-dimensions) page to learn more.
 
 #### **Available Samplers:** {#available-samplers}
 
-See the [Sampler](https://platform.stability.ai/docs/features/api-parameters#sampler) section of our Parameters page for more information.
+See the [Sampler](/docs/features/api-parameters#sampler) section of our Parameters page for more information.
 
 #### **Available Clip Guidance Modes:** {#available-clip-guidance-modes}
 
