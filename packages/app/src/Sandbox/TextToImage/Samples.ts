@@ -1,47 +1,6 @@
-export const typescript = `import { OpenAPI } from "@stability/sdk";
-
-interface GenerationResponse {
-  artifacts: Array<{ base64: string seed: number finishReason: string }>
-}
+export const javascript = `import fs from "fs";
 
 export const textToImage = async () => {
-  const path: OpenAPI.TextToImageRequestPath =
-    "https://api.stability.ai/v1/generation/{engineID}/text-to-image";
-
-  const headers: OpenAPI.TextToImageRequestHeaders = {
-    Accept: "application/json",
-    Authorization: "Bearer {apiKey}"
-  };
-
-  const body: OpenAPI.TextToImageRequestBody = {
-    {OPTIONS}
-  };
-
-  const response = fetch(
-    path,
-    {
-      headers,
-      method: "POST",
-      body: JSON.stringify(body),
-    }
-  );
-  
-  if (!response.ok) {
-    throw new Error(\`Non-200 response: \${await response.text()}\`)
-  }
-  
-  const responseJSON = (await response.json()) as GenerationResponse
-  
-  responseJSON.artifacts.forEach((image, index) => {
-    fs.writeFileSync(
-      \`./out/txt2img_\${image.seed}.png\`,
-      Buffer.from(image.base64, 'base64')
-    )
-  })
-};
-`;
-
-export const javascript = `export const textToImage = async () => {
   const path =
     "https://api.stability.ai/v1/generation/{engineID}/text-to-image";
 

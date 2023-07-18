@@ -10,6 +10,7 @@
 html,
 body {
   font-family: "Inter", sans-serif;
+  font-synthesis: none;
   font-size: 15px;
 
   overscroll-behavior: none;
