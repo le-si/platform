@@ -4,41 +4,49 @@ import { Icon } from "./Icon";
 import { Input } from "./Input";
 import { Introduction } from "./Introduction";
 import { Mode, Modes } from "./Mode";
-import { Steps } from "./Step";
+import { Step, Steps } from "./Step";
+import { Uploads } from "./Upload";
 
 export function FineTuning() {
-  const step = Steps.use();
+  const steps = Steps.use({
+    active: 2,
+    max: 5,
+  });
+
   return (
     <Sandbox
       icon={<Icon />}
       title="Fine-Tuning"
       titleRight={
         <div
-          onClick={Steps.previous}
+          onClick={steps.previous}
           className={classes(
             "flex items-center gap-2",
-            step > 0 ? "cursor-pointer" : "cursor-default"
+            steps.active > 1 ? "cursor-pointer" : "cursor-default"
           )}
         >
-          {step > 0 && (
+          {steps.active > 1 && (
             <FineTuning.ArrowRight className="opacity-muted rotate-180" />
           )}
           <div>
-            Step {step + 1}
-            <span className="opacity-muted"> / 5</span>
+            Step {steps.active}
+            <span className="opacity-muted"> / {steps.max}</span>
           </div>
         </div>
       }
     >
       <div className="flex h-full grow items-center justify-center overflow-y-auto">
-        {step}
+        {steps.active === 1 && <Introduction />}
+        {steps.active === 2 && <Modes />}
+        {steps.active === 3 && <Mode.Instructions />}
+        {steps.active === 4 && <Uploads />}
       </div>
     </Sandbox>
   );
 }
 
 export declare namespace FineTuning {
-  export { Input, Introduction, Mode, Modes, Steps };
+  export { Input, Introduction, Mode, Modes, Step, Steps };
 }
 
 export namespace FineTuning {
@@ -46,22 +54,10 @@ export namespace FineTuning {
   FineTuning.Introduction = Introduction;
   FineTuning.Mode = Mode;
   FineTuning.Modes = Modes;
+  FineTuning.Step = Step;
   FineTuning.Steps = Steps;
 
   export const route = () => "/fine-tuning" as const;
-
-  export function Wrapper({ className, children }: StyleableWithChildren) {
-    return (
-      <div
-        className={classes(
-          "flex max-w-[100rem] flex-col gap-12 p-4 sm:p-4 md:p-6",
-          className
-        )}
-      >
-        {children}
-      </div>
-    );
-  }
 
   export function H1({ className, children }: StyleableWithChildren) {
     return <div className={classes("text-2xl", className)}>{children}</div>;

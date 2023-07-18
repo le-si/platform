@@ -19,6 +19,8 @@ export namespace Input {
 
   namespace State {
     export const use = GlobalState.create<State>((set) => ({
+      input: { mode: "Style" },
+
       setInput: (setInput) =>
         set((state) => ({
           ...state,

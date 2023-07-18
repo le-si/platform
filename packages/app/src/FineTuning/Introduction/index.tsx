@@ -3,9 +3,9 @@ import { Theme } from "~/Theme";
 
 import { HeroBanner } from "./HeroBanner";
 
-export function Introduction({ onGetStarted }: { onGetStarted: () => void }) {
+export function Introduction() {
   return (
-    <FineTuning.Wrapper className="max-w-[80rem]">
+    <FineTuning.Step className="max-w-[80rem]">
       <HeroBanner className="aspect-[680/211] w-full" />
       <Introduction.Section>
         <FineTuning.H1>Fine-tune your own model</FineTuning.H1>
@@ -49,7 +49,7 @@ export function Introduction({ onGetStarted }: { onGetStarted: () => void }) {
           <Theme.Button
             className="text-base"
             variant="primary"
-            onClick={onGetStarted}
+            onClick={FineTuning.Steps.next}
           >
             <div className="mx-2 flex items-center gap-2">
               Get Started <ArrowRight />
@@ -57,7 +57,7 @@ export function Introduction({ onGetStarted }: { onGetStarted: () => void }) {
           </Theme.Button>
         </div>
       </FineTuning.Card>
-    </FineTuning.Wrapper>
+    </FineTuning.Step>
   );
 }
 

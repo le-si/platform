@@ -4,7 +4,7 @@ import { Theme } from "~/Theme";
 
 export function Footer() {
   return (
-    <div className="relative mt-auto flex w-full items-start justify-between border-t border-zinc-100 bg-white px-5 md:items-center lg:h-16">
+    <div className="relative mt-auto flex w-full shrink-0 items-start justify-between border-t border-zinc-100 bg-white px-5 md:items-center lg:h-16">
       <div className="opacity-muted pointer-events-none absolute bottom-0 left-0 right-0 top-0 flex items-end justify-center whitespace-nowrap p-6 italic lg:items-center">
         © STABILITY AI LTD, 2023
       </div>
