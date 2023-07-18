@@ -40,13 +40,13 @@ For `512px` models, the minimum useful sizes are `192-256` in one dimension. For
 
 Generating images under the recommended dimensions may result in undesirable artifacts.
 
-#### Note: `stable-diffusion-xl-beta-v2-2-2` AKA `SDXL Beta v0.8` comes with some special considerations with regard to the dimensions it can generate images at:
+**Note: `stable-diffusion-xl-beta-v2-2-2` AKA `SDXL Beta v0.8` comes with some special considerations with regard to the dimensions it can generate images at:**
 
 `stable-diffusion-xl-beta-v2-2-2` is a `512px` model and can generate images at a maximum of either `512 x 896` or `896 x 512`.
 
 If either the width or the height (but not both) of an image generation request is greater than `512px`, the other side (width or height, respectively) cannot be beyond `512px` in dimension.
 
-#### Note: `stable-diffusion-xl-1024-v0-9` AKA `SDXL v0.9` comes with some special considerations with regard to the dimensions it can generate images at:
+**Note: `stable-diffusion-xl-1024-v0-9` AKA `SDXL v0.9` comes with some special considerations with regard to the dimensions it can generate images at:**
 
 `stable-diffusion-xl-1024-v0-9` is a `1024px` model. However, it has also been trained to support multiple aspect ratios, a clear improvement over previous models that would often see repeated subjects / concepts in wide or tall aspect ratio generations.
 
@@ -107,9 +107,9 @@ Engine (model) to use. Available engines:
 - stable-diffusion-512-v2-1
 - stable-diffusion-768-v2-1
 - (`SDXL`) stable-diffusion-xl-beta-v2-2-2
-  - **Note:** This model has special pricing considerations. For additional information please check out the [SDXL Beta Pricing Table](/docs/getting-started/credits-and-billing#sdxl-pricing-tables).
+  - **Note:** This model has special pricing considerations. For additional information please check out the [Pricing](/pricing) page.
 - (`SDXL`) stable-diffusion-xl-1024-v0-9
-  - **Note:** This model has special pricing considerations. For additional information please check out the [SDXL v0.9 Pricing Table](/docs/getting-started/credits-and-billing#sdxl-pricing-tables).
+  - **Note:** This model has special pricing considerations. For additional information please check out the [Pricing](/pricing) page.
 - stable-inpainting-v1-0
 - stable-inpainting-512-v2-0
 - esrgan-v1-x2plus
