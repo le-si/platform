@@ -33,8 +33,6 @@ export function Input({
     value?.toString() ?? initialValue?.toString() ?? ""
   );
 
-  spy({ value, localValue });
-
   useEffect(() => setLocalValue(value?.toString() ?? ""), [value]);
 
   useLayoutEffect(() => {
