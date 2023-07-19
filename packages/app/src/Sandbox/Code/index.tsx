@@ -57,7 +57,7 @@ export function Code({
 }
 
 export namespace Code {
-  export type Language = "python" | "javascript" | "typescript";
+  export type Language = "python" | "javascript";
 
   export const toMarkdownCodeBlock = (code: Code, language: Language) =>
     "```" + language + "\n" + code + "\n```";
