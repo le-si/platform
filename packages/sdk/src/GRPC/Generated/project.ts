@@ -102,10 +102,6 @@ export interface Project {
    * @generated from protobuf field: repeated gooseai.ProjectAsset assets = 10;
    */
   assets: ProjectAsset[]; // The listing of all assets associated with the project
-  /**
-   * @generated from protobuf field: gooseai.ProjectType type = 11;
-   */
-  type: ProjectType; // The type of project
 }
 /**
  * @generated from protobuf message gooseai.CreateProjectRequest
@@ -131,10 +127,6 @@ export interface CreateProjectRequest {
    * @generated from protobuf field: optional gooseai.ProjectAsset file = 5;
    */
   file?: ProjectAsset; // Project file for the project (if existing, else will create)
-  /**
-   * @generated from protobuf field: gooseai.ProjectType type = 6;
-   */
-  type: ProjectType; // The type of project
 }
 /**
  * @generated from protobuf message gooseai.UpdateProjectRequest
@@ -164,10 +156,6 @@ export interface UpdateProjectRequest {
    * @generated from protobuf field: optional gooseai.ProjectAsset file = 6;
    */
   file?: ProjectAsset; // Project file for the project
-  /**
-   * @generated from protobuf field: optional gooseai.ProjectType type = 7;
-   */
-  type?: ProjectType; // The type of project
 }
 /**
  * @generated from protobuf message gooseai.ListProjectRequest
@@ -470,25 +458,6 @@ export enum ProjectSortDir {
    */
   DESC = 2,
 }
-/**
- * The Type of Project being created
- *
- * @generated from protobuf enum gooseai.ProjectType
- */
-export enum ProjectType {
-  /**
-   * Zero-value, unspecified
-   *
-   * @generated from protobuf enum value: PROJECT_TYPE_UNSPECIFIED = 0;
-   */
-  UNSPECIFIED = 0,
-  /**
-   * Training project, used for Fine-Tuning models
-   *
-   * @generated from protobuf enum value: PROJECT_TYPE_TRAINING = 1;
-   */
-  TRAINING = 1,
-}
 // @generated message type with reflection information, may provide speed optimized methods
 class ProjectAsset$Type extends MessageType<ProjectAsset> {
   constructor() {
@@ -748,12 +717,6 @@ class Project$Type extends MessageType<Project> {
         repeat: 1 /*RepeatType.PACKED*/,
         T: () => ProjectAsset,
       },
-      {
-        no: 11,
-        name: "type",
-        kind: "enum",
-        T: () => ["gooseai.ProjectType", ProjectType, "PROJECT_TYPE_"],
-      },
     ]);
   }
   create(value?: PartialMessage<Project>): Project {
@@ -767,7 +730,6 @@ class Project$Type extends MessageType<Project> {
       createdAt: 0n,
       updatedAt: 0n,
       assets: [],
-      type: 0,
     };
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
       enumerable: false,
@@ -824,9 +786,6 @@ class Project$Type extends MessageType<Project> {
           message.assets.push(
             ProjectAsset.internalBinaryRead(reader, reader.uint32(), options)
           );
-          break;
-        case /* gooseai.ProjectType type */ 11:
-          message.type = reader.int32();
           break;
         default:
           let u = options.readUnknownField;
@@ -890,8 +849,6 @@ class Project$Type extends MessageType<Project> {
         writer.tag(10, WireType.LengthDelimited).fork(),
         options
       ).join();
-    /* gooseai.ProjectType type = 11; */
-    if (message.type !== 0) writer.tag(11, WireType.Varint).int32(message.type);
     let u = options.writeUnknownFields;
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
@@ -931,16 +888,10 @@ class CreateProjectRequest$Type extends MessageType<CreateProjectRequest> {
         T: () => ["gooseai.ProjectStatus", ProjectStatus, "PROJECT_STATUS_"],
       },
       { no: 5, name: "file", kind: "message", T: () => ProjectAsset },
-      {
-        no: 6,
-        name: "type",
-        kind: "enum",
-        T: () => ["gooseai.ProjectType", ProjectType, "PROJECT_TYPE_"],
-      },
     ]);
   }
   create(value?: PartialMessage<CreateProjectRequest>): CreateProjectRequest {
-    const message = { title: "", access: 0, status: 0, type: 0 };
+    const message = { title: "", access: 0, status: 0 };
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
       enumerable: false,
       value: this,
@@ -979,9 +930,6 @@ class CreateProjectRequest$Type extends MessageType<CreateProjectRequest> {
             options,
             message.file
           );
-          break;
-        case /* gooseai.ProjectType type */ 6:
-          message.type = reader.int32();
           break;
         default:
           let u = options.readUnknownField;
@@ -1026,8 +974,6 @@ class CreateProjectRequest$Type extends MessageType<CreateProjectRequest> {
         writer.tag(5, WireType.LengthDelimited).fork(),
         options
       ).join();
-    /* gooseai.ProjectType type = 6; */
-    if (message.type !== 0) writer.tag(6, WireType.Varint).int32(message.type);
     let u = options.writeUnknownFields;
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
@@ -1076,13 +1022,6 @@ class UpdateProjectRequest$Type extends MessageType<UpdateProjectRequest> {
         T: () => ["gooseai.ProjectStatus", ProjectStatus, "PROJECT_STATUS_"],
       },
       { no: 6, name: "file", kind: "message", T: () => ProjectAsset },
-      {
-        no: 7,
-        name: "type",
-        kind: "enum",
-        opt: true,
-        T: () => ["gooseai.ProjectType", ProjectType, "PROJECT_TYPE_"],
-      },
     ]);
   }
   create(value?: PartialMessage<UpdateProjectRequest>): UpdateProjectRequest {
@@ -1128,9 +1067,6 @@ class UpdateProjectRequest$Type extends MessageType<UpdateProjectRequest> {
             options,
             message.file
           );
-          break;
-        case /* optional gooseai.ProjectType type */ 7:
-          message.type = reader.int32();
           break;
         default:
           let u = options.readUnknownField;
@@ -1178,9 +1114,6 @@ class UpdateProjectRequest$Type extends MessageType<UpdateProjectRequest> {
         writer.tag(6, WireType.LengthDelimited).fork(),
         options
       ).join();
-    /* optional gooseai.ProjectType type = 7; */
-    if (message.type !== undefined)
-      writer.tag(7, WireType.Varint).int32(message.type);
     let u = options.writeUnknownFields;
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
