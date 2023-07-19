@@ -15,6 +15,7 @@
     "build:types": "yarn generate:grpc-clients && yarn generate:open-api-types && tsc --project tsconfig.json && tsc-alias",
     "build:javascript": "tsx scripts/Build.ts",
     "build": "yarn build:types && yarn build:javascript && tsx scripts/FindAndReplaceVersion.ts",
+    "build:staging": "yarn build",
     "dev": "nodemon --watch src --ext ts,json --exec \"yarn build\" --ignore \"./src/**/*.generated.*\" --ignore \"./src/GRPC/Generated/**/*\""
   },
   "dependencies": {
