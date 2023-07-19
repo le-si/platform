@@ -25,7 +25,7 @@ export namespace TextPrompts {
   }
 
   export function toJSON(unknown: unknown, language: Code.Language) {
-    if (!TextPrompts.is(unknown)) throw new Error("Invalid text prompts");
+    if (!TextPrompts.is(unknown)) return "[]";
 
     return JSON.stringify(unknown, null, 2)
       .split("\n")
@@ -33,7 +33,7 @@ export namespace TextPrompts {
   }
 
   export function toFormData(unknown: unknown, language: Code.Language) {
-    if (!TextPrompts.is(unknown)) throw new Error("Invalid text prompts");
+    if (!TextPrompts.is(unknown)) return [];
 
     if (language === "python") {
       return unknown.map(({ text, weight }, index) => {
