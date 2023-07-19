@@ -64,7 +64,7 @@ function AvailableCredits() {
         {balance === undefined ? (
           <Theme.Skeleton className="h-4 w-24" />
         ) : (
-          <Billing.Credits credits={balance} />
+          <Billing.Credits credits={spy(balance)} />
         )}
       </span>
       {balance === undefined ? (
