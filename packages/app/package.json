@@ -9,7 +9,7 @@
     "lint:fix": "yarn lint --fix",
     "build": "yarn build:types && vite build",
     "build:types": "tsc --noEmit",
-    "build:staging": "yarn build --mode staging",
+    "build:preview": "yarn build --mode staging",
     "build:production": "yarn build --mode production",
     "preview:staging": "yarn build:staging && vite preview --port 3000 --open",
     "preview:production": "yarn build:production && vite preview --port 3000 --open",
