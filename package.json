@@ -11,6 +11,7 @@
     "sdk": "yarn workspace @stability/sdk",
     "dev": "yarn workspaces foreach --all --interlaced --verbose --parallel --jobs unlimited run dev",
     "build": "yarn workspaces foreach --all --interlaced --verbose --topological --jobs unlimited run build",
+    "build:staging": "yarn workspaces foreach --all --interlaced --verbose --topological --jobs unlimited run build:staging",
     "clean": "yarn workspaces foreach --all --interlaced --verbose --parallel --jobs unlimited run clean && rimraf node_modules"
   },
   "devDependencies": {
