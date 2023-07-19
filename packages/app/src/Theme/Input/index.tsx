@@ -1,4 +1,5 @@
 export type Input = Styleable & {
+  initialValue?: string | number;
   value?: string | number;
   disabled?: boolean;
   autoFocus?: boolean;
@@ -12,6 +13,7 @@ export type Input = Styleable & {
 };
 
 export function Input({
+  initialValue,
   value,
   disabled,
   autoFocus,
@@ -27,7 +29,11 @@ export function Input({
   const [focused, setFocused] = useState(false);
   const [width, setWidth] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [localValue, setLocalValue] = useState<string>(value?.toString() ?? "");
+  const [localValue, setLocalValue] = useState<string>(
+    value?.toString() ?? initialValue?.toString() ?? ""
+  );
+
+  spy({ value, localValue });
 
   useEffect(() => setLocalValue(value?.toString() ?? ""), [value]);
 

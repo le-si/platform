@@ -24,6 +24,7 @@ const MODELS = [
         <a
           href="https://arxiv.org/abs/2108.01073"
           target="_blank"
+          className="text-indigo-500"
           rel="noreferrer"
         >
           SDEdit
@@ -32,22 +33,20 @@ const MODELS = [
       </>
     ),
 
-    formula: (state: State): number =>
+    formula: ({ steps }: State): number =>
       100 *
-      (state.steps === 30
+      (steps === 30
         ? 0.016
-        : state.steps === 50
+        : steps === 50
         ? 0.02
-        : 0.0122 +
-          0.000127 * state.steps +
-          0.000000623 * state.steps * state.steps),
+        : 0.0122 + 0.000127 * steps + 0.000000623 * steps * steps),
 
     formulaStylized:
       "100 * (steps === 30 ? 0.016 : steps === 50 ? 0.02 : 0.0122 + 0.000127 * steps + 0.000000623 * steps * steps)",
 
     variables: [
       {
-        name: "Steps",
+        name: "steps",
         description: "Number of steps to run the model for",
         type: "number",
         min: 10,
@@ -81,22 +80,15 @@ const MODELS = [
       </>
     ),
 
-    formula: (state: State): number =>
-      100 *
-      (state.steps === 30
-        ? 0.016
-        : state.steps === 50
-        ? 0.02
-        : 0.0122 +
-          0.000127 * state.steps +
-          0.000000623 * state.steps * state.steps),
+    formula: ({ width, height, steps }: State): number =>
+      (((width * height - 169527) * steps) / 30) * 5.4e-8 * 100,
 
     formulaStylized:
       "100 * (steps === 30 ? 0.016 : steps === 50 ? 0.02 : 0.0122 + 0.000127 * steps + 0.000000623 * steps * steps)",
 
     variables: [
       {
-        name: "Steps",
+        name: "steps",
         description: "Number of steps to run the model for",
         type: "number",
         min: 10,
@@ -113,16 +105,14 @@ const MODELS = [
     name: "Stable Diffusion 1.5",
     description: `Initialized with the weights of the Stable-Diffusion-v1-2 checkpoint and subsequently fine-tuned on 595k steps at resolution 512x512 on "laion-aesthetics v2 5+" and 10% dropping of the text-conditioning to improve classifier-free guidance sampling.`,
 
-    formula: (state: State): number =>
-      (((state.width * state.height - 169527) * state.steps) / 30) *
-      2.16e-8 *
-      100,
+    formula: ({ width, height, steps }: State): number =>
+      (((width * height - 169527) * steps) / 30) * 2.16e-8 * 100,
 
     formulaStylized: "((width * height - 169527) * steps / 30) * 2.16e-8 * 100",
 
     variables: [
       {
-        name: "Width",
+        name: "width",
         description: "Width of the image in pixels",
         type: "number",
         min: 512,
@@ -130,7 +120,7 @@ const MODELS = [
         step: 1,
       },
       {
-        name: "Height",
+        name: "height",
         description: "Height of the image in pixels",
         type: "number",
         min: 512,
@@ -138,7 +128,7 @@ const MODELS = [
         step: 1,
       },
       {
-        name: "Steps",
+        name: "steps",
         description: "Number of steps to run the model for",
         type: "number",
         min: 10,
@@ -155,16 +145,14 @@ const MODELS = [
     name: "Stable Diffusion 2.1",
     description: `Fine-tuned from Stable Diffusion 2.0 (768-v-ema.ckpt) with an additional 55k steps on the same dataset (with punsafe=0.1), and then fine-tuned for another 155k extra steps with punsafe=0.98.`,
 
-    formula: (state: State): number =>
-      (((state.width * state.height - 169527) * state.steps) / 30) *
-      2.16e-8 *
-      100,
+    formula: ({ width, height, steps }: State): number =>
+      (((width * height - 169527) * steps) / 30) * 2.16e-8 * 100,
 
     formulaStylized: "((width * height - 169527) * steps / 30) * 2.16e-8 * 100",
 
     variables: [
       {
-        name: "Width",
+        name: "width",
         description: "Width of the image in pixels",
         type: "number",
         min: 512,
@@ -172,7 +160,7 @@ const MODELS = [
         step: 1,
       },
       {
-        name: "Height",
+        name: "height",
         description: "Height of the image in pixels",
         type: "number",
         min: 512,
@@ -180,7 +168,7 @@ const MODELS = [
         step: 1,
       },
       {
-        name: "Steps",
+        name: "steps",
         description: "Number of steps to run the model for",
         type: "number",
         min: 10,
@@ -196,21 +184,21 @@ const MODELS = [
     name: "Stable Diffusion x4 Latent Upscaler",
     description: `Trained for 1.25M steps on a 10M subset of LAION containing images >2048x2048. The model was trained on crops of size 512x512 and is a text-guided latent upscaling diffusion model. In addition to the textual input, it receives a noise_level as an input parameter, which can be used to add noise to the low-resolution input according to a predefined diffusion schedule.`,
 
-    formula: (state: State): number =>
-      state.width * state.height > 512 * 512 ? 12 : 8,
+    formula: ({ width, height }: State): number =>
+      width * height > 512 * 512 ? 12 : 8,
 
     formulaStylized: "(width * height) > 512 * 512 ? 12 : 8",
 
     variables: [
       {
-        name: "Width",
+        name: "width",
         description: "Width of the image in pixels",
         type: "number",
         min: 256,
         max: 1024,
       },
       {
-        name: "Height",
+        name: "height",
         description: "Height of the image in pixels",
         type: "number",
         min: 256,
@@ -227,7 +215,7 @@ const MODELS = [
     name: "Real-ESRGAN x2",
     description: `An upgraded ESRGAN trained with pure synthetic data is capable of enhancing details while removing annoying artifacts for common real-world images.`,
 
-    formula: (_state: State): number => 0.2,
+    formula: () => 0.2,
     formulaStylized: "0.2",
 
     variables: [],
@@ -388,8 +376,8 @@ export namespace Pricing {
       height: 512,
       steps: 50,
     });
-    const [revealCalculator, setRevealCalculator] = React.useState(false);
 
+    const [revealCalculator, setRevealCalculator] = React.useState(false);
     const price = model.formula(state);
 
     return (
@@ -401,19 +389,17 @@ export namespace Pricing {
               <Theme.Input
                 key={variable.name}
                 number={variable.type === "number"}
-                title={variable.name}
+                title={`${variable.name
+                  .substring(0, 1)
+                  .toUpperCase()}${variable.name.substring(1)}`}
                 value={
                   state[variable.name as keyof typeof state] ?? variable.min
-                }
-                onChange={(value) =>
-                  variable.type !== "number" &&
-                  setState({ ...state, [variable.name]: value })
                 }
                 onNumberChange={(value) =>
                   variable.type === "number" &&
                   value >= variable.min &&
                   value <= variable.max &&
-                  setState({ ...state, [variable.name]: value })
+                  setState((state) => ({ ...state, [variable.name]: value }))
                 }
               />
             ))}
