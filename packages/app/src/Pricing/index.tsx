@@ -10,21 +10,40 @@ type State = {
 
 const MODELS = [
   {
-    name: "Stable Diffusion XL 0.9",
-    id: `stable-diffusion-xl-1024-v0-9`,
-    description: `Consists of a two-step pipeline for latent diffusion: First, we use a base model to generate latents of the desired output size. In the second step, we use a specialized high-resolution model and apply a technique called SDEdit (https://arxiv.org/abs/2108.01073, also known as "img2img") to the latents generated in the first step, using the same prompt.`,
+    id: "stable-diffusion-xl-1024-v0-9",
     modality: "image",
-    formula: (state: State): number =>
+    static: false,
+
+    name: "Stable Diffusion XL 0.9",
+    description: (
+      <>
+        Consists of a two-step pipeline for latent diffusion: First, we use a
+        base model to generate latents of the desired output size. In the second
+        step, we use a specialized high-resolution model and apply a technique
+        called&nbsp;
+        <a
+          href="https://arxiv.org/abs/2108.01073"
+          target="_blank"
+          className="text-indigo-500"
+          rel="noreferrer"
+        >
+          SDEdit
+        </a>
+        &nbsp;to the latents generated in the first step, using the same prompt.
+      </>
+    ),
+
+    formula: ({ steps }: State): number =>
       100 *
-      (state.steps === 30
+      (steps === 30
         ? 0.016
-        : state.steps === 50
+        : steps === 50
         ? 0.02
-        : 0.0122 +
-          0.000127 * state.steps +
-          0.000000623 * state.steps * state.steps),
+        : 0.0122 + 0.000127 * steps + 0.000000623 * steps * steps),
+
     formulaStylized:
       "100 * (steps === 30 ? 0.016 : steps === 50 ? 0.02 : 0.0122 + 0.000127 * steps + 0.000000623 * steps * steps)",
+
     variables: [
       {
         name: "steps",
@@ -34,18 +53,63 @@ const MODELS = [
         max: 150,
       },
     ],
-    static: false,
   },
+
   {
-    name: "Stable Diffusion 1.5",
+    id: "stable-diffusion-xl-beta-v2-2-2",
+    modality: "image",
+    static: false,
+
+    name: "Stable Diffusion XL 0.8",
+    description: (
+      <>
+        Stable Diffusion XL Beta v0.8 is a 512px trained base model, with
+        additional&nbsp;
+        <a
+          href="https://platform.stability.ai/docs/features/api-parameters#about-dimensions"
+          className="text-indigo-500"
+        >
+          dimension limits
+        </a>
+        &nbsp;that must be considered. The SDXL series of models offer a
+        significant advancement in image generation capabilities, offering
+        enhanced image composition and face generation that results in stunning
+        visuals and realistic aesthetics. With the SDXL series of models, you
+        can create descriptive images with shorter prompts, including improved
+        word generation capabilities.
+      </>
+    ),
+
+    formula: ({ width, height, steps }: State): number =>
+      (((width * height - 169527) * steps) / 30) * 5.4e-8 * 100,
+
+    formulaStylized:
+      "100 * (steps === 30 ? 0.016 : steps === 50 ? 0.02 : 0.0122 + 0.000127 * steps + 0.000000623 * steps * steps)",
+
+    variables: [
+      {
+        name: "steps",
+        description: "Number of steps to run the model for",
+        type: "number",
+        min: 10,
+        max: 150,
+      },
+    ],
+  },
+
+  {
     id: `stable-diffusion-v1.5`,
+    modality: "image",
+    static: false,
+
+    name: "Stable Diffusion 1.5",
     description: `Initialized with the weights of the Stable-Diffusion-v1-2 checkpoint and subsequently fine-tuned on 595k steps at resolution 512x512 on "laion-aesthetics v2 5+" and 10% dropping of the text-conditioning to improve classifier-free guidance sampling.`,
-    modality: "image",
-    formula: (state: State): number =>
-      (((state.width * state.height - 169527) * state.steps) / 30) *
-      2.16e-8 *
-      100,
+
+    formula: ({ width, height, steps }: State): number =>
+      (((width * height - 169527) * steps) / 30) * 2.16e-8 * 100,
+
     formulaStylized: "((width * height - 169527) * steps / 30) * 2.16e-8 * 100",
+
     variables: [
       {
         name: "width",
@@ -71,18 +135,21 @@ const MODELS = [
         max: 150,
       },
     ],
-    static: false,
   },
+
   {
-    name: "Stable Diffusion 2.1",
     id: `stable-diffusion-512-v2-1`,
-    description: `Fine-tuned from Stable Diffusion 2.0 (768-v-ema.ckpt) with an additional 55k steps on the same dataset (with punsafe=0.1), and then fine-tuned for another 155k extra steps with punsafe=0.98.`,
     modality: "image",
-    formula: (state: State): number =>
-      (((state.width * state.height - 169527) * state.steps) / 30) *
-      2.16e-8 *
-      100,
+    static: false,
+
+    name: "Stable Diffusion 2.1",
+    description: `Fine-tuned from Stable Diffusion 2.0 (768-v-ema.ckpt) with an additional 55k steps on the same dataset (with punsafe=0.1), and then fine-tuned for another 155k extra steps with punsafe=0.98.`,
+
+    formula: ({ width, height, steps }: State): number =>
+      (((width * height - 169527) * steps) / 30) * 2.16e-8 * 100,
+
     formulaStylized: "((width * height - 169527) * steps / 30) * 2.16e-8 * 100",
+
     variables: [
       {
         name: "width",
@@ -108,16 +175,20 @@ const MODELS = [
         max: 150,
       },
     ],
-    static: false,
   },
+
   {
-    name: "Stable Diffusion x4 Latent Upscaler",
-    id: `stable-diffusion-x4-latent-upscaler`,
-    description: `Trained for 1.25M steps on a 10M subset of LAION containing images >2048x2048. The model was trained on crops of size 512x512 and is a text-guided latent upscaling diffusion model. In addition to the textual input, it receives a noise_level as an input parameter, which can be used to add noise to the low-resolution input according to a predefined diffusion schedule.`,
+    id: "stable-diffusion-x4-latent-upscaler",
     modality: "upscaling",
-    formula: (state: State): number =>
-      state.width * state.height > 512 * 512 ? 12 : 8,
+
+    name: "Stable Diffusion x4 Latent Upscaler",
+    description: `Trained for 1.25M steps on a 10M subset of LAION containing images >2048x2048. The model was trained on crops of size 512x512 and is a text-guided latent upscaling diffusion model. In addition to the textual input, it receives a noise_level as an input parameter, which can be used to add noise to the low-resolution input according to a predefined diffusion schedule.`,
+
+    formula: ({ width, height }: State): number =>
+      width * height > 512 * 512 ? 12 : 8,
+
     formulaStylized: "(width * height) > 512 * 512 ? 12 : 8",
+
     variables: [
       {
         name: "width",
@@ -135,15 +206,19 @@ const MODELS = [
       },
     ],
   },
+
   {
-    name: "Real-ESRGAN x2",
-    id: `esrgan-v1-x2plus`,
-    description: `An upgraded ESRGAN trained with pure synthetic data is capable of enhancing details while removing annoying artifacts for common real-world images.`,
+    id: "esrgan-v1-x2plus",
     modality: "upscaling",
-    formula: (_state: State): number => 0.2,
-    formulaStylized: "0.2",
-    variables: [],
     static: true,
+
+    name: "Real-ESRGAN x2",
+    description: `An upgraded ESRGAN trained with pure synthetic data is capable of enhancing details while removing annoying artifacts for common real-world images.`,
+
+    formula: () => 0.2,
+    formulaStylized: "0.2",
+
+    variables: [],
   },
 ];
 
@@ -301,8 +376,8 @@ export namespace Pricing {
       height: 512,
       steps: 50,
     });
-    const [revealCalculator, setRevealCalculator] = React.useState(false);
 
+    const [revealCalculator, setRevealCalculator] = React.useState(false);
     const price = model.formula(state);
 
     return (
@@ -314,19 +389,17 @@ export namespace Pricing {
               <Theme.Input
                 key={variable.name}
                 number={variable.type === "number"}
-                title={variable.name}
+                title={`${variable.name
+                  .substring(0, 1)
+                  .toUpperCase()}${variable.name.substring(1)}`}
                 value={
                   state[variable.name as keyof typeof state] ?? variable.min
-                }
-                onChange={(value) =>
-                  variable.type !== "number" &&
-                  setState({ ...state, [variable.name]: value })
                 }
                 onNumberChange={(value) =>
                   variable.type === "number" &&
                   value >= variable.min &&
                   value <= variable.max &&
-                  setState({ ...state, [variable.name]: value })
+                  setState((state) => ({ ...state, [variable.name]: value }))
                 }
               />
             ))}

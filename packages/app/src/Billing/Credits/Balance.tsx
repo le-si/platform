@@ -29,7 +29,7 @@ export namespace Balance {
           id: org.id,
         });
 
-        return response.paymentInfo?.balance ?? 0;
+        return (response.paymentInfo?.balance ?? 0) * 100;
       },
     });
   };

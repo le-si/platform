@@ -1,8 +1,8 @@
-name: Preview Deploy
+name: Production Deploy
 
 on:
   push:
-    branches-ignore:
+    branches:
       - "main"
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
           cache: "yarn"
           cache-dependency-path: yarn.lock
       - name: Install and Build
-        run: yarn install --immutable && yarn build:preview
+        run: yarn install --immutable && yarn build:production
       - name: Extract Branch Name and Commit Hash
         shell: bash
         run: |
@@ -31,4 +31,4 @@ jobs:
         with:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_PLATFORM_CI_API_KEY }}
-          command: pages publish ./packages/app/dist --project-name=platform-stability --branch=${{ steps.extract_vars.outputs.branch }} --commit-hash=${{ steps.extract_vars.outputs.hash }}
+          command: pages publish ./packages/app/dist --project-name=platform-stability --branch main

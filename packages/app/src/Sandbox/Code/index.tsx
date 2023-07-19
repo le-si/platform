@@ -46,7 +46,6 @@ export function Code({
           <Theme.Icon.X className="h-3 w-3" />
         </button>
       </div>
-
       <div className="h-full overflow-auto">
         <Markdown className="sandbox m-0 h-full rounded-t-none p-0 text-[0.95rem] leading-3 sm:px-0">
           {Code.toMarkdownCodeBlock(code, language)}

@@ -10,7 +10,9 @@
     "app": "yarn workspace @stability/app",
     "sdk": "yarn workspace @stability/sdk",
     "dev": "yarn workspaces foreach --all --interlaced --verbose --parallel --jobs unlimited run dev",
-    "build": "yarn workspaces foreach --all --interlaced --verbose --topological --jobs unlimited run build",
+    "build": "yarn build:production",
+    "build:production": "yarn workspaces foreach --all --interlaced --verbose --topological --jobs unlimited run build:production",
+    "build:staging": "yarn workspaces foreach --all --interlaced --verbose --topological --jobs unlimited run build:staging",
     "clean": "yarn workspaces foreach --all --interlaced --verbose --parallel --jobs unlimited run clean && rimraf node_modules"
   },
   "devDependencies": {
