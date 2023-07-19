@@ -1,6 +1,6 @@
 # 💰 Credits + Billing
 
-Credits are required to use both Stability API's and [DreamStudio](https://dreamstudio.ai).
+Credits are required to use the Stability API as well as [DreamStudio](https://dreamstudio.ai).
 
 All new users are granted `25` free credits upon creating an account.
 
@@ -14,6 +14,6 @@ After depleting your free credits, additional credits can be purchased via your 
 
 ## Credit Usage {#credit-usage}
 
-Credit usage scales according to the step count and the pixel dimensions of your request. Refer to the [Pricing](/pricing) page to view the formulas for calculating credit usage for specific models.
+Credit usage scales according to compute required to process your request. Refer to the [Pricing](/pricing) page to learn more about credit usage for specific models, including a basic cost calculator.
 
 The API defaults to `512 x 512` Pixels and `30` Steps, which differs in comparison to DreamStudio, where the default is `512 x 512` Pixels and `50` Steps.

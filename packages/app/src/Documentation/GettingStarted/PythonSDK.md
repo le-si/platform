@@ -2,7 +2,7 @@
 
 ## Basic Installation {#installation}
 
-The Python gRPC SDK is published to PyPI and can be installed just like any other Python package via `pip`. All you need to do to install it is run:
+The Python gRPC SDK is published to [PyPI](https://pypi.org/project/stability-sdk/) and can be installed just like any other Python package via `pip`. All you need to do to install it is run:
 
 ```bash
 pip install stability-sdk
@@ -48,7 +48,7 @@ To deactivate the virtual environment, simply run the command `deactivate`.
 
 ### 1. Clone the `stability-sdk` repository from GitHub... {#clone-stability-sdk-repo}
 
-The stability-sdk repository currently (as of 0.3.0) has dependencies on git submodules. To fetch these submodules while cloning, use the `--recurse-submodules` argument:
+The `stability-sdk` repository (as of 0.3.0) has dependencies on git submodules. To fetch these submodules while cloning, use the `--recurse-submodules` argument:
 
 ```bash
 git clone --recurse-submodules https://github.com/Stability-AI/stability-sdk
@@ -102,10 +102,12 @@ Note that `export` is Linux / MacOS syntax. If you are using Windows, you will n
 
 ```bash
 # Sign up for an account at the following link to get an API Key.
-# https://dreamstudio.ai/
+# https://platform.stability.ai/
 
 # Click on the following link once you have created an account to be taken to your API Key.
-# https://dreamstudio.ai/account
+# https://platform.stability.ai/account
+
+# Paste your API Key below.
 
 export STABILITY_HOST=grpc.stability.ai:443
 export STABILITY_KEY=yourkeyhere

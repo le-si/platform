@@ -8,7 +8,7 @@ Initial images (aka: 'init' images) are a powerful tool for generating or modify
 
 Follow all the steps [here](/docs/getting-started/typescript-client) to setup the gRPC client and helper functions.
 
-### Given the following ... {#init-image}
+### Given the following... {#init-image}
 
 `512x512` init image residing at `./init_image.png`:
 
