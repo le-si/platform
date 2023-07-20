@@ -33,6 +33,7 @@ export namespace Steps {
         }),
       [initial.active, initial.max]
     );
+
     return State.use((state) => state, GlobalState.shallow);
   };
 

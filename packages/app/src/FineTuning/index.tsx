@@ -5,11 +5,11 @@ import { Input } from "./Input";
 import { Introduction } from "./Introduction";
 import { Mode, Modes } from "./Mode";
 import { Step, Steps } from "./Step";
-import { Uploads } from "./Upload";
+import { Upload, Uploads } from "./Upload";
 
 export function FineTuning() {
   const steps = Steps.use({
-    active: 2,
+    active: 4,
     max: 5,
   });
 
@@ -38,7 +38,7 @@ export function FineTuning() {
       <div className="flex h-full grow items-center justify-center overflow-y-auto">
         {steps.active === 1 && <Introduction />}
         {steps.active === 2 && <Modes />}
-        {steps.active === 3 && <Mode.Instructions />}
+        {steps.active === 3 && <Mode.Advice />}
         {steps.active === 4 && <Uploads />}
       </div>
     </Sandbox>
@@ -46,7 +46,7 @@ export function FineTuning() {
 }
 
 export declare namespace FineTuning {
-  export { Input, Introduction, Mode, Modes, Step, Steps };
+  export { Input, Introduction, Mode, Modes, Step, Steps, Upload, Uploads };
 }
 
 export namespace FineTuning {
@@ -56,6 +56,8 @@ export namespace FineTuning {
   FineTuning.Modes = Modes;
   FineTuning.Step = Step;
   FineTuning.Steps = Steps;
+  FineTuning.Upload = Upload;
+  FineTuning.Uploads = Uploads;
 
   export const route = () => "/fine-tuning" as const;
 
@@ -69,7 +71,7 @@ export namespace FineTuning {
 
   export function Card({ className, children }: StyleableWithChildren) {
     return (
-      <div className={classes("rounded-lg bg-white p-4", className)}>
+      <div className={classes("rounded-lg bg-white p-4 lg:p-6", className)}>
         {children}
       </div>
     );

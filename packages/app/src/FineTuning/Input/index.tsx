@@ -2,6 +2,7 @@ import { FineTuning } from "~/FineTuning";
 import { GlobalState } from "~/GlobalState";
 
 export type Input = {
+  name?: string;
   mode?: FineTuning.Mode;
 };
 
