@@ -70,7 +70,7 @@ export namespace User {
         const user: OpenAPI.UserAccountResponseBody = await response.json();
         const dashboardResponse = await GRPC.get()?.dashboard.getMe({});
 
-        return spyJSON({
+        return {
           id: user.id,
           email: user.email,
           avatar: user.profile_picture,
@@ -81,7 +81,7 @@ export namespace User {
               created: new Date(Number(createdAt) * 1000),
             })
           ),
-        });
+        };
       },
     });
 
