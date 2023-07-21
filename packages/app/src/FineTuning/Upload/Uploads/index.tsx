@@ -2,12 +2,14 @@ import { FineTuning } from "~/FineTuning";
 import { GlobalState } from "~/GlobalState";
 import { Theme } from "~/Theme";
 
-export type Uploads = {};
+import { Input } from "./Input";
+
+export type Uploads = {
+  [id: string]: FineTuning.Upload;
+};
 
 export function Uploads() {
-  const input = FineTuning.Input.use();
   const uploads = Uploads.use();
-
   const constraints = {
     ...FineTuning.Upload.constraints(),
     ...FineTuning.Uploads.constraints(),
@@ -26,13 +28,8 @@ export function Uploads() {
       </div>
       <div className="flex gap-6">
         <div className="flex grow basis-0 flex-col gap-4">
-          <FineTuning.H2>
-            Name<sup className="text-red-500">*</sup>
-          </FineTuning.H2>
-          <Theme.Input
-            className="w-full grow"
-            placeholder={`My ${input?.mode?.toLocaleLowerCase()} model`}
-          />
+          <FineTuning.H2>Name</FineTuning.H2>
+          <FineTuning.Project.Name.Input className="w-full grow" />
           <Theme.Button variant="primary" className="mr-auto self-end px-4">
             Train
             <FineTuning.ArrowRight className="ml-2" />
@@ -50,33 +47,34 @@ export function Uploads() {
         <div className="flex items-center justify-center">
           {uploads.length}
           <span className="opacity-muted">
-            &nbsp;/ {constraints.count.max} images
+            &nbsp;/ {constraints.count.min}-{constraints.count.max} images
           </span>
-          <div className="ml-auto flex gap-4">
-            <Theme.Button className="pr-4">
+          <div
+            className={classes(
+              "ml-auto flex gap-4",
+              uploads.length >= constraints.count.max &&
+                "opacity-muted pointer-events-none cursor-not-allowed"
+            )}
+          >
+            <Theme.Button className="pr-4" onClick={() => Input.trigger()}>
               <Theme.Icon.Upload className="mr-1" />
               Upload Image
             </Theme.Button>
-            <Theme.Button className="pr-4">
+            <Theme.Button className="pr-4" onClick={() => Input.trigger()}>
               <Theme.Icon.Upload className="mr-1" />
               Upload Zip
             </Theme.Button>
-            <Theme.Button className="pr-4">
-              <Theme.Icon.Camera className="mr-1 h-7 w-7" />
-              Camera
-            </Theme.Button>
           </div>
         </div>
-        <div
-          className={classes(
-            "grid grid-cols-4 gap-4",
-            uploads.length > 0 && "gap-4 md:grid-cols-5 lg:grid-cols-6 lg:gap-6"
-          )}
-        >
-          <FineTuning.Upload />
-          <FineTuning.Upload />
-          <FineTuning.Upload />
-          <FineTuning.Upload />
+        <div className="relative grid grid-cols-4 gap-4">
+          {uploads.map((upload) => (
+            <FineTuning.Upload key={upload.id} upload={upload} />
+          ))}
+          {Array.from({
+            length: Math.max(0, constraints.count.min - uploads.length),
+          }).map((_, index) => (
+            <FineTuning.Upload key={index} />
+          ))}
         </div>
       </FineTuning.Card>
     </FineTuning.Step>
@@ -84,43 +82,28 @@ export function Uploads() {
 }
 
 export namespace Uploads {
-  export const constraints = () =>
-    ({
-      count: {
-        min: 4,
-        max: 128,
-      },
-    } as const);
+  export const constraints = () => ({ count: { min: 4, max: 128 } } as const);
 
-  export const useTrigger = () => {
-    const [fileInput, trigger] = useMemo(() => {
-      const fileInput = document.createElement("input");
-      fileInput.type = "file";
-      fileInput.multiple = true;
-      // fileInput.onchange = () => {
-      //   if (fileInput.files.length) {
-      //     setFiles(fileInput.files);
-      //   }
-      // };
-
-      return [fileInput, () => fileInput.click()] as const;
-    }, []);
-
-    useEffect(() => () => fileInput.remove(), [fileInput]);
-
-    return trigger;
-  };
+  export const addFromURL = (url: URLString) =>
+    State.use.getState().addUpload(url);
 
   export const use = () =>
     State.use(({ uploads }) => Object.values(uploads), GlobalState.shallow);
 
   type State = {
     uploads: Uploads;
+    addUpload: (url: URLString) => void;
   };
 
   namespace State {
-    export const use = GlobalState.create<State>((_set) => ({
+    export const use = GlobalState.create<State>((set) => ({
       uploads: {},
+      addUpload: (url) =>
+        set(({ uploads }) => {
+          const id = ID.create();
+          const upload = { id, url };
+          return { uploads: { ...uploads, [id]: upload } };
+        }),
     }));
   }
 }

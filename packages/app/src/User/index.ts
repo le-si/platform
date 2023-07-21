@@ -57,7 +57,6 @@ export namespace User {
     const accessToken = AccessToken.use();
     const identityToken = IdentityToken.use();
     const auth0 = Auth0.useAuth0();
-    const grpc = GRPC.use();
 
     const query = ReactQuery.useQuery({
       enabled: !!accessToken,
@@ -69,19 +68,19 @@ export namespace User {
         );
 
         const user: OpenAPI.UserAccountResponseBody = await response.json();
-
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const { response: me } = await grpc!.dashboard.getMe({});
+        const dashboardResponse = await GRPC.get()?.dashboard.getMe({});
 
         return {
           id: user.id,
           email: user.email,
           avatar: user.profile_picture,
           organizationID: user.organizations?.[0]?.id,
-          apiKeys: me.apiKeys.map(({ createdAt, ...key }) => ({
-            ...key,
-            created: new Date(Number(createdAt) * 1000),
-          })),
+          apiKeys: dashboardResponse?.response.apiKeys.map(
+            ({ createdAt, ...key }) => ({
+              ...key,
+              created: new Date(Number(createdAt) * 1000),
+            })
+          ),
         };
       },
     });

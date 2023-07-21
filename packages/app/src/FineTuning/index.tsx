@@ -4,15 +4,12 @@ import { Icon } from "./Icon";
 import { Input } from "./Input";
 import { Introduction } from "./Introduction";
 import { Mode, Modes } from "./Mode";
+import { Project } from "./Project";
 import { Step, Steps } from "./Step";
 import { Upload, Uploads } from "./Upload";
 
 export function FineTuning() {
-  const steps = Steps.use({
-    active: 4,
-    max: 5,
-  });
-
+  const steps = Steps.use({ active: 4, max: 5 });
   return (
     <Sandbox
       icon={<Icon />}
@@ -46,7 +43,17 @@ export function FineTuning() {
 }
 
 export declare namespace FineTuning {
-  export { Input, Introduction, Mode, Modes, Step, Steps, Upload, Uploads };
+  export {
+    Input,
+    Introduction,
+    Mode,
+    Modes,
+    Project,
+    Step,
+    Steps,
+    Upload,
+    Uploads,
+  };
 }
 
 export namespace FineTuning {
@@ -54,6 +61,7 @@ export namespace FineTuning {
   FineTuning.Introduction = Introduction;
   FineTuning.Mode = Mode;
   FineTuning.Modes = Modes;
+  FineTuning.Project = Project;
   FineTuning.Step = Step;
   FineTuning.Steps = Steps;
   FineTuning.Upload = Upload;

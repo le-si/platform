@@ -30,6 +30,7 @@
     "flexsearch": "0.7.21",
     "framer-motion": "^10.12.16",
     "highlight.js": "^11.8.0",
+    "jszip": "^3.10.1",
     "mobx": "^6.7.0",
     "notistack": "^3.0.1",
     "react": "^18.2.0",
