@@ -10,6 +10,9 @@ export type GRPC = {
   fineTuning: Stability.GRPC.FineTuningServiceClient;
   generation: Stability.GRPC.GenerationServiceClient;
   project: Stability.GRPC.ProjectServiceClient;
+  organization: {
+    get: () => Promise<Stability.GRPC.Organization | GRPC.OrganizationError>;
+  };
 };
 
 export namespace GRPC {
