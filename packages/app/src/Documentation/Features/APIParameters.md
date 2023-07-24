@@ -46,11 +46,11 @@ Generating images under the recommended dimensions may result in undesirable art
 
 If either the width or the height (but not both) of an image generation request is greater than `512px`, the other side (width or height, respectively) cannot be beyond `512px` in dimension.
 
-**Note: `stable-diffusion-xl-1024-v0-9` AKA `SDXL v0.9` comes with some special considerations with regard to the dimensions it can generate images at:**
+**Note: `stable-diffusion-xl-1024-v0-9` AKA `SDXL v0.9` and `stable-diffusion-xl-1024-v1-0` AKA `SDXL v1.0` come with some special considerations with regard to the dimensions it can generate images at:**
 
-`stable-diffusion-xl-1024-v0-9` is a `1024px` model. However, it has also been trained to support multiple aspect ratios, a clear improvement over previous models that would often see repeated subjects / concepts in wide or tall aspect ratio generations.
+`stable-diffusion-xl-1024-v0-9` and `stable-diffusion-xl-1024-v1-0` are `1024px` models. However, they have also been trained to support multiple aspect ratios, a clear improvement over previous models that would often see repeated subjects / concepts in wide or tall aspect ratio generations.
 
-`stable-diffusion-xl-1024-v0-9` supports generating images at the following dimensions:
+`stable-diffusion-xl-1024-v0-9` and `stable-diffusion-xl-1024-v1-0` support generating images at the following dimensions:
 
 - `1024 x 1024`
 
@@ -109,6 +109,8 @@ Engine (model) to use. Available engines:
 - (`SDXL`) stable-diffusion-xl-beta-v2-2-2
   - **Note:** This model has special pricing considerations. For additional information please check out the [Pricing](/pricing) page.
 - (`SDXL`) stable-diffusion-xl-1024-v0-9
+  - **Note:** This model has special pricing considerations. For additional information please check out the [Pricing](/pricing) page.
+- (`SDXL`) stable-diffusion-xl-1024-v1-0
   - **Note:** This model has special pricing considerations. For additional information please check out the [Pricing](/pricing) page.
 - stable-inpainting-v1-0
 - stable-inpainting-512-v2-0
