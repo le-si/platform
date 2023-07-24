@@ -87,23 +87,33 @@ export namespace Uploads {
   export const addFromURL = (url: URLString) =>
     State.use.getState().addUpload(url);
 
+  export const remove = (id: ID) => State.use.getState().removeUpload(id);
+
   export const use = () =>
     State.use(({ uploads }) => Object.values(uploads), GlobalState.shallow);
 
   type State = {
     uploads: Uploads;
     addUpload: (url: URLString) => void;
+    removeUpload: (id: ID) => void;
   };
 
   namespace State {
     export const use = GlobalState.create<State>((set) => ({
       uploads: {},
+
       addUpload: (url) =>
         set(({ uploads }) => {
           const id = ID.create();
           const upload = { id, url };
           return { uploads: { ...uploads, [id]: upload } };
         }),
+
+      removeUpload: (id) =>
+        set(
+          ({ uploads: { [id]: upload, ...uploads } }) =>
+            void spy(upload) ?? { uploads }
+        ),
     }));
   }
 }
