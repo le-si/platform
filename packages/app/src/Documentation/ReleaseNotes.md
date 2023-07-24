@@ -30,6 +30,9 @@ Building upon the success of the **SDXL v0.9** release, **SDXL v1.0** brings wit
 - `stable-diffusion-xl-1024-v1-0` is now the default engine for the API. If you wish to use a different engine, you must specify it in your request.
 - `stable-diffusion-xl-1024-v1-0` supports a variety of aspect ratios. Please check the [API Parameters](/docs/features/api-parameters#about-dimensions) page for additional information.
 
+<br/>
+<hr/>
+
 # SDXL v0.9 Release {#sdxl-v0-9-release}
 
 <i>June 27th, 2023</i>
