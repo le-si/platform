@@ -8,7 +8,7 @@ Stability for Blender is meant to be used in two different contexts: the 3D View
 
 ![](/Blender/image_editor_slide_out.jpg)
 
-3. Enter your Stability API key, which you can get [here](/account) after logging in. Click 'Get Started' and you should see the following UI:
+3. Enter your Stability API key, which you can get [here](/account/keys) after logging in. Click 'Get Started' and you should see the following UI:
 
 ![](/Blender/3D_view_default.jpg)
 
