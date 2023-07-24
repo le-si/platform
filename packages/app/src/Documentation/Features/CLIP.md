@@ -32,7 +32,7 @@ os.environ['STABILITY_HOST'] = 'grpc.stability.ai:443'
 # https://platform.stability.ai/
 
 # Click on the following link once you have created an account to be taken to your API Key.
-# https://platform.stability.ai/account
+# https://platform.stability.ai/account/keys
 
 # Paste your API Key below.
 
