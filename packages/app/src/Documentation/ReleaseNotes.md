@@ -8,7 +8,7 @@ We're excited to announce the release of **Stable Diffusion XL v1.0**, the first
 
 ## What's New
 
-Building upon the success of the **SDXL v0.9** release, **SDXL v1.0** brings with it a number of image detail improvements. Specifically, SDXL v1.0 offers enhanced vibrancy and overall color tone accuracy, including deeper black and brighter white tones.
+Building upon the success of the **SDXL v0.9** release, **SDXL v1.0** brings with it a number of image detail improvements. Specifically, **SDXL v1.0** offers enhanced vibrancy and overall color tone accuracy, including deeper black and brighter white tones.
 
 **Prompt:**`A wolf in Yosemite National Park, chilly nature documentary film photography`
 
