@@ -1,6 +1,6 @@
 # SDXL v1.0 Release {#sdxl-v1-0-release}
 
-<i>June 27th, 2023</i>
+<i>July 26th, 2023</i>
 
 ## Overview
 
