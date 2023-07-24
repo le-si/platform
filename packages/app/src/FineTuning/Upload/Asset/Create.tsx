@@ -45,7 +45,21 @@ export namespace Create {
           prompt,
         });
 
-        const response = await grpc?.generation.generate(request);
+        const response = grpc?.generation.generate(request);
+        let success = false;
+        const artifacts = [];
+        for await (const res of response.responses) {
+          for await (const artifact of res.artifacts) {
+            artifacts.push(artifact);
+            if (artifact.type == Stability.GRPC.ArtifactType.ARTIFACT_TEXT) {
+              console.log(artifact.uuid)
+              success = true;
+            }
+          }
+        }
+        if (!success) {
+          throw new Error("Failed to upload artifact.");
+        }
 
         return spy(response);
       },
