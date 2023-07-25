@@ -110,10 +110,7 @@ export namespace Uploads {
         }),
 
       removeUpload: (id) =>
-        set(
-          ({ uploads: { [id]: upload, ...uploads } }) =>
-            void spy(upload) ?? { uploads }
-        ),
+        set(({ uploads: { [id]: _, ...uploads } }) => ({ uploads })),
     }));
   }
 }

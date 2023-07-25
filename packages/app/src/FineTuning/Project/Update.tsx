@@ -4,7 +4,7 @@ import * as ReactQuery from "@tanstack/react-query";
 import { FineTuning } from "~/FineTuning";
 import { GRPC } from "~/GRPC";
 
-export namespace Delete {
+export namespace Update {
   export const use = ({
     upload,
     asset,
@@ -14,11 +14,12 @@ export namespace Delete {
   }) => {
     const [shouldDelete, setShouldDelete] = React.useState(false);
     const trigger = useCallback(() => setShouldDelete(true), []);
+
     const query = ReactQuery.useQuery({
       enabled: shouldDelete,
       initialData: null,
 
-      queryKey: ["FineTuning.Upload.Asset.Delete", upload?.id],
+      queryKey: ["FineTuning.Project.Update", upload?.id],
       queryFn: async () => {
         if (!upload?.id || !asset?.id) return null;
 

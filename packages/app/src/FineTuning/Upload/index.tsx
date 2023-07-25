@@ -10,11 +10,8 @@ export type Upload = {
 
 export function Upload({ upload }: { upload?: Upload }) {
   const { asset, isFetching: isAssetUploading } = Asset.Create.use(upload);
-  const {
-    trigger: deleteAsset,
-    isFetching: isAssetDeleting,
-    ...query
-  } = Asset.Delete.use({ upload, asset });
+  const { trigger: deleteAsset, isFetching: isAssetDeleting } =
+    Asset.Delete.use({ upload, asset });
 
   const [isImageReady, setIsImageReady] = useState(false);
 
@@ -27,14 +24,12 @@ export function Upload({ upload }: { upload?: Upload }) {
     image.onload = () => setIsImageReady(true);
   }, [upload?.url]);
 
-  spy({ isAssetUploading, isAssetDeleting: query });
-
   return (
     <div className="relative box-border flex aspect-square grow items-center justify-center overflow-hidden rounded-md border border-black/10">
       {isImageReady && (
         <div
           className={classes(
-            "absolute h-full w-full bg-cover bg-center",
+            "absolute bottom-0 left-0 right-0 top-0 bg-cover bg-center",
             (isAssetUploading || isAssetDeleting) && "opacity-10"
           )}
           style={{

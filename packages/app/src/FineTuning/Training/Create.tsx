@@ -1,66 +1,68 @@
-import * as Stability from "@stability/sdk";
+// import * as Stability from "@stability/sdk";
 import * as ReactQuery from "@tanstack/react-query";
 
 import { FineTuning } from "~/FineTuning";
 import { GRPC } from "~/GRPC";
 
 export namespace Create {
-  export const use = (upload?: FineTuning.Upload) =>
-    ReactQuery.useQuery({
-      queryKey: ["FineTuning.Upload.Asset.Create", upload?.id],
+  export const use = () => {
+    const project = FineTuning.Project.use();
+
+    const [shouldCreate, setShouldCreate] = React.useState(false);
+    const trigger = useCallback(() => setShouldCreate(true), []);
+
+    const query = ReactQuery.useQuery({
+      enabled: shouldCreate,
+      initialData: null,
+
+      queryKey: ["FineTuning.Training.Create", project?.id],
       queryFn: async () => {
-        if (!upload?.url) return {};
+        if (!project?.id) return null;
 
         const grpc = GRPC.get();
-        if (!grpc) return {};
+        if (!grpc) return null;
 
-        const project = FineTuning.Project.get();
-        if (!project) return {};
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        const image = await fetch(upload.url);
-        const binary = new Uint8Array(await image.arrayBuffer());
-        const mimeType = image.headers.get("content-type") ?? undefined;
+        return true;
 
-        const artifact = Stability.GRPC.Artifact.create({
-          type: Stability.GRPC.ArtifactType.ARTIFACT_IMAGE,
-          mime: mimeType,
-          data: { oneofKind: "binary", binary },
-        });
+        // const artifact = Stability.GRPC.Artifact.create({
+        //   type: Stability.GRPC.ArtifactType.ARTIFACT_IMAGE,
+        //   mime: mimeType,
+        //   data: { oneofKind: "binary", binary },
+        // });
 
-        const prompt = [
-          Stability.GRPC.Prompt.create({
-            prompt: { oneofKind: "artifact", artifact },
-          }),
-        ];
+        // const prompt = [
+        //   Stability.GRPC.Prompt.create({
+        //     prompt: { oneofKind: "artifact", artifact },
+        //   }),
+        // ];
 
-        const asset = Stability.GRPC.AssetParameters.create({
-          action: Stability.GRPC.AssetAction.ASSET_PUT,
-          projectId: project.id,
-          use: Stability.GRPC.AssetUse.INPUT,
-        });
+        // const asset = Stability.GRPC.AssetParameters.create({
+        //   action: Stability.GRPC.AssetAction.ASSET_PUT,
+        //   projectId: project.id,
+        //   use: Stability.GRPC.AssetUse.INPUT,
+        // });
 
-        const request = Stability.GRPC.Request.create({
-          engineId: "asset-service",
-          params: { oneofKind: "asset", asset },
-          prompt,
-        });
+        // const request = Stability.GRPC.Request.create({
+        //   engineId: "asset-service",
+        //   params: { oneofKind: "asset", asset },
+        //   prompt,
+        // });
 
-        const { responses } = grpc?.generation.generate(request);
+        // const { responses } = grpc?.generation.generate(request);
 
-        spy({ responses });
+        // for await (const response of responses) {
+        //   for await (const artifact of response.artifacts) {
+        //     if (artifact.type === Stability.GRPC.ArtifactType.ARTIFACT_TEXT)
+        //       return { id: artifact.uuid };
+        //   }
+        // }
 
-        for await (const response of responses) {
-          spy(response);
-
-          for await (const artifact of response.artifacts) {
-            spy(artifact);
-
-            if (artifact.type === Stability.GRPC.ArtifactType.ARTIFACT_TEXT)
-              return spy({ id: artifact.uuid });
-          }
-        }
-
-        throw new Error("Image upload failed!");
+        // throw new Error("Image upload failed!");
       },
     });
+
+    return { ...query, trigger };
+  };
 }
