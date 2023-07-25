@@ -6,46 +6,27 @@ import { HeroBanner } from "./HeroBanner";
 export function Introduction() {
   return (
     <FineTuning.Step className="max-w-[80rem]">
-      <HeroBanner className="aspect-[680/211] w-full" />
+      <div className="5xl:max-h-none flex max-h-[10rem] items-center justify-center overflow-hidden rounded-2xl">
+        <HeroBanner className="aspect-[680/211] w-full" />
+      </div>
       <Introduction.Section>
         <FineTuning.H1>Fine-tune your own model</FineTuning.H1>
-        <div>
+        <p>
           Get more creative control over your generations by fine-tuning a model
           on a style, face or object
+        </p>
+        <div className="mt-2 flex flex-wrap gap-3">
+          <Introduction.Pill>Stable Diffusion XL 1.0</Introduction.Pill>
+          <Introduction.Pill>4 - 128 images</Introduction.Pill>
         </div>
       </Introduction.Section>
-      <FineTuning.Card className="flex flex-col gap-8 p-8">
-        <div className="flex flex-col gap-8 md:flex-row">
-          <Introduction.Section>
-            <FineTuning.H2>Instructions</FineTuning.H2>
-            <Introduction.List>
-              <Introduction.List.Item>
-                You will need to upload 4-128 images in varying angles or styles
-                examples for the best fine-tune result
-              </Introduction.List.Item>
-              <Introduction.List.Item>
-                Please accept and acknowledge the risks before continuing that
-                process we use to fine-tune a model may generate artifacts,
-                inaccuracies and defects
-              </Introduction.List.Item>
-            </Introduction.List>
-          </Introduction.Section>
-          <Introduction.Section>
-            <FineTuning.H2>Overview</FineTuning.H2>
-            <Introduction.List>
-              <Introduction.List.Item>
-                This fine-tune will be created from the most up-to-date Stable
-                Diffusion model
-              </Introduction.List.Item>
-              <Introduction.List.Item>
-                The fine-tune model will be hosted by us and have access to our
-                super fast GPUs. For now, you won&apos;t be able to download the
-                model
-              </Introduction.List.Item>
-            </Introduction.List>
-          </Introduction.Section>
-        </div>
-        <div className="flex justify-center">
+      <Introduction.Section>
+        <p className="max-w-[50rem] text-sm opacity-75">
+          Please accept and acknowledge the risks before continuing that process
+          we use to fine-tune a model may generate artifacts, inaccuracies and
+          defects
+        </p>
+        <div className="mt-2">
           <Theme.Button
             className="text-base"
             variant="primary"
@@ -56,7 +37,7 @@ export function Introduction() {
             </div>
           </Theme.Button>
         </div>
-      </FineTuning.Card>
+      </Introduction.Section>
     </FineTuning.Step>
   );
 }
@@ -84,7 +65,7 @@ function ArrowRight(props: React.SVGProps<SVGSVGElement>) {
 
 export namespace Introduction {
   export function Section({ children }: React.PropsWithChildren) {
-    return <div className="flex grow basis-0 flex-col gap-8">{children}</div>;
+    return <div className="flex grow basis-0 flex-col gap-3">{children}</div>;
   }
 
   export function List({ children }: React.PropsWithChildren) {
@@ -100,5 +81,13 @@ export namespace Introduction {
         </li>
       );
     }
+  }
+
+  export function Pill({ children }: React.PropsWithChildren) {
+    return (
+      <div className="flex items-center gap-2 rounded-full bg-black/10 px-3 py-1 text-xs">
+        {children}
+      </div>
+    );
   }
 }

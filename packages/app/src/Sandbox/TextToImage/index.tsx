@@ -178,7 +178,7 @@ export function TextToImage({ setOptions }: TextToImage) {
         sidebarBottom={
           <Button
             variant="primary"
-            className="relative h-16 rounded-none"
+            className="relative h-16 w-full rounded-none"
             disabled={generating || !positivePrompt || !apiKey}
             onClick={generate}
           >

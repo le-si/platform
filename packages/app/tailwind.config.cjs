@@ -29,6 +29,12 @@ module.exports = {
         "muted-extra": 0.15,
       },
 
+      screens: {
+        "3xl": "1600px",
+        "4xl": "1920px",
+        "5xl": "2560px",
+      },
+
       colors: {
         "muted-white": "hsla(0, 0%, 100%, 0.4)",
         "muted-white-extra": "hsla(0, 0%, 100%, 0.15)",

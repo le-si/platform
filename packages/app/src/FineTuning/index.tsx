@@ -10,7 +10,7 @@ import { Training } from "./Training";
 import { Upload, Uploads } from "./Upload";
 
 export function FineTuning() {
-  const steps = Steps.use({ active: 5, max: 5 });
+  const steps = Steps.use({ active: 1, max: 5 });
   const isNavigationDisabled = Steps.useIsNavigationDisabled();
   const canNavigateBackwards = !isNavigationDisabled && steps.active > 1;
   return (
@@ -21,7 +21,7 @@ export function FineTuning() {
         <div
           onClick={canNavigateBackwards ? steps.previous : undefined}
           className={classes(
-            "flex items-center gap-2",
+            "flex select-none items-center gap-2",
             canNavigateBackwards ? "cursor-pointer" : "cursor-default"
           )}
         >
@@ -76,11 +76,19 @@ export namespace FineTuning {
   export const route = () => "/fine-tuning" as const;
 
   export function H1({ className, children }: StyleableWithChildren) {
-    return <div className={classes("text-2xl", className)}>{children}</div>;
+    return (
+      <div className={classes("text-4xl font-medium", className)}>
+        {children}
+      </div>
+    );
   }
 
   export function H2({ className, children }: StyleableWithChildren) {
-    return <div className={classes("text-xl", className)}>{children}</div>;
+    return (
+      <div className={classes("text-2xl font-medium", className)}>
+        {children}
+      </div>
+    );
   }
 
   export function Card({ className, children }: StyleableWithChildren) {

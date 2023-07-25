@@ -429,26 +429,9 @@ export interface TransformType {
       };
 }
 /**
- * @generated from protobuf message gooseai.T2IAdapterParameter
+ * @generated from protobuf message gooseai.CAIParameters
  */
-export interface T2IAdapterParameter {
-  /**
-   * @generated from protobuf field: gooseai.T2IAdapter adapter_type = 1;
-   */
-  adapterType: T2IAdapter;
-  /**
-   * @generated from protobuf field: float adapter_strength = 2;
-   */
-  adapterStrength: number;
-  /**
-   * @generated from protobuf field: gooseai.T2IAdapterInit adapter_init_type = 3;
-   */
-  adapterInitType: T2IAdapterInit;
-}
-/**
- * @generated from protobuf message gooseai.ContentCredentialsParameters
- */
-export interface ContentCredentialsParameters {
+export interface CAIParameters {
   /**
    * @generated from protobuf oneof: parameters
    */
@@ -456,18 +439,18 @@ export interface ContentCredentialsParameters {
     | {
         oneofKind: "modelMetadata";
         /**
-         * @generated from protobuf field: gooseai.ContentCredentialsParameters.ModelMetadata model_metadata = 1;
+         * @generated from protobuf field: gooseai.CAIParameters.ModelMetadata model_metadata = 1;
          */
-        modelMetadata: ContentCredentialsParameters_ModelMetadata;
+        modelMetadata: CAIParameters_ModelMetadata;
       }
     | {
         oneofKind: undefined;
       };
 }
 /**
- * @generated from protobuf enum gooseai.ContentCredentialsParameters.ModelMetadata
+ * @generated from protobuf enum gooseai.CAIParameters.ModelMetadata
  */
-export enum ContentCredentialsParameters_ModelMetadata {
+export enum CAIParameters_ModelMetadata {
   /**
    * @generated from protobuf enum value: MODEL_METADATA_UNSPECIFIED = 0;
    */
@@ -544,17 +527,13 @@ export interface ImageParameters {
    */
   quantize?: boolean; // defaults to true
   /**
-   * @generated from protobuf field: optional gooseai.T2IAdapterParameter adapter = 12;
+   * @generated from protobuf field: optional gooseai.CAIParameters cai_parameters = 11;
    */
-  adapter?: T2IAdapterParameter;
+  caiParameters?: CAIParameters; // Set field to have image signed by C2PA
   /**
-   * @generated from protobuf field: repeated gooseai.FineTuningParameters fine_tuning_parameters = 13;
+   * @generated from protobuf field: repeated gooseai.FineTuningParameters fine_tuning_parameters = 12;
    */
-  fineTuningParameters: FineTuningParameters[];
-  /**
-   * @generated from protobuf field: optional gooseai.ContentCredentialsParameters content_credentials_parameters = 14;
-   */
-  contentCredentialsParameters?: ContentCredentialsParameters; // Set field to have image signed by C2PA
+  fineTuningParameters: FineTuningParameters[]; // next available tag: 13
 }
 /**
  * @generated from protobuf message gooseai.ClassifierConcept
@@ -1247,50 +1226,6 @@ export enum ModelArchitecture {
    * @generated from protobuf enum value: MODEL_ARCHITECTURE_LDM = 3;
    */
   LDM = 3,
-}
-/**
- * @generated from protobuf enum gooseai.T2IAdapter
- */
-export enum T2IAdapter {
-  /**
-   * @generated from protobuf enum value: T2IADAPTER_NONE = 0;
-   */
-  T2IADAPTER_NONE = 0,
-  /**
-   * these are all compatible with SDXL.
-   *
-   * @generated from protobuf enum value: T2IADAPTER_SKETCH = 1;
-   */
-  T2IADAPTER_SKETCH = 1,
-  /**
-   * @generated from protobuf enum value: T2IADAPTER_DEPTH = 2;
-   */
-  T2IADAPTER_DEPTH = 2,
-  /**
-   * @generated from protobuf enum value: T2IADAPTER_CANNY = 3;
-   */
-  T2IADAPTER_CANNY = 3,
-}
-/**
- * If adapter_type is not None, then the user can choose what type of init_image to pass in: either an arbitrary image
- * which will then be converted to a depth map, sketch, or canny edge for the sketch, depth and canny adapters respectively,
- * or they can pass in their own depth map, sketch or canny edge. This field controls whether the init_image should
- * be interpreted as an arbitrary image to be preprocessed ready for the t2i adapter, or whether it has already been
- * preprocessed elsewhere
- *
- * @generated from protobuf enum gooseai.T2IAdapterInit
- */
-export enum T2IAdapterInit {
-  /**
-   * these are all compatible with SDXL.
-   *
-   * @generated from protobuf enum value: T2IADAPTERINIT_IMAGE = 0;
-   */
-  T2IADAPTERINIT_IMAGE = 0,
-  /**
-   * @generated from protobuf enum value: T2IADAPTERINIT_ADAPTER_IMAGE = 1;
-   */
-  T2IADAPTERINIT_ADAPTER_IMAGE = 1,
 }
 /**
  * @generated from protobuf enum gooseai.Action
@@ -3410,151 +3345,44 @@ class TransformType$Type extends MessageType<TransformType> {
  */
 export const TransformType = new TransformType$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class T2IAdapterParameter$Type extends MessageType<T2IAdapterParameter> {
+class CAIParameters$Type extends MessageType<CAIParameters> {
   constructor() {
-    super("gooseai.T2IAdapterParameter", [
-      {
-        no: 1,
-        name: "adapter_type",
-        kind: "enum",
-        T: () => ["gooseai.T2IAdapter", T2IAdapter],
-      },
-      {
-        no: 2,
-        name: "adapter_strength",
-        kind: "scalar",
-        T: 2 /*ScalarType.FLOAT*/,
-      },
-      {
-        no: 3,
-        name: "adapter_init_type",
-        kind: "enum",
-        T: () => ["gooseai.T2IAdapterInit", T2IAdapterInit],
-      },
-    ]);
-  }
-  create(value?: PartialMessage<T2IAdapterParameter>): T2IAdapterParameter {
-    const message = { adapterType: 0, adapterStrength: 0, adapterInitType: 0 };
-    globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
-      enumerable: false,
-      value: this,
-    });
-    if (value !== undefined)
-      reflectionMergePartial<T2IAdapterParameter>(this, message, value);
-    return message;
-  }
-  internalBinaryRead(
-    reader: IBinaryReader,
-    length: number,
-    options: BinaryReadOptions,
-    target?: T2IAdapterParameter
-  ): T2IAdapterParameter {
-    let message = target ?? this.create(),
-      end = reader.pos + length;
-    while (reader.pos < end) {
-      let [fieldNo, wireType] = reader.tag();
-      switch (fieldNo) {
-        case /* gooseai.T2IAdapter adapter_type */ 1:
-          message.adapterType = reader.int32();
-          break;
-        case /* float adapter_strength */ 2:
-          message.adapterStrength = reader.float();
-          break;
-        case /* gooseai.T2IAdapterInit adapter_init_type */ 3:
-          message.adapterInitType = reader.int32();
-          break;
-        default:
-          let u = options.readUnknownField;
-          if (u === "throw")
-            throw new globalThis.Error(
-              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
-            );
-          let d = reader.skip(wireType);
-          if (u !== false)
-            (u === true ? UnknownFieldHandler.onRead : u)(
-              this.typeName,
-              message,
-              fieldNo,
-              wireType,
-              d
-            );
-      }
-    }
-    return message;
-  }
-  internalBinaryWrite(
-    message: T2IAdapterParameter,
-    writer: IBinaryWriter,
-    options: BinaryWriteOptions
-  ): IBinaryWriter {
-    /* gooseai.T2IAdapter adapter_type = 1; */
-    if (message.adapterType !== 0)
-      writer.tag(1, WireType.Varint).int32(message.adapterType);
-    /* float adapter_strength = 2; */
-    if (message.adapterStrength !== 0)
-      writer.tag(2, WireType.Bit32).float(message.adapterStrength);
-    /* gooseai.T2IAdapterInit adapter_init_type = 3; */
-    if (message.adapterInitType !== 0)
-      writer.tag(3, WireType.Varint).int32(message.adapterInitType);
-    let u = options.writeUnknownFields;
-    if (u !== false)
-      (u == true ? UnknownFieldHandler.onWrite : u)(
-        this.typeName,
-        message,
-        writer
-      );
-    return writer;
-  }
-}
-/**
- * @generated MessageType for protobuf message gooseai.T2IAdapterParameter
- */
-export const T2IAdapterParameter = new T2IAdapterParameter$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class ContentCredentialsParameters$Type extends MessageType<ContentCredentialsParameters> {
-  constructor() {
-    super("gooseai.ContentCredentialsParameters", [
+    super("gooseai.CAIParameters", [
       {
         no: 1,
         name: "model_metadata",
         kind: "enum",
         oneof: "parameters",
         T: () => [
-          "gooseai.ContentCredentialsParameters.ModelMetadata",
-          ContentCredentialsParameters_ModelMetadata,
+          "gooseai.CAIParameters.ModelMetadata",
+          CAIParameters_ModelMetadata,
           "MODEL_METADATA_",
         ],
       },
     ]);
   }
-  create(
-    value?: PartialMessage<ContentCredentialsParameters>
-  ): ContentCredentialsParameters {
+  create(value?: PartialMessage<CAIParameters>): CAIParameters {
     const message = { parameters: { oneofKind: undefined } };
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
       enumerable: false,
       value: this,
     });
     if (value !== undefined)
-      reflectionMergePartial<ContentCredentialsParameters>(
-        this,
-        message,
-        value
-      );
+      reflectionMergePartial<CAIParameters>(this, message, value);
     return message;
   }
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
-    target?: ContentCredentialsParameters
-  ): ContentCredentialsParameters {
+    target?: CAIParameters
+  ): CAIParameters {
     let message = target ?? this.create(),
       end = reader.pos + length;
     while (reader.pos < end) {
       let [fieldNo, wireType] = reader.tag();
       switch (fieldNo) {
-        case /* gooseai.ContentCredentialsParameters.ModelMetadata model_metadata */ 1:
+        case /* gooseai.CAIParameters.ModelMetadata model_metadata */ 1:
           message.parameters = {
             oneofKind: "modelMetadata",
             modelMetadata: reader.int32(),
@@ -3580,11 +3408,11 @@ class ContentCredentialsParameters$Type extends MessageType<ContentCredentialsPa
     return message;
   }
   internalBinaryWrite(
-    message: ContentCredentialsParameters,
+    message: CAIParameters,
     writer: IBinaryWriter,
     options: BinaryWriteOptions
   ): IBinaryWriter {
-    /* gooseai.ContentCredentialsParameters.ModelMetadata model_metadata = 1; */
+    /* gooseai.CAIParameters.ModelMetadata model_metadata = 1; */
     if (message.parameters.oneofKind === "modelMetadata")
       writer.tag(1, WireType.Varint).int32(message.parameters.modelMetadata);
     let u = options.writeUnknownFields;
@@ -3598,10 +3426,9 @@ class ContentCredentialsParameters$Type extends MessageType<ContentCredentialsPa
   }
 }
 /**
- * @generated MessageType for protobuf message gooseai.ContentCredentialsParameters
+ * @generated MessageType for protobuf message gooseai.CAIParameters
  */
-export const ContentCredentialsParameters =
-  new ContentCredentialsParameters$Type();
+export const CAIParameters = new CAIParameters$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class FineTuningParameters$Type extends MessageType<FineTuningParameters> {
   constructor() {
@@ -3764,23 +3591,17 @@ class ImageParameters$Type extends MessageType<ImageParameters> {
         T: 8 /*ScalarType.BOOL*/,
       },
       {
-        no: 12,
-        name: "adapter",
+        no: 11,
+        name: "cai_parameters",
         kind: "message",
-        T: () => T2IAdapterParameter,
+        T: () => CAIParameters,
       },
       {
-        no: 13,
+        no: 12,
         name: "fine_tuning_parameters",
         kind: "message",
         repeat: 1 /*RepeatType.PACKED*/,
         T: () => FineTuningParameters,
-      },
-      {
-        no: 14,
-        name: "content_credentials_parameters",
-        kind: "message",
-        T: () => ContentCredentialsParameters,
       },
     ]);
   }
@@ -3845,15 +3666,15 @@ class ImageParameters$Type extends MessageType<ImageParameters> {
         case /* optional bool quantize */ 10:
           message.quantize = reader.bool();
           break;
-        case /* optional gooseai.T2IAdapterParameter adapter */ 12:
-          message.adapter = T2IAdapterParameter.internalBinaryRead(
+        case /* optional gooseai.CAIParameters cai_parameters */ 11:
+          message.caiParameters = CAIParameters.internalBinaryRead(
             reader,
             reader.uint32(),
             options,
-            message.adapter
+            message.caiParameters
           );
           break;
-        case /* repeated gooseai.FineTuningParameters fine_tuning_parameters */ 13:
+        case /* repeated gooseai.FineTuningParameters fine_tuning_parameters */ 12:
           message.fineTuningParameters.push(
             FineTuningParameters.internalBinaryRead(
               reader,
@@ -3861,15 +3682,6 @@ class ImageParameters$Type extends MessageType<ImageParameters> {
               options
             )
           );
-          break;
-        case /* optional gooseai.ContentCredentialsParameters content_credentials_parameters */ 14:
-          message.contentCredentialsParameters =
-            ContentCredentialsParameters.internalBinaryRead(
-              reader,
-              reader.uint32(),
-              options,
-              message.contentCredentialsParameters
-            );
           break;
         default:
           let u = options.readUnknownField;
@@ -3937,25 +3749,18 @@ class ImageParameters$Type extends MessageType<ImageParameters> {
     /* optional bool quantize = 10; */
     if (message.quantize !== undefined)
       writer.tag(10, WireType.Varint).bool(message.quantize);
-    /* optional gooseai.T2IAdapterParameter adapter = 12; */
-    if (message.adapter)
-      T2IAdapterParameter.internalBinaryWrite(
-        message.adapter,
-        writer.tag(12, WireType.LengthDelimited).fork(),
+    /* optional gooseai.CAIParameters cai_parameters = 11; */
+    if (message.caiParameters)
+      CAIParameters.internalBinaryWrite(
+        message.caiParameters,
+        writer.tag(11, WireType.LengthDelimited).fork(),
         options
       ).join();
-    /* repeated gooseai.FineTuningParameters fine_tuning_parameters = 13; */
+    /* repeated gooseai.FineTuningParameters fine_tuning_parameters = 12; */
     for (let i = 0; i < message.fineTuningParameters.length; i++)
       FineTuningParameters.internalBinaryWrite(
         message.fineTuningParameters[i],
-        writer.tag(13, WireType.LengthDelimited).fork(),
-        options
-      ).join();
-    /* optional gooseai.ContentCredentialsParameters content_credentials_parameters = 14; */
-    if (message.contentCredentialsParameters)
-      ContentCredentialsParameters.internalBinaryWrite(
-        message.contentCredentialsParameters,
-        writer.tag(14, WireType.LengthDelimited).fork(),
+        writer.tag(12, WireType.LengthDelimited).fork(),
         options
       ).join();
     let u = options.writeUnknownFields;

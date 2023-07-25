@@ -52,10 +52,6 @@ export interface EngineInfo {
    * @generated from protobuf field: bool can_fine_tune = 8;
    */
   canFineTune: boolean;
-  /**
-   * @generated from protobuf field: bool is_adaptive = 9;
-   */
-  isAdaptive: boolean; // Whether this Engine supports T2I Adapters
 }
 /**
  * Empty
@@ -150,7 +146,6 @@ class EngineInfo$Type extends MessageType<EngineInfo> {
         kind: "scalar",
         T: 8 /*ScalarType.BOOL*/,
       },
-      { no: 9, name: "is_adaptive", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
     ]);
   }
   create(value?: PartialMessage<EngineInfo>): EngineInfo {
@@ -163,7 +158,6 @@ class EngineInfo$Type extends MessageType<EngineInfo> {
       name: "",
       description: "",
       canFineTune: false,
-      isAdaptive: false,
     };
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
       enumerable: false,
@@ -207,9 +201,6 @@ class EngineInfo$Type extends MessageType<EngineInfo> {
           break;
         case /* bool can_fine_tune */ 8:
           message.canFineTune = reader.bool();
-          break;
-        case /* bool is_adaptive */ 9:
-          message.isAdaptive = reader.bool();
           break;
         default:
           let u = options.readUnknownField;
@@ -258,9 +249,6 @@ class EngineInfo$Type extends MessageType<EngineInfo> {
     /* bool can_fine_tune = 8; */
     if (message.canFineTune !== false)
       writer.tag(8, WireType.Varint).bool(message.canFineTune);
-    /* bool is_adaptive = 9; */
-    if (message.isAdaptive !== false)
-      writer.tag(9, WireType.Varint).bool(message.isAdaptive);
     let u = options.writeUnknownFields;
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(

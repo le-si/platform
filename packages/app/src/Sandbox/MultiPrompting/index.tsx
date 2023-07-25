@@ -201,7 +201,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
         sidebarBottom={
           <Theme.Button
             variant="primary"
-            className="relative h-16 rounded-none"
+            className="relative h-16 w-full rounded-none"
             disabled={generating || !prompts.length || !apiKey}
             onClick={generate}
           >

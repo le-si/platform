@@ -209,7 +209,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
         sidebarBottom={
           <Button
             variant="primary"
-            className="relative h-16 rounded-none"
+            className="relative h-16 w-full rounded-none"
             disabled={generating || !positivePrompt || !apiKey || !init}
             onClick={generate}
           >
