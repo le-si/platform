@@ -47,7 +47,7 @@ export function Mode({
         {mode}
         <Duration duration={duration} className="opacity-muted ml-auto" />
       </FineTuning.H1>
-      <div className="-mx-4 aspect-[4/3]" style={{ background }} />
+      <div className="aspect-[4/3] rounded-xl" style={{ background }} />
       <div className="my-2">{description}</div>
       <Theme.Button
         className="mt-auto self-end px-4"

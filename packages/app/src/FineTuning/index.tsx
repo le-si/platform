@@ -10,7 +10,7 @@ import { Training } from "./Training";
 import { Upload, Uploads } from "./Upload";
 
 export function FineTuning() {
-  const steps = Steps.use({ active: 1, max: 5 });
+  const steps = Steps.use({ active: 4, max: 5 });
   const isNavigationDisabled = Steps.useIsNavigationDisabled();
   const canNavigateBackwards = !isNavigationDisabled && steps.active > 1;
   return (
@@ -93,7 +93,7 @@ export namespace FineTuning {
 
   export function Card({ className, children }: StyleableWithChildren) {
     return (
-      <div className={classes("rounded-lg bg-white p-4 lg:p-6", className)}>
+      <div className={classes("rounded-lg bg-white p-4", className)}>
         {children}
       </div>
     );
