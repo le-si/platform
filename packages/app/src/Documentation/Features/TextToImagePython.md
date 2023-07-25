@@ -45,9 +45,8 @@ os.environ['STABILITY_KEY'] = 'key-goes-here'
 stability_api = client.StabilityInference(
     key=os.environ['STABILITY_KEY'], # API Key reference.
     verbose=True, # Print debug messages.
-    engine="stable-diffusion-xl-1024-v0-9", # Set the engine to use for generation.
-    # Available engines: stable-diffusion-xl-1024-v0-9 stable-diffusion-v1 stable-diffusion-v1-5 stable-diffusion-512-v2-0 stable-diffusion-768-v2-0
-    # stable-diffusion-512-v2-1 stable-diffusion-768-v2-1 stable-diffusion-xl-beta-v2-2-2 stable-inpainting-v1-0 stable-inpainting-512-v2-0
+    engine="stable-diffusion-xl-1024-v1-0", # Set the engine to use for generation.
+    # Check out the following link for a list of available engines: https://platform.stability.ai/docs/features/api-parameters#engine
 )
 ```
 
@@ -56,16 +55,16 @@ stability_api = client.StabilityInference(
 ```python
 # Set up our initial generation parameters.
 answers = stability_api.generate(
-    prompt="expansive landscape rolling greens with blue daisies and yggdrasil under a blue alien sky, masterful, ghibli",
-    seed=992446758, # If a seed is provided, the resulting generated image will be deterministic.
-                    # What this means is that as long as all generation parameters remain the same, you can always recall the same image simply by generating it again.
-                    # Note: This isn't quite the case for CLIP Guided generations, which we tackle in the CLIP Guidance documentation.
-    steps=50, # Amount of inference steps performed on image generation. Defaults to 30.
+    prompt="expansive landscape rolling greens with gargantuan yggdrasil, intricate world-spanning roots towering under a blue alien sky, masterful, ghibli",
+    seed=4253978046, # If a seed is provided, the resulting generated image will be deterministic.
+                     # What this means is that as long as all generation parameters remain the same, you can always recall the same image simply by generating it again.
+                     # Note: This isn't quite the case for Clip Guided generations, which we'll tackle in a future example notebook.
+    steps=50, # Amount of inference steps performed on image generation. Defaults to 30. 
     cfg_scale=8.0, # Influences how strongly your generation is guided to match your prompt.
                    # Setting this value higher increases the strength in which it tries to match your prompt.
                    # Defaults to 7.0 if not specified.
-    width=1024, # Generation width, if not included defaults to 512 or 1024 depending on the engine.
-    height=1024, # Generation height, if not included defaults to 512 or 1024 depending on the engine.
+    width=1024, # Generation width, defaults to 512 if not included.
+    height=1024, # Generation height, defaults to 512 if not included.
     samples=1, # Number of images to generate, defaults to 1 if not included.
     sampler=generation.SAMPLER_K_DPMPP_2M # Choose which sampler we want to denoise our generation with.
                                                  # Defaults to k_dpmpp_2m if not specified. Clip Guidance only supports ancestral samplers.

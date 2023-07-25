@@ -48,9 +48,8 @@ os.environ['STABILITY_KEY'] = 'key-goes-here'
 stability_api = client.StabilityInference(
     key=os.environ['STABILITY_KEY'], # API Key reference.
     verbose=True, # Print debug messages.
-    engine="stable-diffusion-xl-1024-v0-9", # Set the engine to use for generation.
-    # Available engines: stable-diffusion-xl-1024-v0-9 stable-diffusion-v1 stable-diffusion-v1-5 stable-diffusion-512-v2-0 stable-diffusion-768-v2-0
-    # stable-diffusion-512-v2-1 stable-diffusion-768-v2-1 stable-diffusion-xl-beta-v2-2-2 stable-inpainting-v1-0 stable-inpainting-512-v2-0
+    engine="stable-diffusion-xl-1024-v1-0", # Set the engine to use for generation.
+    # Check out the following link for a list of available engines: https://platform.stability.ai/docs/features/api-parameters#engine
 )
 ```
 
@@ -59,10 +58,10 @@ stability_api = client.StabilityInference(
 ```python
 # Set up our initial generation parameters.
 answers = stability_api.generate(
-    prompt="single sticker illustration ice cream cone highly detailed, simple background",
-    seed=112446111, # If a seed is provided, the resulting generated image will be deterministic.
-                    # What this means is that as long as all generation parameters remain the same, you can always recall the same image simply by generating it again.
-                    # Note: This isn't quite the case for CLIP Guided generations, which we tackle in the CLIP Guidance documentation.
+    prompt="sticker illustration of single scoop ice cream cone, vectorized, simple background",
+    seed=2263864068, # If a seed is provided, the resulting generated image will be deterministic.
+                     # What this means is that as long as all generation parameters remain the same, you can always recall the same image simply by generating it again.
+                     # Note: This isn't quite the case for CLIP Guided generations, which we tackle in the CLIP Guidance documentation.
     steps=50, # Step Count defaults to 50 if not specified here.
     cfg_scale=8.0, # Influences how strongly your generation is guided to match your prompt.
                    # Setting this value higher increases the strength in which it tries to match your prompt.
@@ -100,10 +99,9 @@ By changing only the seed we can use our previous generation as a base for our n
 ```python
 # Set up our initial generation parameters.
 answers = stability_api.generate(
-    prompt="single sticker illustration ice cream cone highly detailed, simple background",
+    prompt="sticker illustration of single scoop ice cream cone, vectorized, simple background",
     init_image=img, # Assign our previously generated img as our Initial Image for transformation.
-    start_schedule=0.7, # Set the strength of our prompt in relation to our initial image.
-    seed=2413523623, # If attempting to transform an image that was previously generated with our API, initial images benefit from having their own distinct seed rather than using the seed of the original image generation.
+    start_schedule=0.65, # Set the strength of our prompt in relation to our initial image.
     steps=50, # Amount of inference steps performed on image generation. Defaults to 30.
     cfg_scale=8.0, # Influences how strongly your generation is guided to match your prompt. Setting this value higher increases the strength in which it tries to match your prompt. Defaults to 7.0 if not specified.
     width=1024, # Generation width, if not included defaults to 512 or 1024 depending on the engine.
