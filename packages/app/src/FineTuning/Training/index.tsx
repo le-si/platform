@@ -36,12 +36,26 @@ export function Training() {
           <Progress />
         </>
       ) : (
-        <FineTuning.Card className="flex flex-col gap-8">
-          <FineTuning.H1 className="flex items-center justify-center gap-1">
-            <Theme.Icon.Check className="-ml-4 text-green-500" />
-            Done Training
+        <div className="flex flex-col items-center gap-8">
+          <FineTuning.H1 className="flex items-center justify-center gap-2">
+            <Theme.Icon.Check className="-ml-4 h-12 w-12 text-green-500" />
+            Training Complete
           </FineTuning.H1>
-          <div>
+          <div className="flex justify-center gap-8">
+            <Theme.Button className="px-4" onClick={FineTuning.Steps.next}>
+              New Model
+            </Theme.Button>
+            <Theme.Button
+              variant="primary"
+              className="px-4"
+              onClick={FineTuning.Steps.next}
+            >
+              Try it out
+              <FineTuning.ArrowRight className="ml-2" />
+            </Theme.Button>
+          </div>
+
+          <div className="text-center text-black/50">
             <p>
               You can manage your model on the&nbsp;
               <Link
@@ -63,20 +77,7 @@ export function Training() {
               &nbsp;for how to use your model through the API.
             </p>
           </div>
-          <div className="flex justify-center gap-4">
-            <Theme.Button className="px-4" onClick={FineTuning.Steps.next}>
-              New Model
-            </Theme.Button>
-            <Theme.Button
-              variant="primary"
-              className="px-4"
-              onClick={FineTuning.Steps.next}
-            >
-              Try
-              <FineTuning.ArrowRight className="ml-2" />
-            </Theme.Button>
-          </div>
-        </FineTuning.Card>
+        </div>
       )}
       {percentage < 100 && (
         <div className="text-center">
