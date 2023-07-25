@@ -11,7 +11,7 @@ export type Upload = {
 
 export function Upload({ upload }: { upload?: Upload }) {
   const { isFetching: isAssetUploading } = Asset.Create.use(upload);
-  const { trigger: deleteAsset, isFetching: isAssetDeleting } =
+  const { execute: deleteAsset, isFetching: isAssetDeleting } =
     Asset.Delete.use(upload);
 
   const [isImageReady, setIsImageReady] = useState(false);
