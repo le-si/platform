@@ -5,17 +5,16 @@ import { FineTuning } from "~/FineTuning";
 import { GRPC } from "~/GRPC";
 
 export namespace Create {
-  export const use = (upload?: FineTuning.Upload) =>
-    ReactQuery.useQuery({
+  export const use = (upload?: FineTuning.Upload) => {
+    const grpc = GRPC.use();
+    const project = FineTuning.Project.use();
+
+    return ReactQuery.useQuery({
+      enabled: !!grpc && !!project,
+
       queryKey: ["FineTuning.Upload.Asset.Create", upload?.id],
       queryFn: async () => {
-        if (!upload?.url) return null;
-
-        const grpc = GRPC.get();
-        if (!grpc) return null;
-
-        const project = FineTuning.Project.get();
-        if (!project) return null;
+        if (!grpc || !project || !upload?.url) return null;
 
         const image = await fetch(upload.url);
         const binary = new Uint8Array(await image.arrayBuffer());
@@ -65,4 +64,5 @@ export namespace Create {
         throw new Error("Image upload failed!");
       },
     });
+  };
 }

@@ -1,16 +1,16 @@
 import { Sandbox } from "~/SandboxV2";
 
 import { Icon } from "./Icon";
-import { Input } from "./Input";
 import { Introduction } from "./Introduction";
 import { Mode, Modes } from "./Mode";
+import { Model, Models } from "./Model";
 import { Project } from "./Project";
 import { Step, Steps } from "./Step";
 import { Training } from "./Training";
 import { Upload, Uploads } from "./Upload";
 
 export function FineTuning() {
-  const steps = Steps.use({ active: 5, max: 5 });
+  const steps = Steps.use({ active: 4, max: 5 });
   const isNavigationDisabled = Steps.useIsNavigationDisabled();
   const canNavigateBackwards = !isNavigationDisabled && steps.active > 1;
   return (
@@ -48,10 +48,11 @@ export function FineTuning() {
 
 export declare namespace FineTuning {
   export {
-    Input,
     Introduction,
     Mode,
     Modes,
+    Model,
+    Models,
     Project,
     Step,
     Steps,
@@ -62,10 +63,11 @@ export declare namespace FineTuning {
 }
 
 export namespace FineTuning {
-  FineTuning.Input = Input;
   FineTuning.Introduction = Introduction;
   FineTuning.Mode = Mode;
   FineTuning.Modes = Modes;
+  FineTuning.Model = Model;
+  FineTuning.Models = Models;
   FineTuning.Project = Project;
   FineTuning.Step = Step;
   FineTuning.Steps = Steps;

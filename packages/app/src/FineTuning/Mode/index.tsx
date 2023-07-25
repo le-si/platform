@@ -1,4 +1,5 @@
 import { FineTuning } from "~/FineTuning";
+import { GlobalState } from "~/GlobalState";
 import { Theme } from "~/Theme";
 
 import { Advice } from "./Advice";
@@ -32,11 +33,9 @@ export function Mode({
   description: React.ReactNode;
   background: CSSValue;
 }) {
-  const input = FineTuning.Input.use();
-  const isModeSelected = input?.mode === mode;
-
+  const isModeSelected = Mode.use() === mode;
   const onClick = useCallback(() => {
-    FineTuning.Input.set({ mode });
+    Mode.set(mode);
     FineTuning.Steps.next();
   }, [mode]);
 
@@ -71,4 +70,33 @@ export namespace Mode {
   Mode.Style = Style;
   Mode.Object = Object;
   Mode.Duration = Duration;
+
+  export const get = () => State.use.getState().mode;
+  export const set: State["setMode"] = (mode) =>
+    State.use.getState().setMode(mode);
+
+  export const fromGRPC = (grpc = 0): Mode | undefined =>
+    (({ 1: "Face", 2: "Style", 3: "Object" } as const)[grpc]);
+
+  export const toGRPC = (mode: Mode): number =>
+    (({ Face: 1, Style: 2, Object: 3 } as const)[mode]);
+
+  export const use = () => State.use(({ mode }) => mode, GlobalState.shallow);
+}
+
+type State = {
+  mode?: Mode;
+  setMode: (setMode: React.SetStateAction<Mode | undefined>) => void;
+};
+
+namespace State {
+  export const use = GlobalState.create<State>((set) => ({
+    mode: "Style",
+
+    setMode: (setMode) =>
+      set((state) => ({
+        ...state,
+        mode: typeof setMode === "function" ? setMode(state.mode) : setMode,
+      })),
+  }));
 }

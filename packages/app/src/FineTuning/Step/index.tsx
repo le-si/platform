@@ -32,6 +32,7 @@ export type Steps = {
 export namespace Steps {
   export const next = () => State.use.getState().next();
   export const previous = () => State.use.getState().previous();
+  export const reset = () => State.use.getState().reset();
 
   export const setIsNavigationDisabled = (isNavigationDisabled = false) =>
     State.use.getState().setIsNavigationDisabled(isNavigationDisabled);
@@ -55,6 +56,7 @@ export namespace Steps {
   type State = Steps & {
     next: () => void;
     previous: () => void;
+    reset: () => void;
 
     isNavigationDisabled: boolean;
     setIsNavigationDisabled: (navigationDisabled?: boolean) => void;
@@ -73,6 +75,8 @@ export namespace Steps {
         set(({ active }) => ({
           active: Math.max(1, active - 1),
         })),
+
+      reset: () => set({ active: 1 }),
 
       isNavigationDisabled: false,
       setIsNavigationDisabled: (isNavigationDisabled = false) =>

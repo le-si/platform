@@ -9,6 +9,8 @@ export type Uploads = {
 };
 
 export function Uploads() {
+  FineTuning.Project.Create.use();
+
   const uploads = Uploads.use();
   const isReadyToTrain = Uploads.useIsReadyToTrain();
 
@@ -36,6 +38,7 @@ export function Uploads() {
             variant="primary"
             className="mr-auto self-end px-4"
             disabled={!isReadyToTrain}
+            onClick={FineTuning.Steps.next}
           >
             Train
             <FineTuning.ArrowRight className="ml-2" />
@@ -145,7 +148,7 @@ export namespace Uploads {
 
       addAssetToUpload: (upload, asset) =>
         set(({ uploads }) => ({
-          uploads: { ...uploads, [upload.id]: { ...upload, asset } },
+          uploads: { ...uploads, [upload.id]: spy({ ...upload, asset }) },
         })),
 
       removeUpload: (id) =>

@@ -22,12 +22,12 @@ export function Duration({
 
 export namespace Duration {
   export const use = () => {
-    const input = FineTuning.Input.use();
-    if (!input?.mode) return;
+    const mode = FineTuning.Mode.use();
+    if (mode) return;
 
-    return input.mode === "Face"
+    return mode === "Face"
       ? FineTuning.Mode.Face.duration()
-      : input.mode === "Style"
+      : mode === "Style"
       ? FineTuning.Mode.Style.duration()
       : FineTuning.Mode.Object.duration();
   };

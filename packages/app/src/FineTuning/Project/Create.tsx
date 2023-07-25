@@ -2,44 +2,38 @@ import * as Stability from "@stability/sdk";
 import * as ReactQuery from "@tanstack/react-query";
 
 import { FineTuning } from "~/FineTuning";
-import { GlobalState } from "~/GlobalState";
 import { GRPC } from "~/GRPC";
 
 export namespace Create {
-  export const use = () =>
-    ReactQuery.useMutation({
-      mutationKey: ["FineTuning.Project.Create"],
-      mutationFn: async ({ name }: Pick<FineTuning.Project, "name">) => {
-        if (State.use.getState().inProgress) return;
+  export const use = () => {
+    const grpc = GRPC.use();
+    const query = ReactQuery.useQuery({
+      enabled: !!grpc,
+      initialData: null,
 
-        const grpc = GRPC.get();
-        if (!grpc) return;
+      queryKey: ["FineTuning.Project.Create"],
+      queryFn: async () => {
+        if (!grpc) return null;
 
-        State.use.setState({ inProgress: true });
+        const request = await grpc?.project.create(
+          GRPC.CreateProjectRequest.create({
+            title: FineTuning.Project.Name.getPlaceholder(),
+            type: Stability.GRPC.ProjectType.TRAINING,
+            access: Stability.GRPC.ProjectAccess.PRIVATE,
+            status: Stability.GRPC.ProjectStatus.ACTIVE,
+          })
+        );
 
-        const request = GRPC.CreateProjectRequest.create({
-          title: name,
-          type: Stability.GRPC.ProjectType.TRAINING,
-          access: Stability.GRPC.ProjectAccess.PRIVATE,
-          status: Stability.GRPC.ProjectStatus.ACTIVE,
-        });
+        if (!request) return null;
 
-        const { response } = await grpc?.project.create(request);
-
-        FineTuning.Project.set({
+        const { response } = request;
+        return {
           id: response.id,
           name: response.title,
-        });
+        };
       },
     });
 
-  type State = {
-    inProgress: boolean;
+    return query;
   };
-
-  namespace State {
-    export const use = GlobalState.create<State>(() => ({
-      inProgress: false,
-    }));
-  }
 }

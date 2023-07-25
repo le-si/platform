@@ -5,14 +5,14 @@ import { GlobalState } from "~/GlobalState";
 import { Theme } from "~/Theme";
 import { User } from "~/User";
 
-import { Create } from "./Create";
 import { Progress } from "./Progress";
 
 export function Training() {
-  const create = Create.use();
+  // const create = FineTuning.Model.Create.use();
+  const models = FineTuning.Models.use();
   const percentage = Training.usePercentage();
 
-  create;
+  models;
 
   const { minMilliseconds, maxMilliseconds } =
     FineTuning.Mode.Duration.use() ?? {
