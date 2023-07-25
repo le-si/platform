@@ -7,12 +7,13 @@ import { GRPC } from "~/GRPC";
 export namespace Create {
   export const use = () => {
     const project = FineTuning.Project.use();
+    const grpc = GRPC.use();
 
-    const [shouldCreate, setShouldCreate] = React.useState(false);
-    const trigger = useCallback(() => setShouldCreate(true), []);
+    const [enabled, setEnabled] = React.useState(true);
+    const enable = useCallback(() => setEnabled(true), []);
 
     const query = ReactQuery.useQuery({
-      enabled: shouldCreate,
+      enabled: enabled && !!grpc,
       initialData: null,
 
       queryKey: ["FineTuning.Training.Create", project?.id],
@@ -20,49 +21,31 @@ export namespace Create {
         if (!project?.id) return null;
 
         const grpc = GRPC.get();
+
+        spy({ project, grpc });
+
         if (!grpc) return null;
 
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        FineTuning.Training.start();
+
+        await new Promise((resolve) => setTimeout(() => resolve(true), 1000));
+
+        FineTuning.Training.stop();
 
         return true;
 
-        // const artifact = Stability.GRPC.Artifact.create({
-        //   type: Stability.GRPC.ArtifactType.ARTIFACT_IMAGE,
-        //   mime: mimeType,
-        //   data: { oneofKind: "binary", binary },
-        // });
-
-        // const prompt = [
-        //   Stability.GRPC.Prompt.create({
-        //     prompt: { oneofKind: "artifact", artifact },
-        //   }),
-        // ];
-
-        // const asset = Stability.GRPC.AssetParameters.create({
-        //   action: Stability.GRPC.AssetAction.ASSET_PUT,
+        // const request = Stability.GRPC.CreateModelRequest.create({
+        //   name: "test",
+        //   mode: Stability.GRPC.FineTuningMode.OBJECT,
+        //   objectPrompt: "dog",
         //   projectId: project.id,
-        //   use: Stability.GRPC.AssetUse.INPUT,
+        //   engineId: "stable-diffusion-xl-1024-v0-9",
         // });
 
-        // const request = Stability.GRPC.Request.create({
-        //   engineId: "asset-service",
-        //   params: { oneofKind: "asset", asset },
-        //   prompt,
-        // });
-
-        // const { responses } = grpc?.generation.generate(request);
-
-        // for await (const response of responses) {
-        //   for await (const artifact of response.artifacts) {
-        //     if (artifact.type === Stability.GRPC.ArtifactType.ARTIFACT_TEXT)
-        //       return { id: artifact.uuid };
-        //   }
-        // }
-
-        // throw new Error("Image upload failed!");
+        // const createModelResponse = await grpc?.fineTuning.createModel(request);
       },
     });
 
-    return { ...query, trigger };
+    return { ...query, enable };
   };
 }

@@ -41,6 +41,11 @@ export namespace Project {
 
   namespace State {
     export const use = GlobalState.create<State>((set) => ({
+      project: {
+        id: "1e0e1105-bd1f-4162-9c4e-b8be85df3d6e",
+        name: "My Model",
+      },
+
       setProject: (project) => set({ project }),
     }));
   }

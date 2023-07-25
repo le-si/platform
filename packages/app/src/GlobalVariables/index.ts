@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { css as cssImport } from "@emotion/react";
+import { css as cssImport, keyframes as keyframesImport } from "@emotion/react";
 import { cx } from "@emotion/css";
 import ReactImport from "react";
 import { twMerge } from "tailwind-merge";
@@ -31,6 +31,7 @@ declare global {
 
   var keys: (...keys: (string | number | undefined)[]) => string;
   var css: typeof cssImport;
+  var keyframes: typeof keyframesImport;
   var classes: typeof cx;
 
   var spy: <A>(a: A) => A;
@@ -66,6 +67,8 @@ globalThis.keys = function (...keys) {
 };
 
 globalThis.css = cssImport;
+globalThis.keyframes = keyframesImport;
+
 globalThis.classes = function (...classes) {
   return twMerge(cx(...classes));
 };
