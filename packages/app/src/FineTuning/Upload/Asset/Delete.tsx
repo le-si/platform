@@ -5,13 +5,7 @@ import { FineTuning } from "~/FineTuning";
 import { GRPC } from "~/GRPC";
 
 export namespace Delete {
-  export const use = ({
-    upload,
-    asset,
-  }: {
-    upload?: FineTuning.Upload;
-    asset?: FineTuning.Upload.Asset;
-  }) => {
+  export const use = (upload?: FineTuning.Upload) => {
     const [shouldDelete, setShouldDelete] = React.useState(false);
     const trigger = useCallback(() => setShouldDelete(true), []);
     const query = ReactQuery.useQuery({
@@ -20,7 +14,7 @@ export namespace Delete {
 
       queryKey: ["FineTuning.Upload.Asset.Delete", upload?.id],
       queryFn: async () => {
-        if (!upload?.id || !asset?.id) return null;
+        if (!upload?.id || !upload.asset?.id) return null;
 
         const grpc = GRPC.get();
         if (!grpc) return null;
@@ -46,11 +40,11 @@ export namespace Delete {
                 prompt: {
                   oneofKind: "artifact",
                   artifact: Stability.GRPC.Artifact.create({
-                    uuid: asset.id,
+                    uuid: upload.asset.id,
                     type: Stability.GRPC.ArtifactType.ARTIFACT_TEXT,
                     data: {
                       oneofKind: "text",
-                      text: asset.id,
+                      text: upload.asset.id,
                     },
                   }),
                 },
@@ -72,7 +66,7 @@ export namespace Delete {
 
     return {
       ...query,
-      ...(asset?.id && {
+      ...(upload?.asset?.id && {
         trigger,
       }),
     };

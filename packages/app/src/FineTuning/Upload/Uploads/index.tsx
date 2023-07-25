@@ -10,6 +10,8 @@ export type Uploads = {
 
 export function Uploads() {
   const uploads = Uploads.use();
+  const isReadyToTrain = Uploads.useIsReadyToTrain();
+
   const constraints = {
     ...FineTuning.Upload.constraints(),
     ...FineTuning.Uploads.constraints(),
@@ -28,9 +30,13 @@ export function Uploads() {
       </div>
       <div className="flex gap-6">
         <div className="flex grow basis-0 flex-col gap-4">
-          <FineTuning.H2>Name</FineTuning.H2>
+          <FineTuning.H2>Model Name</FineTuning.H2>
           <FineTuning.Project.Name.Input className="w-full grow" />
-          <Theme.Button variant="primary" className="mr-auto self-end px-4">
+          <Theme.Button
+            variant="primary"
+            className="mr-auto self-end px-4"
+            disabled={!isReadyToTrain}
+          >
             Train
             <FineTuning.ArrowRight className="ml-2" />
           </Theme.Button>
@@ -87,14 +93,42 @@ export namespace Uploads {
   export const addFromURL = (url: URLString) =>
     State.use.getState().addUpload(url);
 
+  export const addAssetToUpload = (
+    upload: FineTuning.Upload,
+    asset: FineTuning.Upload.Asset
+  ) => State.use.getState().addAssetToUpload(upload, asset);
+
   export const remove = (id: ID) => State.use.getState().removeUpload(id);
 
   export const use = () =>
     State.use(({ uploads }) => Object.values(uploads), GlobalState.shallow);
 
+  export const useIsReadyToTrain = () => {
+    const uploads = use();
+    const { count } = constraints();
+
+    return useMemo(() => {
+      let alreadyUploaded = 0;
+
+      for (const upload of uploads) {
+        if (!upload.asset) return false;
+        alreadyUploaded++;
+      }
+
+      return alreadyUploaded >= count.min;
+    }, [count, uploads]);
+  };
+
   type State = {
     uploads: Uploads;
+
     addUpload: (url: URLString) => void;
+
+    addAssetToUpload: (
+      upload: FineTuning.Upload,
+      asset: FineTuning.Upload.Asset
+    ) => void;
+
     removeUpload: (id: ID) => void;
   };
 
@@ -108,6 +142,11 @@ export namespace Uploads {
           const upload = { id, url };
           return { uploads: { ...uploads, [id]: upload } };
         }),
+
+      addAssetToUpload: (upload, asset) =>
+        set(({ uploads }) => ({
+          uploads: { ...uploads, [upload.id]: { ...upload, asset } },
+        })),
 
       removeUpload: (id) =>
         set(({ uploads: { [id]: _, ...uploads } }) => ({ uploads })),

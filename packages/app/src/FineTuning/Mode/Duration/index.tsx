@@ -1,3 +1,4 @@
+import { FineTuning } from "~/FineTuning";
 import { Theme } from "~/Theme";
 
 export type Duration = {
@@ -17,4 +18,17 @@ export function Duration({
       </span>
     </div>
   );
+}
+
+export namespace Duration {
+  export const use = () => {
+    const input = FineTuning.Input.use();
+    if (!input?.mode) return;
+
+    return input.mode === "Face"
+      ? FineTuning.Mode.Face.duration()
+      : input.mode === "Style"
+      ? FineTuning.Mode.Style.duration()
+      : FineTuning.Mode.Object.duration();
+  };
 }

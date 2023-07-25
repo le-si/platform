@@ -2,7 +2,16 @@ import { GlobalState } from "~/GlobalState";
 
 export type Step = number;
 
-export function Step({ className, children }: StyleableWithChildren) {
+export function Step({
+  disableNavigation,
+  className,
+  children,
+}: StyleableWithChildren & { disableNavigation?: boolean }) {
+  useEffect(
+    () => Steps.setIsNavigationDisabled(disableNavigation),
+    [disableNavigation]
+  );
+
   return (
     <div
       className={classes(
@@ -24,6 +33,12 @@ export namespace Steps {
   export const next = () => State.use.getState().next();
   export const previous = () => State.use.getState().previous();
 
+  export const setIsNavigationDisabled = (isNavigationDisabled = false) =>
+    State.use.getState().setIsNavigationDisabled(isNavigationDisabled);
+
+  export const useIsNavigationDisabled = () =>
+    State.use(({ isNavigationDisabled }) => isNavigationDisabled);
+
   export const use = (initial: Steps) => {
     useEffect(
       () =>
@@ -40,6 +55,9 @@ export namespace Steps {
   type State = Steps & {
     next: () => void;
     previous: () => void;
+
+    isNavigationDisabled: boolean;
+    setIsNavigationDisabled: (navigationDisabled?: boolean) => void;
   };
 
   namespace State {
@@ -55,6 +73,10 @@ export namespace Steps {
         set(({ active }) => ({
           active: Math.max(1, active - 1),
         })),
+
+      isNavigationDisabled: false,
+      setIsNavigationDisabled: (isNavigationDisabled = false) =>
+        set({ isNavigationDisabled }),
     }));
   }
 }

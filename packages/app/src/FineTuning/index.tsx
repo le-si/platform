@@ -6,23 +6,26 @@ import { Introduction } from "./Introduction";
 import { Mode, Modes } from "./Mode";
 import { Project } from "./Project";
 import { Step, Steps } from "./Step";
+import { Training } from "./Training";
 import { Upload, Uploads } from "./Upload";
 
 export function FineTuning() {
   const steps = Steps.use({ active: 4, max: 5 });
+  const isNavigationDisabled = Steps.useIsNavigationDisabled();
+  const canNavigateBackwards = !isNavigationDisabled && steps.active > 1;
   return (
     <Sandbox
       icon={<Icon />}
       title="Fine-Tuning"
       titleRight={
         <div
-          onClick={steps.previous}
+          onClick={canNavigateBackwards ? steps.previous : undefined}
           className={classes(
             "flex items-center gap-2",
-            steps.active > 1 ? "cursor-pointer" : "cursor-default"
+            canNavigateBackwards ? "cursor-pointer" : "cursor-default"
           )}
         >
-          {steps.active > 1 && (
+          {canNavigateBackwards && (
             <FineTuning.ArrowRight className="opacity-muted rotate-180" />
           )}
           <div>
@@ -37,6 +40,7 @@ export function FineTuning() {
         {steps.active === 2 && <Modes />}
         {steps.active === 3 && <Mode.Advice />}
         {steps.active === 4 && <Uploads />}
+        {steps.active === 5 && <Training />}
       </div>
     </Sandbox>
   );

@@ -6,12 +6,13 @@ export { Uploads } from "./Uploads";
 export type Upload = {
   id: ID;
   url?: URLString;
+  asset?: Asset;
 };
 
 export function Upload({ upload }: { upload?: Upload }) {
-  const { asset, isFetching: isAssetUploading } = Asset.Create.use(upload);
+  const { isFetching: isAssetUploading } = Asset.Create.use(upload);
   const { trigger: deleteAsset, isFetching: isAssetDeleting } =
-    Asset.Delete.use({ upload, asset });
+    Asset.Delete.use(upload);
 
   const [isImageReady, setIsImageReady] = useState(false);
 

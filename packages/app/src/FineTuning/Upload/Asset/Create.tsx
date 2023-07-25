@@ -5,8 +5,8 @@ import { FineTuning } from "~/FineTuning";
 import { GRPC } from "~/GRPC";
 
 export namespace Create {
-  export const use = (upload?: FineTuning.Upload) => {
-    const query = ReactQuery.useQuery({
+  export const use = (upload?: FineTuning.Upload) =>
+    ReactQuery.useQuery({
       queryKey: ["FineTuning.Upload.Asset.Create", upload?.id],
       queryFn: async () => {
         if (!upload?.url) return null;
@@ -54,22 +54,15 @@ export namespace Create {
 
         for await (const response of responses) {
           for await (const artifact of response.artifacts) {
-            if (artifact.type === Stability.GRPC.ArtifactType.ARTIFACT_TEXT)
-              return artifact;
+            if (artifact.type === Stability.GRPC.ArtifactType.ARTIFACT_TEXT) {
+              const asset = { id: artifact.uuid };
+              FineTuning.Uploads.addAssetToUpload(upload, asset);
+              return asset;
+            }
           }
         }
 
         throw new Error("Image upload failed!");
       },
     });
-
-    return {
-      ...query,
-      ...(query.data?.uuid && {
-        asset: {
-          id: query.data.uuid,
-        },
-      }),
-    };
-  };
 }
