@@ -97,7 +97,7 @@ for resp in answers:
 answers = stability_api.generate(
     prompt= [generation.Prompt(text="beautiful night sky above japanese town, anime style",parameters=generation.PromptParameters(weight=1)),
     generation.Prompt(text="clouds",parameters=generation.PromptParameters(weight=-1))],
-    # In the example above we are negative prompting poles out of the initial concept.
+    # In the example above we are negative prompting clouds out of the initial concept.
     # When determining prompt weights, the total possible range is [-10, 10] but we recommend staying within the range of [-2, 2].
     seed=1229080980, # If a seed is provided, the resulting generated image will be deterministic.
                     # What this means is that as long as all generation parameters remain the same, you can always recall the same image simply by generating it again.
