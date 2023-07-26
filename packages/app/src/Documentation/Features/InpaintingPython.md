@@ -102,7 +102,7 @@ answers = stability_api.generate(
 
 # Set up our warning to print to the console if the adult content classifier is tripped.
 # If adult content classifier is not tripped, save generated image.
-for resp in answers3:
+for resp in answers:
     for artifact in resp.artifacts:
         if artifact.finish_reason == generation.FILTER:
             warnings.warn(
