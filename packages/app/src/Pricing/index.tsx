@@ -416,7 +416,7 @@ export namespace Pricing {
     const [state, setState] = React.useState<State>({
       width: 512,
       height: 512,
-      steps: 50,
+      steps: 30,
     });
 
     const [revealCalculator, setRevealCalculator] = React.useState(false);
