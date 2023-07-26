@@ -41,7 +41,6 @@ os.environ['STABILITY_KEY'] = 'key-goes-here'
 ### 3. Connect to the Stability API... {#api-connection}
 
 ```python
-
 # Set up our connection to the API.
 stability_api = client.StabilityInference(
     key=os.environ['STABILITY_KEY'], # API Key reference.
@@ -49,7 +48,6 @@ stability_api = client.StabilityInference(
     engine="stable-diffusion-xl-1024-v1-0", # Set the engine to use for generation.
     # Check out the following link for a list of available engines: https://platform.stability.ai/docs/features/api-parameters#engine
 )
-
 ```
 
 ### 4. Set up basic text-to-image parameters, save image on generation, and warning for if the safety filter is tripped... {#initial-parameters}
