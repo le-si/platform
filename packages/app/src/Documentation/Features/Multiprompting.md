@@ -31,7 +31,7 @@ os.environ['STABILITY_HOST'] = 'grpc.stability.ai:443'
 # https://platform.stability.ai/
 
 # Click on the following link once you have created an account to be taken to your API Key.
-# https://platform.stability.ai/account
+# https://platform.stability.ai/account/keys
 
 # Paste your API Key below.
 
@@ -46,9 +46,8 @@ os.environ['STABILITY_KEY'] = 'key-goes-here'
 stability_api = client.StabilityInference(
     key=os.environ['STABILITY_KEY'], # API Key reference.
     verbose=True, # Print debug messages.
-    engine="stable-diffusion-xl-1024-v0-9", # Set the engine to use for generation.
-    # Available engines: stable-diffusion-xl-1024-v0-9 stable-diffusion-v1 stable-diffusion-v1-5 stable-diffusion-512-v2-0 stable-diffusion-768-v2-0
-    # stable-diffusion-512-v2-1 stable-diffusion-768-v2-1 stable-diffusion-xl-beta-v2-2-2 stable-inpainting-v1-0 stable-inpainting-512-v2-0
+    engine="stable-diffusion-xl-1024-v1-0", # Set the engine to use for generation.
+    # Check out the following link for a list of available engines: https://platform.stability.ai/docs/features/api-parameters#engine
 )
 
 ```
@@ -57,10 +56,10 @@ stability_api = client.StabilityInference(
 
 ```python
 answers = stability_api.generate(
-    prompt="beautiful night sky, anime style",
+    prompt="beautiful night sky above japanese town, anime style",
     seed=1229080980, # If a seed is provided, the resulting generated image will be deterministic.
-                    # What this means is that as long as all generation parameters remain the same, you can always recall the same image simply by generating it again.
-                    # Note: This isn't quite the case for CLIP Guided generations, which we tackle in the CLIP Guidance documentation.
+                     # What this means is that as long as all generation parameters remain the same, you can always recall the same image simply by generating it again.
+                     # Note: This isn't quite the case for CLIP Guided generations, which we tackle in the CLIP Guidance documentation.
     steps=50, # Amount of inference steps performed on image generation. Defaults to 30.
     cfg_scale=8.0, # Influences how strongly your generation is guided to match your prompt.
                    # Setting this value higher increases the strength in which it tries to match your prompt.
@@ -96,9 +95,9 @@ for resp in answers:
 # Note: With multi-prompting, we can provide each prompt a specific weight. Negative weights are used to prompt the model to avoid certain concepts.
 # Prompts with token lengths beyond 77 will be truncated. Default prompt weight is 1 if not specified.
 answers = stability_api.generate(
-    prompt= [generation.Prompt(text="beautiful night sky, anime style",parameters=generation.PromptParameters(weight=1)),
-    generation.Prompt(text="poles",parameters=generation.PromptParameters(weight=-1))],
-    # In the example above we are negative prompting fish out of the initial concept.
+    prompt= [generation.Prompt(text="beautiful night sky above japanese town, anime style",parameters=generation.PromptParameters(weight=1)),
+    generation.Prompt(text="clouds",parameters=generation.PromptParameters(weight=-1))],
+    # In the example above we are negative prompting poles out of the initial concept.
     # When determining prompt weights, the total possible range is [-10, 10] but we recommend staying within the range of [-2, 2].
     seed=1229080980, # If a seed is provided, the resulting generated image will be deterministic.
                     # What this means is that as long as all generation parameters remain the same, you can always recall the same image simply by generating it again.

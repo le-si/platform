@@ -12,7 +12,7 @@
     "dev": "yarn workspaces foreach --all --interlaced --verbose --parallel --jobs unlimited run dev",
     "build": "yarn build:production",
     "build:production": "yarn workspaces foreach --all --interlaced --verbose --topological --jobs unlimited run build:production",
-    "build:staging": "yarn workspaces foreach --all --interlaced --verbose --topological --jobs unlimited run build:staging",
+    "build:preview": "yarn workspaces foreach --all --interlaced --verbose --topological --jobs unlimited run build:preview",
     "clean": "yarn workspaces foreach --all --interlaced --verbose --parallel --jobs unlimited run clean && rimraf node_modules"
   },
   "devDependencies": {

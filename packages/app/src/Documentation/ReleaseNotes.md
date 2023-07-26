@@ -1,3 +1,38 @@
+# SDXL v1.0 Release {#sdxl-v1-0-release}
+
+<i>July 26th, 2023</i>
+
+## Overview
+
+We're excited to announce the release of **Stable Diffusion XL v1.0**, the first major version release in the SDXL series!
+
+## What's New
+
+Building upon the success of the **SDXL v0.9** release, **SDXL v1.0** brings with it a number of image detail improvements. Specifically, **SDXL v1.0** offers enhanced vibrancy and overall color tone accuracy, including deeper black and brighter white tones.
+
+**Prompt:**`A wolf in Yosemite National Park, chilly nature documentary film photography`
+
+**Negative Prompt:**`3d render, smooth, plastic, blurry, grainy, low-resolution, anime, deep-fried, oversaturated`
+
+**Steps:**`50`
+
+**Seed:**`992446758`
+
+**CFG Scale:**`8`
+
+**Left Model:** `stable-diffusion-xl-1024-v0-9` AKA `SDXL v0.9` **Right Model:** `stable-diffusion-xl-1024-v1-0` AKA `SDXL v1.0`
+
+![](/Stability+AI+SDXL1-0+wolf.png)
+
+### API
+
+- Introduced support for the `stable-diffusion-xl-1024-v1-0` model engine to the API (gRPC SDK + REST), which brings with it new pricing considerations. Please check out the [Pricing](/pricing) page for additional information.
+- `stable-diffusion-xl-1024-v1-0` is now the default engine for the API. If you wish to use a different engine, you must specify it in your request.
+- `stable-diffusion-xl-1024-v1-0` supports a variety of aspect ratios. Please check the [API Parameters](/docs/features/api-parameters#about-dimensions) page for additional information.
+
+<br/>
+<hr/>
+
 # SDXL v0.9 Release {#sdxl-v0-9-release}
 
 <i>June 27th, 2023</i>
