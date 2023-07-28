@@ -12,11 +12,11 @@ export function Training() {
 
   const { data: model } = FineTuning.Model.Create.use();
 
-  const status = spyJSON(FineTuning.Model.use(model?.id))?.status;
+  const status = FineTuning.Model.use(model?.id)?.status;
   const percentage = Training.usePercentage();
 
   useEffect(() => {
-    (status === "Finished" || status === "Failed") && Training.stop();
+    (status === "Completed" || status === "Failed") && Training.stop();
   }, [status]);
 
   const { minMilliseconds, maxMilliseconds } =

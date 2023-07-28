@@ -8,20 +8,21 @@ export namespace Status {
       ((
         {
           0: "Not Started",
-          1: "Not Started",
-          2: "Started",
-          3: "Finished",
-          4: "Failed",
+          1: "Running",
+          2: "Completed",
+          3: "Failed",
+          4: "Submitted",
         } as const
       )[grpc]);
 
     export const encode = (status: Status): GRPC =>
       ((
         {
-          "Not Started": 1,
-          Started: 2,
-          Finished: 3,
-          Failed: 4,
+          "Not Started": 0,
+          Running: 1,
+          Completed: 2,
+          Failed: 3,
+          Submitted: 4,
         } as const
       )[status]);
   }
