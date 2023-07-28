@@ -35,19 +35,42 @@ export namespace Input {
     image.onload = async () => {
       if (!context) return cleanUp();
 
-      const dimension = Math.max(image.width, image.height);
+      const { size } = FineTuning.Upload.constraints();
 
-      canvas.width = dimension;
-      canvas.height = dimension;
+      const clamp = (value: number) =>
+        Math.max(size.min, Math.min(value, size.max));
 
-      context.drawImage(
-        image,
-        (canvas.width - image.width) / 2,
-        (canvas.height - image.height) / 2
+      const clampedWidth = clamp(image.width);
+      const clampedHeight = clamp(image.height);
+
+      const isScalingUp =
+        clampedWidth / image.width > 1 || clampedHeight / image.height > 1;
+
+      const canvasScale = (isScalingUp ? Math.max : Math.min)(
+        clampedWidth / image.width,
+        clampedHeight / image.height
       );
 
-      FineTuning.Uploads.addFromURL(canvas.toDataURL());
+      const canvasWidth = Math.round(clamp(image.width * canvasScale));
+      const canvasHeight = Math.round(clamp(image.height * canvasScale));
 
+      const scale = Math.max(
+        canvasWidth / image.width,
+        canvasHeight / image.height
+      );
+
+      const scaledImageWidth = image.width * scale;
+      const scaledImageHeight = image.height * scale;
+
+      const x = (canvasWidth - scaledImageWidth) / 2;
+      const y = (canvasHeight - scaledImageHeight) / 2;
+
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
+
+      context.drawImage(image, x, y, scaledImageWidth, scaledImageHeight);
+
+      FineTuning.Uploads.addFromURL(canvas.toDataURL());
       cleanUp();
     };
 

@@ -30,7 +30,7 @@ export function Upload({ upload }: { upload?: Upload }) {
       {isImageReady && (
         <div
           className={classes(
-            "absolute bottom-0 left-0 right-0 top-0 bg-cover bg-center",
+            "absolute bottom-0 left-0 right-0 top-0 bg-contain bg-center bg-no-repeat",
             (isAssetUploading || isAssetDeleting) && "opacity-10"
           )}
           style={{
