@@ -12,7 +12,7 @@ export function Training() {
 
   const { data: model } = FineTuning.Model.Create.use();
 
-  const status = spy(FineTuning.Model.use(model?.id))?.status;
+  const status = spyJSON(FineTuning.Model.use(model?.id))?.status;
   const percentage = Training.usePercentage();
 
   useEffect(() => {

@@ -32,17 +32,7 @@ export namespace Create {
         const { model } = response;
         if (!model) return null;
 
-        return {
-          id: model.id,
-          engineID: model.engineId,
-
-          name: model.name,
-          mode: FineTuning.Mode.fromGRPC(model.mode),
-          objectPrompt: model.objectPrompt,
-
-          status: FineTuning.Model.Status.fromGRPC(model.status),
-          failureReason: model.failureReason,
-        } satisfies FineTuning.Model;
+        return FineTuning.Model.GRPC.decode(model);
       },
     });
   };

@@ -30,14 +30,12 @@ export namespace Models {
           })
         );
 
-        return spy(
-          (response?.models ?? []).reduce(
-            (models, model) => ({
-              ...models,
-              [model.id]: FineTuning.Model.fromGRPC(model),
-            }),
-            {}
-          )
+        return (response?.models ?? []).reduce(
+          (models, model) => ({
+            ...models,
+            [model.id]: FineTuning.Model.GRPC.decode(model),
+          }),
+          {}
         );
       },
     });

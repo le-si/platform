@@ -5,6 +5,7 @@ import { Theme } from "~/Theme";
 import { Advice } from "./Advice";
 import { Duration } from "./Duration";
 import { Face } from "./Face";
+import { GRPC } from "./GRPC";
 import { Object } from "./Object";
 import { Style } from "./Style";
 
@@ -61,12 +62,13 @@ export function Mode({
 }
 
 export declare namespace Mode {
-  export { Advice, Face, Style, Object, Duration };
+  export { Advice, Face, GRPC, Style, Object, Duration };
 }
 
 export namespace Mode {
   Mode.Advice = Advice;
   Mode.Face = Face;
+  Mode.GRPC = GRPC;
   Mode.Style = Style;
   Mode.Object = Object;
   Mode.Duration = Duration;
