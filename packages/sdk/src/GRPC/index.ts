@@ -1,5 +1,6 @@
 import { GrpcWebFetchTransport } from "@protobuf-ts/grpcweb-transport";
 
+export * from "./Generated/google/protobuf/struct";
 export * from "./Generated/dashboard";
 export * from "./Generated/dashboard.client";
 export * from "./Generated/engines";

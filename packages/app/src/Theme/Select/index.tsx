@@ -4,7 +4,7 @@ import { useClickAway } from "react-use";
 export type Select = Styleable & {
   value?: string;
   disabled?: boolean;
-  onChange?: (value: string | undefined) => void;
+  onChange?: (value: string | undefined, label: string | undefined) => void;
   placeholder?: string;
   title?: string;
   icon?: React.ReactNode;
@@ -64,7 +64,7 @@ export function Select({
                 <div
                   key={option.value}
                   onClick={() => {
-                    onChange?.(option.value);
+                    onChange?.(option.value, option.label);
                     setOpen(false);
                   }}
                   className={classes(

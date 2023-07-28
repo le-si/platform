@@ -6,7 +6,8 @@ import { TextPrompts } from "~/Sandbox/TextPrompts";
 import { Theme } from "~/Theme";
 import { User } from "~/User";
 
-import { request } from "./OpenAPI";
+import { Sandbox } from "..";
+
 import * as Samples from "./Samples";
 
 export type MultiPrompting = {
@@ -24,9 +25,11 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
 
   const [imageURL, setImageURL] = useState<string | undefined>(undefined);
   const [generating, setGenerating] = useState<boolean>(false);
+  const models = Sandbox.useModels();
   const [engineID, setEngineID] = useState<string>(
-    "stable-diffusion-xl-beta-v2-2-2"
+    "stable-diffusion-xl-1024-v1-0"
   );
+  const [fineTuneEngine, setFineTuneEngine] = useState<string | undefined>();
   const [error, setError] = useState<string | undefined>(undefined);
 
   const [prompts, setPrompts] = useState<Prompt[]>([
@@ -41,6 +44,9 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
 
   const [cfgScale, setCfgScale] = useState<number>(7);
   const [steps, setSteps] = useState<number>(50);
+  const [seed] = useState<number>(0);
+
+  const createImage = Sandbox.useCreateImage();
 
   const generate = useCallback(async () => {
     if (!apiKey) return;
@@ -48,13 +54,14 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
     setGenerating(true);
     setError(undefined);
 
-    const [url, error] = await request(
-      apiKey,
+    const [url, error] = await createImage(
       engineID,
       prompts,
       style,
       cfgScale,
-      steps
+      seed,
+      steps,
+      fineTuneEngine
     );
 
     setGenerating(false);
@@ -65,7 +72,18 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
     } else {
       setImageURL(url);
     }
-  }, [outOfCreditsHandler, apiKey, engineID, style, prompts, cfgScale, steps]);
+  }, [
+    apiKey,
+    createImage,
+    engineID,
+    prompts,
+    style,
+    cfgScale,
+    seed,
+    steps,
+    fineTuneEngine,
+    outOfCreditsHandler,
+  ]);
 
   useEffect(() => {
     setOptions({
@@ -77,8 +95,9 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
       cfg_scale: cfgScale,
       style_preset: style,
       text_prompts: prompts,
+      finetune_engine: fineTuneEngine,
     });
-  }, [engineID, style, prompts, cfgScale, steps, setOptions]);
+  }, [engineID, style, prompts, cfgScale, steps, setOptions, fineTuneEngine]);
 
   return (
     <div className="flex h-full w-full flex-col gap-6 md:min-w-[55rem]">
@@ -90,21 +109,15 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
             <Theme.Select
               title="Model"
               value={engineID}
-              onChange={(value) => value && setEngineID(value)}
-              options={[
-                {
-                  label: "Stable Diffusion XL",
-                  value: "stable-diffusion-xl-beta-v2-2-2",
-                },
-                {
-                  label: "Stable Diffusion 1.5",
-                  value: "stable-diffusion-v1-5",
-                },
-                {
-                  label: "Stable Diffusion 2.1",
-                  value: "stable-diffusion-512-v2-1",
-                },
-              ]}
+              onChange={(value) => {
+                if (value) {
+                  setEngineID(value);
+                  setFineTuneEngine(
+                    models.find((m) => m.value === value)?.engine ?? undefined
+                  );
+                }
+              }}
+              options={models}
             />
             <Theme.Select
               title="Style"

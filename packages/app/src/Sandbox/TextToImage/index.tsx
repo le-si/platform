@@ -15,7 +15,8 @@ import {
 
 import { User } from "~/User";
 
-import { request } from "./OpenAPI";
+import { Sandbox } from "..";
+
 import * as Samples from "./Samples";
 
 export type TextToImage = {
@@ -28,9 +29,11 @@ export function TextToImage({ setOptions }: TextToImage) {
 
   const [imageURL, setImageURL] = useState<string | undefined>(undefined);
   const [generating, setGenerating] = useState<boolean>(false);
+  const models = Sandbox.useModels();
   const [engineID, setEngineID] = useState<string>(
-    "stable-diffusion-xl-beta-v2-2-2"
+    "stable-diffusion-xl-1024-v1-0"
   );
+  const [fineTuneEngine, setFineTuneEngine] = useState<string | undefined>();
   const [error, setError] = useState<string | undefined>(undefined);
 
   const [positivePrompt, setPositivePrompt] = useState<string>("");
@@ -38,11 +41,11 @@ export function TextToImage({ setOptions }: TextToImage) {
   const [style, setStyle] =
     useState<OpenAPI.TextToImageRequestBody["style_preset"]>("enhance");
 
-  const [width] = useState<number>(512);
-  const [height] = useState<number>(512);
   const [cfgScale, setCfgScale] = useState<number>(7);
   const [steps, setSteps] = useState<number>(50);
   const [seed] = useState<number>(0);
+
+  const createImage = Sandbox.useCreateImage();
 
   const generate = useCallback(async () => {
     if (!apiKey) return;
@@ -50,17 +53,23 @@ export function TextToImage({ setOptions }: TextToImage) {
     setGenerating(true);
     setError(undefined);
 
-    const [url, error] = await request(
-      apiKey,
+    const [url, error] = await createImage(
       engineID,
-      positivePrompt,
-      negativePrompt,
+      [
+        {
+          text: positivePrompt,
+          weight: 1,
+        },
+        {
+          text: negativePrompt,
+          weight: -1,
+        },
+      ],
       style,
-      height,
-      width,
       cfgScale,
       seed,
-      steps
+      steps,
+      fineTuneEngine
     );
 
     setGenerating(false);
@@ -72,42 +81,40 @@ export function TextToImage({ setOptions }: TextToImage) {
       setImageURL(url);
     }
   }, [
-    outOfCreditsHandler,
     apiKey,
+    createImage,
     engineID,
-    style,
     positivePrompt,
     negativePrompt,
-    width,
-    height,
+    style,
     cfgScale,
-    steps,
     seed,
+    steps,
+    fineTuneEngine,
+    outOfCreditsHandler,
   ]);
 
   useEffect(() => {
     setOptions({
       engineID,
-      width,
-      height,
       steps,
       seed,
       cfg_scale: cfgScale,
       samples: 1,
       style_preset: style,
       text_prompts: TextPrompts.toArray(positivePrompt, negativePrompt),
+      finetune_engine: fineTuneEngine,
     });
   }, [
     engineID,
     style,
     positivePrompt,
     negativePrompt,
-    width,
-    height,
     cfgScale,
     steps,
     seed,
     setOptions,
+    fineTuneEngine,
   ]);
 
   return (
@@ -135,21 +142,15 @@ export function TextToImage({ setOptions }: TextToImage) {
             <Select
               title="Model"
               value={engineID}
-              onChange={(value) => value && setEngineID(value)}
-              options={[
-                {
-                  label: "Stable Diffusion XL",
-                  value: "stable-diffusion-xl-beta-v2-2-2",
-                },
-                {
-                  label: "Stable Diffusion 1.5",
-                  value: "stable-diffusion-v1-5",
-                },
-                {
-                  label: "Stable Diffusion 2.1",
-                  value: "stable-diffusion-512-v2-1",
-                },
-              ]}
+              onChange={(value) => {
+                if (value) {
+                  setEngineID(value);
+                  setFineTuneEngine(
+                    models.find((m) => m.value === value)?.engine ?? undefined
+                  );
+                }
+              }}
+              options={models}
             />
             <Select
               title="Style"
