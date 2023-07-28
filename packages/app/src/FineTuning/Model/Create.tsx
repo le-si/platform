@@ -10,36 +10,40 @@ export namespace Create {
     const project = FineTuning.Project.use();
     const mode = FineTuning.Mode.use();
 
-    const [enabled, setEnabled] = React.useState(true);
-    const enable = useCallback(() => setEnabled(true), []);
-
-    const query = ReactQuery.useQuery({
-      enabled: enabled && !!grpc && !!project?.id && !!mode,
+    return ReactQuery.useQuery({
+      enabled: !!grpc && !!project?.id && !!mode,
       initialData: null,
 
       queryKey: ["FineTuning.Training.Create", project?.id],
       queryFn: async () => {
         if (!grpc || !project?.id || !mode) return null;
 
-        // if (1) return null;
-
         FineTuning.Training.start();
 
         const { response } = await grpc?.fineTuning.createModel(
-          spy(
-            Stability.GRPC.CreateModelRequest.create({
-              name: "Testy test",
-              mode: Stability.GRPC.FineTuningMode.STYLE,
-              projectId: project.id,
-              engineId: "stable-diffusion-xl-1024-v0-9",
-            })
-          )
+          Stability.GRPC.CreateModelRequest.create({
+            projectId: project.id,
+            name: project.name,
+            mode: FineTuning.Mode.toGRPC(mode),
+            engineId: "stable-diffusion-xl-1024-v0-9",
+          })
         );
 
-        return spy(response);
+        const { model } = response;
+        if (!model) return null;
+
+        return {
+          id: model.id,
+          engineID: model.engineId,
+
+          name: model.name,
+          mode: FineTuning.Mode.fromGRPC(model.mode),
+          objectPrompt: model.objectPrompt,
+
+          status: FineTuning.Model.Status.fromGRPC(model.status),
+          failureReason: model.failureReason,
+        } satisfies FineTuning.Model;
       },
     });
-
-    return { ...query, enable };
   };
 }

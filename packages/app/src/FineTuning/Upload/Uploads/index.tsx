@@ -148,7 +148,7 @@ export namespace Uploads {
 
       addAssetToUpload: (upload, asset) =>
         set(({ uploads }) => ({
-          uploads: { ...uploads, [upload.id]: spy({ ...upload, asset }) },
+          uploads: { ...uploads, [upload.id]: { ...upload, asset } },
         })),
 
       removeUpload: (id) =>

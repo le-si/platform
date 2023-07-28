@@ -8,11 +8,16 @@ import { User } from "~/User";
 import { Progress } from "./Progress";
 
 export function Training() {
-  // const create = FineTuning.Model.Create.use();
-  const models = FineTuning.Models.use();
+  FineTuning.Model.Create.use();
+
+  const { data: model } = FineTuning.Model.Create.use();
+
+  const status = spy(FineTuning.Model.use(model?.id))?.status;
   const percentage = Training.usePercentage();
 
-  models;
+  useEffect(() => {
+    (status === "Finished" || status === "Failed") && Training.stop();
+  }, [status]);
 
   const { minMilliseconds, maxMilliseconds } =
     FineTuning.Mode.Duration.use() ?? {
@@ -126,7 +131,7 @@ export namespace Training {
 
       const interval = setInterval(() => {
         setNow(new Date());
-      }, 250);
+      }, 1000);
 
       return () => clearInterval(interval);
     }, [percentage]);
@@ -145,7 +150,7 @@ type State = {
 
 namespace State {
   export const use = GlobalState.create<State>((set) => ({
-    start: () => set(spy({ startedAt: new Date(), stoppedAt: undefined })),
-    stop: () => set(spy({ stoppedAt: new Date() })),
+    start: () => set({ startedAt: new Date(), stoppedAt: undefined }),
+    stop: () => set({ stoppedAt: new Date() }),
   }));
 }

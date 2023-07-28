@@ -91,8 +91,6 @@ type State = {
 
 namespace State {
   export const use = GlobalState.create<State>((set) => ({
-    mode: "Style",
-
     setMode: (setMode) =>
       set((state) => ({
         ...state,

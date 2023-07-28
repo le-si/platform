@@ -23,7 +23,7 @@ export function Duration({
 export namespace Duration {
   export const use = () => {
     const mode = FineTuning.Mode.use();
-    if (mode) return;
+    if (!mode) return;
 
     return mode === "Face"
       ? FineTuning.Mode.Face.duration()

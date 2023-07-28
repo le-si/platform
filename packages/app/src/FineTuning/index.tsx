@@ -10,7 +10,7 @@ import { Training } from "./Training";
 import { Upload, Uploads } from "./Upload";
 
 export function FineTuning() {
-  const steps = Steps.use({ active: 4, max: 5 });
+  const steps = Steps.use({ active: 1, max: 4 });
   const isNavigationDisabled = Steps.useIsNavigationDisabled();
   const canNavigateBackwards = !isNavigationDisabled && steps.active > 1;
   return (
@@ -38,9 +38,9 @@ export function FineTuning() {
       <div className="flex h-full grow items-center justify-center overflow-y-auto">
         {steps.active === 1 && <Introduction />}
         {steps.active === 2 && <Modes />}
-        {steps.active === 3 && <Mode.Advice />}
-        {steps.active === 4 && <Uploads />}
-        {steps.active === 5 && <Training />}
+        {/* {steps.active === 3 && <Mode.Advice />} */}
+        {steps.active === 3 && <Uploads />}
+        {steps.active === 4 && <Training />}
       </div>
     </Sandbox>
   );

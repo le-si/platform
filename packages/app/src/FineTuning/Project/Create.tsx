@@ -9,7 +9,7 @@ export namespace Create {
     const grpc = GRPC.use();
     const query = ReactQuery.useQuery({
       enabled: !!grpc,
-      initialData: null,
+      staleTime: Infinity,
 
       queryKey: ["FineTuning.Project.Create"],
       queryFn: async () => {
@@ -24,9 +24,9 @@ export namespace Create {
           })
         );
 
-        if (!request) return null;
-
         const { response } = request;
+        if (!response) return null;
+
         return {
           id: response.id,
           name: response.title,

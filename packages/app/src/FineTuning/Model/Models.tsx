@@ -5,7 +5,7 @@ import { FineTuning } from "~/FineTuning";
 import { GRPC } from "~/GRPC";
 import { User } from "~/User";
 
-export type Models = FineTuning.Model[];
+export type Models = { [id: ID]: FineTuning.Model };
 export namespace Models {
   export const use = () => {
     const grpc = GRPC.use();
@@ -13,20 +13,13 @@ export namespace Models {
 
     return ReactQuery.useQuery({
       enabled: !!grpc && !!user.data?.id,
-      initialData: [],
+      initialData: {},
 
       refetchInterval: 5 * 1000,
 
       queryKey: ["FineTuning.Models"],
       queryFn: async (): Promise<Models> => {
-        spy({
-          "FineTuning.Models": {
-            grpc: grpc,
-            user: user.data?.id,
-          },
-        });
-
-        if (!grpc || !user.data?.id) return [];
+        if (!grpc || !user.data?.id) return {};
 
         const { response } = await grpc?.fineTuning.listModels(
           Stability.GRPC.ListModelsRequest.create({
@@ -38,17 +31,13 @@ export namespace Models {
         );
 
         return spy(
-          (response?.models ?? []).map((model) => ({
-            id: model.id,
-            engineID: model.engineId,
-
-            name: model.name,
-            mode: FineTuning.Mode.fromGRPC(model.mode),
-            objectPrompt: model.objectPrompt,
-
-            status: FineTuning.Model.Status.fromGRPC(model.status),
-            failureReason: model.failureReason,
-          }))
+          (response?.models ?? []).reduce(
+            (models, model) => ({
+              ...models,
+              [model.id]: FineTuning.Model.fromGRPC(model),
+            }),
+            {}
+          )
         );
       },
     });
