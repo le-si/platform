@@ -10,7 +10,7 @@ import { Training } from "./Training";
 import { Upload, Uploads } from "./Upload";
 
 export function FineTuning() {
-  const steps = Steps.use({ active: 3, max: 4 });
+  const steps = Steps.use({ active: 1, max: 4 });
   const isNavigationDisabled = Steps.useIsNavigationDisabled();
   const canNavigateBackwards = !isNavigationDisabled && steps.active > 1;
   return (
