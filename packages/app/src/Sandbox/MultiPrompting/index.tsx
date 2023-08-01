@@ -147,21 +147,23 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
                   key={index}
                   className="flex flex-col gap-2 rounded border border-zinc-300 p-3"
                 >
-                  <Theme.Textarea
+                  <Sandbox.PositivePrompt
                     key={index}
                     autoFocus
                     color={prompt.weight > 0 ? "positive" : "negative"}
                     title={
                       <div className="flex w-full items-center justify-between">
                         <p className="text-sm">Prompt {index + 1}</p>
-                        <Theme.Icon.X
-                          className="h-4 w-4 cursor-pointer text-neutral-500 duration-100 hover:text-neutral-900"
-                          onClick={() =>
-                            setPrompts((prompts) =>
-                              prompts.filter((_, i) => i !== index)
-                            )
-                          }
-                        />
+                        {prompts.length > 1 && (
+                          <Theme.Icon.X
+                            className="h-4 w-4 cursor-pointer text-neutral-500 duration-100 hover:text-neutral-900"
+                            onClick={() =>
+                              setPrompts((prompts) =>
+                                prompts.filter((_, i) => i !== index)
+                              )
+                            }
+                          />
+                        )}
                       </div>
                     }
                     placeholder="Enter prompt"
