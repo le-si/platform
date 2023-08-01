@@ -1,5 +1,6 @@
 import { Create } from "./Create";
 import { Name } from "./Name";
+import { Update } from "./Update";
 
 export type Project = {
   id: ID;
@@ -7,12 +8,13 @@ export type Project = {
 };
 
 export declare namespace Project {
-  export { Create, Name };
+  export { Create, Name, Update };
 }
 
 export namespace Project {
   Project.Create = Create;
   Project.Name = Name;
+  Project.Update = Update;
 
   export const use = () => {
     const { data } = Create.use();

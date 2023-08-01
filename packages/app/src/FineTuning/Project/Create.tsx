@@ -17,7 +17,7 @@ export namespace Create {
 
         const request = await grpc?.project.create(
           GRPC.CreateProjectRequest.create({
-            title: FineTuning.Project.Name.getPlaceholder(),
+            title: FineTuning.Project.Name.Placeholder.get(),
             type: Stability.GRPC.ProjectType.TRAINING,
             access: Stability.GRPC.ProjectAccess.PRIVATE,
             status: Stability.GRPC.ProjectStatus.ACTIVE,

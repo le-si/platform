@@ -1,4 +1,6 @@
-export namespace Random {
+import { GlobalState } from "~/GlobalState";
+
+export namespace Placeholder {
   export const get = () => {
     const descriptors = [
       "Zesty",
@@ -75,4 +77,20 @@ export namespace Random {
       finishes[Math.floor(Math.random() * finishes.length)],
     ].join(" ");
   };
+
+  export const reset = () => State.use.getState().reset();
+
+  export const use = () => State.use(({ placeholder }) => placeholder);
+
+  type State = {
+    placeholder: string;
+    reset: () => void;
+  };
+
+  namespace State {
+    export const use = GlobalState.create<State>((set) => ({
+      placeholder: get(),
+      reset: () => set(() => ({ placeholder: get() })),
+    }));
+  }
 }
