@@ -53,7 +53,8 @@ export function Training() {
             <Theme.Button
               variant="primary"
               className="px-4"
-              onClick={FineTuning.Steps.next}
+              link="/sandbox/text-to-image"
+              noLinkIcon
             >
               Try it out
               <FineTuning.ArrowRight className="ml-2" />
