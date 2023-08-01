@@ -27,7 +27,7 @@ export namespace Create {
             projectId: projectID,
             name: projectName,
             mode: FineTuning.Mode.toGRPC(mode),
-            engineId: "stable-diffusion-xl-1024-v0-9",
+            engineId: "stable-diffusion-xl-1024-v1-0",
           })
         );
 

@@ -16,6 +16,10 @@ export function Training() {
   const percentage = Training.usePercentage();
 
   useEffect(() => {
+    FineTuning.Training.start();
+  }, []);
+
+  useEffect(() => {
     (status === "Completed" || status === "Failed") && Training.stop();
   }, [status]);
 
@@ -46,20 +50,21 @@ export function Training() {
             <Theme.Icon.Check className="-ml-4 h-12 w-12 text-green-500" />
             Training Complete
           </FineTuning.H1>
-          <div className="flex justify-center gap-8">
-            <Theme.Button className="px-4" onClick={FineTuning.Steps.next}>
-              New Model
-            </Theme.Button>
-            <Theme.Button
-              variant="primary"
-              className="px-4"
-              onClick={FineTuning.Steps.next}
-            >
-              Try it out
-              <FineTuning.ArrowRight className="ml-2" />
-            </Theme.Button>
-          </div>
-
+          {false && (
+            <div className="flex justify-center gap-8">
+              <Theme.Button className="px-4" onClick={FineTuning.Steps.next}>
+                New Model
+              </Theme.Button>
+              <Theme.Button
+                variant="primary"
+                className="px-4"
+                onClick={FineTuning.Steps.next}
+              >
+                Try it out
+                <FineTuning.ArrowRight className="ml-2" />
+              </Theme.Button>
+            </div>
+          )}
           <div className="text-center text-black/50">
             <p>
               You can manage your model on the&nbsp;
@@ -118,7 +123,7 @@ export namespace Training {
       ? now.valueOf() - startedAt.valueOf()
       : 0;
 
-    const percentage = Math.max(
+    const percentageActual = Math.max(
       stoppedAt ? 100 : 0,
       Math.min(
         maxMilliseconds > 0 ? (elapsedMilliseconds / maxMilliseconds) * 100 : 0,
@@ -126,17 +131,25 @@ export namespace Training {
       )
     );
 
+    const percentageDisplayed = Math.min(
+      98,
+      100 * Math.sqrt(1 - Math.pow(percentageActual / 100 - 1, 2))
+    );
+
+    spy({
+      startedAt,
+      stoppedAt,
+      percentageActual,
+      percentageDisplayed,
+    });
+
     useEffect(() => {
-      if (percentage === 100) return;
-
-      const interval = setInterval(() => {
-        setNow(new Date());
-      }, 1000);
-
+      if (percentageActual === 100) return;
+      const interval = setInterval(() => setNow(new Date()), 100);
       return () => clearInterval(interval);
-    }, [percentage]);
+    }, [percentageActual]);
 
-    return percentage;
+    return percentageDisplayed;
   };
 }
 
