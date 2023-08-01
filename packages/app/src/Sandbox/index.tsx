@@ -113,10 +113,50 @@ export namespace Sandbox {
       ...(Object.values(finetunedModels.data ?? {}).map((model) => ({
         label: model.name,
         engine: model.engineID ?? "stable-diffusion-xl-1024-v1-0",
-        value: model.id,
+        value: `${model.engineID ?? "stable-diffusion-xl-1024-v1-0"}:${
+          model.id
+        }`,
       })) ?? []),
     ];
   };
+
+  export function PositivePrompt(props: Theme.Textarea & { finetune?: ID }) {
+    const needsToken =
+      props.finetune &&
+      (props.value || "").trim() !== "" &&
+      !props.value?.includes(`<${props.finetune}>`);
+    return (
+      <div className="flex flex-col gap-2">
+        <Theme.Textarea
+          autoFocus
+          color="positive"
+          title="Positive Prompt"
+          placeholder="Description of what you want to generate"
+          {...props}
+          className={classes(
+            needsToken &&
+              "ring-1 ring-amber-700 focus:outline-none focus:outline-transparent"
+          )}
+        />
+        {needsToken && (
+          <div className="flex items-center gap-1">
+            <Theme.Icon.AlertTriangle className="h-4 w-4 text-amber-700" />
+            <p className="select-none text-xs text-amber-700">
+              Prompt is missing the finetune token.{" "}
+              <span
+                onClick={() =>
+                  props.onChange?.(`${props.value} <${props.finetune}>`)
+                }
+                className="cursor-pointer font-semibold hover:text-amber-800 hover:underline"
+              >
+                Add it.
+              </span>
+            </p>
+          </div>
+        )}
+      </div>
+    );
+  }
 
   export const useCreateImage = () => {
     const grpc = GRPC.use();
@@ -133,11 +173,6 @@ export namespace Sandbox {
         initStrength?: OpenAPI.ImageToImageRequestBody["image_strength"],
         initImage?: Blob
       ): Promise<[string | undefined, Error | undefined]> => {
-        // in the case of a finetuned model being used, the engineID is the finetuned model ID & the fineTuneEngine is the base model ID
-        [engineID, fineTuneEngine] = fineTuneEngine
-          ? [fineTuneEngine, engineID]
-          : [engineID, undefined];
-
         const dims = engineID.includes("1024")
           ? 1024
           : engineID.includes("768")
@@ -219,30 +254,23 @@ export namespace Sandbox {
           }),
         };
 
-        const request = grpc?.generation.chainGenerate(
-          spy({
-            requestId: "",
-            stage: [
-              {
-                id: "Main",
+        const request = grpc?.generation.generate(
+          spy(
+            Proto.Request.create({
+              prompt,
 
-                request: Proto.Request.create({
-                  prompt,
+              engineId: engineID,
+              requestedType: Proto.ArtifactType.ARTIFACT_IMAGE,
+              params: { oneofKind: "image", image: imageParams },
 
-                  engineId: engineID,
-                  requestedType: Proto.ArtifactType.ARTIFACT_IMAGE,
-                  params: { oneofKind: "image", image: imageParams },
-
-                  ...extras,
-                }),
-
-                onStatus: [{ action: [Proto.StageAction.RETURN], reason: [] }],
-              },
-            ],
-          })
+              ...extras,
+            })
+          )
         );
 
         if (!request) return [undefined, new Error("GRPC not initialized")];
+
+        console.log("request", request);
 
         for await (const response of request.responses) {
           for (const artifact of response.artifacts) {

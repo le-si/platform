@@ -108,13 +108,12 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
           <div className="flex h-fit w-full grow flex-col gap-3">
             <Theme.Select
               title="Model"
-              value={engineID}
+              value={`${engineID}${fineTuneEngine ? `:${fineTuneEngine}` : ""}`}
               onChange={(value) => {
                 if (value) {
-                  setEngineID(value);
-                  setFineTuneEngine(
-                    models.find((m) => m.value === value)?.engine ?? undefined
-                  );
+                  const [engineID, fineTuneEngine] = value.split(":");
+                  setEngineID(engineID as string);
+                  setFineTuneEngine(fineTuneEngine);
                 }
               }}
               options={models}
