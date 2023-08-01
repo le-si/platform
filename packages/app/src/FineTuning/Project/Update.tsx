@@ -12,7 +12,7 @@ export namespace Update {
 
   export const use = ({ name }: Partial<FineTuning.Project>) => {
     const grpc = GRPC.use();
-    const project = FineTuning.Project.use();
+    const projectID = FineTuning.Project.useID();
 
     const projectNamePlaceholder = FineTuning.Project.Name.Placeholder.use();
     const [projectNameUpdated, setProjectNameUpdated] = useState<
@@ -25,16 +25,16 @@ export namespace Update {
     );
 
     return ReactQuery.useQuery({
-      enabled: !!grpc && !!project,
+      enabled: !!grpc && !!projectID,
       initialData: null,
 
       queryKey: ["FineTuning.Project.Update", projectNameUpdated],
       queryFn: async () => {
-        if (!grpc || !project) return null;
+        if (!grpc || !projectID) return null;
 
         const { response } = await grpc.project.update(
           Stability.GRPC.UpdateProjectRequest.create({
-            id: project.id,
+            id: projectID,
             title: projectNameUpdated ?? projectNamePlaceholder,
           })
         );
