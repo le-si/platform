@@ -13,12 +13,7 @@ export function Step({
   );
 
   return (
-    <div
-      className={classes(
-        "flex max-w-[100rem] flex-col gap-12 p-4 sm:p-4 md:p-6",
-        className
-      )}
-    >
+    <div className={classes("flex max-w-[100rem] flex-col gap-12", className)}>
       {children}
     </div>
   );
