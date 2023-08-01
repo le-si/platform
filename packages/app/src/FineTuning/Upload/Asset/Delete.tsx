@@ -7,18 +7,19 @@ import { GRPC } from "~/GRPC";
 export namespace Delete {
   export const use = (upload?: FineTuning.Upload) => {
     const grpc = GRPC.use();
-    const project = FineTuning.Project.use();
+    const projectID = FineTuning.Project.useID();
 
     const [enabled, setEnabled] = React.useState(false);
     const execute = useCallback(() => setEnabled(true), []);
 
     const query = ReactQuery.useQuery({
-      enabled: enabled && !!grpc && !!project,
+      enabled: enabled && !!grpc && !!projectID,
       initialData: null,
 
       queryKey: ["FineTuning.Upload.Asset.Delete", upload?.id],
       queryFn: async () => {
-        if (!grpc || !project || !upload?.id || !upload.asset?.id) return null;
+        if (!grpc || !projectID || !upload?.id || !upload.asset?.id)
+          return null;
 
         const { responses } = grpc.generation.generate(
           Stability.GRPC.Request.create({
@@ -27,7 +28,7 @@ export namespace Delete {
             params: {
               oneofKind: "asset",
               asset: Stability.GRPC.AssetParameters.create({
-                projectId: project.id,
+                projectId: projectID,
                 action: Stability.GRPC.AssetAction.ASSET_DELETE,
                 use: Stability.GRPC.AssetUse.INPUT,
               }),

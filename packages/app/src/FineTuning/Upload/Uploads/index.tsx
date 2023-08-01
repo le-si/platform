@@ -12,7 +12,7 @@ export function Uploads() {
   FineTuning.Project.Create.use();
 
   const uploads = Uploads.use();
-  const isReadyToTrain = Uploads.useIsReadyToTrain();
+  const { uploadsLoading, isReadyToTrain } = Uploads.useIsReadyToTrain();
 
   const constraints = {
     ...FineTuning.Upload.constraints(),
@@ -40,6 +40,9 @@ export function Uploads() {
             disabled={!isReadyToTrain}
             onClick={FineTuning.Steps.next}
           >
+            {uploadsLoading > 0 && (
+              <Theme.Icon.Spinner className="mr-2 animate-spin text-white" />
+            )}
             Train
             <FineTuning.ArrowRight className="ml-2" />
           </Theme.Button>
@@ -111,14 +114,25 @@ export namespace Uploads {
     const { count } = constraints();
 
     return useMemo(() => {
-      let alreadyUploaded = 0;
+      let uploadsFinished = 0;
+      let uploadsLoading = 0;
 
       for (const upload of uploads) {
-        if (!upload.asset) return false;
-        alreadyUploaded++;
+        if (!!upload.asset) uploadsFinished++;
+        else uploadsLoading++;
       }
 
-      return alreadyUploaded >= count.min;
+      spyJSON({
+        uploadsFinished,
+        uploadsLoading,
+        isReadyToTrain: uploadsLoading === 0 && uploadsFinished >= count.min,
+      });
+
+      return {
+        uploadsFinished,
+        uploadsLoading,
+        isReadyToTrain: uploadsLoading === 0 && uploadsFinished >= count.min,
+      };
     }, [count, uploads]);
   };
 

@@ -16,6 +16,10 @@ export function Training() {
   const percentage = Training.usePercentage();
 
   useEffect(() => {
+    FineTuning.Training.start();
+  }, []);
+
+  useEffect(() => {
     (status === "Completed" || status === "Failed") && Training.stop();
   }, [status]);
 
@@ -119,7 +123,7 @@ export namespace Training {
       ? now.valueOf() - startedAt.valueOf()
       : 0;
 
-    const percentage = Math.max(
+    const percentageActual = Math.max(
       stoppedAt ? 100 : 0,
       Math.min(
         maxMilliseconds > 0 ? (elapsedMilliseconds / maxMilliseconds) * 100 : 0,
@@ -127,17 +131,25 @@ export namespace Training {
       )
     );
 
+    const percentageDisplayed = Math.min(
+      98,
+      100 * Math.sqrt(1 - Math.pow(percentageActual / 100 - 1, 2))
+    );
+
+    spy({
+      startedAt,
+      stoppedAt,
+      percentageActual,
+      percentageDisplayed,
+    });
+
     useEffect(() => {
-      if (percentage === 100) return;
-
-      const interval = setInterval(() => {
-        setNow(new Date());
-      }, 1000);
-
+      if (percentageActual === 100) return;
+      const interval = setInterval(() => setNow(new Date()), 100);
       return () => clearInterval(interval);
-    }, [percentage]);
+    }, [percentageActual]);
 
-    return percentage;
+    return percentageDisplayed;
   };
 }
 

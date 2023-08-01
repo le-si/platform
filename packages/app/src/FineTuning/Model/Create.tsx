@@ -7,23 +7,25 @@ import { GRPC } from "~/GRPC";
 export namespace Create {
   export const use = () => {
     const grpc = GRPC.use();
-    const project = FineTuning.Project.use();
+
+    const projectID = FineTuning.Project.useID();
+    const projectName = FineTuning.Project.Name.use();
     const mode = FineTuning.Mode.use();
 
     return ReactQuery.useQuery({
-      enabled: !!grpc && !!project?.id && !!mode,
+      enabled: !!grpc && !!projectID && !!mode,
       initialData: null,
 
-      queryKey: ["FineTuning.Training.Create", project?.id],
+      queryKey: ["FineTuning.Training.Create", projectID],
       queryFn: async () => {
-        if (!grpc || !project?.id || !mode) return null;
+        if (!grpc || !projectID || !mode) return null;
 
         FineTuning.Training.start();
 
         const { response } = await grpc?.fineTuning.createModel(
           Stability.GRPC.CreateModelRequest.create({
-            projectId: project.id,
-            name: project.name,
+            projectId: projectID,
+            name: projectName,
             mode: FineTuning.Mode.toGRPC(mode),
             engineId: "stable-diffusion-xl-1024-v1-0",
           })

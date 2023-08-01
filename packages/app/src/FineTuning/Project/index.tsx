@@ -16,8 +16,8 @@ export namespace Project {
   Project.Name = Name;
   Project.Update = Update;
 
-  export const use = () => {
+  export const useID = () => {
     const { data } = Create.use();
-    return data ?? undefined;
+    return data?.id ?? undefined;
   };
 }

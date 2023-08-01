@@ -38,7 +38,6 @@ export function FineTuning() {
       <div className="flex h-full grow items-center justify-center overflow-y-auto">
         {steps.active === 1 && <Introduction />}
         {steps.active === 2 && <Modes />}
-        {/* {steps.active === 3 && <Mode.Advice />} */}
         {steps.active === 3 && <Uploads />}
         {steps.active === 4 && <Training />}
       </div>
