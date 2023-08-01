@@ -8,6 +8,7 @@ import {
   Button,
   ImageContainer,
   Input,
+  Range,
   Select,
   Textarea,
   Theme,
@@ -34,6 +35,7 @@ export function TextToImage({ setOptions }: TextToImage) {
     "stable-diffusion-xl-1024-v1-0"
   );
   const [fineTuneEngine, setFineTuneEngine] = useState<string | undefined>();
+  const [finetuneStrength, setFinetuneStrength] = useState<number>(0.75);
   const [error, setError] = useState<string | undefined>(undefined);
 
   const [positivePrompt, setPositivePrompt] = useState<string>("");
@@ -69,7 +71,10 @@ export function TextToImage({ setOptions }: TextToImage) {
       cfgScale,
       seed,
       steps,
-      fineTuneEngine
+      fineTuneEngine,
+      undefined,
+      undefined,
+      finetuneStrength
     );
 
     setGenerating(false);
@@ -92,6 +97,7 @@ export function TextToImage({ setOptions }: TextToImage) {
     steps,
     fineTuneEngine,
     outOfCreditsHandler,
+    finetuneStrength,
   ]);
 
   useEffect(() => {
@@ -148,6 +154,16 @@ export function TextToImage({ setOptions }: TextToImage) {
               }}
               options={models}
             />
+            {fineTuneEngine && (
+              <Range
+                title="Finetune Strength"
+                max={1}
+                min={0}
+                step={0.01}
+                value={finetuneStrength}
+                onChange={setFinetuneStrength}
+              />
+            )}
             <Select
               title="Style"
               value={style}

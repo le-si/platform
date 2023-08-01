@@ -135,7 +135,8 @@ export namespace Sandbox {
           {...props}
           className={classes(
             needsToken &&
-              "ring-1 ring-amber-700 focus:outline-none focus:outline-transparent"
+              "ring-1 ring-amber-700 focus:outline-none focus:outline-transparent",
+            props.className
           )}
         />
         {needsToken && (
@@ -171,7 +172,8 @@ export namespace Sandbox {
         steps?: OpenAPI.TextToImageRequestBody["steps"],
         fineTuneEngine?: string,
         initStrength?: OpenAPI.ImageToImageRequestBody["image_strength"],
-        initImage?: Blob
+        initImage?: Blob,
+        loraStrength?: number
       ): Promise<[string | undefined, Error | undefined]> => {
         const dims = engineID.includes("1024")
           ? 1024
@@ -227,7 +229,7 @@ export namespace Sandbox {
             fineTuningParameters: [
               Proto.FineTuningParameters.create({
                 modelId: fineTuneEngine,
-                weight: 1,
+                weight: loraStrength ?? 0.75,
               }),
             ],
           }),
