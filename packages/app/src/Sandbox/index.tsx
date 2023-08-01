@@ -250,6 +250,7 @@ export namespace Sandbox {
           extras: Proto.Struct.fromJson({
             $IPC: {
               preset: style,
+              ...(engineID.includes("-xl-") && { sdxl_size: [4096, 4096] }),
             },
           }),
         };
