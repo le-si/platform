@@ -68,7 +68,7 @@ export function Select({
                     setOpen(false);
                   }}
                   className={classes(
-                    "flex h-6 select-none items-center justify-between text-sm",
+                    "flex h-6 shrink-0 select-none items-center justify-between text-sm",
                     value === option.value
                       ? "bg-[#B69FFE]"
                       : "hover:bg-[#D1D5DB]",
