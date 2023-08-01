@@ -196,7 +196,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
             {prompts.length < 10 && (
               <Theme.Button
                 variant="secondary"
-                className="border border-dashed border-zinc-300"
+                className="w-full border border-dashed border-zinc-300"
                 onClick={() =>
                   setPrompts((prompts) => [
                     ...prompts,
