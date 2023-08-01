@@ -124,13 +124,10 @@ export function TextToImage({ setOptions }: TextToImage) {
         className="h-full min-h-0 w-full"
         sidebar={
           <div className="flex h-fit w-full grow flex-col gap-3">
-            <Textarea
-              autoFocus
-              color="positive"
-              title="Positive Prompt"
-              placeholder="Description of what you want to generate"
+            <Sandbox.PositivePrompt
               value={positivePrompt}
               onChange={setPositivePrompt}
+              finetune={fineTuneEngine}
             />
             <Textarea
               color="negative"
@@ -141,13 +138,12 @@ export function TextToImage({ setOptions }: TextToImage) {
             />
             <Select
               title="Model"
-              value={engineID}
+              value={`${engineID}${fineTuneEngine ? `:${fineTuneEngine}` : ""}`}
               onChange={(value) => {
                 if (value) {
-                  setEngineID(value);
-                  setFineTuneEngine(
-                    models.find((m) => m.value === value)?.engine ?? undefined
-                  );
+                  const [engineID, fineTuneEngine] = value.split(":");
+                  setEngineID(engineID as string);
+                  setFineTuneEngine(fineTuneEngine);
                 }
               }}
               options={models}
