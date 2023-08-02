@@ -1,5 +1,7 @@
 import * as ReactQuery from "@tanstack/react-query";
 
+import { Theme } from "~/Theme";
+
 let client: Client;
 
 export type Client = ReactQuery.QueryClient;
@@ -8,12 +10,24 @@ export namespace Client {
   export const create = () =>
     (client ||= new ReactQuery.QueryClient({
       defaultOptions: {
-        mutations: { cacheTime: 0 },
+        mutations: {
+          cacheTime: 0,
+          onError,
+        },
+
         queries: {
           cacheTime: 24 * 60 * 60 * 1000,
           refetchOnWindowFocus: false,
           retry: 1,
+          onError,
         },
       },
     }));
+
+  export const onError = (error: unknown) => {
+    console.error(error);
+    Theme.Snackbar.enqueueSnackbar("Something went wrong!", {
+      variant: "error",
+    });
+  };
 }

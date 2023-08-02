@@ -15,7 +15,7 @@ export function Style() {
 
 export namespace Style {
   export const duration = (): FineTuning.Mode.Duration => ({
-    minMilliseconds: 1000 * 60 * 0.2,
-    maxMilliseconds: 1000 * 60 * 0.2,
+    minMilliseconds: 1000 * 60 * 15,
+    maxMilliseconds: 1000 * 60 * 20,
   });
 }
