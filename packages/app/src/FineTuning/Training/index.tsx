@@ -50,21 +50,21 @@ export function Training() {
             <Theme.Icon.Check className="-ml-4 h-12 w-12 text-green-500" />
             Training Complete
           </FineTuning.H1>
-          {false && (
-            <div className="flex justify-center gap-8">
-              <Theme.Button className="px-4" onClick={FineTuning.Steps.next}>
-                New Model
-              </Theme.Button>
-              <Theme.Button
-                variant="primary"
-                className="px-4"
-                onClick={FineTuning.Steps.next}
-              >
-                Try it out
-                <FineTuning.ArrowRight className="ml-2" />
-              </Theme.Button>
-            </div>
-          )}
+          <div className="flex justify-center gap-8">
+            <Theme.Button className="px-4" onClick={FineTuning.Steps.next}>
+              New Model
+            </Theme.Button>
+            <Theme.Button
+              variant="primary"
+              className="px-4"
+              link="/sandbox/text-to-image"
+              noLinkIcon
+            >
+              Try it out
+              <FineTuning.ArrowRight className="ml-2" />
+            </Theme.Button>
+          </div>
+
           <div className="text-center text-black/50">
             <p>
               You can manage your model on the&nbsp;

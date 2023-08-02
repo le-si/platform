@@ -7,11 +7,13 @@ export function Background({
   className,
   children,
 }: Background.Props) {
-  const content = <div className="relative w-full grow">{children}</div>;
+  const content = (
+    <div className="relative w-full grow p-4 md:p-6">{children}</div>
+  );
   return (
     <div
       className={classes(
-        "bg-brand-amber-1 flex min-h-full w-fit flex-col rounded-xl",
+        "bg-brand-amber-1 flex min-h-full w-fit flex-col overflow-hidden rounded-xl",
         className
       )}
     >

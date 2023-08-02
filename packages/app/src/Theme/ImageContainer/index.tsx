@@ -23,11 +23,11 @@ export function ImageContainer({
       {title && <p className="text-sm">{title}</p>}
       {src ? (
         <img
-          className="aspect-square w-[400px] rounded object-cover drop-shadow-lg"
+          className="aspect-square w-[512px] rounded object-cover drop-shadow-lg"
           src={src}
         />
       ) : (
-        <div className="h-[400px] w-[400px] rounded border border-zinc-300 bg-gray-50"></div>
+        <div className="h-[512px] w-[512px] rounded border border-zinc-300 bg-gray-50"></div>
       )}
       {(children || onClear) && (
         <div className="flex items-center justify-between">

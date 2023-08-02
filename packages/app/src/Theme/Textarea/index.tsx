@@ -46,7 +46,7 @@ export function Textarea({
         value={value}
         onChange={(e) => onChange?.(e.target.value)}
         className={classes(
-          "bg-brand-amber-2 min-h-[8rem] max-w-[22rem] resize-none rounded-lg p-3 text-sm focus:outline-1 focus:outline-black/10",
+          "bg-brand-amber-1 min-h-[8rem] max-w-[22rem] resize-none rounded border border-zinc-300/100 p-2 text-sm focus:border-black/30 focus:outline-none",
           disabled && "opacity-60",
           className
         )}

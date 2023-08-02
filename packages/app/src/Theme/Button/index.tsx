@@ -7,6 +7,7 @@ export type Button = StyleableWithChildren & {
   onClick?: () => void;
   variant?: "primary" | "secondary";
   link?: string;
+  noLinkIcon?: boolean;
   loading?: boolean;
 };
 
@@ -18,6 +19,7 @@ export function Button({
   className,
   variant,
   link,
+  noLinkIcon,
   loading,
 }: Button) {
   const navigate = useNavigate();
@@ -61,7 +63,7 @@ export function Button({
       >
         {children}
       </span>
-      {link && (
+      {link && !noLinkIcon && (
         <Theme.Icon.Link color={variant === "primary" ? "white" : undefined} />
       )}
     </button>

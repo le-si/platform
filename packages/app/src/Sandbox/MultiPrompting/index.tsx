@@ -145,7 +145,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
               {prompts.map((prompt, index) => (
                 <div
                   key={index}
-                  className="flex flex-col gap-2 rounded border border-zinc-300 p-3"
+                  className="bg-brand-amber-1 flex flex-col gap-2 rounded border border-zinc-300 p-3"
                 >
                   <Sandbox.PositivePrompt
                     key={index}
@@ -168,6 +168,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
                     }
                     placeholder="Enter prompt"
                     value={prompt.text}
+                    className="min-h-[6rem] border-transparent p-0 focus:border-transparent"
                     onChange={(value) =>
                       setPrompts((prompts) =>
                         prompts.map((prompt, i) =>
