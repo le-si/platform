@@ -56,6 +56,16 @@ export function Sandbox<T extends Record<string, unknown>>({
               language={codeLanguage}
               setLanguage={setCodeLanguage}
               onClose={() => setShowCode(false)}
+              redirect={
+                options.finetune_engine
+                  ? "/docs/features/api-parameters"
+                  : undefined
+              }
+              redirectReason={
+                options.finetune_engine
+                  ? "Inference of finetuned models is not available in the REST api"
+                  : undefined
+              }
             />
           ) : (
             <div
