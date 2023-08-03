@@ -51,8 +51,8 @@ export namespace Create {
           })
         );
 
-        for await (const response of responses) {
-          for await (const artifact of response.artifacts) {
+        for await (const { artifacts } of responses) {
+          for await (const artifact of artifacts) {
             if (artifact.type === Stability.GRPC.ArtifactType.ARTIFACT_TEXT) {
               const asset = { id: artifact.uuid };
               FineTuning.Uploads.addAssetToUpload(upload, asset);

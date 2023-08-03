@@ -10,6 +10,8 @@ export namespace Create {
 
     const projectID = FineTuning.Project.useID();
     const projectName = FineTuning.Project.Name.use();
+    const projectNamePlaceholder = FineTuning.Project.Name.Placeholder.use();
+
     const mode = FineTuning.Mode.use();
 
     return ReactQuery.useQuery({
@@ -25,7 +27,7 @@ export namespace Create {
         const { response } = await grpc?.fineTuning.createModel(
           Stability.GRPC.CreateModelRequest.create({
             projectId: projectID,
-            name: projectName,
+            name: !!projectName ? projectName : projectNamePlaceholder,
             mode: FineTuning.Mode.toGRPC(mode),
             engineId: "stable-diffusion-xl-1024-v1-0",
           })
