@@ -131,17 +131,12 @@ export namespace Training {
       )
     );
 
-    const percentageDisplayed = Math.min(
-      98,
-      100 * Math.sqrt(1 - Math.pow(percentageActual / 100 - 1, 2))
-    );
-
-    spy({
-      startedAt,
-      stoppedAt,
-      percentageActual,
-      percentageDisplayed,
-    });
+    const percentageDisplayed = stoppedAt
+      ? 100
+      : Math.min(
+          98,
+          100 * Math.sqrt(1 - Math.pow(percentageActual / 100 - 1, 2))
+        );
 
     useEffect(() => {
       if (percentageActual === 100) return;

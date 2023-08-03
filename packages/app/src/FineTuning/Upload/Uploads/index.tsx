@@ -122,12 +122,6 @@ export namespace Uploads {
         else uploadsLoading++;
       }
 
-      spyJSON({
-        uploadsFinished,
-        uploadsLoading,
-        isReadyToTrain: uploadsLoading === 0 && uploadsFinished >= count.min,
-      });
-
       return {
         uploadsFinished,
         uploadsLoading,
