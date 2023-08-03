@@ -120,13 +120,15 @@ export namespace Sandbox {
         value: "stable-diffusion-512-v2-1",
         engine: null,
       },
-      ...(Object.values(finetunedModels.data ?? {}).map((model) => ({
-        label: model.name,
-        engine: model.engineID ?? "stable-diffusion-xl-1024-v1-0",
-        value: `${model.engineID ?? "stable-diffusion-xl-1024-v1-0"}:${
-          model.id
-        }`,
-      })) ?? []),
+      ...(Object.values(finetunedModels.data ?? {})
+        .filter((model) => model.status === "Completed")
+        .map((model) => ({
+          label: model.name,
+          engine: model.engineID ?? "stable-diffusion-xl-1024-v1-0",
+          value: `${model.engineID ?? "stable-diffusion-xl-1024-v1-0"}:${
+            model.id
+          }`,
+        })) ?? []),
     ];
   };
 
