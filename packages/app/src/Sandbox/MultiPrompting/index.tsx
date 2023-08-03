@@ -30,6 +30,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
     "stable-diffusion-xl-1024-v1-0"
   );
   const [fineTuneEngine, setFineTuneEngine] = useState<string | undefined>();
+  const [finetuneStrength, setFinetuneStrength] = useState<number>(0.75);
   const [error, setError] = useState<string | undefined>(undefined);
 
   const [prompts, setPrompts] = useState<Prompt[]>([
@@ -61,7 +62,10 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
       cfgScale,
       seed,
       steps,
-      fineTuneEngine
+      fineTuneEngine,
+      undefined,
+      undefined,
+      finetuneStrength
     );
 
     setGenerating(false);
@@ -83,6 +87,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
     steps,
     fineTuneEngine,
     outOfCreditsHandler,
+    finetuneStrength,
   ]);
 
   useEffect(() => {
@@ -96,8 +101,18 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
       style_preset: style,
       text_prompts: prompts,
       finetune_engine: fineTuneEngine,
+      finetune_strength: finetuneStrength,
     });
-  }, [engineID, style, prompts, cfgScale, steps, setOptions, fineTuneEngine]);
+  }, [
+    engineID,
+    style,
+    prompts,
+    cfgScale,
+    steps,
+    setOptions,
+    fineTuneEngine,
+    finetuneStrength,
+  ]);
 
   return (
     <div className="flex h-full w-full flex-col gap-6 md:min-w-[55rem]">
@@ -118,6 +133,16 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
               }}
               options={models}
             />
+            {fineTuneEngine && (
+              <Theme.Range
+                title="Finetune Strength"
+                max={1}
+                min={0}
+                step={0.01}
+                value={finetuneStrength}
+                onChange={setFinetuneStrength}
+              />
+            )}
             <Theme.Select
               title="Style"
               value={style}

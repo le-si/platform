@@ -35,6 +35,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
     "stable-diffusion-xl-1024-v1-0"
   );
   const [fineTuneEngine, setFineTuneEngine] = useState<string | undefined>();
+  const [finetuneStrength, setFinetuneStrength] = useState<number>(0.75);
   const [error, setError] = useState<string | undefined>(undefined);
 
   const [positivePrompt, setPositivePrompt] = useState<string>("");
@@ -80,7 +81,8 @@ export function ImageToImage({ setOptions }: ImageToImage) {
       steps,
       fineTuneEngine,
       initStrength,
-      init?.file
+      init?.file,
+      finetuneStrength
     );
 
     setGenerating(false);
@@ -105,6 +107,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
     fineTuneEngine,
     initStrength,
     outOfCreditsHandler,
+    finetuneStrength,
   ]);
 
   useEffect(() => {
@@ -192,6 +195,16 @@ export function ImageToImage({ setOptions }: ImageToImage) {
               }}
               options={models}
             />
+            {fineTuneEngine && (
+              <Theme.Range
+                title="Finetune Strength"
+                max={1}
+                min={0}
+                step={0.01}
+                value={finetuneStrength}
+                onChange={setFinetuneStrength}
+              />
+            )}
             <Select
               title="Style"
               value={style}
