@@ -26,12 +26,12 @@ export function Uploads() {
       <div className="flex gap-6">
         <div className="flex grow basis-0 flex-col gap-4">
           <div className="flex flex-col gap-1">
-            <h3 className="text-lg">Model Name</h3>
+            <h3 className="select-none text-lg">Model Name</h3>
             <FineTuning.Project.Name.Input className="w-full grow" />
           </div>
           {mode === "Object" && (
             <div className="flex flex-col gap-1">
-              <h3 className="text-lg">Object Prompt</h3>
+              <h3 className="select-none text-lg">Object Prompt</h3>
               <FineTuning.Mode.Object.Prompt />
             </div>
           )}
