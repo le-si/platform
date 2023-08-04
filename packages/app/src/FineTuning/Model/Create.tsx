@@ -30,6 +30,7 @@ export namespace Create {
             name: !!projectName ? projectName : projectNamePlaceholder,
             mode: FineTuning.Mode.toGRPC(mode),
             engineId: "stable-diffusion-xl-1024-v1-0",
+            objectPrompt: FineTuning.Mode.Object.Prompt.get(),
           })
         );
 
