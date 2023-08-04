@@ -128,7 +128,11 @@ export namespace Uploads {
       return {
         uploadsFinished,
         uploadsLoading,
-        isReadyToTrain: uploadsLoading === 0 && uploadsFinished >= count.min,
+        isReadyToTrain:
+          uploadsLoading === 0 &&
+          uploadsFinished >= count.min &&
+          (FineTuning.Mode.get() !== "Object" ||
+            FineTuning.Mode.Object.Prompt.use().length > 0),
       };
     }, [count, uploads]);
   };
