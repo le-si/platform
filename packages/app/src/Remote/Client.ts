@@ -26,7 +26,12 @@ export namespace Client {
 
   export const onError = (error: unknown) => {
     console.error(error);
-    Theme.Snackbar.enqueueSnackbar("Something went wrong!", {
+
+    const message = "Something went wrong!";
+    const messageWithDetails =
+      error instanceof Error ? `${message} ${error.message}` : message;
+
+    Theme.Snackbar.enqueueSnackbar(messageWithDetails, {
       variant: "error",
     });
   };
