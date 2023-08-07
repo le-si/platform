@@ -241,7 +241,7 @@ export namespace Sandbox {
             fineTuningParameters: [
               Proto.FineTuningParameters.create({
                 modelId: fineTuneEngine,
-                weight: loraStrength ?? 0.75,
+                weight: loraStrength ?? 1,
               }),
             ],
           }),

@@ -35,7 +35,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
     "stable-diffusion-xl-1024-v1-0"
   );
   const [fineTuneEngine, setFineTuneEngine] = useState<string | undefined>();
-  const [finetuneStrength, setFinetuneStrength] = useState<number>(0.75);
+  const [finetuneStrength, setFinetuneStrength] = useState<number>(1);
   const [error, setError] = useState<string | undefined>(undefined);
 
   const [positivePrompt, setPositivePrompt] = useState<string>("");

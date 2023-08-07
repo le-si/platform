@@ -30,7 +30,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
     "stable-diffusion-xl-1024-v1-0"
   );
   const [fineTuneEngine, setFineTuneEngine] = useState<string | undefined>();
-  const [finetuneStrength, setFinetuneStrength] = useState<number>(0.75);
+  const [finetuneStrength, setFinetuneStrength] = useState<number>(1);
   const [error, setError] = useState<string | undefined>(undefined);
 
   const [prompts, setPrompts] = useState<Prompt[]>([
