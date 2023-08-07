@@ -70,7 +70,7 @@ export function Training() {
               You can manage your model on the&nbsp;
               <Link
                 className="text-indigo-500 hover:underline"
-                to={User.Account.Page.url()}
+                to={User.Finetunes.url()}
               >
                 account page
               </Link>
