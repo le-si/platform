@@ -1,4 +1,5 @@
 import { FineTuning } from "~/FineTuning";
+import { Mode } from "~/FineTuning/Mode";
 import { GlobalState } from "~/GlobalState";
 import { Theme } from "~/Theme";
 
@@ -10,6 +11,7 @@ export type Uploads = {
 
 export function Uploads() {
   FineTuning.Project.Create.use();
+  const mode = Mode.use();
 
   const uploads = Uploads.use();
   const { uploadsLoading, isReadyToTrain } = Uploads.useIsReadyToTrain();
@@ -20,46 +22,39 @@ export function Uploads() {
   };
 
   return (
-    <FineTuning.Step className="max-w-[1000px]">
-      <div>
-        <FineTuning.H1>
-          Upload {constraints.count.min}-{constraints.count.max} images
-        </FineTuning.H1>
-        <p className="mt-2">
-          Image size should be from {constraints.size.min}px to&nbsp;
-          {constraints.size.max}px
-        </p>
-      </div>
+    <FineTuning.Step className="max-w-[1000px] lg:w-[50rem]  xl:w-[80rem]">
       <div className="flex gap-6">
         <div className="flex grow basis-0 flex-col gap-4">
-          <FineTuning.H2>Model Name</FineTuning.H2>
-          <FineTuning.Project.Name.Input className="w-full grow" />
-          <Theme.Button
-            variant="primary"
-            className="mr-auto self-end px-4"
-            disabled={!isReadyToTrain}
-            onClick={FineTuning.Steps.next}
-          >
-            {uploadsLoading > 0 && (
-              <Theme.Icon.Spinner className="mr-2 animate-spin text-white" />
-            )}
-            Train
-            <FineTuning.ArrowRight className="ml-2" />
-          </Theme.Button>
+          <div className="flex flex-col gap-1">
+            <h3 className="select-none text-lg">Model Name</h3>
+            <FineTuning.Project.Name.Input className="w-full grow" />
+          </div>
+          {mode === "Object" && (
+            <div className="flex flex-col gap-1">
+              <h3 className="select-none text-lg">Object Prompt</h3>
+              <FineTuning.Mode.Object.Prompt />
+            </div>
+          )}
         </div>
-        <div className="grow basis-0">
-          <FineTuning.H2 className="mb-2">Instructions</FineTuning.H2>
-          <p>
-            The more you upload the better the fine-tune results. Faces will be
-            centred before fine-tuning automatically.
-          </p>
+        <div className="prose grow basis-0">
+          <ul>
+            <li>
+              Upload {constraints.count.min}-{constraints.count.max} images
+            </li>
+            <li>More images are better</li>
+            <li>
+              Image size should be from {constraints.size.min}px to&nbsp;
+              {constraints.size.max}px
+            </li>
+            <li>Images are deleted after a successful finetune</li>
+          </ul>
         </div>
       </div>
-      <FineTuning.Card className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6">
         <div className="flex items-center justify-center">
-          {uploads.length}
-          <span className="opacity-muted">
-            &nbsp;/ {constraints.count.min}-{constraints.count.max} images
+          {uploads.filter((upload) => upload.asset).length}
+          <span className="opacity-muted select-none">
+            &nbsp;/ {constraints.count.max} images
           </span>
           <div
             className={classes(
@@ -70,15 +65,23 @@ export function Uploads() {
           >
             <Theme.Button className="pr-4" onClick={() => Input.trigger()}>
               <Theme.Icon.Upload className="mr-1" />
-              Upload Image
+              Upload Assets
             </Theme.Button>
-            <Theme.Button className="pr-4" onClick={() => Input.trigger()}>
-              <Theme.Icon.Upload className="mr-1" />
-              Upload Zip
+            <Theme.Button
+              variant="primary"
+              className="mr-auto self-end px-4"
+              disabled={!isReadyToTrain}
+              onClick={FineTuning.Steps.next}
+            >
+              {uploadsLoading > 0 && (
+                <Theme.Icon.Spinner className="mr-2 animate-spin text-white" />
+              )}
+              Start Training
+              <FineTuning.ArrowRight className="ml-2" />
             </Theme.Button>
           </div>
         </div>
-        <div className="relative grid grid-cols-4 gap-4">
+        <div className="relative grid grid-cols-4 gap-2">
           {uploads.map((upload) => (
             <FineTuning.Upload key={upload.id} upload={upload} />
           ))}
@@ -88,7 +91,7 @@ export function Uploads() {
             <FineTuning.Upload key={index} />
           ))}
         </div>
-      </FineTuning.Card>
+      </div>
     </FineTuning.Step>
   );
 }
@@ -125,7 +128,11 @@ export namespace Uploads {
       return {
         uploadsFinished,
         uploadsLoading,
-        isReadyToTrain: uploadsLoading === 0 && uploadsFinished >= count.min,
+        isReadyToTrain:
+          uploadsLoading === 0 &&
+          uploadsFinished >= count.min &&
+          (FineTuning.Mode.get() !== "Object" ||
+            FineTuning.Mode.Object.Prompt.use().length > 0),
       };
     }, [count, uploads]);
   };

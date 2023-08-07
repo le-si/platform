@@ -74,7 +74,7 @@ export function Code({
         </button>
       </div>
       <div className={classes("h-full overflow-auto", redirect && "blur")}>
-        <Markdown className="sandbox m-0 h-full rounded-t-none p-0 text-[0.95rem] leading-3 sm:px-0">
+        <Markdown className="sandbox m-0 h-full max-w-full rounded-t-none p-0 text-[0.95rem] leading-3 sm:px-0">
           {Code.toMarkdownCodeBlock(code, language)}
         </Markdown>
       </div>

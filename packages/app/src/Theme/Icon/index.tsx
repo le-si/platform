@@ -1,3 +1,5 @@
+import { Download } from "lucide-react";
+
 import { AlertCircle } from "./AlertCircle";
 import { AlertTriangle } from "./AlertTriangle";
 import { Arrow } from "./Arrow";
@@ -66,6 +68,7 @@ export declare namespace Icon {
     Help,
     Menu,
     User,
+    Download,
   };
 }
 
@@ -100,4 +103,5 @@ export namespace Icon {
   Icon.Help = Help;
   Icon.Menu = Menu;
   Icon.User = User;
+  Icon.Download = Download;
 }

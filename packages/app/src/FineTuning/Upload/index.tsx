@@ -1,6 +1,8 @@
 import { Theme } from "~/Theme";
 
 import { Asset } from "./Asset";
+import { Input } from "./Uploads/Input";
+
 export { Uploads } from "./Uploads";
 
 export type Upload = {
@@ -9,7 +11,13 @@ export type Upload = {
   asset?: Asset;
 };
 
-export function Upload({ upload }: { upload?: Upload }) {
+export function Upload({
+  upload,
+  hidden,
+}: {
+  upload?: Upload;
+  hidden?: boolean;
+}) {
   const { isFetching: isAssetUploading } = Asset.Create.use(upload);
   const { execute: deleteAsset, isFetching: isAssetDeleting } =
     Asset.Delete.use(upload);
@@ -26,7 +34,14 @@ export function Upload({ upload }: { upload?: Upload }) {
   }, [upload?.url]);
 
   return (
-    <div className="relative box-border flex aspect-square grow items-center justify-center overflow-hidden rounded-md border border-black/10">
+    <div
+      className={classes(
+        "relative box-border flex aspect-square grow items-center justify-center overflow-hidden rounded-md border border-black/10",
+        hidden && "hidden",
+        !upload && "cursor-pointer"
+      )}
+      onClick={() => !upload && Input.trigger()}
+    >
       {isImageReady && (
         <div
           className={classes(

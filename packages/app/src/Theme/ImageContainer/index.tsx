@@ -31,13 +31,31 @@ export function ImageContainer({
       )}
       {(children || onClear) && (
         <div className="flex items-center justify-between">
-          {children ? <div className="flex">{children}</div> : <div />}
+          <div className="flex">
+            <button
+              onClick={() => {
+                if (!src) return;
+
+                // download image
+                const link = document.createElement("a");
+                link.download = "image.png";
+
+                link.href = src;
+                link.click();
+              }}
+              className="flex items-center gap-1 text-xs text-zinc-400 duration-100 hover:text-black"
+            >
+              Download
+              <Theme.Icon.Download className="h-3 w-3" />
+            </button>
+            {children}
+          </div>
           {onClear && (
             <button
               onClick={onClear}
               className="flex items-center gap-1 text-xs text-zinc-400 duration-100 hover:text-black"
             >
-              Clear Image
+              Clear
               <Theme.Icon.X className="h-3 w-3 rounded-full border border-zinc-400 p-px" />
             </button>
           )}
