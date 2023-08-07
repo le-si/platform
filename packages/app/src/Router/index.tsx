@@ -47,6 +47,10 @@ export function Router() {
       ),
     },
     {
+      path: "/docs/terms-of-service",
+      element: <Markdown.Page>{Markdown.Pages.API_TOS}</Markdown.Page>,
+    },
+    {
       path: "/docs",
       element: (
         <Theme.Page>
