@@ -31,7 +31,7 @@ import {
 // stepScheduleStart, which is done via the following formula: stepScheduleStart = 1 - imageStrength.  This means
 // an image strength of 40% would result in a stepScheduleStart of 0.6.
 const imageStrength = 0.4;
-const request = buildGenerationRequest("stable-diffusion-xl-1024-v0-9", {
+const request = buildGenerationRequest("stable-diffusion-xl-1024-v1-0", {
   type: "image-to-image",
   prompts: [
     {
@@ -40,7 +40,7 @@ const request = buildGenerationRequest("stable-diffusion-xl-1024-v0-9", {
   ],
   stepScheduleStart: 1 - imageStrength,
   initImage: fs.readFileSync("./init_image.png"),
-  seed: 121245125,
+  seed: 123463446,
   samples: 1,
   cfgScale: 8,
   steps: 50,

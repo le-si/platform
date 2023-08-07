@@ -37,7 +37,7 @@ const request = buildGenerationRequest("stable-diffusion-xl-1024-v0-9", {
   maskImage: fs.readFileSync("./mask_image.png"),
   prompts: [
     {
-      text: "rainbow starship",
+      text: "crayon drawing of rocket ship launching from forest",
     },
   ],
   seed: 44332211,

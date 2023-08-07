@@ -32,7 +32,7 @@ os.environ['STABILITY_HOST'] = 'grpc.stability.ai:443'
 # https://platform.stability.ai/
 
 # Click on the following link once you have created an account to be taken to your API Key.
-# https://platform.stability.ai/account
+# https://platform.stability.ai/account/keys
 
 # Paste your API Key below.
 
@@ -46,9 +46,8 @@ os.environ['STABILITY_KEY'] = 'key-goes-here'
 stability_api = client.StabilityInference(
     key=os.environ['STABILITY_KEY'], # API Key reference.
     verbose=True, # Print debug messages.
-    engine="stable-diffusion-xl-1024-v0-9", # Set the engine to use for generation.
-    # Available engines: stable-diffusion-xl-1024-v0-9 stable-diffusion-v1 stable-diffusion-v1-5 stable-diffusion-512-v2-0 stable-diffusion-768-v2-0
-    # stable-diffusion-512-v2-1 stable-diffusion-768-v2-1 stable-diffusion-xl-beta-v2-2-2 stable-inpainting-v1-0 stable-inpainting-512-v2-0
+    engine="stable-diffusion-xl-1024-v1-0", # Set the engine to use for generation.
+    # Check out the following link for a list of available engines: https://platform.stability.ai/docs/features/api-parameters#engine
 )
 ```
 
