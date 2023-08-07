@@ -113,8 +113,10 @@ export namespace Uploads {
     State.use(({ uploads }) => Object.values(uploads), GlobalState.shallow);
 
   export const useIsReadyToTrain = () => {
-    const uploads = use();
     const { count } = constraints();
+
+    const uploads = use();
+    const objectPrompt = FineTuning.Mode.Object.Prompt.use();
 
     return useMemo(() => {
       let uploadsFinished = 0;
@@ -131,10 +133,9 @@ export namespace Uploads {
         isReadyToTrain:
           uploadsLoading === 0 &&
           uploadsFinished >= count.min &&
-          (FineTuning.Mode.get() !== "Object" ||
-            FineTuning.Mode.Object.Prompt.use().length > 0),
+          (FineTuning.Mode.get() !== "Object" || !!objectPrompt),
       };
-    }, [count, uploads]);
+    }, [count, uploads, objectPrompt]);
   };
 
   type State = {
