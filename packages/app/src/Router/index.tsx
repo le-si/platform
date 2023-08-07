@@ -159,6 +159,10 @@ export function Router() {
           path: User.APIKeys.Table.uri(),
           element: <User.APIKeys.Table />,
         },
+        {
+          path: User.Finetunes.uri(),
+          element: <User.Finetunes />,
+        },
       ],
     },
     {

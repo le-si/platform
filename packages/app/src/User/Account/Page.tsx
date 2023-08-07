@@ -26,6 +26,12 @@ function Component() {
             API Keys
           </Theme.NavButton>
           <Theme.NavButton
+            url={User.Finetunes.url()}
+            active={location.pathname === User.Finetunes.url()}
+          >
+            Finetunes
+          </Theme.NavButton>
+          <Theme.NavButton
             url={User.Account.Overview.url()}
             active={location.pathname === User.Account.Overview.url()}
           >

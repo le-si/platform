@@ -9,6 +9,7 @@ import { Account } from "./Account";
 import { APIKey, APIKeys } from "./APIKey";
 import { Avatar } from "./Avatar";
 import { Delete } from "./Delete";
+import { Finetunes } from "./Finetunes";
 import { IdentityToken } from "./IdentityToken";
 import { Login } from "./Login";
 import { Logout } from "./Logout";
@@ -37,6 +38,7 @@ export declare namespace User {
     Account,
     Delete,
     Organization,
+    Finetunes,
   };
 }
 
@@ -52,6 +54,7 @@ export namespace User {
   User.Account = Account;
   User.Delete = Delete;
   User.Organization = Organization;
+  User.Finetunes = Finetunes;
 
   export const use = () => {
     const accessToken = AccessToken.use();

@@ -60,7 +60,7 @@ export function Modal({
               )}
               <div
                 className={classes(
-                  "p-4 pb-10 pt-20 text-sm text-neutral-500",
+                  "p-4 text-sm text-neutral-500",
                   containerClassName
                 )}
               >
