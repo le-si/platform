@@ -75,7 +75,7 @@ export namespace FineTuning {
   FineTuning.Uploads = Uploads;
 
   export const route = () => "/fine-tuning" as const;
-  export const enabled = () => false as const;
+  export const enabled = () => true as const;
 
   export function H1({ className, children }: StyleableWithChildren) {
     return (
