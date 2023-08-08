@@ -121,7 +121,6 @@ export function ImageToImage({ setOptions }: ImageToImage) {
       cfg_scale: cfgScale,
       style_preset: style,
       text_prompts: TextPrompts.toArray(positivePrompt, negativePrompt),
-      finetune_engine: fineTuneEngine,
     });
   }, [
     engineID,
@@ -134,7 +133,6 @@ export function ImageToImage({ setOptions }: ImageToImage) {
     setOptions,
     initStrength,
     init,
-    fineTuneEngine,
   ]);
 
   return (

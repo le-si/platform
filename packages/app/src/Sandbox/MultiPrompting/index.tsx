@@ -106,20 +106,8 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
       cfg_scale: cfgScale,
       style_preset: style,
       text_prompts: prompts,
-      finetune_engine: fineTuneEngine,
-      finetune_strength: finetuneStrength,
     });
-  }, [
-    engineID,
-    style,
-    prompts,
-    cfgScale,
-    steps,
-    setOptions,
-    fineTuneEngine,
-    finetuneStrength,
-    dims,
-  ]);
+  }, [engineID, style, prompts, cfgScale, steps, setOptions, dims]);
 
   return (
     <div className="flex h-full w-full flex-col gap-6 md:min-w-[55rem]">
