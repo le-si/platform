@@ -104,7 +104,7 @@ export function Upscaling({ setOptions }: Upscaling) {
         sidebarBottom={
           <Button
             variant="primary"
-            className="relative h-16 rounded-none"
+            className="relative h-16 w-full rounded-none"
             disabled={generating || !init || !apiKey}
             onClick={generate}
           >

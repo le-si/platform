@@ -16,7 +16,8 @@ import { DropZone } from "~/Theme/DropZone";
 
 import { User } from "~/User";
 
-import { request } from "./OpenAPI";
+import { Sandbox } from "..";
+
 import * as Samples from "./Samples";
 
 export type ImageToImage = {
@@ -29,9 +30,12 @@ export function ImageToImage({ setOptions }: ImageToImage) {
 
   const [imageURL, setImageURL] = useState<string | undefined>(undefined);
   const [generating, setGenerating] = useState<boolean>(false);
+  const models = Sandbox.useModels();
   const [engineID, setEngineID] = useState<string>(
-    "stable-diffusion-xl-beta-v2-2-2"
+    "stable-diffusion-xl-1024-v1-0"
   );
+  const [fineTuneEngine, setFineTuneEngine] = useState<string | undefined>();
+  const [finetuneStrength, setFinetuneStrength] = useState<number>(1);
   const [error, setError] = useState<string | undefined>(undefined);
 
   const [positivePrompt, setPositivePrompt] = useState<string>("");
@@ -51,23 +55,34 @@ export function ImageToImage({ setOptions }: ImageToImage) {
   >();
   const [initStrength, setInitStrength] = useState<number>(0.35);
 
+  const createImage = Sandbox.useCreateImage();
+
   const generate = useCallback(async () => {
     if (!apiKey || !init?.file) return;
 
     setGenerating(true);
     setError(undefined);
 
-    const [url, error] = await request(
-      apiKey,
+    const [url, error] = await createImage(
       engineID,
-      init?.file,
-      positivePrompt,
-      negativePrompt,
+      [
+        {
+          text: positivePrompt,
+          weight: 1,
+        },
+        {
+          text: negativePrompt,
+          weight: -1,
+        },
+      ],
       style,
       cfgScale,
       seed,
       steps,
-      initStrength
+      fineTuneEngine,
+      initStrength,
+      init?.file,
+      finetuneStrength
     );
 
     setGenerating(false);
@@ -80,16 +95,19 @@ export function ImageToImage({ setOptions }: ImageToImage) {
     }
   }, [
     apiKey,
-    cfgScale,
-    engineID,
-    outOfCreditsHandler,
     init?.file,
-    initStrength,
-    negativePrompt,
+    createImage,
+    engineID,
     positivePrompt,
+    negativePrompt,
+    style,
+    cfgScale,
     seed,
     steps,
-    style,
+    fineTuneEngine,
+    initStrength,
+    outOfCreditsHandler,
+    finetuneStrength,
   ]);
 
   useEffect(() => {
@@ -103,6 +121,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
       cfg_scale: cfgScale,
       style_preset: style,
       text_prompts: TextPrompts.toArray(positivePrompt, negativePrompt),
+      finetune_engine: fineTuneEngine,
     });
   }, [
     engineID,
@@ -115,6 +134,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
     setOptions,
     initStrength,
     init,
+    fineTuneEngine,
   ]);
 
   return (
@@ -165,23 +185,26 @@ export function ImageToImage({ setOptions }: ImageToImage) {
             </DropZone>
             <Select
               title="Model"
-              value={engineID}
-              onChange={(value) => value && setEngineID(value)}
-              options={[
-                {
-                  label: "Stable Diffusion XL",
-                  value: "stable-diffusion-xl-beta-v2-2-2",
-                },
-                {
-                  label: "Stable Diffusion 1.5",
-                  value: "stable-diffusion-v1-5",
-                },
-                {
-                  label: "Stable Diffusion 2.1",
-                  value: "stable-diffusion-512-v2-1",
-                },
-              ]}
+              value={`${engineID}${fineTuneEngine ? `:${fineTuneEngine}` : ""}`}
+              onChange={(value) => {
+                if (value) {
+                  const [engineID, fineTuneEngine] = value.split(":");
+                  setEngineID(engineID as string);
+                  setFineTuneEngine(fineTuneEngine);
+                }
+              }}
+              options={models}
             />
+            {fineTuneEngine && (
+              <Theme.Range
+                title="Finetune Strength"
+                max={1}
+                min={0}
+                step={0.01}
+                value={finetuneStrength}
+                onChange={setFinetuneStrength}
+              />
+            )}
             <Select
               title="Style"
               value={style}
@@ -209,7 +232,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
         sidebarBottom={
           <Button
             variant="primary"
-            className="relative h-16 rounded-none"
+            className="relative h-16 w-full rounded-none"
             disabled={generating || !positivePrompt || !apiKey || !init}
             onClick={generate}
           >

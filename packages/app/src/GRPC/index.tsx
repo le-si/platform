@@ -1,19 +1,33 @@
 import * as Stability from "@stability/sdk";
 import { CustomError } from "ts-custom-error";
+import { GlobalState } from "~/GlobalState";
+
 import { User } from "~/User";
 
-// export declare namespace GRPC {
-//   export {  } from "@stability/sdk";
-// }
+export type GRPC = {
+  dashboard: Stability.GRPC.DashboardServiceClient;
+  engines: Stability.GRPC.DashboardServiceClient;
+  fineTuning: Stability.GRPC.FineTuningServiceClient;
+  generation: Stability.GRPC.GenerationServiceClient;
+  project: Stability.GRPC.ProjectServiceClient;
+  organization: {
+    get: () => Promise<Stability.GRPC.Organization | GRPC.OrganizationError>;
+  };
+};
 
 export namespace GRPC {
   export const CreateChargeRequest = Stability.GRPC.CreateChargeRequest;
   export const GetChargesRequest = Stability.GRPC.GetChargesRequest;
+  export const CreateProjectRequest = Stability.GRPC.CreateProjectRequest;
 
-  export const use = () => {
+  export const get = () => State.use.getState().grpc;
+
+  export const use = () => State.use(({ grpc }) => grpc, GlobalState.shallow);
+
+  export function Provider({ children }: React.PropsWithChildren) {
     const accessToken = User.AccessToken.use();
 
-    return useMemo(() => {
+    useEffect(() => {
       if (!accessToken) return;
 
       const transport = Stability.GRPC.createWebTransport({
@@ -22,11 +36,11 @@ export namespace GRPC {
       });
 
       const dashboard = new Stability.GRPC.DashboardServiceClient(transport);
-
-      return {
+      const grpc = {
         dashboard,
-        generation: new Stability.GRPC.GenerationServiceClient(transport),
         engines: new Stability.GRPC.DashboardServiceClient(transport),
+        fineTuning: new Stability.GRPC.FineTuningServiceClient(transport),
+        generation: new Stability.GRPC.GenerationServiceClient(transport),
         project: new Stability.GRPC.ProjectServiceClient(transport),
         organization: {
           get: async (): Promise<
@@ -37,25 +51,38 @@ export namespace GRPC {
               ({ isDefault }) => isDefault
             );
 
-            if (!defaultOrganization) {
+            if (!defaultOrganization)
               return new OrganizationError("No default organization found!");
-            }
 
             const { organization } = defaultOrganization;
-            if (!organization) {
+            if (!organization)
               return new OrganizationError("No organization found!");
-            }
 
             return organization;
           },
         },
       };
+
+      State.use.setState({ grpc });
     }, [accessToken]);
-  };
+
+    return <>{children}</>;
+  }
 
   export class OrganizationError extends CustomError {
     constructor(message: string) {
       super(message);
     }
+  }
+
+  type State = {
+    grpc?: GRPC;
+    setGRPC: (grpc?: GRPC) => void;
+  };
+
+  namespace State {
+    export const use = GlobalState.create<State>((set) => ({
+      setGRPC: (grpc) => set({ grpc }),
+    }));
   }
 }

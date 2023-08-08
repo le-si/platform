@@ -1,27 +1,28 @@
-export type Background = StyleableWithChildren & {
-  title?: string;
-  sidebar?: React.ReactNode;
-  sidebarBottom?: React.ReactNode;
-};
-
 export function Background({
-  className,
-  children,
   title,
+  titleRight,
+  icon,
   sidebar,
   sidebarBottom,
-}: Background) {
-  const content = <div className="h-full w-full p-3">{children}</div>;
-
+  className,
+  children,
+}: Background.Props) {
+  const content = (
+    <div className="relative w-full grow p-4 md:p-6">{children}</div>
+  );
   return (
     <div
       className={classes(
-        "bg-brand-amber-1 flex h-full w-fit flex-col overflow-auto rounded-xl",
+        "bg-brand-amber-1 flex min-h-full w-fit flex-col overflow-hidden rounded-xl",
         className
       )}
     >
       {title && (
-        <div className="border-b border-zinc-300 p-3 text-lg">{title}</div>
+        <div className="flex items-center gap-2 border-b border-zinc-300 p-3 text-lg">
+          {icon && <div>{icon}</div>}
+          <div>{title}</div>
+          {titleRight && <div className="ml-auto">{titleRight}</div>}
+        </div>
       )}
       {sidebar ? (
         <div className="flex h-full min-h-0 w-full">
@@ -42,4 +43,14 @@ export function Background({
       )}
     </div>
   );
+}
+
+export namespace Background {
+  export type Props = StyleableWithChildren & {
+    title?: React.ReactNode;
+    titleRight?: React.ReactNode;
+    icon?: React.ReactNode;
+    sidebar?: React.ReactNode;
+    sidebarBottom?: React.ReactNode;
+  };
 }

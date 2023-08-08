@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Markdown } from "~/Markdown";
 import { Theme } from "~/Theme";
 
@@ -8,11 +9,15 @@ export function Code({
   language,
   setLanguage,
   onClose,
+  redirect,
+  redirectReason,
 }: {
   code: Code;
   language: Code.Language;
   setLanguage: (language: Code.Language) => void;
   onClose: () => void;
+  redirect?: string;
+  redirectReason?: string;
 }) {
   const highlighting = Code.useHighlighting(code, language);
 
@@ -20,9 +25,31 @@ export function Code({
     <div
       ref={highlighting.ref}
       css={highlighting.css}
-      className="flex w-full max-w-[50rem] shrink flex-col overflow-hidden overflow-x-auto rounded-xl"
+      className={classes(
+        "relative flex w-full max-w-[50rem] shrink flex-col overflow-hidden overflow-x-auto rounded-xl"
+      )}
     >
-      <div className="flex w-full gap-1 border-b border-[#424242] bg-[#2b2b2b] p-2">
+      {redirect && (
+        <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
+          <div className="pointer-events-none flex flex-col items-center gap-2">
+            <h1 className="text-lg text-white">
+              {redirectReason ?? "Examples are not available for this engine"}
+            </h1>
+            <Link
+              to={redirect}
+              className="pointer-events-auto flex items-center gap-2 text-amber-300 hover:underline"
+            >
+              Learn more
+              <Theme.Icon.ExternalLink className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      )}
+      <div
+        className={classes(
+          "flex w-full gap-1 border-b border-[#424242] bg-[#2b2b2b] p-2"
+        )}
+      >
         <LanguageButton
           language="Javascript"
           onClick={() => setLanguage("javascript")}
@@ -46,8 +73,8 @@ export function Code({
           <Theme.Icon.X className="h-3 w-3" />
         </button>
       </div>
-      <div className="h-full overflow-auto">
-        <Markdown className="sandbox m-0 h-full rounded-t-none p-0 text-[0.95rem] leading-3 sm:px-0">
+      <div className={classes("h-full overflow-auto", redirect && "blur")}>
+        <Markdown className="sandbox m-0 h-full max-w-full rounded-t-none p-0 text-[0.95rem] leading-3 sm:px-0">
           {Code.toMarkdownCodeBlock(code, language)}
         </Markdown>
       </div>

@@ -1,4 +1,8 @@
+import { OpenAPI } from "@stability/sdk";
+import { GRPC as Proto } from "@stability/sdk";
 import { useWindowSize } from "react-use";
+import { FineTuning } from "~/FineTuning";
+import { GRPC } from "~/GRPC";
 
 import { Theme } from "~/Theme";
 
@@ -9,7 +13,9 @@ export function Sandbox<T extends Record<string, unknown>>({
   SandboxComponent,
   samples,
 }: {
-  SandboxComponent: React.FC<{ setOptions: (options: T) => void }> & {
+  SandboxComponent: React.FC<{
+    setOptions: (options: T) => void;
+  }> & {
     formatOptions: (
       options: Omit<T, "engineID">,
       language: Code.Language
@@ -50,6 +56,16 @@ export function Sandbox<T extends Record<string, unknown>>({
               language={codeLanguage}
               setLanguage={setCodeLanguage}
               onClose={() => setShowCode(false)}
+              redirect={
+                options.finetune_engine
+                  ? "/docs/features/api-parameters"
+                  : undefined
+              }
+              redirectReason={
+                options.finetune_engine
+                  ? "Inference of finetuned models is not available in the REST api"
+                  : undefined
+              }
             />
           ) : (
             <div
@@ -79,4 +95,221 @@ export declare namespace Sandbox {
 
 export namespace Sandbox {
   Sandbox.List = List;
+
+  export const useModels = () => {
+    const finetunedModels = FineTuning.Models.use();
+
+    return [
+      {
+        label: "Stable Diffusion XL 1.0",
+        value: "stable-diffusion-xl-1024-v1-0",
+        engine: null,
+      },
+      {
+        label: "Stable Diffusion XL 0.9",
+        value: "stable-diffusion-xl-1024-v0-9",
+        engine: null,
+      },
+      {
+        label: "Stable Diffusion 1.5",
+        value: "stable-diffusion-v1-5",
+        engine: null,
+      },
+      {
+        label: "Stable Diffusion 2.1",
+        value: "stable-diffusion-512-v2-1",
+        engine: null,
+      },
+      ...(Object.values(finetunedModels.data ?? {})
+        .filter((model) => model.status === "Completed")
+        .map((model) => ({
+          label: model.name,
+          engine: model.engineID ?? "stable-diffusion-xl-1024-v1-0",
+          value: `${model.engineID ?? "stable-diffusion-xl-1024-v1-0"}:${
+            model.id
+          }`,
+        })) ?? []),
+    ];
+  };
+
+  export function PositivePrompt(props: Theme.Textarea & { finetune?: ID }) {
+    const needsToken =
+      props.finetune &&
+      (props.value || "").trim() !== "" &&
+      !props.value?.includes(`<${props.finetune}>`);
+    return (
+      <div className="flex flex-col gap-2">
+        <Theme.Textarea
+          autoFocus
+          color="positive"
+          title="Positive Prompt"
+          placeholder="Description of what you want to generate"
+          {...props}
+          className={classes(
+            needsToken &&
+              "ring-1 ring-amber-700 focus:outline-none focus:outline-transparent",
+            props.className
+          )}
+        />
+        {needsToken && (
+          <div className="flex items-center gap-1">
+            <Theme.Icon.AlertTriangle className="h-4 w-4 text-amber-700" />
+            <p className="select-none text-xs text-amber-700">
+              Prompt is missing the finetune token.{" "}
+              <span
+                onClick={() =>
+                  props.onChange?.(`${props.value} <${props.finetune}>`)
+                }
+                className="cursor-pointer font-semibold hover:text-amber-800 hover:underline"
+              >
+                Add it.
+              </span>
+            </p>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  export const useCreateImage = () => {
+    const grpc = GRPC.use();
+
+    return useCallback(
+      async (
+        engineID: string,
+        prompts: OpenAPI.TextToImageRequestBody["text_prompts"],
+        style?: OpenAPI.TextToImageRequestBody["style_preset"],
+        cfgScale?: OpenAPI.TextToImageRequestBody["cfg_scale"],
+        seed?: OpenAPI.TextToImageRequestBody["seed"],
+        steps?: OpenAPI.TextToImageRequestBody["steps"],
+        fineTuneEngine?: string,
+        initStrength?: OpenAPI.ImageToImageRequestBody["image_strength"],
+        initImage?: Blob,
+        loraStrength?: number
+      ): Promise<[string | undefined, Error | undefined]> => {
+        const dims = engineID.includes("1024")
+          ? 1024
+          : engineID.includes("768")
+          ? 768
+          : 512;
+
+        const prompt =
+          prompts
+            ?.filter((prompt) => prompt.text)
+            .map(({ text, weight }) =>
+              Proto.Prompt.create({
+                prompt: { oneofKind: "text", text },
+                parameters: { weight },
+              })
+            ) ?? [];
+
+        if (initImage) {
+          prompt.push(
+            Proto.Prompt.create({
+              parameters: { init: true, weight: initStrength ?? 0.35 },
+              prompt: {
+                oneofKind: "artifact",
+                artifact: Proto.Artifact.create({
+                  type: Proto.ArtifactType.ARTIFACT_IMAGE,
+                  mime: "image/png",
+                  data: {
+                    oneofKind: "binary",
+                    binary: new Uint8Array(await initImage.arrayBuffer()),
+                  },
+                }),
+              },
+            })
+          );
+        }
+
+        const imageParams = Proto.ImageParameters.create({
+          width: BigInt(dims),
+          height: BigInt(dims),
+
+          steps: BigInt(steps ?? 50),
+          samples: BigInt(1),
+          seed: [seed ?? 0],
+
+          transform: Proto.TransformType.create({
+            type: {
+              oneofKind: "diffusion",
+              diffusion: 0,
+            },
+          }),
+
+          ...(fineTuneEngine && {
+            fineTuningParameters: [
+              Proto.FineTuningParameters.create({
+                modelId: fineTuneEngine,
+                weight: loraStrength ?? 1,
+              }),
+            ],
+          }),
+
+          parameters: [
+            Proto.StepParameter.create({
+              sampler: Proto.SamplerParameters.create({
+                cfgScale: cfgScale,
+              }),
+
+              scaledStep: 0,
+              schedule: Proto.ScheduleParameters.create({
+                start: initImage ? 1 - (initStrength ?? 0) : 1,
+              }),
+            }),
+          ],
+        });
+
+        const extras = style && {
+          extras: Proto.Struct.fromJson({
+            $IPC: {
+              preset: style,
+              ...(engineID.includes("-xl-") && { sdxl_size: [4096, 4096] }),
+            },
+          }),
+        };
+
+        const request = grpc?.generation.generate(
+          spy(
+            Proto.Request.create({
+              prompt,
+
+              engineId: engineID,
+              requestedType: Proto.ArtifactType.ARTIFACT_IMAGE,
+              params: { oneofKind: "image", image: imageParams },
+
+              ...extras,
+            })
+          )
+        );
+
+        if (!request) return [undefined, new Error("GRPC not initialized")];
+
+        console.log("request", request);
+
+        for await (const response of request.responses) {
+          for (const artifact of response.artifacts) {
+            if (
+              artifact.type === Proto.ArtifactType.ARTIFACT_TEXT &&
+              artifact.finishReason === Proto.FinishReason.FILTER
+            )
+              return [undefined, new Error("banned word detected")];
+
+            if (
+              artifact.type === Proto.ArtifactType.ARTIFACT_IMAGE &&
+              artifact.data.oneofKind === "binary"
+            ) {
+              const image = new Blob([artifact.data.binary]);
+              const url = URL.createObjectURL(image);
+
+              return [url, undefined];
+            }
+          }
+        }
+
+        return [undefined, new Error("GRPC request failed")];
+      },
+      [grpc]
+    );
+  };
 }

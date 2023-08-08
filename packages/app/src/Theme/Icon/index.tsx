@@ -1,8 +1,12 @@
+import { Download } from "lucide-react";
+
 import { AlertCircle } from "./AlertCircle";
 import { AlertTriangle } from "./AlertTriangle";
 import { Arrow } from "./Arrow";
+import { Camera } from "./Camera";
 import { Check } from "./Check";
 import { ChevronRight } from "./ChevronRight";
+import { Clock } from "./Clock";
 import { Code } from "./Code";
 import { Coin } from "./Coin";
 import { Copy } from "./Copy";
@@ -37,6 +41,7 @@ export declare namespace Icon {
     AlertCircle,
     AlertTriangle,
     Arrow,
+    Camera,
     Check,
     Code,
     Copy,
@@ -57,11 +62,13 @@ export declare namespace Icon {
     Python,
     TypeScript,
     ChevronRight,
+    Clock,
     Token,
     Coin,
     Help,
     Menu,
     User,
+    Download,
   };
 }
 
@@ -69,8 +76,10 @@ export namespace Icon {
   Icon.AlertCircle = AlertCircle;
   Icon.AlertTriangle = AlertTriangle;
   Icon.Arrow = Arrow;
+  Icon.Camera = Camera;
   Icon.Check = Check;
   Icon.Code = Copy;
+  Icon.Clock = Clock;
   Icon.Copy = Copy;
   Icon.Engine = Engine;
   Icon.ExternalLink = ExternalLink;
@@ -94,4 +103,5 @@ export namespace Icon {
   Icon.Help = Help;
   Icon.Menu = Menu;
   Icon.User = User;
+  Icon.Download = Download;
 }

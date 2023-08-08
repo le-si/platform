@@ -7,6 +7,7 @@ export type Button = StyleableWithChildren & {
   onClick?: () => void;
   variant?: "primary" | "secondary";
   link?: string;
+  noLinkIcon?: boolean;
   loading?: boolean;
 };
 
@@ -18,6 +19,7 @@ export function Button({
   className,
   variant,
   link,
+  noLinkIcon,
   loading,
 }: Button) {
   const navigate = useNavigate();
@@ -34,7 +36,7 @@ export function Button({
       }
       className={classes(
         active && "hover",
-        "h-fit w-full max-w-[20rem] grow-0 rounded-lg p-2.5 text-sm text-white duration-100 focus:outline-1 focus:outline-black/10",
+        "h-fit w-fit max-w-[20rem] grow-0 rounded-lg p-2.5 text-white duration-100 focus:outline-1 focus:outline-black/10",
         variant === "primary"
           ? "bg-brand-orange/90"
           : "bg-brand-amber-1 text-black",
@@ -61,7 +63,7 @@ export function Button({
       >
         {children}
       </span>
-      {link && (
+      {link && !noLinkIcon && (
         <Theme.Icon.Link color={variant === "primary" ? "white" : undefined} />
       )}
     </button>

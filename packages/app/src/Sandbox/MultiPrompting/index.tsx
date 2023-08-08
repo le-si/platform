@@ -6,7 +6,8 @@ import { TextPrompts } from "~/Sandbox/TextPrompts";
 import { Theme } from "~/Theme";
 import { User } from "~/User";
 
-import { request } from "./OpenAPI";
+import { Sandbox } from "..";
+
 import * as Samples from "./Samples";
 
 export type MultiPrompting = {
@@ -24,9 +25,12 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
 
   const [imageURL, setImageURL] = useState<string | undefined>(undefined);
   const [generating, setGenerating] = useState<boolean>(false);
+  const models = Sandbox.useModels();
   const [engineID, setEngineID] = useState<string>(
-    "stable-diffusion-xl-beta-v2-2-2"
+    "stable-diffusion-xl-1024-v1-0"
   );
+  const [fineTuneEngine, setFineTuneEngine] = useState<string | undefined>();
+  const [finetuneStrength, setFinetuneStrength] = useState<number>(1);
   const [error, setError] = useState<string | undefined>(undefined);
 
   const [prompts, setPrompts] = useState<Prompt[]>([
@@ -36,11 +40,20 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
     },
   ]);
 
+  const dims = engineID.includes("1024")
+    ? 1024
+    : engineID.includes("768")
+    ? 768
+    : 512;
+
   const [style, setStyle] =
     useState<OpenAPI.TextToImageRequestBody["style_preset"]>("enhance");
 
   const [cfgScale, setCfgScale] = useState<number>(7);
   const [steps, setSteps] = useState<number>(50);
+  const [seed] = useState<number>(0);
+
+  const createImage = Sandbox.useCreateImage();
 
   const generate = useCallback(async () => {
     if (!apiKey) return;
@@ -48,13 +61,17 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
     setGenerating(true);
     setError(undefined);
 
-    const [url, error] = await request(
-      apiKey,
+    const [url, error] = await createImage(
       engineID,
       prompts,
       style,
       cfgScale,
-      steps
+      seed,
+      steps,
+      fineTuneEngine,
+      undefined,
+      undefined,
+      finetuneStrength
     );
 
     setGenerating(false);
@@ -65,20 +82,44 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
     } else {
       setImageURL(url);
     }
-  }, [outOfCreditsHandler, apiKey, engineID, style, prompts, cfgScale, steps]);
+  }, [
+    apiKey,
+    createImage,
+    engineID,
+    prompts,
+    style,
+    cfgScale,
+    seed,
+    steps,
+    fineTuneEngine,
+    outOfCreditsHandler,
+    finetuneStrength,
+  ]);
 
   useEffect(() => {
     setOptions({
       engineID,
       samples: 1,
-      height: 512,
-      width: 512,
+      height: dims,
+      width: dims,
       steps,
       cfg_scale: cfgScale,
       style_preset: style,
       text_prompts: prompts,
+      finetune_engine: fineTuneEngine,
+      finetune_strength: finetuneStrength,
     });
-  }, [engineID, style, prompts, cfgScale, steps, setOptions]);
+  }, [
+    engineID,
+    style,
+    prompts,
+    cfgScale,
+    steps,
+    setOptions,
+    fineTuneEngine,
+    finetuneStrength,
+    dims,
+  ]);
 
   return (
     <div className="flex h-full w-full flex-col gap-6 md:min-w-[55rem]">
@@ -89,23 +130,26 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
           <div className="flex h-fit w-full grow flex-col gap-3">
             <Theme.Select
               title="Model"
-              value={engineID}
-              onChange={(value) => value && setEngineID(value)}
-              options={[
-                {
-                  label: "Stable Diffusion XL",
-                  value: "stable-diffusion-xl-beta-v2-2-2",
-                },
-                {
-                  label: "Stable Diffusion 1.5",
-                  value: "stable-diffusion-v1-5",
-                },
-                {
-                  label: "Stable Diffusion 2.1",
-                  value: "stable-diffusion-512-v2-1",
-                },
-              ]}
+              value={`${engineID}${fineTuneEngine ? `:${fineTuneEngine}` : ""}`}
+              onChange={(value) => {
+                if (value) {
+                  const [engineID, fineTuneEngine] = value.split(":");
+                  setEngineID(engineID as string);
+                  setFineTuneEngine(fineTuneEngine);
+                }
+              }}
+              options={models}
             />
+            {fineTuneEngine && (
+              <Theme.Range
+                title="Finetune Strength"
+                max={1}
+                min={0}
+                step={0.01}
+                value={finetuneStrength}
+                onChange={setFinetuneStrength}
+              />
+            )}
             <Theme.Select
               title="Style"
               value={style}
@@ -133,27 +177,30 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
               {prompts.map((prompt, index) => (
                 <div
                   key={index}
-                  className="flex flex-col gap-2 rounded border border-zinc-300 p-3"
+                  className="bg-brand-amber-1 flex flex-col gap-2 rounded border border-zinc-300 p-3"
                 >
-                  <Theme.Textarea
+                  <Sandbox.PositivePrompt
                     key={index}
                     autoFocus
                     color={prompt.weight > 0 ? "positive" : "negative"}
                     title={
                       <div className="flex w-full items-center justify-between">
                         <p className="text-sm">Prompt {index + 1}</p>
-                        <Theme.Icon.X
-                          className="h-4 w-4 cursor-pointer text-neutral-500 duration-100 hover:text-neutral-900"
-                          onClick={() =>
-                            setPrompts((prompts) =>
-                              prompts.filter((_, i) => i !== index)
-                            )
-                          }
-                        />
+                        {prompts.length > 1 && (
+                          <Theme.Icon.X
+                            className="h-4 w-4 cursor-pointer text-neutral-500 duration-100 hover:text-neutral-900"
+                            onClick={() =>
+                              setPrompts((prompts) =>
+                                prompts.filter((_, i) => i !== index)
+                              )
+                            }
+                          />
+                        )}
                       </div>
                     }
                     placeholder="Enter prompt"
                     value={prompt.text}
+                    className="min-h-[6rem] border-transparent p-0 focus:border-transparent"
                     onChange={(value) =>
                       setPrompts((prompts) =>
                         prompts.map((prompt, i) =>
@@ -182,7 +229,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
             {prompts.length < 10 && (
               <Theme.Button
                 variant="secondary"
-                className="border border-dashed border-zinc-300"
+                className="w-full border border-dashed border-zinc-300"
                 onClick={() =>
                   setPrompts((prompts) => [
                     ...prompts,
@@ -201,7 +248,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
         sidebarBottom={
           <Theme.Button
             variant="primary"
-            className="relative h-16 rounded-none"
+            className="relative h-16 w-full rounded-none"
             disabled={generating || !prompts.length || !apiKey}
             onClick={generate}
           >

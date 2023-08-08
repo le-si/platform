@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FineTuning } from "~/FineTuning";
 
 import { Theme } from "~/Theme";
 
@@ -134,16 +135,23 @@ function SandboxCard({
   svg,
   link,
   soon,
+  isNew,
 }: {
   title: string;
   svg: string;
   link: string;
   soon?: boolean;
+  isNew?: boolean;
 }) {
   const content = (
     <>
-      <div className="h-full w-full rounded-xl bg-white">
+      <div className="relative h-full w-full rounded-xl bg-white">
         <img className="w-full" src={soon ? "/svg/soon-sandbox.webp" : svg} />
+        {isNew && (
+          <div className="absolute right-0 top-0 rounded-bl-lg rounded-tr-lg bg-indigo-500 px-2.5 py-1 font-semibold text-white">
+            New
+          </div>
+        )}
       </div>
       <div className="flex items-center gap-2">
         <h2
@@ -193,11 +201,20 @@ function Sandboxes() {
           svg="/svg/upscaling-sandbox.webp"
           link="/sandbox/upscaling"
         />
-        <SandboxCard
-          title="Multi-Prompting"
-          svg="/svg/multi-prompting-sandbox.webp"
-          link="/sandbox/multi-prompting"
-        />
+        {FineTuning.enabled() ? (
+          <SandboxCard
+            title="Fine-Tuning"
+            svg="/svg/fine-tuning-sandbox.webp"
+            link="/sandbox/fine-tuning"
+            isNew
+          />
+        ) : (
+          <SandboxCard
+            title="Multi-Prompting"
+            svg="/svg/multi-prompting-sandbox.webp"
+            link="/sandbox/multi-prompting"
+          />
+        )}
       </div>
       <Link
         to="/sandbox"

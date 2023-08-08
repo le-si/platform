@@ -1,2 +1,7 @@
 export { Provider } from "./Provider";
-export { useSnackbar as use, type CustomContentProps } from "notistack";
+
+export {
+  useSnackbar as use,
+  enqueueSnackbar,
+  type CustomContentProps,
+} from "notistack";

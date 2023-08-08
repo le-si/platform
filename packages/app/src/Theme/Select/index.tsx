@@ -4,7 +4,7 @@ import { useClickAway } from "react-use";
 export type Select = Styleable & {
   value?: string;
   disabled?: boolean;
-  onChange?: (value: string | undefined) => void;
+  onChange?: (value: string | undefined, label: string | undefined) => void;
   placeholder?: string;
   title?: string;
   icon?: React.ReactNode;
@@ -64,11 +64,11 @@ export function Select({
                 <div
                   key={option.value}
                   onClick={() => {
-                    onChange?.(option.value);
+                    onChange?.(option.value, option.label);
                     setOpen(false);
                   }}
                   className={classes(
-                    "flex h-6 select-none items-center justify-between text-sm",
+                    "flex h-6 shrink-0 select-none items-center justify-between text-sm",
                     value === option.value
                       ? "bg-[#B69FFE]"
                       : "hover:bg-[#D1D5DB]",

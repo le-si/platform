@@ -35,7 +35,6 @@ const BaseSnackbar = React.forwardRef<
   CustomContentProps & { Icon?: React.ReactElement }
 >(({ id, message, persist, Icon }, ref) => {
   const { closeSnackbar } = Theme.Snackbar.use();
-
   return (
     <div
       className="mb-4 flex items-center rounded-lg border border-zinc-700 bg-white p-3 text-zinc-500 shadow dark:bg-zinc-900 dark:text-zinc-400"

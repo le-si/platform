@@ -10,6 +10,7 @@ export type Input = Styleable & {
   icon?: React.ReactNode;
   percentage?: boolean;
   number?: boolean;
+  grow?: boolean;
 };
 
 export function Input({
@@ -25,6 +26,7 @@ export function Input({
   icon,
   percentage,
   number,
+  grow,
 }: Input) {
   const [focused, setFocused] = useState(false);
   const [width, setWidth] = useState(0);
@@ -56,7 +58,7 @@ export function Input({
   }, [percentage, value]);
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className={classes("flex flex-col gap-1", grow && "w-full")}>
       {title && <h1 className="select-none text-xs opacity-75">{title}</h1>}
       <div
         className={classes(

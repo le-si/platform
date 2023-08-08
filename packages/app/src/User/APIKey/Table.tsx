@@ -19,7 +19,7 @@ export function Table() {
     <div className="flex h-full w-full flex-col items-end gap-5">
       <AddKeyButton />
       <Background
-        className="h-fit w-full grow self-start overflow-x-auto truncate"
+        className="h-fit min-h-0 w-full grow self-start overflow-x-auto truncate"
         title="API Keys"
       >
         <div className="w-full text-left text-sm text-neutral-500 dark:text-neutral-400">

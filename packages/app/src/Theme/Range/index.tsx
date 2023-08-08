@@ -23,7 +23,7 @@ export function Range({
       <div className="flex select-none items-center justify-between">
         {title &&
           (typeof title === "string" ? (
-            <p className="text-sm">{title}</p>
+            <p className={classes("select-none text-xs opacity-75")}>{title}</p>
           ) : (
             title
           ))}
@@ -35,14 +35,50 @@ export function Range({
         value={value}
         onChange={(e) => onChange?.(e.target.valueAsNumber)}
         className={classes(
-          "bg-brand-amber-2 max-w-[22rem] resize-none appearance-none rounded-lg text-sm focus:outline-1 focus:outline-black/10",
+          "mb-2 h-px max-w-[22rem] resize-none appearance-none rounded-lg bg-zinc-300 text-sm focus:outline-1 focus:outline-black/10",
           disabled && "opacity-60",
           className
         )}
         min={min}
         max={max}
         step={step}
-        css={css``}
+        css={css`
+          &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 1rem;
+            height: 1rem;
+            background-color: #fff;
+            border: 1px solid #d4d4d8;
+            border-radius: 50%;
+            cursor: pointer;
+          }
+          &::-moz-range-thumb {
+            width: 1rem;
+            height: 1rem;
+            background-color: #fff;
+            border: 1px solid #d4d4d8;
+            border-radius: 50%;
+            cursor: pointer;
+          }
+          &::-ms-thumb {
+            width: 1rem;
+            height: 1rem;
+            background-color: #fff;
+            border: 1px solid #d4d4d8;
+            border-radius: 50%;
+            cursor: pointer;
+          }
+          &:active::-webkit-slider-thumb {
+            background-color: #d4d4d8;
+          }
+          &:active::-moz-range-thumb {
+            background-color: #d4d4d8;
+          }
+          &:active::-ms-thumb {
+            background-color: #d4d4d8;
+          }
+        `}
       />
     </div>
   );
