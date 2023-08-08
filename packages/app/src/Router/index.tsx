@@ -65,10 +65,14 @@ export function Router() {
         },
       ],
     },
-    {
-      path: "/sandbox/fine-tuning",
-      element: <FineTuning />,
-    },
+    ...(FineTuning.enabled()
+      ? [
+          {
+            path: "/sandbox/fine-tuning",
+            element: <FineTuning />,
+          },
+        ]
+      : []),
     {
       path: "/sandbox/fine-tuning/testing",
       element: <FineTuningTesting />,
@@ -159,10 +163,14 @@ export function Router() {
           path: User.APIKeys.Table.uri(),
           element: <User.APIKeys.Table />,
         },
-        {
-          path: User.Finetunes.uri(),
-          element: <User.Finetunes />,
-        },
+        ...(FineTuning.enabled()
+          ? [
+              {
+                path: User.Finetunes.uri(),
+                element: <User.Finetunes />,
+              },
+            ]
+          : []),
       ],
     },
     {

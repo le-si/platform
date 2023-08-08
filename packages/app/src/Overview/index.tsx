@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FineTuning } from "~/FineTuning";
 
 import { Theme } from "~/Theme";
 
@@ -200,12 +201,20 @@ function Sandboxes() {
           svg="/svg/upscaling-sandbox.webp"
           link="/sandbox/upscaling"
         />
-        <SandboxCard
-          title="Fine-Tuning"
-          svg="/svg/fine-tuning-sandbox.webp"
-          link="/sandbox/fine-tuning"
-          isNew
-        />
+        {FineTuning.enabled() ? (
+          <SandboxCard
+            title="Fine-Tuning"
+            svg="/svg/fine-tuning-sandbox.webp"
+            link="/sandbox/fine-tuning"
+            isNew
+          />
+        ) : (
+          <SandboxCard
+            title="Multi-Prompting"
+            svg="/svg/multi-prompting-sandbox.webp"
+            link="/sandbox/multi-prompting"
+          />
+        )}
       </div>
       <Link
         to="/sandbox"

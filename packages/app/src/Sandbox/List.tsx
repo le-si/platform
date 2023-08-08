@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FineTuning } from "~/FineTuning";
 import { GlobalSearch } from "~/GlobalSearch";
 
 type Props = {
@@ -66,16 +67,17 @@ function Sandboxes({
         image="/svg/sandboxes/upscaling.webp"
       />
       <SandboxButton
-        title="Fine-Tuning"
-        description="Train image models with your data"
-        href="/sandbox/fine-tuning"
-        image="/svg/sandboxes/fine-tuning.webp"
-      />
-      <SandboxButton
         title="Multi-Prompting"
         description="Generate images from multiple prompts"
         href="/sandbox/multi-prompting"
         image="/svg/sandboxes/multi-prompting.webp"
+      />
+      <SandboxButton
+        title="Fine-Tuning"
+        description="Train image models with your data"
+        href="/sandbox/fine-tuning"
+        image="/svg/sandboxes/fine-tuning.webp"
+        comingSoon={!FineTuning.enabled()}
       />
 
       <SandboxButton

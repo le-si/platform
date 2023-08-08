@@ -1,5 +1,6 @@
 import * as Auth0 from "@auth0/auth0-react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { FineTuning } from "~/FineTuning";
 import { GlobalSearch } from "~/GlobalSearch";
 import { Theme } from "~/Theme";
 import { User } from "~/User";
@@ -25,12 +26,14 @@ function Component() {
           >
             API Keys
           </Theme.NavButton>
-          <Theme.NavButton
-            url={User.Finetunes.url()}
-            active={location.pathname === User.Finetunes.url()}
-          >
-            Finetunes
-          </Theme.NavButton>
+          {FineTuning.enabled() && (
+            <Theme.NavButton
+              url={User.Finetunes.url()}
+              active={location.pathname === User.Finetunes.url()}
+            >
+              Finetunes
+            </Theme.NavButton>
+          )}
           <Theme.NavButton
             url={User.Account.Overview.url()}
             active={location.pathname === User.Account.Overview.url()}
