@@ -117,7 +117,6 @@ export function TextToImage({ setOptions }: TextToImage) {
       samples: 1,
       style_preset: style,
       text_prompts: TextPrompts.toArray(positivePrompt, negativePrompt),
-      finetune_engine: fineTuneEngine,
     });
   }, [
     engineID,
@@ -128,7 +127,6 @@ export function TextToImage({ setOptions }: TextToImage) {
     steps,
     seed,
     setOptions,
-    fineTuneEngine,
     dims,
   ]);
 
