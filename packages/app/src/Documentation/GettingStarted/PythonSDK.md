@@ -105,7 +105,7 @@ Note that `export` is Linux / MacOS syntax. If you are using Windows, you will n
 # https://platform.stability.ai/
 
 # Click on the following link once you have created an account to be taken to your API Key.
-# https://platform.stability.ai/account
+# https://platform.stability.ai/account/keys
 
 # Paste your API Key below.
 

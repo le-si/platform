@@ -104,7 +104,7 @@ function BuyCredits({ autoFocus }: { autoFocus: boolean | undefined }) {
   return (
     <div className="flex flex-col gap-3">
       <h1>
-        Purchase API credits on&nbsp;
+        Purchase credits for API usage and&nbsp;
         <Link to="https://dreamstudio.ai/account" className="text-brand-indigo">
           DreamStudio
         </Link>

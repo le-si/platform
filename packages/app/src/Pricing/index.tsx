@@ -10,6 +10,46 @@ type State = {
 
 const MODELS = [
   {
+    id: "stable-diffusion-xl-1024-v1-0",
+    modality: "image",
+    static: false,
+
+    name: "Stable Diffusion XL 1.0",
+    description: (
+      <>
+        Building upon the success of the Stable Diffusion XL v0.9 release,
+        Stable Diffusion XL v1.0 brings with it a number of image detail
+        improvements. Specifically, Stable Diffusion XL v1.0 offers enhanced
+        vibrancy and overall color tone accuracy, including deeper black and
+        brighter white tones.
+      </>
+    ),
+
+    formula: ({ steps }: State): number =>
+      100 *
+      (steps == 30
+        ? 0.016
+        : steps == 40
+        ? 0.018
+        : steps == 50
+        ? 0.02
+        : 0.0122 + 0.000127 * steps + 0.000000623 * steps * steps),
+
+    formulaStylized:
+      "100 * (steps === 30 ? 0.016 : steps === 50 ? 0.02 : 0.0122 + 0.000127 * steps + 0.000000623 * steps * steps)",
+
+    variables: [
+      {
+        name: "steps",
+        description: "Number of steps to run the model for",
+        type: "number",
+        min: 10,
+        max: 150,
+      },
+    ],
+  },
+
+  {
     id: "stable-diffusion-xl-1024-v0-9",
     modality: "image",
     static: false,
@@ -35,9 +75,11 @@ const MODELS = [
 
     formula: ({ steps }: State): number =>
       100 *
-      (steps === 30
+      (steps == 30
         ? 0.016
-        : steps === 50
+        : steps == 40
+        ? 0.018
+        : steps == 50
         ? 0.02
         : 0.0122 + 0.000127 * steps + 0.000000623 * steps * steps),
 
@@ -374,7 +416,7 @@ export namespace Pricing {
     const [state, setState] = React.useState<State>({
       width: 512,
       height: 512,
-      steps: 50,
+      steps: 30,
     });
 
     const [revealCalculator, setRevealCalculator] = React.useState(false);
