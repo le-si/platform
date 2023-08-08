@@ -47,6 +47,12 @@ export function TextToImage({ setOptions }: TextToImage) {
   const [steps, setSteps] = useState<number>(50);
   const [seed] = useState<number>(0);
 
+  const dims = engineID.includes("1024")
+    ? 1024
+    : engineID.includes("768")
+    ? 768
+    : 512;
+
   const createImage = Sandbox.useCreateImage();
 
   const generate = useCallback(async () => {
@@ -104,6 +110,8 @@ export function TextToImage({ setOptions }: TextToImage) {
     setOptions({
       engineID,
       steps,
+      width: dims,
+      height: dims,
       seed,
       cfg_scale: cfgScale,
       samples: 1,
@@ -121,6 +129,7 @@ export function TextToImage({ setOptions }: TextToImage) {
     seed,
     setOptions,
     fineTuneEngine,
+    dims,
   ]);
 
   return (

@@ -40,6 +40,12 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
     },
   ]);
 
+  const dims = engineID.includes("1024")
+    ? 1024
+    : engineID.includes("768")
+    ? 768
+    : 512;
+
   const [style, setStyle] =
     useState<OpenAPI.TextToImageRequestBody["style_preset"]>("enhance");
 
@@ -94,8 +100,8 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
     setOptions({
       engineID,
       samples: 1,
-      height: 512,
-      width: 512,
+      height: dims,
+      width: dims,
       steps,
       cfg_scale: cfgScale,
       style_preset: style,
@@ -112,6 +118,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
     setOptions,
     fineTuneEngine,
     finetuneStrength,
+    dims,
   ]);
 
   return (
