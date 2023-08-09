@@ -18,7 +18,7 @@ export function Introduction() {
         <div className="mb-6 mt-2 flex flex-wrap gap-3">
           <Introduction.Pill>Stable Diffusion XL 1.0</Introduction.Pill>
           <Introduction.Pill>4 - 128 Images Required</Introduction.Pill>
-          <Introduction.Pill>4 - 128 Images Required</Introduction.Pill>
+          <Introduction.Pill>Low Cost</Introduction.Pill>
         </div>
         <p>
           Get more creative control over your generations by fine-tuning a model

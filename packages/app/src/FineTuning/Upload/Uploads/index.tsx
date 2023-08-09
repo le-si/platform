@@ -39,14 +39,20 @@ export function Uploads() {
         <div className="prose grow basis-0">
           <ul>
             <li>
-              Upload {constraints.count.min}-{constraints.count.max} images
+              You&apos;ll need to upload at least {constraints.count.min} images
+              for training
             </li>
-            <li>More images are better</li>
             <li>
-              Image size should be from {constraints.size.min}px to&nbsp;
-              {constraints.size.max}px
+              More images will produce better results, the maximum is&nbsp;
+              {constraints.count.max}
             </li>
-            <li>Images are deleted after a successful fine-tune</li>
+            <li>
+              Images smaller than {constraints.size.min}px or larger than&nbsp;
+              {constraints.size.max}px will be resized
+            </li>
+            <li>
+              Images are deleted after your fine-tune is finished training
+            </li>
           </ul>
         </div>
       </div>
@@ -64,7 +70,7 @@ export function Uploads() {
             )}
           >
             <Theme.Button className="pr-4" onClick={() => Input.trigger()}>
-              <Theme.Icon.Upload className="mr-1" />
+              <Theme.Icon.Upload className="-my-1 mr-1" />
               Upload Assets
             </Theme.Button>
             <Theme.Button

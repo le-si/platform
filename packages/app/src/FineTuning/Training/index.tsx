@@ -60,7 +60,7 @@ export function Training() {
               link="/sandbox/text-to-image"
               noLinkIcon
             >
-              Try it out
+              Try it Out
               <FineTuning.ArrowRight className="ml-2" />
             </Theme.Button>
           </div>
