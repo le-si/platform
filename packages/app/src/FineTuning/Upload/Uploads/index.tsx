@@ -54,17 +54,21 @@ export function Uploads() {
         <div className="flex items-center justify-center">
           {uploads.filter((upload) => upload.asset).length}
           <span className="opacity-muted select-none">
-            &nbsp;/ {constraints.count.max} images
+            &nbsp;/ {constraints.count.max} Training Images
           </span>
           <div
             className={classes(
-              "ml-auto flex gap-4",
+              "ml-auto flex gap-2",
               uploads.length >= constraints.count.max &&
                 "opacity-muted pointer-events-none cursor-not-allowed"
             )}
           >
-            <Theme.Button className="pr-4" onClick={() => Input.trigger()}>
-              <Theme.Icon.Upload className="mr-1" />
+            <Theme.Button
+              variant="tertiary"
+              className="pr-4"
+              onClick={() => Input.trigger()}
+            >
+              <Theme.Icon.Upload className="mr-1 h-5 w-5" />
               Upload Assets
             </Theme.Button>
             <Theme.Button

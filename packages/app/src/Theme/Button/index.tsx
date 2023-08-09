@@ -5,7 +5,7 @@ export type Button = StyleableWithChildren & {
   active?: boolean;
   disabled?: boolean;
   onClick?: () => void;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "tertiary";
   link?: string;
   noLinkIcon?: boolean;
   loading?: boolean;
@@ -17,7 +17,7 @@ export function Button({
   disabled,
   onClick,
   className,
-  variant,
+  variant = "secondary",
   link,
   noLinkIcon,
   loading,
@@ -39,12 +39,16 @@ export function Button({
         "h-fit w-fit max-w-[20rem] grow-0 rounded-lg p-2.5 text-white duration-100 focus:outline-1 focus:outline-black/10",
         variant === "primary"
           ? "bg-brand-orange/90"
-          : "bg-brand-amber-1 text-black",
+          : variant === "secondary"
+          ? "bg-brand-amber-1 text-black"
+          : "bg-[#f0eace] text-black",
         disabled
           ? "opacity-60"
           : variant === "primary"
           ? "hover:bg-brand-orange"
-          : "hover:bg-brand-amber-2",
+          : variant === "secondary"
+          ? "hover:bg-brand-amber-2"
+          : "hover:bg-[#e9dead]",
         link && "flex items-center justify-between gap-2 text-left",
         loading && "pointer-events-none relative opacity-80",
         className
