@@ -1,9 +1,13 @@
+import { useNavigate } from "react-router-dom";
+
 import { FineTuning } from "~/FineTuning";
 import { Theme } from "~/Theme";
 
 import { HeroBanner } from "./HeroBanner";
 
 export function Introduction() {
+  const navigate = useNavigate();
+  const { data: models } = FineTuning.Models.use();
   return (
     <FineTuning.Step className="max-w-[80rem]">
       <div className="5xl:max-h-none flex max-h-[10rem] items-center justify-center overflow-hidden rounded-2xl">
@@ -11,25 +15,36 @@ export function Introduction() {
       </div>
       <Introduction.Section>
         <FineTuning.H1>Fine-tune your own model</FineTuning.H1>
+        <div className="mb-6 mt-2 flex flex-wrap gap-3">
+          <Introduction.Pill>Stable Diffusion XL 1.0</Introduction.Pill>
+          <Introduction.Pill>4 - 128 Images Required</Introduction.Pill>
+          <Introduction.Pill>4 - 128 Images Required</Introduction.Pill>
+        </div>
         <p>
           Get more creative control over your generations by fine-tuning a model
-          on a style, face or object
+          on a style, face, or object.
         </p>
-        <div className="mt-2 flex flex-wrap gap-3">
-          <Introduction.Pill>Stable Diffusion XL 1.0</Introduction.Pill>
-          <Introduction.Pill>4 - 128 images</Introduction.Pill>
-        </div>
+        <p>Fine-tuned models can be used through the API or Sandbox.</p>
       </Introduction.Section>
       <Introduction.Section>
-        <p className="max-w-[50rem] text-sm opacity-75">
-          Please accept and acknowledge the risks before continuing that process
-          we use to fine-tune a model may generate artifacts, inaccuracies and
-          defects
-        </p>
-        <div className="mt-2">
+        <div className="mt-2 flex justify-end gap-4 text-base">
+          {Object.values(models).length > 0 && (
+            <Theme.Button
+              className="text-base"
+              onClick={() => navigate("/account/fine-tuning")}
+            >
+              View Your Models
+            </Theme.Button>
+          )}
           <Theme.Button
             className="text-base"
+            onClick={() => navigate("/docs/features/fine-tuning")}
+          >
+            Documentation
+          </Theme.Button>
+          <Theme.Button
             variant="primary"
+            className="text-base"
             onClick={FineTuning.Steps.next}
           >
             <div className="mx-2 flex items-center gap-2">

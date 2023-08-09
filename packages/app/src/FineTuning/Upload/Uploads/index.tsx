@@ -46,7 +46,7 @@ export function Uploads() {
               Image size should be from {constraints.size.min}px to&nbsp;
               {constraints.size.max}px
             </li>
-            <li>Images are deleted after a successful finetune</li>
+            <li>Images are deleted after a successful fine-tune</li>
           </ul>
         </div>
       </div>

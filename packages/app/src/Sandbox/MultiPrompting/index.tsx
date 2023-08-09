@@ -30,7 +30,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
     "stable-diffusion-xl-1024-v1-0"
   );
   const [fineTuneEngine, setFineTuneEngine] = useState<string | undefined>();
-  const [finetuneStrength, setFinetuneStrength] = useState<number>(1);
+  const [fineTuneStrength, setFineTuneStrength] = useState<number>(1);
   const [error, setError] = useState<string | undefined>(undefined);
 
   const [prompts, setPrompts] = useState<Prompt[]>([
@@ -71,7 +71,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
       fineTuneEngine,
       undefined,
       undefined,
-      finetuneStrength
+      fineTuneStrength
     );
 
     setGenerating(false);
@@ -93,7 +93,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
     steps,
     fineTuneEngine,
     outOfCreditsHandler,
-    finetuneStrength,
+    fineTuneStrength,
   ]);
 
   useEffect(() => {
@@ -106,8 +106,8 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
       cfg_scale: cfgScale,
       style_preset: style,
       text_prompts: prompts,
-      finetune_engine: fineTuneEngine,
-      finetune_strength: finetuneStrength,
+      fineTune_engine: fineTuneEngine,
+      fineTune_strength: fineTuneStrength,
     });
   }, [
     engineID,
@@ -117,7 +117,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
     steps,
     setOptions,
     fineTuneEngine,
-    finetuneStrength,
+    fineTuneStrength,
     dims,
   ]);
 
@@ -142,12 +142,12 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
             />
             {fineTuneEngine && (
               <Theme.Range
-                title="Finetune Strength"
+                title="FineTune Strength"
                 max={1}
                 min={0}
                 step={0.01}
-                value={finetuneStrength}
-                onChange={setFinetuneStrength}
+                value={fineTuneStrength}
+                onChange={setFineTuneStrength}
               />
             )}
             <Theme.Select

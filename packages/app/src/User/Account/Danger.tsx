@@ -10,13 +10,9 @@ export function Danger() {
   return (
     <>
       <div className="mb-10 w-full">
-        <h5 className="mb-3.5 text-xl font-semibold tracking-tight text-neutral-900 dark:text-white">
-          Danger zone
-        </h5>
-
         <div className="flex items-center justify-between rounded border border-red-500 px-4 py-3 pr-6 text-black">
           <div className="flex flex-col">
-            <span className="text-lg">Delete account</span>
+            <span className="text-lg">Delete Account</span>
             <span className="opacity-muted text-sm">
               This action is permanent and cannot be undone
             </span>

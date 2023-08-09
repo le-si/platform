@@ -28,10 +28,10 @@ function Component() {
           </Theme.NavButton>
           {FineTuning.enabled() && (
             <Theme.NavButton
-              url={User.Finetunes.url()}
-              active={location.pathname === User.Finetunes.url()}
+              url={User.FineTuning.url()}
+              active={location.pathname === User.FineTuning.url()}
             >
-              Finetunes
+              Fine-Tuning
             </Theme.NavButton>
           )}
           <Theme.NavButton

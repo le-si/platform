@@ -10,7 +10,7 @@ export function Prompt(props: Theme.Input) {
     <Theme.Input
       value={prompt}
       onChange={Prompt.set}
-      placeholder={"Object you're finetuning, e.g. 'car', 'dog', 'cat'"}
+      placeholder={"Object you're fineTuning, e.g. 'car', 'dog', 'cat'"}
       {...props}
     />
   );

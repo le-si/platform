@@ -35,7 +35,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
     "stable-diffusion-xl-1024-v1-0"
   );
   const [fineTuneEngine, setFineTuneEngine] = useState<string | undefined>();
-  const [finetuneStrength, setFinetuneStrength] = useState<number>(1);
+  const [fineTuneStrength, setFineTuneStrength] = useState<number>(1);
   const [error, setError] = useState<string | undefined>(undefined);
 
   const [positivePrompt, setPositivePrompt] = useState<string>("");
@@ -82,7 +82,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
       fineTuneEngine,
       initStrength,
       init?.file,
-      finetuneStrength
+      fineTuneStrength
     );
 
     setGenerating(false);
@@ -107,7 +107,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
     fineTuneEngine,
     initStrength,
     outOfCreditsHandler,
-    finetuneStrength,
+    fineTuneStrength,
   ]);
 
   useEffect(() => {
@@ -121,7 +121,7 @@ export function ImageToImage({ setOptions }: ImageToImage) {
       cfg_scale: cfgScale,
       style_preset: style,
       text_prompts: TextPrompts.toArray(positivePrompt, negativePrompt),
-      finetune_engine: fineTuneEngine,
+      fineTune_engine: fineTuneEngine,
     });
   }, [
     engineID,
@@ -197,12 +197,12 @@ export function ImageToImage({ setOptions }: ImageToImage) {
             />
             {fineTuneEngine && (
               <Theme.Range
-                title="Finetune Strength"
+                title="Fine-Tune Strength"
                 max={1}
                 min={0}
                 step={0.01}
-                value={finetuneStrength}
-                onChange={setFinetuneStrength}
+                value={fineTuneStrength}
+                onChange={setFineTuneStrength}
               />
             )}
             <Select

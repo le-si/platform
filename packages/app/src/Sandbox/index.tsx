@@ -33,7 +33,6 @@ export function Sandbox<T extends Record<string, unknown>>({
     );
 
     if (!hasActiveOption) return undefined;
-
     return samples[codeLanguage]
       .trim()
       .replace("{apiKey}", "YOUR_API_KEY")
@@ -57,13 +56,13 @@ export function Sandbox<T extends Record<string, unknown>>({
               setLanguage={setCodeLanguage}
               onClose={() => setShowCode(false)}
               redirect={
-                options.finetune_engine
+                options.fineTune_engine
                   ? "/docs/features/api-parameters"
                   : undefined
               }
               redirectReason={
-                options.finetune_engine
-                  ? "Inference of finetuned models is not available in the REST api"
+                options.fineTune_engine
+                  ? "Inference of fine-tuned models is not available in the REST api"
                   : undefined
               }
             />
@@ -97,8 +96,7 @@ export namespace Sandbox {
   Sandbox.List = List;
 
   export const useModels = () => {
-    const finetunedModels = FineTuning.Models.use();
-
+    const fineTunedModels = FineTuning.Models.use();
     return [
       {
         label: "Stable Diffusion XL 1.0",
@@ -120,7 +118,7 @@ export namespace Sandbox {
         value: "stable-diffusion-512-v2-1",
         engine: null,
       },
-      ...(Object.values(finetunedModels.data ?? {})
+      ...(Object.values(fineTunedModels.data ?? {})
         .filter((model) => model.status === "Completed")
         .map((model) => ({
           label: model.name,
@@ -132,11 +130,12 @@ export namespace Sandbox {
     ];
   };
 
-  export function PositivePrompt(props: Theme.Textarea & { finetune?: ID }) {
+  export function PositivePrompt(props: Theme.Textarea & { fineTune?: ID }) {
     const needsToken =
-      props.finetune &&
+      props.fineTune &&
       (props.value || "").trim() !== "" &&
-      !props.value?.includes(`<${props.finetune}>`);
+      !props.value?.includes(`<${props.fineTune}>`);
+
     return (
       <div className="flex flex-col gap-2">
         <Theme.Textarea
@@ -155,10 +154,10 @@ export namespace Sandbox {
           <div className="flex items-center gap-1">
             <Theme.Icon.AlertTriangle className="h-4 w-4 text-amber-700" />
             <p className="select-none text-xs text-amber-700">
-              Prompt is missing the finetune token.{" "}
+              Prompt is missing the fine-tune token.&nbsp;
               <span
                 onClick={() =>
-                  props.onChange?.(`${props.value} <${props.finetune}>`)
+                  props.onChange?.(`${props.value} <${props.fineTune}>`)
                 }
                 className="cursor-pointer font-semibold hover:text-amber-800 hover:underline"
               >

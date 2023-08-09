@@ -1,6 +1,6 @@
 import { GRPC as Proto } from "@stability/sdk";
 import { Link } from "react-router-dom";
-import { FineTuning } from "~/FineTuning";
+import { FineTuning as GlobalFineTuning } from "~/FineTuning";
 import { GRPC } from "~/GRPC";
 import { Theme } from "~/Theme";
 
@@ -12,18 +12,17 @@ const statusMap = {
   Failed: 4,
 };
 
-function statusValue(status?: FineTuning.Model.Status) {
+function statusValue(status?: GlobalFineTuning.Model.Status) {
   return statusMap[status ?? "Not Started"];
 }
 
-export function Finetunes() {
-  const models = FineTuning.Models.use();
-
+export function FineTuning() {
+  const models = GlobalFineTuning.Models.use();
   return (
     <div className="flex h-full w-full flex-col items-end gap-5">
       <Theme.Background
         className="h-fit min-h-0 w-full grow self-start overflow-x-auto truncate"
-        title="Finetunes"
+        title="Your Models"
       >
         {models.data || !models.isFetched ? (
           <div className="flex w-full flex-col gap-2 text-left">
@@ -47,13 +46,13 @@ export function Finetunes() {
         ) : (
           <div className="flex h-full flex-col items-center justify-center gap-2">
             <h1 className="text-center text-black/50">
-              {"You don't have any finetunes yet"}
+              {"You don't have any fine-tuned models yet"}
             </h1>
             <Link
               to="/sandbox/fine-tuning"
               className="pointer-events-auto flex items-center gap-2 text-indigo-600 hover:underline"
             >
-              Create a finetune
+              Create a fine-tune
               <Theme.Icon.ExternalLink className="h-4 w-4" />
             </Link>
           </div>
@@ -63,10 +62,9 @@ export function Finetunes() {
   );
 }
 
-function Model({ model }: { model: FineTuning.Model }) {
+function Model({ model }: { model: GlobalFineTuning.Model }) {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const grpc = GRPC.use();
-
   return (
     <div className="grid grid-cols-5 text-sm text-neutral-700 dark:text-neutral-400">
       <h1 className="col-span-2 truncate text-base">{model.name}</h1>
@@ -119,7 +117,7 @@ export function DeleteModal({
   onClose,
   onDelete,
 }: {
-  model: FineTuning.Model;
+  model: GlobalFineTuning.Model;
   open: boolean;
   onClose: () => void;
   onDelete: () => void;
@@ -129,7 +127,7 @@ export function DeleteModal({
     <Theme.Modal
       open={open}
       onClose={onClose}
-      title="Delete this finetuned model?"
+      title="Delete this fine-tuned model?"
       className="flex max-w-[25rem]"
       bottom={
         <div className="flex w-full items-center justify-end gap-3 p-4">
@@ -163,7 +161,7 @@ export function DeleteModal({
   );
 }
 
-export namespace Finetunes {
-  export const uri = () => "finetunes" as const;
-  export const url = () => "/account/finetunes" as const;
+export namespace FineTuning {
+  export const uri = () => "fine-tuning" as const;
+  export const url = () => "/account/fine-tuning" as const;
 }

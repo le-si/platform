@@ -166,8 +166,8 @@ export function Router() {
         ...(FineTuning.enabled()
           ? [
               {
-                path: User.Finetunes.uri(),
-                element: <User.Finetunes />,
+                path: User.FineTuning.uri(),
+                element: <User.FineTuning />,
               },
             ]
           : []),
