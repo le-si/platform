@@ -35,9 +35,8 @@ export function Mode({
 }) {
   const isModeSelected = Mode.use() === mode;
   const onClick = useCallback(() => {
-    Mode.set(mode);
     FineTuning.Steps.next();
-  }, [mode]);
+  }, []);
 
   return (
     <FineTuning.Card className="flex grow basis-0 flex-col gap-4">
