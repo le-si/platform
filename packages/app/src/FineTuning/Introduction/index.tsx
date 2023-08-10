@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { FineTuning } from "~/FineTuning";
 import { Theme } from "~/Theme";
 import { User } from "~/User";
@@ -32,7 +33,7 @@ export function Introduction() {
             <FineTuning.H1>Fine-tune your own model</FineTuning.H1>
             <p>
               Get more creative control over your generations by fine-tuning a
-              model on a style, face or object for use in our APIs.
+              model on a style, face or object for use in the Stability API.
             </p>
             <div className="mt-2 flex flex-wrap gap-3">
               <Introduction.Pill>Stable Diffusion XL 1.0</Introduction.Pill>
@@ -45,7 +46,14 @@ export function Introduction() {
               process we use to fine-tune a model may generate artifacts,
               inaccuracies and defects
             </p>
-            <div className="mt-2">
+            <div className="mt-2 flex gap-3">
+              <Theme.Button
+                className="px-4 text-base"
+                variant="tertiary"
+                link="/docs/features/api-parameters"
+              >
+                Documentation
+              </Theme.Button>
               <Theme.Button
                 className="text-base"
                 variant="primary"
@@ -57,6 +65,18 @@ export function Introduction() {
               </Theme.Button>
             </div>
           </Introduction.Section>
+          <div className="-mt-8 flex items-center">
+            <span className="whitespace-pre opacity-75">
+              {"Buy more credits "}
+            </span>
+            <Link
+              to="/account/credits"
+              className="flex items-center gap-2 text-indigo-600 hover:underline"
+            >
+              here
+              <Theme.Icon.ExternalLink className="h-4 w-4" />
+            </Link>
+          </div>
         </>
       )}
     </FineTuning.Step>
