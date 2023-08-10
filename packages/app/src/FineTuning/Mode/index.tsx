@@ -35,8 +35,9 @@ export function Mode({
 }) {
   const isModeSelected = Mode.use() === mode;
   const onClick = useCallback(() => {
+    Mode.set(mode);
     FineTuning.Steps.next();
-  }, []);
+  }, [mode]);
 
   return (
     <FineTuning.Card className="flex grow basis-0 flex-col gap-4">
@@ -50,9 +51,9 @@ export function Mode({
       <Theme.Button
         className="mt-auto self-end px-4"
         onClick={onClick}
-        variant={isModeSelected ? "primary" : "secondary"}
+        variant="secondary"
       >
-        {isModeSelected ? "Next" : "Select"}
+        Select
         <FineTuning.ArrowRight className="ml-2" />
       </Theme.Button>
     </FineTuning.Card>
