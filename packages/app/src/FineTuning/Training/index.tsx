@@ -61,7 +61,7 @@ export function Training() {
             <Theme.Button
               variant="primary"
               className="px-4"
-              link="/sandbox/text-to-image"
+              link={`/sandbox/text-to-image?finetune=${model?.id}`}
               noLinkIcon
             >
               Try it Out
