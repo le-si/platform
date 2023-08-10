@@ -55,6 +55,10 @@ if response.status_code != 200:
 
 data = response.json()
 
+# make sure the out directory exists
+if not os.path.exists("./out"):
+    os.makedirs("./out")
+
 for i, image in enumerate(data["artifacts"]):
     with open(f'./out/txt2img_{image["seed"]}.png', "wb") as f:
         f.write(base64.b64decode(image["base64"]))
