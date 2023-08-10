@@ -32,7 +32,7 @@ export function Introduction() {
             <FineTuning.H1>Fine-tune your own model</FineTuning.H1>
             <p>
               Get more creative control over your generations by fine-tuning a
-              model on a style, face or object
+              model on a style, face or object for use in our APIs.
             </p>
             <div className="mt-2 flex flex-wrap gap-3">
               <Introduction.Pill>Stable Diffusion XL 1.0</Introduction.Pill>
