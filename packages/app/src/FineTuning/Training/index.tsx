@@ -41,7 +41,7 @@ export function Training() {
       disableNavigation
       className="max-w-[800px] grow items-center"
     >
-      {status !== "Running" ? (
+      {!status || ["Submitted", "Not Started"].includes(status) ? (
         <div className="flex flex-col items-center gap-8">
           <Theme.Icon.Spinner className="-mb-4 h-12 w-12" />
           <FineTuning.H1 className="flex items-center justify-center gap-2">
