@@ -51,9 +51,9 @@ export function Mode({
       <Theme.Button
         className="mt-auto self-end px-4"
         onClick={onClick}
-        variant={isModeSelected ? "primary" : "secondary"}
+        variant="secondary"
       >
-        {isModeSelected ? "Next" : "Select"}
+        Select
         <FineTuning.ArrowRight className="ml-2" />
       </Theme.Button>
     </FineTuning.Card>

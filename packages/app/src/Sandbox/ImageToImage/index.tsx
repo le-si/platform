@@ -43,8 +43,8 @@ export function ImageToImage({ setOptions }: ImageToImage) {
   const [style, setStyle] =
     useState<OpenAPI.ImageToImageRequestBody["style_preset"]>("enhance");
 
-  const [cfgScale, setCfgScale] = useState<number>(7);
-  const [steps, setSteps] = useState<number>(50);
+  const [cfgScale, setCfgScale] = useState<number>(5);
+  const [steps, setSteps] = useState<number>(40);
   const [seed] = useState<number>(0);
   const [init, setInit] = useState<
     | {

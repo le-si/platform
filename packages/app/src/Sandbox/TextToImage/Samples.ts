@@ -40,6 +40,7 @@ export const textToImage = async () => {
 export const python = `
 import base64
 import requests
+import os
 
 url = "https://api.stability.ai/v1/generation/{engineID}/text-to-image"
 
@@ -63,6 +64,10 @@ if response.status_code != 200:
     raise Exception("Non-200 response: " + str(response.text))
 
 data = response.json()
+
+# make sure the out directory exists
+if not os.path.exists("./out"):
+    os.makedirs("./out")
 
 for i, image in enumerate(data["artifacts"]):
     with open(f'./out/txt2img_{image["seed"]}.png', "wb") as f:

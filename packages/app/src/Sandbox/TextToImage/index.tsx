@@ -43,8 +43,8 @@ export function TextToImage({ setOptions }: TextToImage) {
   const [style, setStyle] =
     useState<OpenAPI.TextToImageRequestBody["style_preset"]>("enhance");
 
-  const [cfgScale, setCfgScale] = useState<number>(7);
-  const [steps, setSteps] = useState<number>(50);
+  const [cfgScale, setCfgScale] = useState<number>(5);
+  const [steps, setSteps] = useState<number>(40);
   const [seed] = useState<number>(0);
 
   const dims = engineID.includes("1024")

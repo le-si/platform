@@ -51,18 +51,22 @@ export function Training() {
         </>
       ) : (
         <div className="flex flex-col items-center gap-8">
+          <Theme.Icon.Check className="-mb-3 h-16 w-16 text-green-500" />
           <FineTuning.H1 className="flex items-center justify-center gap-2">
-            <Theme.Icon.Check className="-ml-4 h-12 w-12 text-green-500" />
             Training Complete
           </FineTuning.H1>
-          <div className="flex justify-center gap-8">
-            <Theme.Button className="px-4" onClick={FineTuning.Steps.next}>
+          <div className="flex justify-center gap-4">
+            <Theme.Button
+              variant="tertiary"
+              className="px-4"
+              onClick={FineTuning.Steps.next}
+            >
               New Model
             </Theme.Button>
             <Theme.Button
               variant="primary"
               className="px-4"
-              link="/sandbox/text-to-image"
+              link={`/sandbox/text-to-image?finetune=${model?.id}`}
               noLinkIcon
             >
               Try it Out

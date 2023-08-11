@@ -2,6 +2,7 @@ import { Sandbox } from "~/SandboxV2";
 
 import { Icon } from "./Icon";
 import { Introduction } from "./Introduction";
+import { Legal } from "./Legal";
 import { Mode, Modes } from "./Mode";
 import { Model, Models } from "./Model";
 import { Project } from "./Project";
@@ -13,6 +14,7 @@ export function FineTuning() {
   const steps = Steps.use({ active: 3, max: 4 });
   const isNavigationDisabled = Steps.useIsNavigationDisabled();
   const canNavigateBackwards = !isNavigationDisabled && steps.active > 1;
+
   return (
     <Sandbox
       icon={<Icon />}
@@ -58,6 +60,7 @@ export declare namespace FineTuning {
     Training,
     Upload,
     Uploads,
+    Legal,
   };
 }
 
@@ -73,6 +76,7 @@ export namespace FineTuning {
   FineTuning.Training = Training;
   FineTuning.Upload = Upload;
   FineTuning.Uploads = Uploads;
+  FineTuning.Legal = Legal;
 
   export const route = () => "/fine-tuning" as const;
   export const enabled = () => true as const;

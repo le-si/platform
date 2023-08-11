@@ -16,7 +16,7 @@ export namespace Login {
   Login.Callback = Callback;
   Login.Page = Page;
 
-  const use = () => {
+  export const use = () => {
     const { loginWithRedirect } = Auth0.useAuth0();
 
     return useCallback(
