@@ -8,9 +8,7 @@ import { User } from "~/User";
 import { Progress } from "./Progress";
 
 export function Training() {
-  FineTuning.Model.Create.use();
-
-  const { data: model } = FineTuning.Model.Create.use();
+  const { isError, data: model } = FineTuning.Model.Create.use();
 
   const status = FineTuning.Model.use(model?.id)?.status;
   const percentage = Training.usePercentage();
@@ -22,6 +20,13 @@ export function Training() {
   useEffect(() => {
     (status === "Completed" || status === "Failed") && Training.stop();
   }, [status]);
+
+  useEffect(() => {
+    if (!isError) return;
+
+    Training.stop();
+    FineTuning.Steps.previous();
+  }, [isError]);
 
   const { minMilliseconds, maxMilliseconds } =
     FineTuning.Mode.Duration.use() ?? {
