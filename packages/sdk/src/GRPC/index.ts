@@ -5,7 +5,7 @@ export * from "./Generated/dashboard";
 export * from "./Generated/dashboard.client";
 export * from "./Generated/engines";
 export * from "./Generated/engines.client";
-export * from "./Generated/fineTuning";
+export * from "./Generated/finetuning";
 export * from "./Generated/finetuning.client";
 export * from "./Generated/generation";
 export * from "./Generated/generation.client";
