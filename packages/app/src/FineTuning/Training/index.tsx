@@ -14,8 +14,10 @@ export function Training() {
   const percentage = Training.usePercentage();
 
   useEffect(() => {
-    FineTuning.Training.start();
-  }, []);
+    if (status === "Running" && !State.use.getState().startedAt) {
+      FineTuning.Training.start();
+    }
+  }, [status]);
 
   useEffect(() => {
     (status === "Completed" || status === "Failed") && Training.stop();
@@ -39,7 +41,40 @@ export function Training() {
       disableNavigation
       className="max-w-[800px] grow items-center"
     >
-      {percentage < 100 ? (
+      {status !== "Running" ? (
+        <div className="flex flex-col items-center gap-8">
+          <Theme.Icon.Spinner className="-mb-4 h-12 w-12" />
+          <FineTuning.H1 className="flex items-center justify-center gap-2">
+            Queued
+          </FineTuning.H1>
+          <p className="text-center opacity-80">
+            Your model is in the queue and will start training shortly.
+          </p>
+
+          <div className="text-center text-black/50">
+            <p>
+              You can manage your model on the&nbsp;
+              <Link
+                className="text-indigo-500 hover:underline"
+                to={User.FineTuning.url()}
+              >
+                account page
+              </Link>
+              .
+            </p>
+            <p>
+              Check out the&nbsp;
+              <Link
+                className="text-indigo-500 hover:underline"
+                to={User.Account.Page.url()}
+              >
+                documentation
+              </Link>
+              &nbsp;for how to use your model through the API.
+            </p>
+          </div>
+        </div>
+      ) : percentage < 100 ? (
         <>
           <FineTuning.H1 className="flex items-center gap-1">
             Training&nbsp;
@@ -98,7 +133,7 @@ export function Training() {
           </div>
         </div>
       )}
-      {percentage < 100 && (
+      {percentage < 100 && status === "Running" && (
         <div className="text-center">
           <p>We&apos;re fine-tuning your model now.</p>
           <p>
@@ -120,7 +155,6 @@ export namespace Training {
 
   export const usePercentage = () => {
     const [now, setNow] = useState(new Date());
-
     const { maxMilliseconds } = FineTuning.Mode.Duration.use() ?? {
       maxMilliseconds: Infinity,
     };
