@@ -8,7 +8,6 @@ import {
   Button,
   ImageContainer,
   Input,
-  Range,
   Select,
   Textarea,
   Theme,
@@ -21,35 +20,56 @@ import { Sandbox } from "..";
 import * as Samples from "./Samples";
 
 export type TextToImage = {
+  input: Sandbox.Input;
+  setInput: (input: Sandbox.Input) => void;
   setOptions: (options: Record<string, unknown>) => void;
 };
 
-export function TextToImage({ setOptions }: TextToImage) {
+export function TextToImage({ setOptions, input, setInput }: TextToImage) {
   const apiKey = User.AccessToken.use();
   const outOfCreditsHandler = User.Account.Credits.useOutOfCreditsHandler();
 
   const [imageURL, setImageURL] = useState<string | undefined>(undefined);
   const [generating, setGenerating] = useState<boolean>(false);
   const models = Sandbox.useModels();
-  const [engineID, setEngineID] = useState<string>(
-    "stable-diffusion-xl-1024-v1-0"
-  );
-  const [fineTuneEngine, setFineTuneEngine] = useState<string | undefined>();
-  const [finetuneStrength, setFinetuneStrength] = useState<number>(1);
+  const finetunes = Sandbox.useFinetunes();
   const [error, setError] = useState<string | undefined>(undefined);
 
-  const [positivePrompt, setPositivePrompt] = useState<string>("");
-  const [negativePrompt, setNegativePrompt] = useState<string>("");
-  const [style, setStyle] =
-    useState<OpenAPI.TextToImageRequestBody["style_preset"]>("enhance");
+  const positivePrompt = input.prompts[0]?.text ?? "";
+  const negativePrompt = input.prompts[1]?.text ?? "";
+  const setPositivePrompt = (value: string) =>
+    setInput({
+      ...input,
+      prompts: [
+        {
+          text: value,
+          weight: 1,
+        },
+        {
+          text: negativePrompt,
+          weight: -1,
+        },
+      ],
+    });
 
-  const [cfgScale, setCfgScale] = useState<number>(5);
-  const [steps, setSteps] = useState<number>(40);
-  const [seed] = useState<number>(0);
+  const setNegativePrompt = (value: string) =>
+    setInput({
+      ...input,
+      prompts: [
+        {
+          text: positivePrompt,
+          weight: 1,
+        },
+        {
+          text: value,
+          weight: -1,
+        },
+      ],
+    });
 
-  const dims = engineID.includes("1024")
+  const dims = input.engineID.includes("1024")
     ? 1024
-    : engineID.includes("768")
+    : input.engineID.includes("768")
     ? 768
     : 512;
 
@@ -61,27 +81,7 @@ export function TextToImage({ setOptions }: TextToImage) {
     setGenerating(true);
     setError(undefined);
 
-    const [url, error] = await createImage(
-      engineID,
-      [
-        {
-          text: positivePrompt,
-          weight: 1,
-        },
-        {
-          text: negativePrompt,
-          weight: -1,
-        },
-      ],
-      style,
-      cfgScale,
-      seed,
-      steps,
-      fineTuneEngine,
-      undefined,
-      undefined,
-      finetuneStrength
-    );
+    const [url, error] = await createImage(input);
 
     setGenerating(false);
     if (error) {
@@ -91,45 +91,29 @@ export function TextToImage({ setOptions }: TextToImage) {
     } else {
       setImageURL(url);
     }
-  }, [
-    apiKey,
-    createImage,
-    engineID,
-    positivePrompt,
-    negativePrompt,
-    style,
-    cfgScale,
-    seed,
-    steps,
-    fineTuneEngine,
-    outOfCreditsHandler,
-    finetuneStrength,
-  ]);
+  }, [apiKey, createImage, input, outOfCreditsHandler]);
 
   useEffect(() => {
     setOptions({
-      engineID,
-      steps,
+      engineID: input.engineID,
+      steps: input.steps,
       width: dims,
       height: dims,
-      seed,
-      cfg_scale: cfgScale,
+      seed: input.seed,
+      cfg_scale: input.cfgScale,
       samples: 1,
-      style_preset: style,
-      text_prompts: TextPrompts.toArray(positivePrompt, negativePrompt),
-      finetune_engine: fineTuneEngine,
+      style_preset: input.style,
+      text_prompts: input.prompts,
     });
   }, [
-    engineID,
-    style,
-    positivePrompt,
-    negativePrompt,
-    cfgScale,
-    steps,
-    seed,
     setOptions,
-    fineTuneEngine,
     dims,
+    input.engineID,
+    input.steps,
+    input.seed,
+    input.cfgScale,
+    input.style,
+    input.prompts,
   ]);
 
   return (
@@ -142,7 +126,7 @@ export function TextToImage({ setOptions }: TextToImage) {
             <Sandbox.PositivePrompt
               value={positivePrompt}
               onChange={setPositivePrompt}
-              finetune={fineTuneEngine}
+              finetune={input.fineTuneEngine}
             />
             <Textarea
               color="negative"
@@ -153,47 +137,75 @@ export function TextToImage({ setOptions }: TextToImage) {
             />
             <Select
               title="Model"
-              value={`${engineID}${fineTuneEngine ? `:${fineTuneEngine}` : ""}`}
+              value={input.engineID}
               onChange={(value) => {
-                if (value) {
-                  const [engineID, fineTuneEngine] = value.split(":");
-                  setEngineID(engineID as string);
-                  setFineTuneEngine(fineTuneEngine);
-                }
+                if (!value) return;
+                setInput({
+                  ...input,
+                  engineID: value,
+                });
               }}
               options={models}
             />
-            {fineTuneEngine && (
-              <Range
+            {finetunes.length > 0 && (
+              <Select
+                title="Finetune"
+                value={input.fineTuneEngine ?? undefined}
+                onChange={(value) => {
+                  const finetune = finetunes.find((f) => f.value === value);
+
+                  setInput({
+                    ...input,
+                    fineTuneEngine: value,
+                    engineID: finetune?.engine ?? input.engineID,
+                  });
+                }}
+                options={[
+                  {
+                    label: "None",
+                    value: undefined,
+                  },
+                  ...finetunes,
+                ]}
+              />
+            )}
+            {input.fineTuneEngine && (
+              <Theme.Range
                 title="Finetune Strength"
                 max={1}
                 min={0}
                 step={0.01}
-                value={finetuneStrength}
-                onChange={setFinetuneStrength}
+                value={input.loraStrength}
+                onChange={(value) =>
+                  setInput({ ...input, loraStrength: value })
+                }
               />
             )}
             <Select
               title="Style"
-              value={style}
+              value={input.style}
               onChange={(value) =>
-                setStyle(
-                  value as OpenAPI.TextToImageRequestBody["style_preset"]
-                )
+                setInput({
+                  ...input,
+                  style:
+                    value as OpenAPI.TextToImageRequestBody["style_preset"],
+                })
               }
               options={StylePresets.options()}
             />
             <Input
               number
               title="CFG Scale"
-              value={cfgScale}
-              onNumberChange={setCfgScale}
+              value={input.cfgScale}
+              onNumberChange={(value) =>
+                setInput({ ...input, cfgScale: value })
+              }
             />
             <Input
               title="Steps"
               number
-              value={steps}
-              onNumberChange={setSteps}
+              value={input.steps}
+              onNumberChange={(value) => setInput({ ...input, steps: value })}
             />
           </div>
         }
