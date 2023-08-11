@@ -107,7 +107,6 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
       style_preset: style,
       text_prompts: prompts,
       finetune_engine: fineTuneEngine,
-      finetune_strength: finetuneStrength,
     });
   }, [
     engineID,
@@ -117,7 +116,6 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
     steps,
     setOptions,
     fineTuneEngine,
-    finetuneStrength,
     dims,
   ]);
 

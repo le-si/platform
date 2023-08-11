@@ -73,10 +73,20 @@ export function Code({
           <Theme.Icon.X className="h-3 w-3" />
         </button>
       </div>
-      <div className={classes("h-full overflow-auto", redirect && "blur")}>
-        <Markdown className="sandbox m-0 h-full max-w-full rounded-t-none p-0 text-[0.95rem] leading-3 sm:px-0">
-          {Code.toMarkdownCodeBlock(code, language)}
-        </Markdown>
+      <div
+        className={classes("h-full overflow-auto", redirect && "bg-[#2b2b2b]")}
+      >
+        {!redirect ? (
+          <Markdown
+            className={classes(
+              "sandbox m-0 h-full max-w-full rounded-t-none p-0 text-[0.95rem] leading-3 sm:px-0"
+            )}
+          >
+            {Code.toMarkdownCodeBlock(code, language)}
+          </Markdown>
+        ) : (
+          <div className="sandbox h-full w-full" />
+        )}
       </div>
     </div>
   );
