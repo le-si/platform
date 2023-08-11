@@ -1,5 +1,6 @@
 import { OpenAPI } from "@stability/sdk";
 import { GRPC as Proto } from "@stability/sdk";
+import { useLocation } from "react-router-dom";
 import { useWindowSize } from "react-use";
 import { FineTuning } from "~/FineTuning";
 import { GRPC } from "~/GRPC";
@@ -14,6 +15,8 @@ export function Sandbox<T extends Record<string, unknown>>({
   samples,
 }: {
   SandboxComponent: React.FC<{
+    input: Sandbox.Input;
+    setInput: (input: Sandbox.Input) => void;
     setOptions: (options: T) => void;
   }> & {
     formatOptions: (
@@ -26,6 +29,54 @@ export function Sandbox<T extends Record<string, unknown>>({
   const [showCode, setShowCode] = useState(true);
   const [codeLanguage, setCodeLanguage] = useState<Code.Language>("javascript");
   const [options, setOptions] = useState<T>({} as T);
+  const [input, setInput] = useState<Sandbox.Input>({
+    engineID: "stable-diffusion-xl-1024-v1-0",
+    prompts: [
+      {
+        text: "A painting of a cat",
+        weight: 1,
+      },
+      {
+        text: "blurry, bad",
+        weight: -1,
+      },
+    ],
+    cfgScale: 5,
+    steps: 40,
+    seed: 0,
+    fineTuneEngine: undefined,
+    initImage: undefined,
+    initStrength: 0.35,
+    loraStrength: 1,
+    style: "enhance",
+  });
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+
+    const engineID = params.get("engine-id");
+    if (engineID) setInput({ ...input, engineID });
+
+    const fineTune = params.get("fine-tune");
+    if (fineTune)
+      setInput({
+        ...input,
+        fineTuneEngine: fineTune,
+        prompts: [
+          {
+            text: `A photo of <${fineTune}>`,
+            weight: 1,
+          },
+          {
+            text: "blurry, bad",
+            weight: -1,
+          },
+        ],
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.search]);
 
   const code = useMemo(() => {
     const hasActiveOption = Object.entries(options).find(
@@ -56,12 +107,12 @@ export function Sandbox<T extends Record<string, unknown>>({
               setLanguage={setCodeLanguage}
               onClose={() => setShowCode(false)}
               redirect={
-                options.fineTune_engine
+                input.fineTuneEngine
                   ? "/docs/features/api-parameters"
                   : undefined
               }
               redirectReason={
-                options.fineTune_engine
+                input.fineTuneEngine
                   ? "Inference of fine-tuned models is not available in the REST api"
                   : undefined
               }
@@ -75,7 +126,11 @@ export function Sandbox<T extends Record<string, unknown>>({
               View Code
             </div>
           ))}
-        <SandboxComponent setOptions={setOptions} />
+        <SandboxComponent
+          input={input}
+          setInput={setInput}
+          setOptions={setOptions}
+        />
       </div>
     </div>
   );
@@ -95,46 +150,59 @@ export declare namespace Sandbox {
 export namespace Sandbox {
   Sandbox.List = List;
 
-  export const useModels = () => {
+  export type Input = {
+    engineID: string;
+    prompts: OpenAPI.TextToImageRequestBody["text_prompts"];
+    style?: OpenAPI.TextToImageRequestBody["style_preset"];
+    cfgScale?: OpenAPI.TextToImageRequestBody["cfg_scale"];
+    seed?: OpenAPI.TextToImageRequestBody["seed"];
+    steps?: OpenAPI.TextToImageRequestBody["steps"];
+    fineTuneEngine?: string;
+    initStrength?: OpenAPI.ImageToImageRequestBody["image_strength"];
+    initImage?: Blob;
+    loraStrength?: number;
+  };
+
+  export const useModels = () => [
+    {
+      label: "Stable Diffusion XL 1.0",
+      value: "stable-diffusion-xl-1024-v1-0",
+      engine: null,
+    },
+    {
+      label: "Stable Diffusion XL 0.9",
+      value: "stable-diffusion-xl-1024-v0-9",
+      engine: null,
+    },
+    {
+      label: "Stable Diffusion 1.5",
+      value: "stable-diffusion-v1-5",
+      engine: null,
+    },
+    {
+      label: "Stable Diffusion 2.1",
+      value: "stable-diffusion-512-v2-1",
+      engine: null,
+    },
+  ];
+
+  export const useFineTunes = () => {
     const fineTunedModels = FineTuning.Models.use();
-    return [
-      {
-        label: "Stable Diffusion XL 1.0",
-        value: "stable-diffusion-xl-1024-v1-0",
-        engine: null,
-      },
-      {
-        label: "Stable Diffusion XL 0.9",
-        value: "stable-diffusion-xl-1024-v0-9",
-        engine: null,
-      },
-      {
-        label: "Stable Diffusion 1.5",
-        value: "stable-diffusion-v1-5",
-        engine: null,
-      },
-      {
-        label: "Stable Diffusion 2.1",
-        value: "stable-diffusion-512-v2-1",
-        engine: null,
-      },
-      ...(Object.values(fineTunedModels.data ?? {})
+
+    return (
+      Object.values(fineTunedModels.data ?? {})
         .filter((model) => model.status === "Completed")
         .map((model) => ({
           label: model.name,
           engine: model.engineID ?? "stable-diffusion-xl-1024-v1-0",
-          value: `${model.engineID ?? "stable-diffusion-xl-1024-v1-0"}:${
-            model.id
-          }`,
-        })) ?? []),
-    ];
+          value: model.id,
+        })) ?? []
+    );
   };
 
   export function PositivePrompt(props: Theme.Textarea & { fineTune?: ID }) {
     const needsToken =
-      props.fineTune &&
-      (props.value || "").trim() !== "" &&
-      !props.value?.includes(`<${props.fineTune}>`);
+      props.fineTune && !props.value?.includes(`<${props.fineTune}>`);
 
     return (
       <div className="flex flex-col gap-2">
@@ -174,18 +242,18 @@ export namespace Sandbox {
     const grpc = GRPC.use();
 
     return useCallback(
-      async (
-        engineID: string,
-        prompts: OpenAPI.TextToImageRequestBody["text_prompts"],
-        style?: OpenAPI.TextToImageRequestBody["style_preset"],
-        cfgScale?: OpenAPI.TextToImageRequestBody["cfg_scale"],
-        seed?: OpenAPI.TextToImageRequestBody["seed"],
-        steps?: OpenAPI.TextToImageRequestBody["steps"],
-        fineTuneEngine?: string,
-        initStrength?: OpenAPI.ImageToImageRequestBody["image_strength"],
-        initImage?: Blob,
-        loraStrength?: number
-      ): Promise<[string | undefined, Error | undefined]> => {
+      async ({
+        engineID,
+        prompts,
+        style,
+        cfgScale,
+        seed,
+        steps,
+        fineTuneEngine,
+        initStrength,
+        initImage,
+        loraStrength,
+      }: Sandbox.Input): Promise<[string | undefined, Error | undefined]> => {
         const dims = engineID.includes("1024")
           ? 1024
           : engineID.includes("768")
