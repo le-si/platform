@@ -9,6 +9,7 @@ const ACCEPTABLE_KEY_DATE = new Date("2023-08-08T00:00:00.000Z");
 
 export function Introduction() {
   const { user } = User.use();
+  const onLogin = User.Login.use();
   const [showLegal, setShowLegal] = React.useState(false);
 
   useEffect(() => {
@@ -57,10 +58,10 @@ export function Introduction() {
               <Theme.Button
                 className="text-base"
                 variant="primary"
-                onClick={() => setShowLegal(true)}
+                onClick={() => (!!user ? setShowLegal(true) : onLogin())}
               >
                 <div className="mx-2 flex items-center gap-2">
-                  Get Started <ArrowRight />
+                  {!!user ? "Get Started" : "Login"} <ArrowRight />
                 </div>
               </Theme.Button>
             </div>
