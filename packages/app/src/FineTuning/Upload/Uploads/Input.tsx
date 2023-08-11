@@ -3,7 +3,7 @@ import JSZip from "jszip";
 import { FineTuning } from "~/FineTuning";
 
 export namespace Input {
-  const handleZipFile = async (zipFile: Blob) => {
+  export const handleZipFile = async (zipFile: Blob) => {
     const zip = await JSZip.loadAsync(zipFile);
 
     for (const fileName in zip.files) {
@@ -26,7 +26,7 @@ export namespace Input {
     }
   };
 
-  const addResizedFile = (url: URLString) => {
+  export const addResizedFile = (url: URLString) => {
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
 
