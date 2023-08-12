@@ -52,7 +52,7 @@ export function Introduction() {
               <Theme.Button
                 className="px-4 text-base"
                 variant="tertiary"
-                link="/docs/features/api-parameters"
+                link="/docs/features/fine-tuning"
               >
                 Documentation
               </Theme.Button>

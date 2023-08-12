@@ -107,9 +107,7 @@ export function Sandbox<T extends Record<string, unknown>>({
               setLanguage={setCodeLanguage}
               onClose={() => setShowCode(false)}
               redirect={
-                input.fineTuneEngine
-                  ? "/docs/features/api-parameters"
-                  : undefined
+                input.fineTuneEngine ? "/docs/features/fine-tuning" : undefined
               }
               redirectReason={
                 input.fineTuneEngine
