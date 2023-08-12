@@ -48,7 +48,7 @@ export function Sandbox<T extends Record<string, unknown>>({
     initImage: undefined,
     initStrength: 0.35,
     loraStrength: 1,
-    style: "enhance",
+    style: undefined,
   });
 
   const location = useLocation();
