@@ -71,9 +71,9 @@ export function Code({
           )}
           <button
             onClick={onClose}
-            className="aspect-square rounded border border-transparent p-1 px-1.5 text-xs text-white duration-100 hover:bg-white hover:text-black"
+            className="aspect-square rounded border border-transparent p-0.5 px-1 text-xs text-white duration-100 hover:bg-white hover:text-black"
           >
-            <Theme.Icon.X className="h-3 w-3" />
+            <Theme.Icon.X className="h-4 w-4" />
           </button>
         </div>
       </div>
