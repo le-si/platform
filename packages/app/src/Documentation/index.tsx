@@ -12,6 +12,7 @@ import imageToImagePython from "./Features/ImageToImagePython.md?raw";
 import imageToImageTypeScript from "./Features/ImageToImageTypeScript.md?raw";
 import inpaintingPython from "./Features/InpaintingPython.md?raw";
 import inpaintingTypeScript from "./Features/InpaintingTypeScript.md?raw";
+import finetuningPython from "./Features/FinetuningPython.md?raw";
 import multiprompting from "./Features/Multiprompting.md?raw";
 import textToImagePython from "./Features/TextToImagePython.md?raw";
 import textToImageTypeScript from "./Features/TextToImageTypeScript.md?raw";
@@ -209,6 +210,14 @@ export namespace Documentation {
                   "/docs/api-reference#tag/v1generation/operation/masking",
               },
             ],
+          },
+          {
+            name: "Fine-tuning",
+            route: "/docs/features/fine-tuning",
+            imageURL: "/clip-guidance-dochead.png",
+            summary: "Learn how to fine-tune models with the Stability API.",
+
+            content: finetuningPython,
           },
           {
             name: "CLIP Guidance",
