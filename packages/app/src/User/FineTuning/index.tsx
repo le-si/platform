@@ -26,14 +26,14 @@ export function FineTuning() {
       >
         {models.data || !models.isFetched ? (
           <div className="flex w-full flex-col gap-2 text-left">
-            <div className="mb-2 grid grid-cols-5 border-b border-black/5 pb-2 text-xs uppercase text-neutral-500">
-              <h1 className="col-span-2 truncate">Name</h1>
+            <div className="mb-2 grid grid-cols-6 border-b border-black/5 pb-2 text-xs uppercase text-neutral-500">
+              <h1 className="col-span-3 truncate">Name</h1>
               <h1 className="truncate">Type</h1>
               <h1 className="truncate">Status</h1>
             </div>
             {!models.isFetched ? (
-              <div className="grid grid-cols-5 text-sm text-neutral-700 dark:text-neutral-400">
-                <h1 className="col-span-5 mt-6 truncate text-center">
+              <div className="grid grid-cols-6 text-sm text-neutral-700 dark:text-neutral-400">
+                <h1 className="col-span-6 mt-6 truncate text-center">
                   Loading...
                 </h1>
               </div>
@@ -66,8 +66,33 @@ function Model({ model }: { model: GlobalFineTuning.Model }) {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const grpc = GRPC.use();
   return (
-    <div className="grid grid-cols-5 text-sm text-neutral-700 dark:text-neutral-400">
-      <h1 className="col-span-2 truncate text-base">{model.name}</h1>
+    <div className="grid grid-cols-6 items-center border-b border-zinc-200/50 pb-2 text-sm text-neutral-700 last:border-transparent last:pb-0 dark:text-neutral-400">
+      <div className="col-span-3 flex flex-col gap-0.5 truncate">
+        <Link
+          className="group flex w-fit items-center gap-1 text-lg hover:text-indigo-500 hover:underline"
+          to={`/sandbox/text-to-image?fine-tune=${model.id}`}
+        >
+          {model.name}
+          <Theme.Icon.ExternalLink className="hidden h-4 w-4 group-hover:block" />
+        </Link>
+        <p
+          className="group flex w-fit items-center gap-1 text-xs opacity-50"
+          onClick={(e) => {
+            e.stopPropagation();
+            navigator.clipboard.writeText(model.id);
+
+            // select the text
+            const selection = window.getSelection();
+            const range = document.createRange();
+            range.selectNodeContents(e.target as Node);
+            selection?.removeAllRanges();
+            selection?.addRange(range);
+          }}
+        >
+          {model.id}
+          <Theme.Icon.Copy className="hidden h-3 w-3 group-hover:block" />
+        </p>
+      </div>
       <h1 className="w-fit truncate text-left text-sm opacity-75">
         {model.mode}
       </h1>
