@@ -60,18 +60,22 @@ export function Code({
           onClick={() => setLanguage("python")}
           active={language === "python"}
         />
-        <button
-          onClick={() => navigator.clipboard.writeText(code)}
-          className="ml-auto rounded border border-transparent p-1 text-xs text-white duration-100 hover:bg-white hover:text-black"
-        >
-          <Theme.Icon.Copy className="h-4 w-4" />
-        </button>
-        <button
-          onClick={onClose}
-          className="aspect-square rounded border border-transparent p-1 px-1.5 text-xs text-white duration-100 hover:bg-white hover:text-black"
-        >
-          <Theme.Icon.X className="h-3 w-3" />
-        </button>
+        <div className="ml-auto flex items-center gap-1">
+          {!redirect && (
+            <button
+              onClick={() => navigator.clipboard.writeText(code)}
+              className="rounded border border-transparent p-1 text-xs text-white duration-100 hover:bg-white hover:text-black"
+            >
+              <Theme.Icon.Copy className="h-4 w-4" />
+            </button>
+          )}
+          <button
+            onClick={onClose}
+            className="aspect-square rounded border border-transparent p-1 px-1.5 text-xs text-white duration-100 hover:bg-white hover:text-black"
+          >
+            <Theme.Icon.X className="h-3 w-3" />
+          </button>
+        </div>
       </div>
       <div
         className={classes("h-full overflow-auto", redirect && "bg-[#2b2b2b]")}
