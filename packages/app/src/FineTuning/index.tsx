@@ -84,6 +84,11 @@ export namespace FineTuning {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const { user } = User.use();
 
+    // staging bypass
+    if (window.location.hostname.endsWith(".pages.dev")) {
+      return true;
+    }
+
     // finetuning EA org IDs
     return [
       "org-mAy9qFiLGNWMlANu121Eh3Gx",
