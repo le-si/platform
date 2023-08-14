@@ -163,7 +163,7 @@ export function Router() {
           path: User.APIKeys.Table.uri(),
           element: <User.APIKeys.Table />,
         },
-        ...(enabled
+        ...(FineTuning.useEnabled()
           ? [
               {
                 path: User.FineTuning.uri(),
