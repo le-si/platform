@@ -6,6 +6,56 @@ Try it out live by clicking the link below to open the notebook in Google Colab!
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1aTLAuCF-5tseklGY25HHc0b4w9sRzvKM?usp=sharing)
 
+## Fine-tuning Tips {#tips}
+
+At present, the fine-tuning API offers three modes: Face, Object, and Style. Each of these modes comes with specific requirements along with suggestions for how to get the best results:
+
+### Face Mode
+
+#### Requirements:
+
+- Face mode has been designed for human faces. As such, for non-human faces please try our Object mode with `face` or `head` object prompts.
+- Uploaded images must be of a single person's face. Multiple people may yield strange results and we will not be able to distinguish between multiple faces.
+- Ensure that your images are vertically oriented. Sideways or upside down photos may yield poor results.
+- A minimum of four photos is required to train a face model. 
+
+#### Suggestions:
+
+- Higher quality and quantities of photos will improve the final resulting model. We suggest uploading `six or more` images for a Face model.
+- Contrasting backgrounds help differentiate the face from its surroundings.
+- Variation in lighting, angle, clothing, and hair style in the dataset will improve the overall flexibility of the resulting model.
+- Avoid uploading photos where objects may be obscuring the subject of the photo's face.
+
+### Object Mode
+
+#### Requirements:
+
+- Suitable for single objects / categories.
+- Uploaded images should be focused on a single object, as we are currently only extracting a single object for training with this mode.
+- Use simple, concrete terms for your object prompt. IE: `cat`, `car`, etc. instead of using your cat's name, or a specific car model.
+- Objects should be clearly differentiated from and stand out against the background.
+
+#### Suggestions:
+
+- Higher quality and quantities of photos will improve the final resulting model. We suggest uploading `six to ten or more` images for an Object model.
+- Variation in lighting and angle in the dataset will improve the overall flexibility of the resulting model.
+- Contrasting backgrounds help differentiate the object from its surroundings.
+
+### Style Mode
+
+#### Requirements:
+
+- A minimum of ten example images are required to capture a style.
+- Uploaded Images may vary in aspect ratio, however they will be center cropped as a part of the training process. If your dataset has a person or a subject in them, we recommend that they be in the center of the images. 
+- Aesthetic styles like `oil painting` or `line art` often work best. Keep in mind that the more your conceptual style can generalize to a diversity of subjects, the better the resulting model will be. 
+
+#### Suggestions:
+
+- High-quality images with wide dynamic range and resolution are preferred when training a Style model.
+- Include a diverse range of subjects in your style dataset to avoid the resulting model focusing on a specific type of object. IE: If you are training a Cartoon style model with a dataset primarily consisting of bikes, the resulting model will be heavily biased towards generating images of bikes.
+- Larger datasets enhance results; `20 - 30` images are suggested for styles like `oil painting`, whereas `50 - 60` images are suggested for general concepts like `dark and moody.`
+- Upload only the highest quality version if you have the same image in different qualities, and avoid uploading duplicates.
+
 ## Python Example {#python-example}
 
 ### 1. Install the Stability SDK package... {#install-sdk}
