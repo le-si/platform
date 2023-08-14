@@ -12,14 +12,20 @@ export function Legal() {
     <div className="flex min-h-0 flex-col gap-4">
       <div className="grid grid-cols-2 gap-4">
         <div className="flex flex-col gap-4 rounded-xl border border-zinc-200 p-3">
-          <LegalTakeaway text="One thing you should do" />
-          <LegalTakeaway text="Here's another thing" />
-          <LegalTakeaway text="And another thing" />
+          <LegalTakeaway text="Use images you own" />
+          <LegalTakeaway text="Use the service in accordance to regulations" />
+          <LegalTakeaway text="Use images of people with permission" />
         </div>
         <div className="flex flex-col gap-4 rounded-xl border border-zinc-200 p-3">
-          <LegalTakeaway isNegative text="Not this though" />
-          <LegalTakeaway isNegative text="Or this maybe" />
-          <LegalTakeaway isNegative text="Or this for real" />
+          <LegalTakeaway isNegative text="Use images you don't own" />
+          <LegalTakeaway
+            isNegative
+            text="Use images of people without permission"
+          />
+          <LegalTakeaway
+            isNegative
+            text="Use this service from the State of Illinois"
+          />
         </div>
       </div>
       <div className="min-h-0 rounded-xl border border-zinc-300 bg-black/[2%] p-1 pl-0">
