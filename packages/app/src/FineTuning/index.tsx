@@ -85,7 +85,10 @@ export namespace FineTuning {
     const { user } = User.use();
 
     // staging bypass
-    if (window.location.hostname.endsWith(".pages.dev")) {
+    if (
+      window.location.hostname.endsWith(".pages.dev") ||
+      window.location.hostname.includes("localhost")
+    ) {
       return true;
     }
 
