@@ -20,7 +20,6 @@ import { User } from "~/User";
 
 export function Router() {
   Scroll.useScrollToTopOrHashOnNavigate();
-  const enabled = FineTuning.useEnabled();
 
   return ReactRouter.useRoutes([
     {
@@ -66,7 +65,7 @@ export function Router() {
         },
       ],
     },
-    ...(enabled
+    ...(FineTuning.useEnabled()
       ? [
           {
             path: "/sandbox/fine-tuning",

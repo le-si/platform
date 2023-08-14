@@ -14,9 +14,7 @@ export function Training() {
   const percentage = Training.usePercentage();
 
   useEffect(() => {
-    if (status === "Running" && !State.use.getState().startedAt) {
-      FineTuning.Training.start();
-    }
+    status === "Running" && !State.use.getState().startedAt && Training.start();
   }, [status]);
 
   useEffect(() => {
@@ -25,7 +23,6 @@ export function Training() {
 
   useEffect(() => {
     if (!isError) return;
-
     Training.stop();
     FineTuning.Steps.previous();
   }, [isError]);

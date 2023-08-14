@@ -9,12 +9,12 @@ import animationPricing from "./Features/AnimationPricing.md?raw";
 import animationUsing from "./Features/AnimationUsing.md?raw";
 import apiParameters from "./Features/APIParameters.md?raw";
 import clipGuidance from "./Features/CLIP.md?raw";
-import finetuningPython from "./Features/FinetuningPython.md?raw";
+import fineTuningPython from "./Features/FineTuningPython.md?raw";
 import imageToImagePython from "./Features/ImageToImagePython.md?raw";
 import imageToImageTypeScript from "./Features/ImageToImageTypeScript.md?raw";
 import inpaintingPython from "./Features/InpaintingPython.md?raw";
 import inpaintingTypeScript from "./Features/InpaintingTypeScript.md?raw";
-import multiprompting from "./Features/Multiprompting.md?raw";
+import multiPrompting from "./Features/MultiPrompting.md?raw";
 import textToImagePython from "./Features/TextToImagePython.md?raw";
 import textToImageTypeScript from "./Features/TextToImageTypeScript.md?raw";
 import imageUpscalerPython from "./Features/UpscalerPython.md?raw";
@@ -73,11 +73,7 @@ export namespace Documentation {
     redirect?: string;
   };
 
-  export function createDocs(
-    { finetuningEnabled } = {
-      finetuningEnabled: false,
-    }
-  ) {
+  export function create({ fineTuningEnabled } = { fineTuningEnabled: false }) {
     return [
       {
         icon: "rocket",
@@ -216,16 +212,16 @@ export namespace Documentation {
               },
             ],
           },
-          ...(finetuningEnabled
+          ...(fineTuningEnabled
             ? [
                 {
-                  name: "Fine-tuning",
+                  name: "Fine-Tuning",
                   route: "/docs/features/fine-tuning",
                   imageURL: "/clip-guidance-dochead.png",
                   summary:
                     "Learn how to fine-tune models with the Stability API.",
 
-                  content: finetuningPython,
+                  content: fineTuningPython,
                 },
               ]
             : []),
@@ -301,12 +297,12 @@ export namespace Documentation {
             ],
           },
           {
-            name: "Multi-prompting",
+            name: "Multi-Prompting",
             route: "/docs/features/multi-prompting",
             imageURL: "/multi-prompting-dochead.png",
             summary: "Learn how to use multi-prompting and prompt weighting.",
 
-            content: multiprompting,
+            content: multiPrompting,
             tabs: [
               {
                 name: "Sandbox",
@@ -411,9 +407,8 @@ export namespace Documentation {
   }
 
   export function useDocs(): Documentation {
-    const enabled = FineTuning.useEnabled();
-
-    return useMemo(() => createDocs({ finetuningEnabled: enabled }), [enabled]);
+    const fineTuningEnabled = FineTuning.useEnabled();
+    return useMemo(() => create({ fineTuningEnabled }), [fineTuningEnabled]);
   }
 
   export function useRoutes() {

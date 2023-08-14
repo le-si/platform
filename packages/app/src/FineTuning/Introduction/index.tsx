@@ -14,12 +14,9 @@ export function Introduction() {
   const [showLegal, setShowLegal] = React.useState(false);
 
   useEffect(() => {
-    if (
-      showLegal &&
-      user?.apiKeys?.some((apiKey) => apiKey.created > ACCEPTABLE_KEY_DATE)
-    ) {
+    showLegal &&
+      user?.apiKeys?.some((apiKey) => apiKey.created > ACCEPTABLE_KEY_DATE) &&
       FineTuning.Steps.next();
-    }
   }, [showLegal, user?.apiKeys]);
 
   return (

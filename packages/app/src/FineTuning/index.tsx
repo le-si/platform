@@ -81,10 +81,9 @@ export namespace FineTuning {
 
   export const route = () => "/fine-tuning" as const;
   export const useEnabled = () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { user } = User.use();
+    if (!user?.organizationID) return false;
 
-    // staging bypass
     if (
       window.location.hostname.endsWith(".pages.dev") ||
       window.location.hostname.includes("localhost")
@@ -92,7 +91,6 @@ export namespace FineTuning {
       return true;
     }
 
-    // finetuning EA org IDs
     return [
       "org-mAy9qFiLGNWMlANu121Eh3Gx",
       "org-GYX1xC2JFChiwKXfMW0sKfkv",
@@ -102,7 +100,7 @@ export namespace FineTuning {
       "org-G7pJ5MbPHlPMnknIQAFwiCe7",
       "org-KdLTjs3lIQjva1KWs0P7ewwh",
       "org-xYtvwlTR9GSfvk9OI854sN1u",
-    ].includes(user?.organizationID ?? "");
+    ].includes(user.organizationID);
   };
 
   export function H1({ className, children }: StyleableWithChildren) {
