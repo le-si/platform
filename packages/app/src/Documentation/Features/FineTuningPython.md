@@ -207,8 +207,6 @@ Now that we have a fine-tuned model, we can generate images with it! By calling 
 
 Note that the examples below assume that you still have the `model` object from the training session handy. If you don't, refer to Step 3 again to get a list of your models, assign the model ID string to a variable (IE: `model_a_id = 'model-id-string'`), and then use that in place of `model.id` in the examples below (IE: `<{model_a_id}:0.7>` or `model_a_id` if updating or deleting a model).
 
-Multiple fine-tuned models can be used together in the same prompt by ensuring that each model ID has its own respective variable. For example, `<{model_a_id}:0.7> in the style of <{model_b_id}:0.7>` will generate an image using two different fine-tuned models.
-
 Note that the example below is a basic image request with your fine-tuned model, however all of the API's image generation parameters (minus CLIP Guidance, due to incompatibility with SDXL) are available to be used with your fine-tuned model.
 
 ```python  
