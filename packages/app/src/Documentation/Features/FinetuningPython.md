@@ -119,11 +119,7 @@ For training, we need a dataset of images. Please only upload images that you ha
 
 A larger dataset often tends to result in a more accurate model, but will also take longer to train.
 
-While each mode can accept up to `128` images, we have a few suggestions for a starter dataset based on the mode you are using:
-
-- Face: `6 or more` images.
-- Object: `6 - 10` images.
-- Style: `20 - 30` images.
+While each mode can accept up to `128` images, see the [Fine-tuning Tips](#tips) section for suggestions on how many images to use for each mode.
 
 The file formats that are acceptable are `.png`, `.jpg`, and `.jpeg`. If you're running this on Google Colab, you can upload your `.zip` file directly after running the cell without inputting a local directory.
 
