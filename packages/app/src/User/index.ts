@@ -63,6 +63,8 @@ export namespace User {
 
     const query = ReactQuery.useQuery({
       enabled: !!accessToken,
+      staleTime: 5 * 60 * 1000,
+
       queryKey: ["User.use"],
       queryFn: async (): Promise<User> => {
         const response = await fetch(
