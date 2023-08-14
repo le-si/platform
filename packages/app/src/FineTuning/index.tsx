@@ -1,4 +1,5 @@
 import { Sandbox } from "~/SandboxV2";
+import { User } from "~/User";
 
 import { Icon } from "./Icon";
 import { Introduction } from "./Introduction";
@@ -79,7 +80,22 @@ export namespace FineTuning {
   FineTuning.Legal = Legal;
 
   export const route = () => "/fine-tuning" as const;
-  export const enabled = () => true as const;
+  export const useEnabled = () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { user } = User.use();
+
+    // finetuning EA org IDs
+    return [
+      "org-mAy9qFiLGNWMlANu121Eh3Gx",
+      "org-GYX1xC2JFChiwKXfMW0sKfkv",
+      "org-6XpcsYaOTwoiA6cRBfoWS7f0",
+      "org-jiApiqFniMKJeS4atcPnqUPp",
+      "org-L4IWuqVx7yq70VUdGahpdSWp",
+      "org-G7pJ5MbPHlPMnknIQAFwiCe7",
+      "org-KdLTjs3lIQjva1KWs0P7ewwh",
+      "org-xYtvwlTR9GSfvk9OI854sN1u",
+    ].includes(user?.organizationID ?? "");
+  };
 
   export function H1({ className, children }: StyleableWithChildren) {
     return (

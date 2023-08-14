@@ -50,10 +50,11 @@ export function TabPage({ group }: { group: Documentation.Group }) {
         <div className="flex items-center gap-1">
           {group.tabs
             ?.filter((t) => t.redirect)
-            .map((t, i) => (
+            .map((t) => (
               <Link
                 key={`redirect-${t.name}`}
                 className="hover:bg-brand-amber-1 flex cursor-pointer items-center justify-center gap-1 rounded px-2 py-1.5 duration-100"
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 to={t.redirect!}
               >
                 {t.icon}

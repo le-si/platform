@@ -41,7 +41,7 @@ export namespace Engine {
       if (group.children) group.children.forEach(indexRecursively);
     };
 
-    Documentation.create().forEach(indexRecursively);
+    Documentation.createDocs().forEach(indexRecursively);
 
     customSearchCandidates().forEach((item) => index.add(item));
   }

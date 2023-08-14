@@ -40,6 +40,7 @@ function Sandboxes({
   smallGrid,
   hideComingSoon,
 }: Pick<Props, "smallGrid" | "hideComingSoon">) {
+  const enabled = FineTuning.useEnabled();
   return (
     <div
       className={classes(
@@ -77,7 +78,7 @@ function Sandboxes({
         description="Train image models with your data"
         href="/sandbox/fine-tuning"
         image="/svg/sandboxes/fine-tuning.webp"
-        comingSoon={!FineTuning.enabled()}
+        comingSoon={!enabled}
       />
 
       <SandboxButton

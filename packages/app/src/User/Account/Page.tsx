@@ -16,6 +16,8 @@ function Component() {
     }
   }, [location.pathname, location.search, navigate]);
 
+  const enabled = FineTuning.useEnabled();
+
   return (
     <div className="mt-6 flex w-full flex-col gap-5 px-5 sm:flex-row">
       <div className="flex w-full flex-col gap-5 sm:max-w-[20rem]">
@@ -26,7 +28,7 @@ function Component() {
           >
             API Keys
           </Theme.NavButton>
-          {FineTuning.enabled() && (
+          {enabled && (
             <Theme.NavButton
               url={User.FineTuning.url()}
               active={location.pathname === User.FineTuning.url()}

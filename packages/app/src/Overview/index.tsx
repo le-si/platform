@@ -183,6 +183,7 @@ function SandboxCard({
 }
 
 function Sandboxes() {
+  const enabled = FineTuning.useEnabled();
   return (
     <div className="flex flex-col items-center gap-5">
       <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -201,7 +202,7 @@ function Sandboxes() {
           svg="/svg/upscaling-sandbox.webp"
           link="/sandbox/upscaling"
         />
-        {FineTuning.enabled() ? (
+        {enabled ? (
           <SandboxCard
             title="Fine-Tuning"
             svg="/svg/fine-tuning-sandbox.webp"

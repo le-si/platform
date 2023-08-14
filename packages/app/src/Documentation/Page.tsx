@@ -116,7 +116,7 @@ function findDocCursor(
 }
 
 export function Page() {
-  const routes = Documentation.create();
+  const routes = Documentation.useDocs();
   const navigate = useNavigate();
   const location = useLocation();
 

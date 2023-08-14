@@ -1,4 +1,5 @@
 import { Navigate, RouteObject } from "react-router-dom";
+import { FineTuning } from "~/FineTuning";
 import { Markdown } from "~/Markdown";
 import { Theme } from "~/Theme";
 
@@ -72,7 +73,11 @@ export namespace Documentation {
     redirect?: string;
   };
 
-  export function create(): Documentation {
+  export function createDocs(
+    { finetuningEnabled } = {
+      finetuningEnabled: false,
+    }
+  ) {
     return [
       {
         icon: "rocket",
@@ -211,14 +216,19 @@ export namespace Documentation {
               },
             ],
           },
-          {
-            name: "Fine-tuning",
-            route: "/docs/features/fine-tuning",
-            imageURL: "/clip-guidance-dochead.png",
-            summary: "Learn how to fine-tune models with the Stability API.",
+          ...(finetuningEnabled
+            ? [
+                {
+                  name: "Fine-tuning",
+                  route: "/docs/features/fine-tuning",
+                  imageURL: "/clip-guidance-dochead.png",
+                  summary:
+                    "Learn how to fine-tune models with the Stability API.",
 
-            content: finetuningPython,
-          },
+                  content: finetuningPython,
+                },
+              ]
+            : []),
           {
             name: "CLIP Guidance",
             route: "/docs/features/clip-guidance",
@@ -400,10 +410,14 @@ export namespace Documentation {
     ];
   }
 
-  export const use = (): Documentation => React.useMemo(create, []);
+  export function useDocs(): Documentation {
+    const enabled = FineTuning.useEnabled();
+
+    return useMemo(() => createDocs({ finetuningEnabled: enabled }), [enabled]);
+  }
 
   export function useRoutes() {
-    const documentation = Documentation.use();
+    const documentation = Documentation.useDocs();
 
     return React.useMemo(() => {
       const routes = (documentation: Documentation): RouteObject[] =>
