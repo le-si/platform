@@ -30,7 +30,6 @@ At present, the fine-tuning API offers three modes: Face, Object, and Style. Eac
 
 #### Requirements:
 
-- Suitable for single objects / categories.
 - Uploaded images should be focused on a single object, as we are currently only extracting a single object for training with this mode.
 - Use simple, concrete terms for your object prompt. IE: `cat`, `car`, etc. instead of using your cat's name, or a specific car model.
 - Objects should be clearly differentiated from and stand out against the background.
