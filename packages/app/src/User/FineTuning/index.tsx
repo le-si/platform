@@ -19,7 +19,7 @@ function statusValue(status?: GlobalFineTuning.Model.Status) {
 export function FineTuning() {
   const models = GlobalFineTuning.Models.use();
   return (
-    <div className="flex h-full w-full flex-col items-end gap-5">
+    <div className="flex h-full w-full flex-col gap-5 pb-12">
       <Theme.Background
         className="h-fit min-h-0 w-full grow self-start overflow-x-auto truncate"
         title="Your Models"
@@ -58,6 +58,14 @@ export function FineTuning() {
           </div>
         )}
       </Theme.Background>
+
+      <Link
+        to="/sandbox/fine-tuning"
+        className="pointer-events-auto flex items-center gap-2 text-indigo-600 hover:underline"
+      >
+        Create a fine-tune
+        <Theme.Icon.ExternalLink className="h-4 w-4" />
+      </Link>
     </div>
   );
 }
