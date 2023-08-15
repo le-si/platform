@@ -137,6 +137,7 @@ export function TextToImage({ setOptions, input, setInput }: TextToImage) {
             />
             <Select
               title="Model"
+              disabled={!!input.fineTuneEngine}
               value={input.engineID}
               onChange={(value) => {
                 if (!value) return;

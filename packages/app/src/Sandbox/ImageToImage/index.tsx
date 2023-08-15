@@ -179,6 +179,7 @@ export function ImageToImage({ setOptions, input, setInput }: ImageToImage) {
             </DropZone>
             <Select
               title="Model"
+              disabled={!!input.fineTuneEngine}
               value={input.engineID}
               onChange={(value) => {
                 if (!value) return;

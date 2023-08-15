@@ -91,6 +91,7 @@ export function MultiPrompting({
           <div className="flex h-fit w-full grow flex-col gap-3">
             <Theme.Select
               title="Model"
+              disabled={!!input.fineTuneEngine}
               value={input.engineID}
               onChange={(value) => {
                 if (!value) return;
