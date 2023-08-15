@@ -135,13 +135,10 @@ export function ImageToImage({ setOptions, input, setInput }: ImageToImage) {
         className="h-full min-h-0 w-full"
         sidebar={
           <div className="flex h-fit w-full grow flex-col gap-3">
-            <Textarea
-              autoFocus
-              color="positive"
-              title="Positive Prompt"
-              placeholder="Description of what you want to generate"
+            <Sandbox.PositivePrompt
               value={positivePrompt}
               onChange={setPositivePrompt}
+              fineTune={input.fineTuneEngine}
             />
             <Textarea
               color="negative"

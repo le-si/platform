@@ -220,7 +220,7 @@ export namespace Sandbox {
           <div className="flex items-center gap-1">
             <Theme.Icon.AlertTriangle className="h-4 w-4 text-amber-700" />
             <p className="select-none text-xs text-amber-700">
-              Prompt is missing the fine-tune token.&nbsp;
+              Prompt missing the fine-tune token.&nbsp;
               <span
                 onClick={() =>
                   props.onChange?.(`${props.value} <${props.fineTune}>`)

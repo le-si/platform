@@ -167,6 +167,11 @@ export function MultiPrompting({
                   <Sandbox.PositivePrompt
                     key={index}
                     autoFocus
+                    fineTune={
+                      (prompt.weight ?? 1) > 0
+                        ? input.fineTuneEngine
+                        : undefined
+                    }
                     color={(prompt.weight ?? 1) > 0 ? "positive" : "negative"}
                     title={
                       <div className="flex w-full items-center justify-between">
