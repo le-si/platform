@@ -15,7 +15,12 @@ export function Avatar({ className }: Styleable) {
           src={user.avatar}
         />
       ) : (
-        <Theme.Icon.User className="flex h-8 w-8 rounded-full bg-gray-500/30 p-1.5" />
+        <Theme.Icon.User
+          className={classes(
+            "flex h-8 w-8 rounded-full bg-gray-500/30 p-1.5",
+            className
+          )}
+        />
       )}
     </>
   );

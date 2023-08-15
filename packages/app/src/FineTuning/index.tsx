@@ -1,7 +1,9 @@
 import { Sandbox } from "~/SandboxV2";
+import { User } from "~/User";
 
 import { Icon } from "./Icon";
 import { Introduction } from "./Introduction";
+import { Legal } from "./Legal";
 import { Mode, Modes } from "./Mode";
 import { Model, Models } from "./Model";
 import { Project } from "./Project";
@@ -13,6 +15,7 @@ export function FineTuning() {
   const steps = Steps.use({ active: 1, max: 4 });
   const isNavigationDisabled = Steps.useIsNavigationDisabled();
   const canNavigateBackwards = !isNavigationDisabled && steps.active > 1;
+
   return (
     <Sandbox
       icon={<Icon />}
@@ -58,6 +61,7 @@ export declare namespace FineTuning {
     Training,
     Upload,
     Uploads,
+    Legal,
   };
 }
 
@@ -73,9 +77,31 @@ export namespace FineTuning {
   FineTuning.Training = Training;
   FineTuning.Upload = Upload;
   FineTuning.Uploads = Uploads;
+  FineTuning.Legal = Legal;
 
   export const route = () => "/fine-tuning" as const;
-  export const enabled = () => false as const;
+  export const useEnabled = () => {
+    const { user } = User.use();
+    if (!user?.organizationID) return false;
+
+    if (
+      window.location.hostname.endsWith(".pages.dev") ||
+      window.location.hostname.includes("localhost")
+    ) {
+      return true;
+    }
+
+    return [
+      "org-mAy9qFiLGNWMlANu121Eh3Gx",
+      "org-GYX1xC2JFChiwKXfMW0sKfkv",
+      "org-6XpcsYaOTwoiA6cRBfoWS7f0",
+      "org-jiApiqFniMKJeS4atcPnqUPp",
+      "org-L4IWuqVx7yq70VUdGahpdSWp",
+      "org-G7pJ5MbPHlPMnknIQAFwiCe7",
+      "org-KdLTjs3lIQjva1KWs0P7ewwh",
+      "org-xYtvwlTR9GSfvk9OI854sN1u",
+    ].includes(user.organizationID);
+  };
 
   export function H1({ className, children }: StyleableWithChildren) {
     return (

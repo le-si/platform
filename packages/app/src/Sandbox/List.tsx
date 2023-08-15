@@ -77,7 +77,7 @@ function Sandboxes({
         description="Train image models with your data"
         href="/sandbox/fine-tuning"
         image="/svg/sandboxes/fine-tuning.webp"
-        comingSoon={!FineTuning.enabled()}
+        comingSoon={!FineTuning.useEnabled()}
       />
 
       <SandboxButton

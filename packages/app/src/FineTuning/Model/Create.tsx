@@ -22,8 +22,6 @@ export namespace Create {
       queryFn: async () => {
         if (!grpc || !projectID || !mode) return null;
 
-        FineTuning.Training.start();
-
         const { response } = await grpc?.fineTuning.createModel(
           Stability.GRPC.CreateModelRequest.create({
             projectId: projectID,

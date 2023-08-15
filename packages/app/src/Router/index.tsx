@@ -65,7 +65,7 @@ export function Router() {
         },
       ],
     },
-    ...(FineTuning.enabled()
+    ...(FineTuning.useEnabled()
       ? [
           {
             path: "/sandbox/fine-tuning",
@@ -163,11 +163,11 @@ export function Router() {
           path: User.APIKeys.Table.uri(),
           element: <User.APIKeys.Table />,
         },
-        ...(FineTuning.enabled()
+        ...(FineTuning.useEnabled()
           ? [
               {
-                path: User.Finetunes.uri(),
-                element: <User.Finetunes />,
+                path: User.FineTuning.uri(),
+                element: <User.FineTuning />,
               },
             ]
           : []),

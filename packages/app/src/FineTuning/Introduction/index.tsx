@@ -1,43 +1,83 @@
+import { Link } from "react-router-dom";
+
 import { FineTuning } from "~/FineTuning";
 import { Theme } from "~/Theme";
+import { User } from "~/User";
 
 import { HeroBanner } from "./HeroBanner";
 
+const ACCEPTABLE_KEY_DATE = new Date("2023-08-08T00:00:00.000Z");
+
 export function Introduction() {
+  const { user } = User.use();
+  const onLogin = User.Login.use();
+  const [showLegal, setShowLegal] = React.useState(false);
+
+  useEffect(() => {
+    showLegal &&
+      user?.apiKeys?.some((apiKey) => apiKey.created > ACCEPTABLE_KEY_DATE) &&
+      FineTuning.Steps.next();
+  }, [showLegal, user?.apiKeys]);
+
   return (
     <FineTuning.Step className="max-w-[80rem]">
-      <div className="5xl:max-h-none flex max-h-[10rem] items-center justify-center overflow-hidden rounded-2xl">
-        <HeroBanner className="aspect-[680/211] w-full" />
-      </div>
-      <Introduction.Section>
-        <FineTuning.H1>Fine-tune your own model</FineTuning.H1>
-        <p>
-          Get more creative control over your generations by fine-tuning a model
-          on a style, face or object
-        </p>
-        <div className="mt-2 flex flex-wrap gap-3">
-          <Introduction.Pill>Stable Diffusion XL 1.0</Introduction.Pill>
-          <Introduction.Pill>4 - 128 images</Introduction.Pill>
-        </div>
-      </Introduction.Section>
-      <Introduction.Section>
-        <p className="max-w-[50rem] text-sm opacity-75">
-          Please accept and acknowledge the risks before continuing that process
-          we use to fine-tune a model may generate artifacts, inaccuracies and
-          defects
-        </p>
-        <div className="mt-2">
-          <Theme.Button
-            className="text-base"
-            variant="primary"
-            onClick={FineTuning.Steps.next}
-          >
-            <div className="mx-2 flex items-center gap-2">
-              Get Started <ArrowRight />
+      {showLegal ? (
+        <FineTuning.Legal />
+      ) : (
+        <>
+          <div className="5xl:max-h-none flex max-h-[10rem] items-center justify-center overflow-hidden rounded-2xl">
+            <HeroBanner className="aspect-[680/211] w-full" />
+          </div>
+          <Introduction.Section>
+            <FineTuning.H1>Fine-tune your own model</FineTuning.H1>
+            <p>
+              Get more creative control over your generations by fine-tuning a
+              model on a style, face or object for use in the Stability API.
+            </p>
+            <div className="mt-2 flex flex-wrap gap-3">
+              <Introduction.Pill>Stable Diffusion XL 1.0</Introduction.Pill>
+              <Introduction.Pill>4 - 128 images</Introduction.Pill>
             </div>
-          </Theme.Button>
-        </div>
-      </Introduction.Section>
+          </Introduction.Section>
+          <Introduction.Section>
+            <p className="max-w-[50rem] text-sm opacity-75">
+              Please accept and acknowledge the risks before continuing that
+              process we use to fine-tune a model may generate artifacts,
+              inaccuracies and defects
+            </p>
+            <div className="mt-2 flex gap-3">
+              <Theme.Button
+                className="px-4 text-base"
+                variant="tertiary"
+                link="/docs/features/fine-tuning"
+              >
+                Documentation
+              </Theme.Button>
+              <Theme.Button
+                className="text-base"
+                variant="primary"
+                onClick={() => (!!user ? setShowLegal(true) : onLogin())}
+              >
+                <div className="mx-2 flex items-center gap-2">
+                  {!!user ? "Get Started" : "Login"} <ArrowRight />
+                </div>
+              </Theme.Button>
+            </div>
+          </Introduction.Section>
+          <div className="-mt-8 flex items-center">
+            <span className="whitespace-pre opacity-75">
+              {"Buy more credits "}
+            </span>
+            <Link
+              to="/account/credits"
+              className="flex items-center gap-2 text-indigo-600 hover:underline"
+            >
+              here
+              <Theme.Icon.ExternalLink className="h-4 w-4" />
+            </Link>
+          </div>
+        </>
+      )}
     </FineTuning.Step>
   );
 }

@@ -48,19 +48,20 @@ export function TabPage({ group }: { group: Documentation.Group }) {
             ))}
         </div>
         <div className="flex items-center gap-1">
-          {group.tabs
-            ?.filter((t) => t.redirect)
-            .map((t, i) => (
-              <Link
-                key={`redirect-${t.name}`}
-                className="hover:bg-brand-amber-1 flex cursor-pointer items-center justify-center gap-1 rounded px-2 py-1.5 duration-100"
-                to={t.redirect!}
-              >
-                {t.icon}
-                {t.name}
-                <Theme.Icon.ExternalLink className="h-4 w-4" />
-              </Link>
-            ))}
+          {group.tabs?.map(
+            (tab) =>
+              !!tab.redirect && (
+                <Link
+                  key={`redirect-${tab.name}`}
+                  className="hover:bg-brand-amber-1 flex cursor-pointer items-center justify-center gap-1 rounded px-2 py-1.5 duration-100"
+                  to={tab.redirect}
+                >
+                  {tab.icon}
+                  {tab.name}
+                  <Theme.Icon.ExternalLink className="h-4 w-4" />
+                </Link>
+              )
+          )}
         </div>
       </div>
       {typeof content === "string" ? (

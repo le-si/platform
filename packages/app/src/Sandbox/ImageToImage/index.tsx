@@ -21,31 +21,21 @@ import { Sandbox } from "..";
 import * as Samples from "./Samples";
 
 export type ImageToImage = {
+  input: Sandbox.Input;
+  setInput: (input: Sandbox.Input) => void;
   setOptions: (options: Record<string, unknown>) => void;
 };
 
-export function ImageToImage({ setOptions }: ImageToImage) {
+export function ImageToImage({ setOptions, input, setInput }: ImageToImage) {
   const apiKey = User.AccessToken.use();
   const outOfCreditsHandler = User.Account.Credits.useOutOfCreditsHandler();
 
   const [imageURL, setImageURL] = useState<string | undefined>(undefined);
   const [generating, setGenerating] = useState<boolean>(false);
   const models = Sandbox.useModels();
-  const [engineID, setEngineID] = useState<string>(
-    "stable-diffusion-xl-1024-v1-0"
-  );
-  const [fineTuneEngine, setFineTuneEngine] = useState<string | undefined>();
-  const [finetuneStrength, setFinetuneStrength] = useState<number>(1);
+  const fineTunes = Sandbox.useFineTunes();
   const [error, setError] = useState<string | undefined>(undefined);
 
-  const [positivePrompt, setPositivePrompt] = useState<string>("");
-  const [negativePrompt, setNegativePrompt] = useState<string>("");
-  const [style, setStyle] =
-    useState<OpenAPI.ImageToImageRequestBody["style_preset"]>("enhance");
-
-  const [cfgScale, setCfgScale] = useState<number>(7);
-  const [steps, setSteps] = useState<number>(50);
-  const [seed] = useState<number>(0);
   const [init, setInit] = useState<
     | {
         file: Blob;
@@ -53,21 +43,15 @@ export function ImageToImage({ setOptions }: ImageToImage) {
       }
     | undefined
   >();
-  const [initStrength, setInitStrength] = useState<number>(0.35);
 
-  const createImage = Sandbox.useCreateImage();
-
-  const generate = useCallback(async () => {
-    if (!apiKey || !init?.file) return;
-
-    setGenerating(true);
-    setError(undefined);
-
-    const [url, error] = await createImage(
-      engineID,
-      [
+  const positivePrompt = input.prompts[0]?.text ?? "";
+  const negativePrompt = input.prompts[1]?.text ?? "";
+  const setPositivePrompt = (value: string) =>
+    setInput({
+      ...input,
+      prompts: [
         {
-          text: positivePrompt,
+          text: value,
           weight: 1,
         },
         {
@@ -75,15 +59,38 @@ export function ImageToImage({ setOptions }: ImageToImage) {
           weight: -1,
         },
       ],
-      style,
-      cfgScale,
-      seed,
-      steps,
-      fineTuneEngine,
-      initStrength,
-      init?.file,
-      finetuneStrength
-    );
+    });
+
+  const setNegativePrompt = (value: string) =>
+    setInput({
+      ...input,
+      prompts: [
+        {
+          text: positivePrompt,
+          weight: 1,
+        },
+        {
+          text: value,
+          weight: -1,
+        },
+      ],
+    });
+
+  const dims = input.engineID.includes("1024")
+    ? 1024
+    : input.engineID.includes("768")
+    ? 768
+    : 512;
+
+  const createImage = Sandbox.useCreateImage();
+
+  const generate = useCallback(async () => {
+    if (!apiKey) return;
+
+    setGenerating(true);
+    setError(undefined);
+
+    const [url, error] = await createImage(input);
 
     setGenerating(false);
     if (error) {
@@ -93,46 +100,32 @@ export function ImageToImage({ setOptions }: ImageToImage) {
     } else {
       setImageURL(url);
     }
-  }, [
-    apiKey,
-    init?.file,
-    createImage,
-    engineID,
-    positivePrompt,
-    negativePrompt,
-    style,
-    cfgScale,
-    seed,
-    steps,
-    fineTuneEngine,
-    initStrength,
-    outOfCreditsHandler,
-    finetuneStrength,
-  ]);
+  }, [apiKey, createImage, input, outOfCreditsHandler]);
 
   useEffect(() => {
     setOptions({
       init_image_mode: "IMAGE_STRENGTH",
-      image_strength: initStrength,
+      image_strength: input.initStrength,
+      engineID: input.engineID,
+      steps: input.steps,
+      width: dims,
+      height: dims,
+      seed: input.seed,
+      cfg_scale: input.cfgScale,
       samples: 1,
-      engineID,
-      steps,
-      seed,
-      cfg_scale: cfgScale,
-      style_preset: style,
-      text_prompts: TextPrompts.toArray(positivePrompt, negativePrompt),
+      style_preset: input.style,
+      text_prompts: input.prompts,
     });
   }, [
-    engineID,
-    style,
-    positivePrompt,
-    negativePrompt,
-    cfgScale,
-    steps,
-    seed,
     setOptions,
-    initStrength,
-    init,
+    dims,
+    input.engineID,
+    input.steps,
+    input.seed,
+    input.cfgScale,
+    input.style,
+    input.prompts,
+    input.initStrength,
   ]);
 
   return (
@@ -142,13 +135,10 @@ export function ImageToImage({ setOptions }: ImageToImage) {
         className="h-full min-h-0 w-full"
         sidebar={
           <div className="flex h-fit w-full grow flex-col gap-3">
-            <Textarea
-              autoFocus
-              color="positive"
-              title="Positive Prompt"
-              placeholder="Description of what you want to generate"
+            <Sandbox.PositivePrompt
               value={positivePrompt}
               onChange={setPositivePrompt}
+              fineTune={input.fineTuneEngine}
             />
             <Textarea
               color="negative"
@@ -165,9 +155,13 @@ export function ImageToImage({ setOptions }: ImageToImage) {
                   file: blob,
                   url: URL.createObjectURL(blob),
                 });
+                setInput({
+                  ...input,
+                  initImage: blob,
+                });
               }}
               imageStyle={{
-                opacity: initStrength,
+                opacity: input.initStrength,
               }}
               onClear={() => setInit(undefined)}
             >
@@ -176,54 +170,85 @@ export function ImageToImage({ setOptions }: ImageToImage) {
                   title="Strength"
                   number
                   percentage
-                  value={initStrength * 100}
-                  onNumberChange={(value) => setInitStrength(value / 100)}
+                  value={(input.initStrength ?? 0.35) * 100}
+                  onNumberChange={(value) =>
+                    setInput({ ...input, initStrength: value / 100 })
+                  }
                 />
               )}
             </DropZone>
             <Select
               title="Model"
-              value={`${engineID}${fineTuneEngine ? `:${fineTuneEngine}` : ""}`}
+              disabled={!!input.fineTuneEngine}
+              value={input.engineID}
               onChange={(value) => {
-                if (value) {
-                  const [engineID, fineTuneEngine] = value.split(":");
-                  setEngineID(engineID as string);
-                  setFineTuneEngine(fineTuneEngine);
-                }
+                if (!value) return;
+                setInput({
+                  ...input,
+                  engineID: value,
+                });
               }}
               options={models}
             />
-            {fineTuneEngine && (
+            {fineTunes.length > 0 && (
+              <Select
+                title="Fine-Tune"
+                value={input.fineTuneEngine ?? undefined}
+                onChange={(value) => {
+                  const fineTune = fineTunes.find((f) => f.value === value);
+
+                  setInput({
+                    ...input,
+                    fineTuneEngine: value,
+                    engineID: fineTune?.engine ?? input.engineID,
+                  });
+                }}
+                options={[
+                  {
+                    label: "None",
+                    value: undefined,
+                  },
+                  ...fineTunes,
+                ]}
+              />
+            )}
+            {input.fineTuneEngine && (
               <Theme.Range
-                title="Finetune Strength"
+                title="Fine-Tune Strength"
                 max={1}
                 min={0}
                 step={0.01}
-                value={finetuneStrength}
-                onChange={setFinetuneStrength}
+                value={input.loraStrength}
+                onChange={(value) =>
+                  setInput({ ...input, loraStrength: value })
+                }
               />
             )}
             <Select
               title="Style"
-              value={style}
+              value={input.style}
               onChange={(value) =>
-                setStyle(
-                  value as OpenAPI.TextToImageRequestBody["style_preset"]
-                )
+                setInput({
+                  ...input,
+                  style:
+                    value as OpenAPI.TextToImageRequestBody["style_preset"],
+                })
               }
               options={StylePresets.options()}
             />
             <Input
               number
               title="CFG Scale"
-              value={cfgScale}
-              onNumberChange={setCfgScale}
+              value={input.cfgScale}
+              onNumberChange={(value) =>
+                setInput({ ...input, cfgScale: value })
+              }
             />
             <Input
               title="Steps"
               number
-              value={steps}
-              onNumberChange={setSteps}
+              value={input.steps}
+              onNumberChange={(value) => setInput({ ...input, steps: value })}
             />
           </div>
         }

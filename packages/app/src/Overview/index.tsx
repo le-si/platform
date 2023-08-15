@@ -201,7 +201,7 @@ function Sandboxes() {
           svg="/svg/upscaling-sandbox.webp"
           link="/sandbox/upscaling"
         />
-        {FineTuning.enabled() ? (
+        {FineTuning.useEnabled() ? (
           <SandboxCard
             title="Fine-Tuning"
             svg="/svg/fine-tuning-sandbox.webp"

@@ -9,7 +9,7 @@ import { Account } from "./Account";
 import { APIKey, APIKeys } from "./APIKey";
 import { Avatar } from "./Avatar";
 import { Delete } from "./Delete";
-import { Finetunes } from "./Finetunes";
+import { FineTuning } from "./FineTuning";
 import { IdentityToken } from "./IdentityToken";
 import { Login } from "./Login";
 import { Logout } from "./Logout";
@@ -38,7 +38,7 @@ export declare namespace User {
     Account,
     Delete,
     Organization,
-    Finetunes,
+    FineTuning,
   };
 }
 
@@ -54,7 +54,7 @@ export namespace User {
   User.Account = Account;
   User.Delete = Delete;
   User.Organization = Organization;
-  User.Finetunes = Finetunes;
+  User.FineTuning = FineTuning;
 
   export const use = () => {
     const accessToken = AccessToken.use();
@@ -63,6 +63,8 @@ export namespace User {
 
     const query = ReactQuery.useQuery({
       enabled: !!accessToken,
+      staleTime: 5 * 60 * 1000,
+
       queryKey: ["User.use"],
       queryFn: async (): Promise<User> => {
         const response = await fetch(

@@ -36,7 +36,7 @@ export function Upload({
   return (
     <div
       className={classes(
-        "relative box-border flex aspect-square grow items-center justify-center overflow-hidden rounded-md border border-black/10",
+        "relative box-border flex aspect-square grow items-center justify-center overflow-hidden rounded-md border border-black/10 bg-black/10",
         hidden && "hidden",
         !upload && "cursor-pointer"
       )}

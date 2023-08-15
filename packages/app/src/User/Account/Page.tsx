@@ -9,7 +9,7 @@ function Component() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // redirect to /account/keys if no subpage is selected
+  // redirect to /account/keys if no sub-page is selected
   useEffect(() => {
     if (location.pathname === "/account") {
       navigate(User.APIKeys.Table.url() + location.search);
@@ -26,12 +26,12 @@ function Component() {
           >
             API Keys
           </Theme.NavButton>
-          {FineTuning.enabled() && (
+          {FineTuning.useEnabled() && (
             <Theme.NavButton
-              url={User.Finetunes.url()}
-              active={location.pathname === User.Finetunes.url()}
+              url={User.FineTuning.url()}
+              active={location.pathname === User.FineTuning.url()}
             >
-              Finetunes
+              Fine-Tuning
             </Theme.NavButton>
           )}
           <Theme.NavButton

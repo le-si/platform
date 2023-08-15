@@ -11,6 +11,8 @@ import { Sandbox } from "..";
 import * as Samples from "./Samples";
 
 export type MultiPrompting = {
+  input: Sandbox.Input;
+  setInput: (input: Sandbox.Input) => void;
   setOptions: (options: Record<string, unknown>) => void;
 };
 
@@ -19,39 +21,25 @@ export type Prompt = {
   weight: number;
 };
 
-export function MultiPrompting({ setOptions }: MultiPrompting) {
+export function MultiPrompting({
+  setOptions,
+  input,
+  setInput,
+}: MultiPrompting) {
   const apiKey = User.AccessToken.use();
   const outOfCreditsHandler = User.Account.Credits.useOutOfCreditsHandler();
 
   const [imageURL, setImageURL] = useState<string | undefined>(undefined);
   const [generating, setGenerating] = useState<boolean>(false);
   const models = Sandbox.useModels();
-  const [engineID, setEngineID] = useState<string>(
-    "stable-diffusion-xl-1024-v1-0"
-  );
-  const [fineTuneEngine, setFineTuneEngine] = useState<string | undefined>();
-  const [finetuneStrength, setFinetuneStrength] = useState<number>(1);
+  const fineTunes = Sandbox.useFineTunes();
   const [error, setError] = useState<string | undefined>(undefined);
 
-  const [prompts, setPrompts] = useState<Prompt[]>([
-    {
-      text: "A painting of a cat",
-      weight: 1,
-    },
-  ]);
-
-  const dims = engineID.includes("1024")
+  const dims = input.engineID.includes("1024")
     ? 1024
-    : engineID.includes("768")
+    : input.engineID.includes("768")
     ? 768
     : 512;
-
-  const [style, setStyle] =
-    useState<OpenAPI.TextToImageRequestBody["style_preset"]>("enhance");
-
-  const [cfgScale, setCfgScale] = useState<number>(7);
-  const [steps, setSteps] = useState<number>(50);
-  const [seed] = useState<number>(0);
 
   const createImage = Sandbox.useCreateImage();
 
@@ -61,18 +49,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
     setGenerating(true);
     setError(undefined);
 
-    const [url, error] = await createImage(
-      engineID,
-      prompts,
-      style,
-      cfgScale,
-      seed,
-      steps,
-      fineTuneEngine,
-      undefined,
-      undefined,
-      finetuneStrength
-    );
+    const [url, error] = await createImage(input);
 
     setGenerating(false);
     if (error) {
@@ -82,32 +59,28 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
     } else {
       setImageURL(url);
     }
-  }, [
-    apiKey,
-    createImage,
-    engineID,
-    prompts,
-    style,
-    cfgScale,
-    seed,
-    steps,
-    fineTuneEngine,
-    outOfCreditsHandler,
-    finetuneStrength,
-  ]);
+  }, [apiKey, createImage, input, outOfCreditsHandler]);
 
   useEffect(() => {
     setOptions({
-      engineID,
+      engineID: input.engineID,
       samples: 1,
       height: dims,
       width: dims,
-      steps,
-      cfg_scale: cfgScale,
-      style_preset: style,
-      text_prompts: prompts,
+      steps: input.steps,
+      cfg_scale: input.cfgScale,
+      style_preset: input.style,
+      text_prompts: input.prompts,
     });
-  }, [engineID, style, prompts, cfgScale, steps, setOptions, dims]);
+  }, [
+    setOptions,
+    dims,
+    input.engineID,
+    input.steps,
+    input.cfgScale,
+    input.style,
+    input.prompts,
+  ]);
 
   return (
     <div className="flex h-full w-full flex-col gap-6 md:min-w-[55rem]">
@@ -118,51 +91,76 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
           <div className="flex h-fit w-full grow flex-col gap-3">
             <Theme.Select
               title="Model"
-              value={`${engineID}${fineTuneEngine ? `:${fineTuneEngine}` : ""}`}
+              disabled={!!input.fineTuneEngine}
+              value={input.engineID}
               onChange={(value) => {
-                if (value) {
-                  const [engineID, fineTuneEngine] = value.split(":");
-                  setEngineID(engineID as string);
-                  setFineTuneEngine(fineTuneEngine);
-                }
+                if (!value) return;
+                setInput({ ...input, engineID: value });
               }}
               options={models}
             />
-            {fineTuneEngine && (
+            {fineTunes.length > 0 && (
+              <Theme.Select
+                title="Fine-Tune"
+                value={input.fineTuneEngine ?? undefined}
+                onChange={(value) => {
+                  const fineTune = fineTunes.find((f) => f.value === value);
+                  setInput({
+                    ...input,
+                    fineTuneEngine: value,
+                    engineID: fineTune?.engine ?? input.engineID,
+                  });
+                }}
+                options={[
+                  {
+                    label: "None",
+                    value: undefined,
+                  },
+                  ...fineTunes,
+                ]}
+              />
+            )}
+            {input.fineTuneEngine && (
               <Theme.Range
-                title="Finetune Strength"
+                title="FineTune Strength"
                 max={1}
                 min={0}
                 step={0.01}
-                value={finetuneStrength}
-                onChange={setFinetuneStrength}
+                value={input.loraStrength}
+                onChange={(value) =>
+                  setInput({ ...input, loraStrength: value })
+                }
               />
             )}
             <Theme.Select
               title="Style"
-              value={style}
+              value={input.style}
               onChange={(value) =>
-                setStyle(
-                  value as OpenAPI.TextToImageRequestBody["style_preset"]
-                )
+                setInput({
+                  ...input,
+                  style:
+                    value as OpenAPI.TextToImageRequestBody["style_preset"],
+                })
               }
               options={StylePresets.options()}
             />
             <Theme.Input
               number
               title="CFG Scale"
-              value={cfgScale}
-              onNumberChange={setCfgScale}
+              value={input.cfgScale}
+              onNumberChange={(value) =>
+                setInput({ ...input, cfgScale: value })
+              }
             />
             <Theme.Input
               title="Steps"
               number
-              value={steps}
-              onNumberChange={setSteps}
+              value={input.steps}
+              onNumberChange={(value) => setInput({ ...input, steps: value })}
             />
             <p className="select-none text-xs opacity-75">Prompts</p>
             <div className="-mt-2 flex flex-col gap-3">
-              {prompts.map((prompt, index) => (
+              {input.prompts.map((prompt, index) => (
                 <div
                   key={index}
                   className="bg-brand-amber-1 flex flex-col gap-2 rounded border border-zinc-300 p-3"
@@ -170,17 +168,25 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
                   <Sandbox.PositivePrompt
                     key={index}
                     autoFocus
-                    color={prompt.weight > 0 ? "positive" : "negative"}
+                    fineTune={
+                      (prompt.weight ?? 1) > 0
+                        ? input.fineTuneEngine
+                        : undefined
+                    }
+                    color={(prompt.weight ?? 1) > 0 ? "positive" : "negative"}
                     title={
                       <div className="flex w-full items-center justify-between">
                         <p className="text-sm">Prompt {index + 1}</p>
-                        {prompts.length > 1 && (
+                        {input.prompts.length > 1 && (
                           <Theme.Icon.X
                             className="h-4 w-4 cursor-pointer text-neutral-500 duration-100 hover:text-neutral-900"
                             onClick={() =>
-                              setPrompts((prompts) =>
-                                prompts.filter((_, i) => i !== index)
-                              )
+                              setInput({
+                                ...input,
+                                prompts: input.prompts.filter(
+                                  (_, i) => i !== index
+                                ),
+                              })
                             }
                           />
                         )}
@@ -190,11 +196,12 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
                     value={prompt.text}
                     className="min-h-[6rem] border-transparent p-0 focus:border-transparent"
                     onChange={(value) =>
-                      setPrompts((prompts) =>
-                        prompts.map((prompt, i) =>
+                      setInput({
+                        ...input,
+                        prompts: input.prompts.map((prompt, i) =>
                           i === index ? { ...prompt, text: value } : prompt
-                        )
-                      )
+                        ),
+                      })
                     }
                   />
                   <Theme.Range
@@ -204,28 +211,29 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
                     title="Weight"
                     value={prompt.weight}
                     onChange={(value) =>
-                      setPrompts((prompts) =>
-                        prompts.map((prompt, i) =>
+                      setInput({
+                        ...input,
+                        prompts: input.prompts.map((prompt, i) =>
                           i === index ? { ...prompt, weight: value } : prompt
-                        )
-                      )
+                        ),
+                      })
                     }
                   />
                 </div>
               ))}
             </div>
-            {prompts.length < 10 && (
+            {input.prompts.length < 10 && (
               <Theme.Button
                 variant="secondary"
                 className="w-full border border-dashed border-zinc-300"
                 onClick={() =>
-                  setPrompts((prompts) => [
-                    ...prompts,
-                    {
+                  setInput({
+                    ...input,
+                    prompts: input.prompts.concat({
                       text: "",
                       weight: 1,
-                    },
-                  ])
+                    }),
+                  })
                 }
               >
                 Add Prompt
@@ -237,7 +245,7 @@ export function MultiPrompting({ setOptions }: MultiPrompting) {
           <Theme.Button
             variant="primary"
             className="relative h-16 w-full rounded-none"
-            disabled={generating || !prompts.length || !apiKey}
+            disabled={generating || !input.prompts.length || !apiKey}
             onClick={generate}
           >
             Generate
