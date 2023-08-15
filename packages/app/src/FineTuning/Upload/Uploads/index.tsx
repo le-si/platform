@@ -150,7 +150,7 @@ export function Uploads() {
 }
 
 export namespace Uploads {
-  export const constraints = () => ({ count: { min: 4, max: 128 } } as const);
+  export const constraints = () => ({ count: { min: 4, max: 64 } } as const);
 
   export const addFromURL = (url: URLString) =>
     State.use.getState().addUpload(url);
@@ -202,6 +202,8 @@ export namespace Uploads {
     ) => void;
 
     removeUpload: (id: ID) => void;
+
+    reset: () => void;
   };
 
   namespace State {
@@ -222,6 +224,8 @@ export namespace Uploads {
 
       removeUpload: (id) =>
         set(({ uploads: { [id]: _, ...uploads } }) => ({ uploads })),
+
+      reset: () => set({ uploads: {} }),
     }));
   }
 }
