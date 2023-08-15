@@ -68,13 +68,17 @@ function Model({ model }: { model: GlobalFineTuning.Model }) {
   return (
     <div className="grid grid-cols-6 items-center border-b border-zinc-200/50 pb-2 text-sm text-neutral-700 last:border-transparent last:pb-0 dark:text-neutral-400">
       <div className="col-span-3 flex flex-col gap-0.5 truncate">
-        <Link
-          className="group flex w-fit items-center gap-1 text-lg hover:text-indigo-500 hover:underline"
-          to={`/sandbox/text-to-image?fine-tune=${model.id}`}
-        >
-          {model.name}
-          <Theme.Icon.ExternalLink className="hidden h-4 w-4 group-hover:block" />
-        </Link>
+        {model.status === "Completed" ? (
+          <Link
+            className="group flex w-fit items-center gap-1 text-lg hover:text-indigo-500 hover:underline"
+            to={`/sandbox/text-to-image?fine-tune=${model.id}`}
+          >
+            {model.name}
+            <Theme.Icon.ExternalLink className="hidden h-4 w-4 group-hover:block" />
+          </Link>
+        ) : (
+          <h2 className="w-fit text-lg">{model.name}</h2>
+        )}
         <p
           className="group flex w-fit items-center gap-1 text-xs opacity-50"
           onClick={(e) => {
