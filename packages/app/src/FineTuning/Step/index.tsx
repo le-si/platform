@@ -1,5 +1,7 @@
 import { GlobalState } from "~/GlobalState";
 
+import { FineTuning } from "..";
+
 export type Step = number;
 
 export function Step({
@@ -71,7 +73,10 @@ export namespace Steps {
           active: Math.max(1, active - 1),
         })),
 
-      reset: () => set({ active: 1 }),
+      reset: () => {
+        set({ active: 1 });
+        FineTuning.Uploads.reset();
+      },
 
       isNavigationDisabled: false,
       setIsNavigationDisabled: (isNavigationDisabled = false) =>

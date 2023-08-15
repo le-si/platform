@@ -101,7 +101,7 @@ export function Uploads() {
         </div>
         <div
           className={classes(
-            "scrollbar relative grid max-h-[30rem] grid-cols-4 gap-2 overflow-y-auto rounded-xl border border-zinc-300 p-2",
+            "scrollbar relative grid max-h-[30rem] grid-cols-4 gap-2 overflow-y-auto rounded-xl border border-zinc-300 p-2 sm:grid-cols-6",
             uploads.length <= 0 && "border-dashed"
           )}
           onDragOver={(e) => {
@@ -136,7 +136,7 @@ export function Uploads() {
           ))}
           {uploads.length <= 0 && (
             <div
-              className="col-span-4 flex h-[15rem] w-full cursor-pointer select-none flex-col items-center justify-center gap-3"
+              className="col-span-4 flex h-[15rem] w-full cursor-pointer select-none flex-col items-center justify-center gap-3 sm:col-span-6"
               onClick={() => Input.trigger()}
             >
               <Theme.Icon.Upload className="h-8 w-8" />
@@ -164,6 +164,8 @@ export namespace Uploads {
 
   export const use = () =>
     State.use(({ uploads }) => Object.values(uploads), GlobalState.shallow);
+
+  export const reset = () => State.use.getState().reset();
 
   export const useIsReadyToTrain = () => {
     const { count } = constraints();
