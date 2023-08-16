@@ -19,6 +19,11 @@ export function Introduction() {
       FineTuning.Steps.next();
   }, [showLegal, user?.apiKeys]);
 
+  const constraints = {
+    ...FineTuning.Upload.constraints(),
+    ...FineTuning.Uploads.constraints(),
+  };
+
   return (
     <FineTuning.Step className="max-w-[80rem]">
       {showLegal ? (
@@ -36,7 +41,9 @@ export function Introduction() {
             </p>
             <div className="mt-2 flex flex-wrap gap-3">
               <Introduction.Pill>Stable Diffusion XL 1.0</Introduction.Pill>
-              <Introduction.Pill>4 - 128 images</Introduction.Pill>
+              <Introduction.Pill>
+                {constraints.count.min} - {constraints.count.max} images
+              </Introduction.Pill>
             </div>
           </Introduction.Section>
           <Introduction.Section>
