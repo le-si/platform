@@ -1,3 +1,4 @@
+import Lottie from "lottie-react";
 import { Link } from "react-router-dom";
 
 import { FineTuning } from "~/FineTuning";
@@ -5,7 +6,8 @@ import { GlobalState } from "~/GlobalState";
 import { Theme } from "~/Theme";
 import { User } from "~/User";
 
-import { Progress } from "./Progress";
+import queueAnim from "./QueueAnimation.json";
+import trainAnim from "./TrainingAnimation.json";
 
 export function Training() {
   const { isError, data: model } = FineTuning.Model.Create.use();
@@ -40,11 +42,11 @@ export function Training() {
     >
       {!status || ["Submitted", "Not Started"].includes(status) ? (
         <div className="flex flex-col items-center gap-8">
-          <Theme.Icon.Spinner className="-mb-4 h-12 w-12" />
           <FineTuning.H1 className="flex items-center justify-center gap-2">
             Queued
           </FineTuning.H1>
-          <p className="text-center opacity-80">
+          <Lottie animationData={queueAnim} />
+          <p className="text-center">
             Your model is in the queue and will start training shortly.
           </p>
 
@@ -74,12 +76,9 @@ export function Training() {
       ) : percentage < 100 ? (
         <>
           <FineTuning.H1 className="flex items-center gap-1">
-            Training&nbsp;
-            <span className="opacity-muted font-light">
-              {Math.round(percentage)}%
-            </span>
+            Training
           </FineTuning.H1>
-          <Progress />
+          <Lottie animationData={trainAnim} />
         </>
       ) : (
         <div className="flex flex-col items-center gap-8">

@@ -32,6 +32,7 @@
     "highlight.js": "^11.8.0",
     "jszip": "^3.10.1",
     "lodash.throttle": "^4.1.1",
+    "lottie-react": "^2.4.0",
     "lucide-react": "^0.264.0",
     "mobx": "^6.7.0",
     "notistack": "^3.0.1",
