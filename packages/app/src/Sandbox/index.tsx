@@ -298,7 +298,7 @@ export namespace Sandbox {
           transform: Proto.TransformType.create({
             type: {
               oneofKind: "diffusion",
-              diffusion: 0,
+              diffusion: fineTuneEngine ? 10 : 0,
             },
           }),
 
@@ -315,6 +315,7 @@ export namespace Sandbox {
             Proto.StepParameter.create({
               sampler: Proto.SamplerParameters.create({
                 cfgScale: cfgScale,
+                eta: fineTuneEngine ? 0.5 : undefined,
               }),
 
               scaledStep: 0,
