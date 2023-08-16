@@ -1,6 +1,5 @@
 import { GlobalState } from "~/GlobalState";
-
-import { FineTuning } from "..";
+import { FineTuning } from "~/FineTuning";
 
 export type Step = number;
 
