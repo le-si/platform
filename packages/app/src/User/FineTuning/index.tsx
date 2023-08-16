@@ -72,6 +72,8 @@ export function FineTuning() {
 
 function Model({ model }: { model: GlobalFineTuning.Model }) {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [isFailureReasonModelOpen, setIsFailureReasonModelOpen] =
+    useState(false);
   const grpc = GRPC.use();
   return (
     <div className="grid grid-cols-6 items-center border-b border-zinc-200/50 pb-2 text-sm text-neutral-700 last:border-transparent last:pb-0 dark:text-neutral-400">
@@ -108,7 +110,7 @@ function Model({ model }: { model: GlobalFineTuning.Model }) {
       <h1 className="w-fit truncate text-left text-sm opacity-75">
         {model.mode}
       </h1>
-      <h1 className="truncate">
+      <h1 className="flex items-center gap-2 truncate">
         <h1
           className={classes(
             "w-fit rounded border px-2 py-0.5 text-sm",
@@ -121,6 +123,23 @@ function Model({ model }: { model: GlobalFineTuning.Model }) {
         >
           {model.status}
         </h1>
+        {model.status === "Failed" && model.failureReason && (
+          <>
+            <h1
+              className="cursor-pointer truncate"
+              onClick={() => setIsFailureReasonModelOpen(true)}
+            >
+              {model.failureReason}
+            </h1>
+            <FailureReasonModal
+              open={isFailureReasonModelOpen}
+              onClose={() => {
+                setIsFailureReasonModelOpen(false);
+              }}
+              reason={model.failureReason}
+            />
+          </>
+        )}
       </h1>
       <div className="flex items-center justify-end gap-2">
         <Theme.Button
@@ -165,7 +184,7 @@ export function DeleteModal({
       open={open}
       onClose={onClose}
       title="Delete this fine-tuned model?"
-      className="flex max-w-[25rem]"
+      className="flex w-full max-w-[25rem]"
       bottom={
         <div className="flex w-full items-center justify-end gap-3 p-4">
           <Theme.Button
@@ -194,6 +213,27 @@ export function DeleteModal({
         </span>{" "}
         will stop working.
       </p>
+    </Theme.Modal>
+  );
+}
+
+export function FailureReasonModal({
+  open,
+  onClose,
+  reason,
+}: {
+  open: boolean;
+  onClose: () => void;
+  reason: string;
+}) {
+  return (
+    <Theme.Modal
+      open={open}
+      onClose={onClose}
+      title="Failure Reason"
+      className="flex w-full max-w-[25rem]"
+    >
+      <p className="whitespace-normal">{reason}</p>
     </Theme.Modal>
   );
 }
