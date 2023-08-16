@@ -101,7 +101,7 @@ export function Uploads() {
         </div>
         <div
           className={classes(
-            "scrollbar relative grid max-h-[30rem] grid-cols-4 gap-2 overflow-y-auto rounded-xl border border-zinc-300 p-2",
+            "scrollbar relative grid max-h-[30rem] grid-cols-4 gap-2 overflow-y-auto rounded-xl border border-zinc-300 p-2 sm:grid-cols-6",
             uploads.length <= 0 && "border-dashed"
           )}
           onDragOver={(e) => {
@@ -136,7 +136,7 @@ export function Uploads() {
           ))}
           {uploads.length <= 0 && (
             <div
-              className="col-span-4 flex h-[15rem] w-full cursor-pointer select-none flex-col items-center justify-center gap-3"
+              className="col-span-4 flex h-[15rem] w-full cursor-pointer select-none flex-col items-center justify-center gap-3 sm:col-span-6"
               onClick={() => Input.trigger()}
             >
               <Theme.Icon.Upload className="h-8 w-8" />
@@ -150,7 +150,7 @@ export function Uploads() {
 }
 
 export namespace Uploads {
-  export const constraints = () => ({ count: { min: 4, max: 128 } } as const);
+  export const constraints = () => ({ count: { min: 4, max: 64 } } as const);
 
   export const addFromURL = (url: URLString) =>
     State.use.getState().addUpload(url);
@@ -164,6 +164,8 @@ export namespace Uploads {
 
   export const use = () =>
     State.use(({ uploads }) => Object.values(uploads), GlobalState.shallow);
+
+  export const reset = () => State.use.getState().reset();
 
   export const useIsReadyToTrain = () => {
     const { count } = constraints();
@@ -202,6 +204,8 @@ export namespace Uploads {
     ) => void;
 
     removeUpload: (id: ID) => void;
+
+    reset: () => void;
   };
 
   namespace State {
@@ -222,6 +226,8 @@ export namespace Uploads {
 
       removeUpload: (id) =>
         set(({ uploads: { [id]: _, ...uploads } }) => ({ uploads })),
+
+      reset: () => set({ uploads: {} }),
     }));
   }
 }

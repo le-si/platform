@@ -91,7 +91,7 @@ export function Training() {
             <Theme.Button
               variant="tertiary"
               className="px-4"
-              onClick={FineTuning.Steps.next}
+              onClick={FineTuning.Steps.reset}
             >
               New Model
             </Theme.Button>
