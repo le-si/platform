@@ -5,6 +5,9 @@ export type Input = Styleable & {
   autoFocus?: boolean;
   onChange?: (value: string) => void;
   onNumberChange?: (value: number) => void;
+  onBlur?: () => void;
+  min?: number;
+  max?: number;
   placeholder?: string;
   title?: string;
   icon?: React.ReactNode;
@@ -20,6 +23,9 @@ export function Input({
   autoFocus,
   onChange,
   onNumberChange,
+  onBlur,
+  min,
+  max,
   className,
   placeholder,
   title,
@@ -83,9 +89,17 @@ export function Input({
             value={localValue}
             onChange={(e) => {
               setLocalValue(e.target.value);
+              const maybeNumber = parseFloat(e.target.value);
 
-              if (number && !isNaN(parseFloat(e.target.value))) {
-                onNumberChange?.(parseFloat(e.target.value));
+              if (
+                number &&
+                !isNaN(maybeNumber) &&
+                min !== undefined &&
+                maybeNumber >= min &&
+                max !== undefined &&
+                maybeNumber <= max
+              ) {
+                onNumberChange?.(maybeNumber);
               } else {
                 onChange?.(e.target.value);
               }
@@ -108,6 +122,7 @@ export function Input({
               }
             }}
             onBlur={() => {
+              onBlur?.();
               setFocused(false);
               if (number) {
                 // strip out all non-numeric characters
@@ -118,6 +133,19 @@ export function Input({
 
                 const number = parseFloat(numericValue ?? "0");
                 if (!isNaN(number)) {
+                  // clamp values to min/max
+                  if (min !== undefined && number < min) {
+                    onNumberChange?.(min);
+                    setLocalValue(min.toString());
+                    return;
+                  }
+
+                  if (max !== undefined && number > max) {
+                    onNumberChange?.(max);
+                    setLocalValue(max.toString());
+                    return;
+                  }
+
                   onNumberChange?.(number);
                   setLocalValue(number.toString());
                 } else {
