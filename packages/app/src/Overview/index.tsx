@@ -60,15 +60,13 @@ function DocumentCard({
             onClick={link.soon ? (e) => e.preventDefault() : doNothing}
             rel="noopener noreferrer"
             className={classes(
-              "flex items-center gap-2 text-sm font-semibold text-indigo-500 duration-100",
-              link.soon
-                ? "cursor-not-allowed text-gray-400"
-                : "hover:text-indigo-400"
+              "flex w-fit items-center gap-1 text-sm font-semibold text-indigo-500 duration-100",
+              link.soon ? "cursor-not-allowed text-gray-400" : "hover:underline"
             )}
           >
             {link.title}&nbsp;
             {link.newWindow ? (
-              <Theme.Icon.ExternalLink />
+              <Theme.Icon.ExternalLink className="h-4 w-4" />
             ) : (
               <Theme.Icon.Arrow />
             )}
@@ -107,7 +105,6 @@ function Documentation() {
                 title: "Chat UI",
                 url: "https://research.stability.ai/chat",
                 newWindow: true,
-                soon: true,
               },
             ]}
           />
@@ -243,7 +240,7 @@ function OtherCard({
       <img src={svg} />
       <Link
         to={link}
-        className="flex items-center gap-2 text-sm font-semibold text-indigo-500 duration-100 group-hover:text-indigo-400"
+        className="flex items-center gap-2 text-sm font-semibold text-indigo-500 duration-100 group-hover:underline"
       >
         {linkName ?? "Learn More"} <Theme.Icon.Arrow />
       </Link>
