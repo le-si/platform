@@ -375,7 +375,7 @@ export function Pricing() {
               can be purchased via the&nbsp;
               <Link
                 className="prose text-indigo-500 hover:underline"
-                to="/account/billing"
+                to="/account/credits"
               >
                 account page
               </Link>
