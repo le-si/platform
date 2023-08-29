@@ -439,10 +439,10 @@ export namespace Pricing {
                 }
                 onNumberChange={(value) =>
                   variable.type === "number" &&
-                  value >= variable.min &&
-                  value <= variable.max &&
                   setState((state) => ({ ...state, [variable.name]: value }))
                 }
+                min={variable.min}
+                max={variable.max}
               />
             ))}
           </div>
