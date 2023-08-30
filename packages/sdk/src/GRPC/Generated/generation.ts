@@ -986,6 +986,23 @@ export interface OnStatus {
    * @generated from protobuf field: repeated gooseai.StageAction action = 3;
    */
   action: StageAction[];
+  /**
+   * @generated from protobuf field: optional gooseai.ArtifactTypeFilter artifact_type = 4;
+   */
+  artifactType?: ArtifactTypeFilter;
+}
+/**
+ * @generated from protobuf message gooseai.ArtifactTypeFilter
+ */
+export interface ArtifactTypeFilter {
+  /**
+   * @generated from protobuf field: repeated gooseai.ArtifactType include = 1;
+   */
+  include: ArtifactType[];
+  /**
+   * @generated from protobuf field: repeated gooseai.ArtifactType exclude = 2;
+   */
+  exclude: ArtifactType[];
 }
 /**
  * @generated from protobuf message gooseai.Stage
@@ -6074,6 +6091,12 @@ class OnStatus$Type extends MessageType<OnStatus> {
         repeat: 1 /*RepeatType.PACKED*/,
         T: () => ["gooseai.StageAction", StageAction, "STAGE_ACTION_"],
       },
+      {
+        no: 4,
+        name: "artifact_type",
+        kind: "message",
+        T: () => ArtifactTypeFilter,
+      },
     ]);
   }
   create(value?: PartialMessage<OnStatus>): OnStatus {
@@ -6111,6 +6134,14 @@ class OnStatus$Type extends MessageType<OnStatus> {
             for (let e = reader.int32() + reader.pos; reader.pos < e; )
               message.action.push(reader.int32());
           else message.action.push(reader.int32());
+          break;
+        case /* optional gooseai.ArtifactTypeFilter artifact_type */ 4:
+          message.artifactType = ArtifactTypeFilter.internalBinaryRead(
+            reader,
+            reader.uint32(),
+            options,
+            message.artifactType
+          );
           break;
         default:
           let u = options.readUnknownField;
@@ -6153,6 +6184,13 @@ class OnStatus$Type extends MessageType<OnStatus> {
         writer.int32(message.action[i]);
       writer.join();
     }
+    /* optional gooseai.ArtifactTypeFilter artifact_type = 4; */
+    if (message.artifactType)
+      ArtifactTypeFilter.internalBinaryWrite(
+        message.artifactType,
+        writer.tag(4, WireType.LengthDelimited).fork(),
+        options
+      ).join();
     let u = options.writeUnknownFields;
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
@@ -6167,6 +6205,111 @@ class OnStatus$Type extends MessageType<OnStatus> {
  * @generated MessageType for protobuf message gooseai.OnStatus
  */
 export const OnStatus = new OnStatus$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class ArtifactTypeFilter$Type extends MessageType<ArtifactTypeFilter> {
+  constructor() {
+    super("gooseai.ArtifactTypeFilter", [
+      {
+        no: 1,
+        name: "include",
+        kind: "enum",
+        repeat: 1 /*RepeatType.PACKED*/,
+        T: () => ["gooseai.ArtifactType", ArtifactType],
+      },
+      {
+        no: 2,
+        name: "exclude",
+        kind: "enum",
+        repeat: 1 /*RepeatType.PACKED*/,
+        T: () => ["gooseai.ArtifactType", ArtifactType],
+      },
+    ]);
+  }
+  create(value?: PartialMessage<ArtifactTypeFilter>): ArtifactTypeFilter {
+    const message = { include: [], exclude: [] };
+    globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
+      enumerable: false,
+      value: this,
+    });
+    if (value !== undefined)
+      reflectionMergePartial<ArtifactTypeFilter>(this, message, value);
+    return message;
+  }
+  internalBinaryRead(
+    reader: IBinaryReader,
+    length: number,
+    options: BinaryReadOptions,
+    target?: ArtifactTypeFilter
+  ): ArtifactTypeFilter {
+    let message = target ?? this.create(),
+      end = reader.pos + length;
+    while (reader.pos < end) {
+      let [fieldNo, wireType] = reader.tag();
+      switch (fieldNo) {
+        case /* repeated gooseai.ArtifactType include */ 1:
+          if (wireType === WireType.LengthDelimited)
+            for (let e = reader.int32() + reader.pos; reader.pos < e; )
+              message.include.push(reader.int32());
+          else message.include.push(reader.int32());
+          break;
+        case /* repeated gooseai.ArtifactType exclude */ 2:
+          if (wireType === WireType.LengthDelimited)
+            for (let e = reader.int32() + reader.pos; reader.pos < e; )
+              message.exclude.push(reader.int32());
+          else message.exclude.push(reader.int32());
+          break;
+        default:
+          let u = options.readUnknownField;
+          if (u === "throw")
+            throw new globalThis.Error(
+              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
+            );
+          let d = reader.skip(wireType);
+          if (u !== false)
+            (u === true ? UnknownFieldHandler.onRead : u)(
+              this.typeName,
+              message,
+              fieldNo,
+              wireType,
+              d
+            );
+      }
+    }
+    return message;
+  }
+  internalBinaryWrite(
+    message: ArtifactTypeFilter,
+    writer: IBinaryWriter,
+    options: BinaryWriteOptions
+  ): IBinaryWriter {
+    /* repeated gooseai.ArtifactType include = 1; */
+    if (message.include.length) {
+      writer.tag(1, WireType.LengthDelimited).fork();
+      for (let i = 0; i < message.include.length; i++)
+        writer.int32(message.include[i]);
+      writer.join();
+    }
+    /* repeated gooseai.ArtifactType exclude = 2; */
+    if (message.exclude.length) {
+      writer.tag(2, WireType.LengthDelimited).fork();
+      for (let i = 0; i < message.exclude.length; i++)
+        writer.int32(message.exclude[i]);
+      writer.join();
+    }
+    let u = options.writeUnknownFields;
+    if (u !== false)
+      (u == true ? UnknownFieldHandler.onWrite : u)(
+        this.typeName,
+        message,
+        writer
+      );
+    return writer;
+  }
+}
+/**
+ * @generated MessageType for protobuf message gooseai.ArtifactTypeFilter
+ */
+export const ArtifactTypeFilter = new ArtifactTypeFilter$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class Stage$Type extends MessageType<Stage> {
   constructor() {

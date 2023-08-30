@@ -56,7 +56,9 @@ namespace InputDirectory {
       );
 
     export const forceUpdate = () =>
-      ChildProcess.execSync("git reset --hard origin/main", { cwd: path() });
+      ChildProcess.execSync("git reset --hard origin/main && git pull", {
+        cwd: path(),
+      });
   }
 
   namespace TensorsProto {
