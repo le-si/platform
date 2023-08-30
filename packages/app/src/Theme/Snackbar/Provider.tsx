@@ -11,7 +11,7 @@ export function Provider({ children }: React.PropsWithChildren) {
     <SnackbarProvider
       maxSnack={6}
       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-      classes={{ containerRoot: "max-w-[50%]" }}
+      classes={{ containerRoot: "md:max-w-[75%] lg:max-w-[50%]" }}
       Components={{
         default: DefaultSnackbar,
         info: InfoSnackbar,
