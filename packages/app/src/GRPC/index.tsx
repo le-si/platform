@@ -22,7 +22,7 @@ export namespace GRPC {
 
   export const get = () => State.use.getState().grpc;
 
-  export const use = () => State.use(({ grpc }) => grpc, GlobalState.shallow);
+  export const use = () => State.use(({ grpc }) => grpc);
 
   export function Provider({ children }: React.PropsWithChildren) {
     const accessToken = User.AccessToken.use();
