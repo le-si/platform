@@ -4,12 +4,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Theme } from "~/Theme";
 import { User } from "~/User";
+import "./snackbar.scss";
 
 export function Provider({ children }: React.PropsWithChildren) {
   return (
     <SnackbarProvider
       maxSnack={6}
       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+      classes={{ containerRoot: "max-w-[50%]" }}
       Components={{
         default: DefaultSnackbar,
         info: InfoSnackbar,
@@ -42,7 +44,9 @@ const BaseSnackbar = React.forwardRef<
       ref={ref}
     >
       {Icon}
-      <div className="ml-3">{message}</div>
+      <div className="ml-3 max-h-[10rem] overflow-y-auto overscroll-none">
+        {message}
+      </div>
       {persist && (
         <button
           type="button"
