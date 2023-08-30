@@ -72,7 +72,7 @@ export namespace Login {
         <Theme.Tooltip content="View your account page" placement="bottom">
           <Link
             to="/account/keys"
-            className="block rounded-full ring-1 ring-transparent duration-100 hover:ring hover:ring-indigo-500"
+            className="flex rounded-full ring-1 ring-transparent duration-100 hover:ring hover:ring-indigo-500"
           >
             <User.Avatar />
           </Link>

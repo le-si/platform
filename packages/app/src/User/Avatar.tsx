@@ -7,21 +7,21 @@ export function Avatar({ className }: Styleable) {
   if (!user) return null;
 
   return (
-    <>
-      {!!user.avatar ? (
-        <img
-          alt="User avatar"
-          className={classes("h-8 w-8 rounded-full", className)}
-          src={user.avatar}
-        />
-      ) : (
-        <Theme.Icon.User
-          className={classes(
-            "flex h-8 w-8 rounded-full bg-gray-500/30 p-1.5",
-            className
-          )}
-        />
-      )}
-    </>
+    <div className="swap swap-flip">
+      <input hidden readOnly type="checkbox" checked={!!user.avatar} />
+
+      <img
+        alt="User avatar"
+        className={classes("swap-on h-8 w-8 rounded-full", className)}
+        src={user.avatar}
+      />
+
+      <Theme.Icon.User
+        className={classes(
+          "swap-off flex h-8 w-8 rounded-full bg-gray-500/30 p-1.5",
+          className
+        )}
+      />
+    </div>
   );
 }
