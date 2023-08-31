@@ -4,14 +4,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Theme } from "~/Theme";
 import { User } from "~/User";
-import "./snackbar.scss";
 
 export function Provider({ children }: React.PropsWithChildren) {
   return (
     <SnackbarProvider
       maxSnack={6}
       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-      classes={{ containerRoot: "md:max-w-[75%] lg:max-w-[50%]" }}
+      classes={{
+        containerRoot:
+          "[&>div]:w-full [word-break:break-word] md:max-w-[75%] lg:max-w-[50%]",
+      }}
       Components={{
         default: DefaultSnackbar,
         info: InfoSnackbar,
