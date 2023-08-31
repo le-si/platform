@@ -1,9 +1,14 @@
 import { Theme } from ".";
 
 export namespace Loading {
-  export function Overlay() {
+  export function Overlay({ className }: Styleable) {
     return (
-      <div className="flex h-[calc(100vh-20rem)] items-center justify-center">
+      <div
+        className={classes(
+          "flex h-screen items-center justify-center",
+          className
+        )}
+      >
         <Theme.Icon.Spinner className="h-10 w-10" />
       </div>
     );

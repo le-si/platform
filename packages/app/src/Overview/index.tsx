@@ -238,12 +238,9 @@ function OtherCard({
     <Link to={link} className="group flex flex-col gap-3">
       <h1 className="text-3xl font-extralight">{title}</h1>
       <img src={svg} />
-      <Link
-        to={link}
-        className="flex items-center gap-2 text-sm font-semibold text-indigo-500 duration-100 group-hover:underline"
-      >
+      <div className="flex items-center gap-2 text-sm font-semibold text-indigo-500 duration-100 group-hover:underline">
         {linkName ?? "Learn More"} <Theme.Icon.Arrow />
-      </Link>
+      </div>
     </Link>
   );
 }

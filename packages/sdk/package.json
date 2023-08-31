@@ -17,7 +17,8 @@
     "build": "yarn build:types && yarn build:javascript && tsx scripts/FindAndReplaceVersion.ts",
     "build:production": "yarn build",
     "build:preview": "yarn build",
-    "dev": "nodemon --watch src --ext ts,json --exec \"yarn build\" --ignore \"./src/**/*.generated.*\" --ignore \"./src/GRPC/Generated/**/*\""
+    "dev": "nodemon --watch src --ext ts,json --exec \"yarn build\" --ignore \"./src/**/*.generated.*\" --ignore \"./src/GRPC/Generated/**/*\"",
+    "postinstall": "yarn build"
   },
   "dependencies": {
     "@protobuf-ts/grpcweb-transport": "^2.9.0"

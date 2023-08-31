@@ -49,7 +49,7 @@ export function RedocContainer({ spec }: { spec?: object | undefined }) {
               </Redoc.StoreProvider>
             </Redoc.ThemeProvider>
           ) : (
-            <Theme.Loading.Overlay />
+            <Theme.Loading.Overlay className="h-[calc(100vh-4rem)]" />
           )
         }
       </Redoc.StoreBuilder>

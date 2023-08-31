@@ -1,7 +1,6 @@
 import * as Auth0 from "@auth0/auth0-react";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { type SetRequired } from "type-fest";
 import { Theme } from "~/Theme";
 
 import { User } from "~/User";
@@ -34,59 +33,62 @@ export function Provider({ children }: React.PropsWithChildren) {
 }
 
 function ErrorHandler({ children }: React.PropsWithChildren) {
-  const { error } = Auth0.useAuth0();
+  const { error, loginWithRedirect } = Auth0.useAuth0();
   const { enqueueSnackbar } = Theme.Snackbar.use();
 
   useEffect(() => {
-    if (!error || canIgnoreError(error)) return;
+    if (!error || AuthError.isIgnorableError(error)) return;
+    if (AuthError.isLoginRequiredError(error)) {
+      loginWithRedirect().catch(console.error);
+      return;
+    }
 
     console.error("[Auth0]", toJSON(error));
 
-    enqueueSnackbar(getErrorMessage(error), {
-      variant: isUnverifiedEmailError(error) ? "warning" : "error",
+    enqueueSnackbar(AuthError.getMessage(error), {
       preventDuplicate: true,
+      variant: AuthError.isEmailNotVerifiedError(error) ? "warning" : "error",
     });
   }, [enqueueSnackbar, error]);
 
   return <>{children}</>;
 }
 
-type AuthError = SetRequired<Auth0.OAuthError, "error_description" | "error">;
-function isAuthError(x: unknown): x is AuthError {
-  return (
-    x instanceof Error &&
+type AuthError = {
+  readonly error: string;
+  readonly error_description: string;
+};
+
+namespace AuthError {
+  export const is = (x: unknown): x is AuthError =>
+    typeof x === "object" &&
+    x !== null &&
     "error" in x &&
     typeof x.error === "string" &&
     x.error.length > 0 &&
     "error_description" in x &&
     typeof x.error_description === "string" &&
-    x.error_description.length > 0
-  );
-}
+    x.error_description.length > 0;
 
-function isUnverifiedEmailError(error: Error): boolean {
-  return (
-    isAuthError(error) &&
-    error.error === "unauthorized" &&
-    error.error_description === "Please verify your email before logging in."
-  );
-}
+  export const getMessage = (error: Error): string =>
+    AuthError.is(error) ? error.error_description : error.message;
 
-function canIgnoreError(error: Error): boolean {
-  return (
-    isAuthError(error) &&
-    (error.error === "login_required" || error.error === "cancelled")
-  );
-}
+  export const isEmailNotVerifiedError = (x: unknown): boolean =>
+    AuthError.is(x) &&
+    x.error === "unauthorized" &&
+    x.error_description === "Please verify your email before logging in.";
 
-function getErrorMessage(error: Error): string {
-  return isAuthError(error) ? error.error_description : error.message;
+  export const isIgnorableError = (x: unknown): boolean =>
+    AuthError.is(x) && x.error === "cancelled";
+
+  export const isLoginRequiredError = (x: unknown): boolean =>
+    AuthError.is(x) && x.error === "login_required";
 }
 
 function toJSON(value: unknown) {
   try {
     return JSON.stringify(value, null, 2);
   } catch (ignored) {
-    return `Failed to convert the following to JSON: ${value}`;
+    return `Failed to convert to JSON: ${value}`;
   }
 }
