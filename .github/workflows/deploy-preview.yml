@@ -20,6 +20,9 @@ jobs:
           cache-dependency-path: yarn.lock
       - name: Install and Build
         run: yarn install --immutable && yarn build:preview
+      - name: Run app tests
+        run: yarn test
+        working-directory: packages/app
       - name: Extract Branch Name and Commit Hash
         shell: bash
         run: |
