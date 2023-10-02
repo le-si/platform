@@ -6,13 +6,13 @@ import { AccessToken } from "./AccessToken";
 vitest.mock("~/User", () => ({}));
 
 // Mock calls to Auth0
-const getAccessTokenSilently = vitest.fn();
-const loginWithRedirect = vitest.fn();
+const mockGetAccessTokenSilently = vitest.fn();
+const mockLoginWithRedirect = vitest.fn();
 vitest.mock("@auth0/auth0-react", () => ({
   useAuth0: () => ({
-    getAccessTokenSilently,
     isAuthenticated: true,
-    loginWithRedirect,
+    getAccessTokenSilently: mockGetAccessTokenSilently,
+    loginWithRedirect: mockLoginWithRedirect,
   }),
 }));
 
@@ -28,36 +28,36 @@ describe("AccessToken", () => {
   test("returns undefined while auth0 is negotiating token", async () => {
     const { result } = renderHook(() => AccessToken.use());
 
-    expect(getAccessTokenSilently).toBeCalled();
-    expect(loginWithRedirect).not.toBeCalled();
+    expect(mockGetAccessTokenSilently).toBeCalled();
+    expect(mockLoginWithRedirect).not.toBeCalled();
     expect(console.error).not.toBeCalled();
     expect(result.current).toBeUndefined();
   });
 
   test("returns token from auth0 once negotiated", async () => {
     const accessToken = "access-token";
-    getAccessTokenSilently.mockImplementation(() => accessToken);
+    mockGetAccessTokenSilently.mockImplementation(() => accessToken);
 
     const { result } = renderHook(() => AccessToken.use());
     await waitForValueToChange(() => result.current);
 
-    expect(getAccessTokenSilently).toBeCalled();
-    expect(loginWithRedirect).not.toBeCalled();
+    expect(mockGetAccessTokenSilently).toBeCalled();
+    expect(mockLoginWithRedirect).not.toBeCalled();
     expect(console.error).not.toBeCalled();
     expect(result.current).toEqual(accessToken);
   });
 
   test("initiates re-authentication on error", async () => {
     const mockError = new Error("mock error");
-    getAccessTokenSilently.mockImplementation(() => {
+    mockGetAccessTokenSilently.mockImplementation(() => {
       throw mockError;
     });
 
     renderHook(() => AccessToken.use());
 
-    expect(getAccessTokenSilently).toBeCalled();
+    expect(mockGetAccessTokenSilently).toBeCalled();
     expect(console.error).toBeCalledWith(mockError);
-    expect(loginWithRedirect).toHaveBeenCalledWith({
+    expect(mockLoginWithRedirect).toHaveBeenCalledWith({
       appState: {
         returnTo: window.location.pathname + window.location.search,
       },
