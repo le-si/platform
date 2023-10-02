@@ -3,7 +3,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 export type AccessToken = string;
 export namespace AccessToken {
   export const use = (): AccessToken | undefined => {
-    const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+    const { getAccessTokenSilently, isAuthenticated, loginWithRedirect } =
+      useAuth0();
     const [accessToken, setAccessToken] = useState<AccessToken | undefined>();
 
     useEffect(() => {
@@ -15,27 +16,22 @@ export namespace AccessToken {
           const accessToken = await getAccessTokenSilently();
           if (!isCancelled) setAccessToken(accessToken);
         } catch (error) {
-          console.error(error);
+          await loginWithRedirect({
+            appState: {
+              returnTo: window.location.pathname + window.location.search,
+            },
+            authorizationParams: {
+              audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+            },
+          });
         }
       })();
 
       return () => {
         isCancelled = true;
       };
-    }, [getAccessTokenSilently, isAuthenticated]);
+    }, [loginWithRedirect, getAccessTokenSilently, isAuthenticated]);
 
     return accessToken;
   };
-
-  export function useOrLogin() {
-    const { logout, isAuthenticated, loginWithRedirect } = useAuth0();
-    const accessToken = use();
-
-    return useCallback(async () => {
-      isAuthenticated &&
-        logout({ logoutParams: { returnTo: window.location.origin } });
-
-      return accessToken ?? (await loginWithRedirect());
-    }, [accessToken, isAuthenticated, loginWithRedirect, logout]);
-  }
 }
