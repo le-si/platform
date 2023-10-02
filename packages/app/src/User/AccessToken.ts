@@ -1,4 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import { Environment } from "~/Environment";
 
 export type AccessToken = string;
 export namespace AccessToken {
@@ -16,12 +17,13 @@ export namespace AccessToken {
           const accessToken = await getAccessTokenSilently();
           if (!isCancelled) setAccessToken(accessToken);
         } catch (error) {
+          console.error(error);
           await loginWithRedirect({
             appState: {
               returnTo: window.location.pathname + window.location.search,
             },
             authorizationParams: {
-              audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+              audience: Environment.get("AUTH0_AUDIENCE"),
             },
           });
         }
